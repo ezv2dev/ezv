@@ -1022,7 +1022,7 @@ class HotelDetailController extends Controller
 
         if ($updatedHotel) {
             return response()->json([
-                'message' => 'Successfuly Updated Hotel Profile',
+                'message' => 'Successfully Updated Hotel Profile',
                 'status' => 200,
                 'data' => $hotelData
             ]);
@@ -1066,7 +1066,7 @@ class HotelDetailController extends Controller
             // return back()
             //     ->with('success', 'Your data has been deleted');
             return response()->json([
-                'message' => 'Delete Data Successfuly',
+                'message' => 'Delete Data Successfully',
                 'status' => 200,
             ], 200);
         } else {
@@ -1312,7 +1312,7 @@ class HotelDetailController extends Controller
             // return back()
             //     ->with('success', 'Your data has been deleted');
             return response()->json([
-                'message' => 'Delete Data Successfuly',
+                'message' => 'Delete Data Successfully',
                 'status' => 200,
             ], 200);
         } else {
@@ -1557,7 +1557,7 @@ class HotelDetailController extends Controller
         // check if update is success or not
         if ($updatedHotel) {
             return response()->json([
-                'message' => 'Successfuly Updated Hotel Location',
+                'message' => 'Successfully Updated Hotel Location',
                 'data' => $homeData
             ], 200);
         } else {

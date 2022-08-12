@@ -100,7 +100,7 @@ class ActivityListController extends Controller
         // check if update is success or not
         if ($updatedActivity) {
             return response()->json([
-                'message' => 'Successfuly Updated Name WoW',
+                'message' => 'Successfully Updated Name WoW',
                 'status' => 200,
                 'data' => $activityData
             ]);
@@ -164,7 +164,7 @@ class ActivityListController extends Controller
         // check if update is success or not
         if ($updatedActivity) {
             return response()->json([
-                'message' => 'Successfuly Updated Wow Description',
+                'message' => 'Successfully Updated Wow Description',
                 'data' => $wowData
             ], 200);
         } else {
@@ -226,7 +226,7 @@ class ActivityListController extends Controller
         // check if update is success or not
         if ($updatedActivity) {
             return response()->json([
-                'message' => 'Successfuly Updated Wow Short Description',
+                'message' => 'Successfully Updated Wow Short Description',
                 'data' => $wowData
             ], 200);
         } else {
@@ -291,7 +291,7 @@ class ActivityListController extends Controller
         // check if update is success or not
         if ($updatedActivity) {
             return response()->json([
-                'message' => 'Successfuly Updated WoW Location',
+                'message' => 'Successfully Updated WoW Location',
                 'data' => $activityData
             ], 200);
         } else {
@@ -376,7 +376,7 @@ class ActivityListController extends Controller
         // check if update is success or not
         if ($updatedActivity) {
             return response()->json([
-                'message' => 'Successfuly Updated WoW Time',
+                'message' => 'Successfully Updated WoW Time',
                 'status' => 200,
                 'data' => $data,
             ]);
@@ -438,7 +438,7 @@ class ActivityListController extends Controller
         // check if update is success or not
         if ($updatedActivity) {
             return response()->json([
-                'message' => 'Successfuly Updated WoW Contact',
+                'message' => 'Successfully Updated WoW Contact',
                 'status' => 200,
                 'data' => $activity,
             ]);
@@ -517,7 +517,7 @@ class ActivityListController extends Controller
         // check if update is success or not
         if ($updatedActivity) {
             return response()->json([
-                'message' => 'Successfuly Updated WoW Profile',
+                'message' => 'Successfully Updated WoW Profile',
                 'status' => 200,
                 'data' => $activityData
             ]);
@@ -559,7 +559,7 @@ class ActivityListController extends Controller
         // check if delete is success or not
         if ($deletedActivityImage) {
             return response()->json([
-                'message' => 'Delete Data Successfuly',
+                'message' => 'Delete Data Successfully',
                 'status' => 200,
             ], 200);
         } else {
@@ -654,7 +654,7 @@ class ActivityListController extends Controller
         // check if update is success or not
         if (isset($createdActivity) == true) {
             return response()->json([
-                'message' => 'Successfuly Updated WoW Contact',
+                'message' => 'Successfully Updated WoW Contact',
                 'data' => $activityPrice,
                 'uid' => $uid,
             ], 200);
@@ -995,7 +995,7 @@ class ActivityListController extends Controller
         // check if delete is success or not
         if ($deletedActivityVideo) {
             return response()->json([
-                'message' => 'Delete Data Successfuly',
+                'message' => 'Delete Data Successfully',
                 'status' => 200,
             ], 200);
         } else {
@@ -1034,7 +1034,7 @@ class ActivityListController extends Controller
         // check if delete is success or not
         if ($deletedActivityPhoto) {
             return response()->json([
-                'message' => 'Delete Data Successfuly',
+                'message' => 'Delete Data Successfully',
                 'status' => 200,
             ], 200);
         } else {
@@ -1175,7 +1175,7 @@ class ActivityListController extends Controller
         // check if update is success or not
         if ($updatedActivity) {
             return response()->json([
-                'message' => 'Successfuly Updated WoW Category',
+                'message' => 'Successfully Updated WoW Category',
                 'status' => 200,
                 'data' => $activity->subCategory,
             ]);
@@ -1315,7 +1315,7 @@ class ActivityListController extends Controller
         // check if delete is success or not
         if ($deletedActivityStory) {
             return response()->json([
-                'message' => 'Delete Data Successfuly',
+                'message' => 'Delete Data Successfully',
                 'status' => 200,
             ], 200);
         } else {

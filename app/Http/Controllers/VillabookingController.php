@@ -104,16 +104,14 @@ class VillabookingController extends Controller
         $date = [];
         $i = 0;
 
-        foreach ($event as $key => $value)
-        {
+        foreach ($event as $key => $value) {
             $date[$i]['no'] = $key;
             $date[$i]['start'] = date('Y-m-d', strtotime($value['DTSTART']));
             $date[$i]['end'] = date('Y-m-d', strtotime($value['DTEND']));
             $i++;
         }
 
-        foreach ($date as $key => $value)
-        {
+        foreach ($date as $key => $value) {
             VillaAvailability::insert([
                 'id_villa' => $id,
                 'start' => $value['start'],
@@ -124,7 +122,7 @@ class VillabookingController extends Controller
         }
 
         return response()->json([
-            'message' => 'Successfuly import calendar.'
+            'message' => 'Successfully import calendar.'
         ]);
     }
 
@@ -134,15 +132,14 @@ class VillabookingController extends Controller
         $sCheck_out = $request->end;
 
         $availability = VillaAvailability::whereBetween('start', [$sCheck_in, $sCheck_out])
-        ->orWhereBetween('end', [$sCheck_in, $sCheck_out])
-        ->get();
+            ->orWhereBetween('end', [$sCheck_in, $sCheck_out])
+            ->get();
 
         $villa = $availability->where('id_villa', $request->id);
         return response()->json([
             'data' => $villa,
             'status' => 200,
         ]);
-
     }
 
     public function update(Request $request, $id)
@@ -259,8 +256,7 @@ class VillabookingController extends Controller
             $dates[] = Carbon::yesterday()->format('Y-m-d');
         }
 
-        if ($availability->count() > 0)
-        {
+        if ($availability->count() > 0) {
             foreach ($availability as $item2) {
                 $period2 = CarbonPeriod::create($item2->start, $item2->end);
                 foreach ($period2 as $date2) {
@@ -591,29 +587,26 @@ class VillabookingController extends Controller
         $normal_price = $regular[0]->price;
 
         //cek if there is  cleaning fee
-        if(count($cleaning) != 0)
-        {
+        if (count($cleaning) != 0) {
             $cleaning_fee = $cleaning[0]->price;
-        }else{
+        } else {
             $cleaning_fee = 0;
         }
 
         //cek if there is extra bed
-        if(count($extra_bed) != 0)
-        {
+        if (count($extra_bed) != 0) {
             $extra_bed_price = $extra_bed[0]->price;
             $extra_bed_max = $extra_bed[0]->max;
-        }else{
+        } else {
             $extra_bed_price = 0;
             $extra_bed_max = 0;
         }
 
         //cek if there is extra guest
-        if(count($extra_guest) != 0)
-        {
+        if (count($extra_guest) != 0) {
             $extra_guest_price = $extra_guest[0]->price;
             $extra_guest_max = $extra_guest[0]->max;
-        }else{
+        } else {
             $extra_guest_price = 0;
             $extra_guest_max = 0;
         }
@@ -631,8 +624,7 @@ class VillabookingController extends Controller
         array_pop($date_pick);
 
         //count
-        if (count($special) != 0)
-        {
+        if (count($special) != 0) {
             //get special date
             foreach ($special as $item) {
                 $period_price = CarbonPeriod::create($item->start, $item->end);
@@ -646,7 +638,7 @@ class VillabookingController extends Controller
             foreach ($special as $item) {
                 $period_price = CarbonPeriod::create($item->start, $item->end);
                 $discount = VillaDetailPrice::select('disc')->where('start', $item->start)->where('end', $item->end)->get();
-                if(count($discount) != 0){
+                if (count($discount) != 0) {
                     foreach ($period_price as $date) {
                         $date_discount[] = array($date->format('Y-m-d'), $discount[0]->disc);
                     }
@@ -660,16 +652,14 @@ class VillabookingController extends Controller
         foreach ($date_pick as $booking) {
             $price = $regular[0]->price;
 
-            if (count($special) != 0)
-            {
+            if (count($special) != 0) {
                 foreach ($date_price as $item) {
                     if ($booking == $item[0]) {
                         $price = $item[1];
                     }
                 }
 
-                foreach ($date_discount as $item)
-                {
+                foreach ($date_discount as $item) {
                     if ($booking == $item[0]) {
                         $disc = $item[1] / 100 * $price;
                     }

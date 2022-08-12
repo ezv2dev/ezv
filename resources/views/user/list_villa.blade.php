@@ -64,6 +64,14 @@
             color: #ff7400 !important;
             cursor: pointer;
         }
+        @media only screen and (max-width: 328px) {
+            .guests {
+                min-width: 234px;
+            }
+            .guest-popup {
+                left: -18px !important;
+            }
+        }
     </style>
     {{-- function get data --}}
 

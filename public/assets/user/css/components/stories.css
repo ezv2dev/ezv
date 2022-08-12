@@ -30,7 +30,7 @@
 
 .story-title{
     margin-top: 8px;
-    text-align: center;  
+    text-align: center;
 }
 
 .circ{
@@ -52,11 +52,12 @@
         font-size: 14px;
     }
     .story img{
+        width: 68px;
+        height: 68px;
+        margin-top: 0.75rem
+    }
+    .circ{
         width: var(--responsiveImg);
         height: var(--responsiveImg);
-    }
-    .circ{  
-        width: var(--responsiveImg);
-        height: var(--responsiveImg);  
     }
 }

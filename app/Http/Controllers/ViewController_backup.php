@@ -455,7 +455,7 @@ class ViewController extends Controller
             $event[$i]['start'] = $item->start;
             $event[$i]['end'] = date('Y-m-d', strtotime($item->end . " +1 days"));
             $event[$i]['disc'] = $item->disc;
-            $event[$i]['title'] = 'IDR '. $item->title;
+            $event[$i]['title'] = 'IDR ' . $item->title;
             $event[$i]['name'] = $item->name;
             $event[$i]['regular_price'] = $item->regular_price;
             $i++;
@@ -881,7 +881,7 @@ class ViewController extends Controller
             // return back()
             //     ->with('success', 'Your data has been deleted');
             return response()->json([
-                'message' => 'Delete Data Successfuly',
+                'message' => 'Delete Data Successfully',
                 'status' => 200,
             ], 200);
         } else {
@@ -1231,7 +1231,7 @@ class ViewController extends Controller
         // check if delete is success or not
         if ($deletedVillaVideo) {
             return response()->json([
-                'message' => 'Delete Data Successfuly',
+                'message' => 'Delete Data Successfully',
                 'status' => 200,
             ], 200);
         } else {
@@ -1272,7 +1272,7 @@ class ViewController extends Controller
             // return back()
             //     ->with('success', 'Your data has been deleted');
             return response()->json([
-                'message' => 'Delete Data Successfuly',
+                'message' => 'Delete Data Successfully',
                 'status' => 200,
             ], 200);
         } else {
@@ -1372,7 +1372,7 @@ class ViewController extends Controller
             // return back()
             //     ->with('success', 'Your data has been deleted');
             return response()->json([
-                'message' => 'Delete Data Successfuly',
+                'message' => 'Delete Data Successfully',
                 'status' => 200,
             ], 200);
         } else {
