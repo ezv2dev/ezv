@@ -1213,6 +1213,7 @@ if (isset($_COOKIE['tema'])) {
     </div>
     </div>
     </div>
+    @include('user.modal.filter.filter_modal')
     <!-- Footer -->
     @if (Route::is('list') || Route::is('search_villa_combine'))
         @include('user.modal.filter.filter_modal')
