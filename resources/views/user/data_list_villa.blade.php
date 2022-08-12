@@ -32,6 +32,34 @@ if (isset($_COOKIE['tema'])) {
         }
     }
 </style>
+<script>
+    
+
+    $(window).on('load resize', ()=>{
+        var width = $(window).width(); 
+        var height = $(window).height(); 
+
+        if ((width >= 500)) {
+            $(".villa-list-price-trigger").attr("onclick", "");   
+        }
+        else {   
+            $(".villa-list-price-trigger").attr("onclick", "showpricebreakdown()");
+            $(".price-breakdown-overlay").addClass("d-none");
+            $(".price-breakdown-mobile").removeClass("price-breakdown-mobile-expand");
+        }
+    });
+</script>
+<div class="price-breakdown-overlay d-none" onclick="closepricebreakdown()"></div>
+<div class="price-breakdown-mobile">
+    <header class="price-breakdown-header p-3 d-flex justify-content-between border-bottom">
+        <div class="font-black">
+            Price Breakdown
+        </div>
+        <div onclick="closepricebreakdown()">
+            <i class="fa-solid fa-xmark"></i>
+        </div>
+    </header>
+</div>
 @if (count($villas) == 0)
     <div class="container">
         <div class="row justify-content-center">
@@ -327,7 +355,7 @@ if (isset($_COOKIE['tema'])) {
                                 <div class="villa-list-price">
                                     @if ($data->price)
                                         @if (empty($dateDiff))
-                                            <span class="villa-list-price">
+                                            <span class="villa-list-price villa-list-price-trigger">
                                                 {{ CurrencyConversion::exchangeWithUnit($data->price) }} /{{ __('user_page.night') }}
                                             </span>
                                         @else
@@ -336,7 +364,7 @@ if (isset($_COOKIE['tema'])) {
                                                 $service = App\Http\Controllers\VillabookingController::get_service(['start' => $get_check_in, 'end' => $get_check_out, 'id_villa' => $data->id_villa]);
                                                 $get_total = App\Http\Controllers\VillabookingController::get_total_all(['start' => $get_check_in, 'end' => $get_check_out, 'id_villa' => $data->id_villa]);
                                             @endphp
-                                            <span class="villa-list-price">
+                                            <span class="villa-list-price villa-list-price-trigger">
                                                 {{ CurrencyConversion::exchangeWithUnit($data->price) }} /{{ __('user_page.night') }}
                                             </span>
                                             <span> • </span>

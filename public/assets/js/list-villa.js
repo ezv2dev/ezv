@@ -17,6 +17,25 @@ document.getElementById("activity-button").onclick = function () {
     document.getElementById("activity-form").submit();
 };
 
+
+function showpricebreakdown() {
+    $("body").css({
+        "height": "auto",
+        "overflow": "auto"
+    })
+    $(".price-breakdown-overlay").removeClass("d-none");
+    $(".price-breakdown-mobile").addClass("price-breakdown-mobile-expand");
+}
+
+function closepricebreakdown() {
+    $("body").css({
+        "height": "auto",
+        "overflow": "auto"
+    })
+    $(".price-breakdown-overlay").addClass("d-none");
+    $(".price-breakdown-mobile").removeClass("price-breakdown-mobile-expand");
+}
+
 // Flat Picker
 
 $("#check_in").flatpickr({
@@ -43,3 +62,5 @@ $("#check_in").flatpickr({
 });
 
 Dashmix.helpersOnLoad(["jq-magnific-popup"]);
+
+
