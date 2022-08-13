@@ -1283,7 +1283,7 @@
                                 @if ($restaurant->photo->count() > 0)
                                     @foreach ($restaurant->photo->sortBy('order') as $item)
                                     <div class="col-4 grid-photo" id="displayPhoto{{ $item->id_photo }}">
-                                        <a data-toggle="modal" data-target="#modal-photo-gallery" data-section="{{ $item->id_photo }}"> 
+                                        <a onclick="openModalGalleryMobile(`{{ $item->id_photo }}`)"> 
                                             <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/' . $item->name) }}" title="{{ $item->caption }}">
                                         </a>
                                             @auth
@@ -1460,7 +1460,7 @@
                                         {{-- <a onclick="view_menu('{{ $menu->id_menu }}')" class="photosGrid__Photo btn"
                                         style="background-image: url('{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/menu' . '/' . $menu->foto) }}')">
                                         </a> --}}
-                                        <a data-toggle="modal" data-target="#modal-menu-gallery" data-section="{{ $menu->id_menu }}"> 
+                                        <a onclick="openModalMenuMobile(`{{ $menu->id_menu }}`)"> 
                                             <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/' . 'menu/' . $menu->foto) }}" title="{{ $menu->name }}">
                                         </a>
                                         @auth
@@ -6492,24 +6492,6 @@
     $(document).on(supportsTouch ? 'touchend' : 'click', function(event) {
         $('.dropdwn').slideUp('fast');
         // document.activeElement.blur();//lose focus
-    });
-</script>
-<script>
-    // image gallery
-    $('#modal-photo-gallery').on('shown.bs.modal', function(event) {
-    $('#modal-photo-gallery .modal-body-gallery').scrollTop();
-    var section = $(event.relatedTarget).data('section');
-    var position = $('#' + section).position();
-    $("#modal-photo-gallery").scrollTop(position.top);
-    });
-</script>
-<script>
-    // menu gallery
-    $('#modal-menu-gallery').on('shown.bs.modal', function(event) {
-    $('#modal-menu-gallery .modal-body-gallery').scrollTop();
-    var section = $(event.relatedTarget).data('section');
-    var position = $('#' + section).position();
-    $("#modal-menu-gallery").scrollTop(position.top);
     });
 </script>
 </body>

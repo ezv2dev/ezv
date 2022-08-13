@@ -104,6 +104,8 @@
         $("#modal-photo-gallery").find('.modal-body').scrollTop(position.top);
     }
 </script>
+
+
 <!-- <script>
     $('#modal-photo-gallery').on('shown.bs.modal', function(event) {
     var section = $(event.relatedTarget).data('section');
