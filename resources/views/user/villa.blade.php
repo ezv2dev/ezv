@@ -4893,6 +4893,7 @@
                 let uid = message.data.uid.uid;
                 let lowerCaseUid = uid.toLowerCase();
                 let content = "";
+                let contentMobile = "";
                 let contentPositionModal;
                 let contentPositionModalVideo;
                 let contentStory = "";
@@ -4915,6 +4916,9 @@
                     $('.gallery').html("");
                 }
 
+                const mobile = $(".mobile");
+                const desktop = $(".desktop");
+
                 if (message.data.photo.length > 0) {
                     content = '<div class="col-4 grid-photo" id="displayPhoto' +
                         message.data.photo[0].id_photo +
@@ -4926,13 +4930,22 @@
                         message.data.photo[0].id_photo +
                         '" onclick="delete_photo_photo(this)"><i class="fa fa-trash"></i></button> </span> </div>';
 
+                    contentMobile += '<div class="col-4 grid-photo" id="displayPhoto' +
+                        message.data.photo[0].id_photo +
+                        '"> <a data-toggle="modal" data-target="#modal-photo-gallery" data-section="'+message.data.photo[0].id_photo+'"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
+                        path + lowerCaseUid + slash + message.data.photo[0].name +
+                        '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $villa[0]->id_villa }}" data-photo="' +
+                        message.data.photo[0].id_photo +
+                        '" onclick="delete_photo_photo(this)"><i class="fa fa-trash"></i></button> </span> </div>';
+
                     contentPositionModal = '<li class="ui-state-default" data-id="' + message.data.photo[0]
                         .id_photo + '" id="positionPhotoGallery' + message.data.photo[0].id_photo +
                         '"> <img src="' +
                         path + lowerCaseUid + slash + message.data.photo[0].name +
                         '" title="' + message.data.photo[0].name + '"> </li>';
 
-                    $('.gallery').append(content);
+                    desktop.find('.gallery').append(content);
+                    mobile.find('.gallery').append(contentMobile);
                     $('#sortable-photo').append(contentPositionModal);
                 }
 
@@ -4944,6 +4957,16 @@
                         '#t=5.0"> </video> <span class="video-grid-button"><i class="fa fa-play"></i></span></a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $villa[0]->id_villa }}" data-video="' +
                         message.data.video[0].id_video +
                         '" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
+
+                    contentMobile += '<div class="col-4 grid-photo" id="displayVideo' + message.data.video[0]
+                            .id_video +
+                            '"> <a class="pointer-normal" onclick="view(' + message.data.video[0]
+                            .id_video +
+                            ')" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="' +
+                            path + lowerCaseUid + slash + message.data.video[0].name +
+                            '#t=5.0"> </video> <span class="video-grid-button"><i class="fa fa-play"></i></span></a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $villa[0]->id_villa }}" data-video="' +
+                            message.data.video[0].id_video +
+                            '" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
 
                     contentPositionModalVideo = '<li class="ui-state-default" data-id="' + message.data.video[0]
                         .id_video + '" id="positionVideoGallery' + message.data.video[0].id_video +
@@ -4967,7 +4990,8 @@
                         message.data.video[0].id_video +
                         '" onclick="delete_photo_video(this)"> <i class="fa fa-trash" style="color:red; margin-left: 25px;" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="Delete"></i> </a> </a> </div> </div> </div>';
 
-                    $('.gallery').append(content);
+                    desktop.find('.gallery').append(content);
+                    mobile.find('.gallery').append(contentMobile);
                     $('#sortable-video').append(contentPositionModalVideo);
                     $("#storyContent").append(contentStory);
                     sliderRestaurant();
@@ -5389,7 +5413,11 @@
                         },
                         success: async function(response) {
                             await Swal.fire('Deleted', response.message, 'success');
-                            $(`#displayPhoto${photo}`).remove();
+                            const mobile = $(".mobile");
+                            mobile.find('#displayPhoto'+photo).remove();
+                            const desktop = $(".desktop");
+                            desktop.find('#displayPhoto'+photo).remove();
+                            // $(`#displayPhoto${photo}`).remove();
                             $("#positionPhotoGallery"+photo).remove();
 
                             let galleryDiv = $('.gallery');
