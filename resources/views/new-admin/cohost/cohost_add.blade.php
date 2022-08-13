@@ -86,21 +86,21 @@
                                             class="form-control form-control-alt {{ $errors->has('email') ? ' is-invalid' : '' }}"
                                             name="email_cohost" placeholder="Email Address">
                                         <i id="fvicn-eml" class="flaticon-envelope flaticon"></i>
-                                        <small id="err-eml-lgn" style="display: none;" class="invalid-feedback"></small>
+                                        <small id="err-eml-lgn" style="display: none;" class="invalid-feedback">This email field is required</small>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <hr>
-                    <div class="row">
+                    <div class="row" id="check_perm">
                         <label class="form-label"><b>Permission</b></label>
                         <div class="translate-text-group" style="display: flex; flex-wrap: wrap; margin-left: 15px;">
                             <div class="col-12 col-md-6 col-lg-4">
                                 <div class="row" style="font-size: 13px;">
                                     <label class="container-checkbox2">
                                         <span class="translate-text-group-items">Listing</span>
-                                        <input type="checkbox"
+                                        <input type="checkbox" class="check-cat"
                                             id="listing" name="listing">
                                         <span class="checkmark2"></span>
                                     </label>
@@ -112,7 +112,7 @@
                                 <div class="row" style="font-size: 13px;">
                                     <label class="container-checkbox2">
                                         <span class="translate-text-group-items">Reservation</span>
-                                        <input type="checkbox"
+                                        <input type="checkbox" class="check-cat"
                                             id="reservation" name="reservation">
                                         <span class="checkmark2"></span>
                                     </label>
@@ -124,7 +124,7 @@
                                 <div class="row" style="font-size: 13px;">
                                     <label class="container-checkbox2">
                                         <span class="translate-text-group-items">Calendar</span>
-                                        <input type="checkbox"
+                                        <input type="checkbox" class="check-cat"
                                             id="calendar" name="calendar">
                                         <span class="checkmark2"></span>
                                     </label>
@@ -136,7 +136,7 @@
                                 <div class="row" style="font-size: 13px;">
                                     <label class="container-checkbox2">
                                         <span class="translate-text-group-items">Statistic</span>
-                                        <input type="checkbox"
+                                        <input type="checkbox" class="check-cat"
                                             id="statistic" name="statistic">
                                         <span class="checkmark2"></span>
                                     </label>
@@ -148,7 +148,7 @@
                                 <div class="row" style="font-size: 13px;">
                                     <label class="container-checkbox2">
                                         <span class="translate-text-group-items">Finance</span>
-                                        <input type="checkbox"
+                                        <input type="checkbox" class="check-cat"
                                             id="finance" name="finance">
                                         <span class="checkmark2"></span>
                                     </label>
@@ -160,7 +160,7 @@
                                 <div class="row" style="font-size: 13px;">
                                     <label class="container-checkbox2">
                                         <span class="translate-text-group-items">Inbox</span>
-                                        <input type="checkbox"
+                                        <input type="checkbox" class="check-cat"
                                             id="inbox" name="inbox">
                                         <span class="checkmark2"></span>
                                     </label>
@@ -172,14 +172,16 @@
                                 <div class="row" style="font-size: 13px;">
                                     <label class="container-checkbox2">
                                         <span class="translate-text-group-items">Collaboration</span>
-                                        <input type="checkbox"
+                                        <input type="checkbox" class="check-cat"
                                             id="collaboration" name="collaboration">
                                         <span class="checkmark2"></span>
                                     </label>
                                 </div>
                             </div>
                         </div>
+                        <small id="err-slc-cat" style="display: none;" class="invalid-feedback">Select one of category</small><br>
                     </div>
+
                 </form>
             </div>
             <div class="modal-filter-footer d-flex justify-content-center"
@@ -199,42 +201,71 @@
 
 
 <script>
+$('#email_cohost').keyup(function (e) {
+    $('#email_cohost').removeClass('is-invalid');
+    $('#err-eml-lgn').hide();
+});
+$(".check-cat").change(function () {
+    $("#check_perm").each(function () {
+        if ($(this).find('input[type="checkbox"]:checked').length > 0) {
+            $(".checkmark2").css("border", "");
+            $("#err-slc-cat").hide();
+        }
+    });
+});
 function store_cohost()
 {
-    $.ajax({
-        type: "POST",
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-        url: "/cohost-store",
-        data: $('#formcohost').serialize(),
-        success: function (response) {
+    let error = 0;
+    if(!$('#email_cohost').val()) {
+        $('#email_cohost').addClass('is-invalid');
+        $('#err-eml-lgn').show();
+        error = 1;
+    }
+    $("#check_perm").each(function () {
+        if ($(this).find('input[type="checkbox"]:checked').length == 0) {
+            $(".checkmark2").css("border", "solid #e04f1a 1px");
+            $("#err-slc-cat").show();
+            error = 1;
+        }
+    });
+    if(error = 1) {
+        return false;
+    } else {
+        $.ajax({
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: "/cohost-store",
+            data: $('#formcohost').serialize(),
+            success: function (response) {
 
-            iziToast.success({
-                title: "Success",
-                message: response.message,
-                position: "topRight",
-            });
+                iziToast.success({
+                    title: "Success",
+                    message: response.message,
+                    position: "topRight",
+                });
 
-            $('#modal-cohost').modal('hide');
-        },
-        error: function (jqXHR, exception) {
-            if (jqXHR.responseJSON.errors) {
-                for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                $('#modal-cohost').modal('hide');
+            },
+            error: function (jqXHR, exception) {
+                if (jqXHR.responseJSON.errors) {
+                    for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                        iziToast.error({
+                            title: "Error",
+                            message: jqXHR.responseJSON.errors[i],
+                            position: "topRight",
+                        });
+                    }
+                } else {
                     iziToast.error({
                         title: "Error",
-                        message: jqXHR.responseJSON.errors[i],
+                        message: jqXHR.responseJSON.message,
                         position: "topRight",
                     });
                 }
-            } else {
-                iziToast.error({
-                    title: "Error",
-                    message: jqXHR.responseJSON.message,
-                    position: "topRight",
-                });
-            }
-        },
-    });
+            },
+        });
+    }
 }
 </script>
