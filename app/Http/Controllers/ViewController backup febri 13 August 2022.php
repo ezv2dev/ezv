@@ -2184,11 +2184,13 @@ class ViewController extends Controller
         $accessibility_features = VillaAccessibilityFeatures::all();
         $accessibility_features_detail = VillaAccessibilitiyFeaturesDetail::all();
 
-        //get all villa grade a - d
-        $villa = Villa::where('status', 1)->where('grade', '!=', 'AA')->inRandomOrder()->get()->sortBy('grade')->toArray();
+        $villa = Villa::where('status', 1)->paginate(env('CONTENT_PER_PAGE_LIST_VILLA') ?? 5);
+        $villa->appends(request()->query());
+
         // TODO uncomment when lazy load, start
-        $villa_aa = Villa::where('grade', '=', 'AA')->where('status', 1)->inRandomOrder()->get()->toArray();
-        dd($villa_aa);
+        $villas = Villa::where('grade', '!=', 'AA')->where('status', 1)->inRandomOrder()->get()->sortBy('grade');
+        $villa_aa = Villa::where('grade', '=', 'AA')->where('status', 1)->inRandomOrder()->get();
+
         // if ($request->itemIds) {
         //     $villas = Villa::where('grade', '!=', 'AA')->where('status', 1)->whereNotIn('id_villa', $request->itemIds)->inRandomOrder()->get()->sortBy('grade');
         //     $villa_aa = Villa::where('grade', '=', 'AA')->where('status', 1)->whereNotIn('id_villa', $request->itemIds)->inRandomOrder()->get();
