@@ -37,7 +37,7 @@
     <!-- END Icons -->
 
     <link rel="stylesheet" href="{{ asset('assets/user/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/js/plugins/magnific-popup/magnific-popup.css') }}">
+    <!-- <link rel="stylesheet" href="{{ asset('assets/js/plugins/magnific-popup/magnific-popup.css') }}"> -->
     <link rel="stylesheet"
         href="{{ asset('assets/js/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/js/plugins/flatpickr/flatpickr.min.css') }}">
@@ -2996,7 +2996,7 @@
 
     <script src="{{ asset('assets/js/plugins/slick-carousel/slick.min.js') }}"></script>
     {{-- Page JS Plugins --}}
-    <script src="{{ asset('assets/js/plugins/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
+    <!-- <script src="{{ asset('assets/js/plugins/magnific-popup/jquery.magnific-popup.min.js') }}"></script> -->
     <script src="{{ asset('assets/js/plugins/jquery-validation/jquery.validate.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/jquery-validation/additional-methods.js') }}"></script>
     <script src="{{ asset('assets/js/story-admin-slider.js') }}"></script>
