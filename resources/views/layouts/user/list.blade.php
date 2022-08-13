@@ -1357,7 +1357,7 @@ if (isset($_COOKIE['tema'])) {
         function moreCategory() {
             sidebarhide();
             $('#categoryModal').modal('show');
-            $('html').css("overflow-y", "hidden")
+            $('#categoryModal').css("overflow-y", "hidden")
 
             // close sidebar di mobile size
             $( ".btn-close-expand-navbar-mobile" ).trigger( "click" )
@@ -1370,7 +1370,7 @@ if (isset($_COOKIE['tema'])) {
             sidebarhide();
             $('.modal').modal('hide');
             $('#modalSubCategory').modal('show');
-            $('html').css("overflow-y", "hidden")
+            $('#modalSubCategory').css("overflow-y", "hidden")
 
             // close sidebar di mobile size
             $( ".btn-close-expand-navbar-mobile" ).trigger( "click" )
@@ -1383,7 +1383,7 @@ if (isset($_COOKIE['tema'])) {
             sidebarhide();
             $('.modal').modal('hide');
             $('#modalFiltersHome').modal('show');
-            $('html').css("overflow-y", "hidden")
+            $('#modalFiltersHome').css("overflow-y", "hidden")
 
             // close sidebar di mobile size
             $( ".btn-close-expand-navbar-mobile" ).trigger( "click" )
@@ -1395,7 +1395,7 @@ if (isset($_COOKIE['tema'])) {
         function modalFiltersHotel() {
             $('.modal').modal('hide');
             $('#modalFiltersHotel').modal('show');
-            $('html').css("overflow-y", "hidden")
+            $('#modalFiltersHotel').css("overflow-y", "hidden")
 
            // close sidebar di mobile size
            $( ".btn-close-expand-navbar-mobile" ).trigger( "click" )
@@ -1407,7 +1407,7 @@ if (isset($_COOKIE['tema'])) {
         function filterCollab() {
             $('.modal').modal('hide');
             $('#modalFiltersCollab').modal('show');
-            $('html').css("overflow-y", "hidden")
+            $('#modalFiltersCollab').css("overflow-y", "hidden")
 
            // close sidebar di mobile size
            $( ".btn-close-expand-navbar-mobile" ).trigger( "click" )
@@ -1417,9 +1417,9 @@ if (isset($_COOKIE['tema'])) {
         }
 
         // fix bug scroll ketika open sidebar dan open modal subcategory di mobile size
-        $('#categoryModal, #modalSubCategory, #modalFiltersHome, #modalFiltersHotel, #modalFiltersCollab').on('hidden.bs.modal', function (e) {
-            $('html').css("overflow-y", "")
-        })
+        // $('#categoryModal, #modalSubCategory, #modalFiltersHome, #modalFiltersHotel, #modalFiltersCollab').on('hidden.bs.modal', function (e) {
+        //     $('html').css("overflow-y", "")
+        // })
     </script>
 
     <script>
