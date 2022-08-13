@@ -1097,7 +1097,7 @@
                                 @if ($activity->photo->count() > 0)
                                     @foreach ($activity->photo->sortBy('order') as $item)
                                         <div class="col-4 grid-photo" id="displayPhoto{{ $item->id_photo }}">
-                                            <a data-toggle="modal" data-target="#modal-photo-gallery" data-section="{{ $item->id_photo }}">
+                                            <a onclick="openModalGalleryMobile(`{{ $item->id_photo }}`)">
                                                 <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="{{ URL::asset('/foto/activity/' . strtolower($activity->uid) . '/' . $item->name) }}" title="{{ $item->caption }}">
                                             </a>
                                             @auth
@@ -6218,14 +6218,7 @@
 @endif
 @include('user.modal.activity.detail_price')
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script>
-        $('#modal-photo-gallery').on('shown.bs.modal', function(event) {
-        $('#modal-photo-gallery .modal-body-gallery').scrollTop();
-        var section = $(event.relatedTarget).data('section');
-        var position = $('#' + section).position();
-        $("#modal-photo-gallery").scrollTop(position.top);
-        });
-    </script>
+   
 </body>
 </body>
 
