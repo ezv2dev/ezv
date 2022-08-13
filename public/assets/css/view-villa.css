@@ -3410,7 +3410,7 @@ span.flatpickr-weekday {
     #gallery .gallery .grid-photo:nth-child(3n + 0) .edit-video-icon,
     #menu .gallery2 .grid-photo:nth-child(3n + 0) .edit-menu-icon {
         right: 20px !important;
-    }
+    } 
 }
 @media only screen and (max-width: 345px) {
     .name-content-mobile #name-content-mobile {
@@ -3443,6 +3443,12 @@ span.flatpickr-weekday {
 @media only screen and (min-width: 768px) and (max-width: 870px) {
     .stories #storyContent {
         width: 175px !important;
+    }
+    .cards3 {
+        width: 346px;
+    }
+    .inner-wrap {
+        margin-left: -56px;
     }
 }
 @media only screen and (min-width: 871px) and (max-width: 1190px) {
@@ -4660,6 +4666,12 @@ span.flatpickr-weekday {
 
     .desk-e-call {
         width: 105%;
+    }
+    .cards3 {
+        width: 377px !important;
+    }
+    .card3 {
+        width: 83px;
     }
 }
 
