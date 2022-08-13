@@ -740,6 +740,11 @@
                                                         </div>
                                                     </div>
 
+                                                    <button type="submit" class="d-block m-auto"
+                                                        style="background: #ff7400; color: white; padding: 5px 15px; border-radius: 10px; font-size: 18px;"
+                                                        onclick="villaFilter()">
+                                                        Search
+                                                    </button>
                                                 </div>
 
                                             </li>
@@ -1977,6 +1982,10 @@
                                                             </div>
                                                         </div>
 
+                                                        <button type="submit" class="d-block m-auto"
+                                                            style="background: #ff7400; color: white; padding: 5px 15px; border-radius: 10px; font-size: 18px;">
+                                                            Search
+                                                        </button>
                                                     </div>
 
                                                 </li>
