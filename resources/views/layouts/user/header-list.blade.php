@@ -1023,6 +1023,11 @@
                                                         </div>
                                                     </div>
 
+                                                    <button type="submit" class="d-block m-auto"
+                                                        style="background: #ff7400; color: white; padding: 5px 15px; border-radius: 10px; font-size: 18px;"
+                                                        onclick="homesFilter({{ request()->get('fPropertyType') ?? 'null' }}, {{ request()->get('fAmenities') ?? 'null' }})">
+                                                        Search
+                                                    </button>
                                                 </div>
                                             </li>
                                         </ul>
@@ -1752,6 +1757,11 @@
                                                         </div>
                                                     </div>
 
+                                                    <button type="submit" class="d-block m-auto"
+                                                        style="background: #ff7400; color: white; padding: 5px 15px; border-radius: 10px; font-size: 18px;"
+                                                        onclick="hotelFilter({{ request()->get('fCategory') ?? 'null' }}, {{ request()->get('filter') ?? 'null' }}, false)">
+                                                        Search
+                                                    </button>
                                                 </div>
                                             </li>
                                         </ul>

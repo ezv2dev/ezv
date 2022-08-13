@@ -881,93 +881,45 @@
         }
     }
 
-    $(function() {
-        $('#max_guest').keyup(function(e) {
-            $('#max_guest').removeClass('is-invalid');
-            $('#err-mxguest').hide();
-        });
-        $('#price_extra_guest').keyup(function(e) {
-            $('#price_extra_guest').removeClass('is-invalid');
-            $('#err-exguest').hide();
-        });
-        $('#max_bed').keyup(function(e) {
-            $('#max_bed').removeClass('is-invalid');
-            $('#err-maxbed').hide();
-        });
-        $('#price_extra_bed').keyup(function(e) {
-            $('#price_extra_bed').removeClass('is-invalid');
-            $('#err-exbed').hide();
-        });
-        $('#max_pet').keyup(function(e) {
-            $('#max_pet').removeClass('is-invalid');
-            $('#err-maxpet').hide();
-        });
-        $('#price_extra_pet').keyup(function(e) {
-            $('#price_extra_pet').removeClass('is-invalid');
-            $('#err-expet').hide();
-        });
-        $('#edit-extra').submit(function(e) {
-            let error = 0;
-            if (!$('#max_guest').val()) {
-                $('#max_guest').addClass('is-invalid');
-                $('#err-mxguest').show();
-                error = 1;
-            } else {
-                $('#max_guest').removeClass('is-invalid');
-                $('#err-mxguest').hide();
-            }
-            if (!$('#price_extra_guest').val()) {
-                $('#price_extra_guest').addClass('is-invalid');
-                $('#err-exguest').show();
-                error = 1;
-            } else {
-                $('#price_extra_guest').removeClass('is-invalid');
-                $('#err-exguest').hide();
-            }
-            if (!$('#max_bed').val()) {
-                $('#max_bed').addClass('is-invalid');
-                $('#err-maxbed').show();
-                error = 1;
-            } else {
-                $('#max_bed').removeClass('is-invalid');
-                $('#err-maxbed').hide();
-            }
-            if (!$('#price_extra_bed').val()) {
-                $('#price_extra_bed').addClass('is-invalid');
-                $('#err-exbed').show();
-                error = 1;
-            } else {
-                $('#price_extra_bed').removeClass('is-invalid');
-                $('#err-exbed').hide();
-            }
-            if (!$('#max_pet').val()) {
-                $('#max_pet').addClass('is-invalid');
-                $('#err-maxpet').show();
-                error = 1;
-            } else {
-                $('#max_pet').removeClass('is-invalid');
-                $('#err-maxpet').hide();
-            }
-            if ($('#depositPrice').hasClass('d-block')) {
-                if (!$('#price_extra_pet').val()) {
-                    $('#price_extra_pet').addClass('is-invalid');
-                    $('#err-expet').show();
-                    error = 1;
-                } else {
-                    $('#price_extra_pet').removeClass('is-invalid');
-                    $('#err-expet').hide();
-                }
-            }
+    // $(function() {
+    //     $('#max_pet').keyup(function(e) {
+    //         $('#max_pet').removeClass('is-invalid');
+    //         $('#err-maxpet').hide();
+    //     });
+    //     $('#price_extra_pet').keyup(function(e) {
+    //         $('#price_extra_pet').removeClass('is-invalid');
+    //         $('#err-expet').hide();
+    //     });
+    //     $('#edit-extra').submit(function(e) {
+    //         let error = 0;
 
-            if (error == 1) {
-                e.preventDefault();
-            } else {
-                let btn = document.getElementById("sbmt-extra");
-                btn.textContent = "Saving...";
-                btn.classList.add("disabled");
-            }
-        });
-    });
+    //         if (!$('#max_pet').val()) {
+    //             $('#max_pet').addClass('is-invalid');
+    //             $('#err-maxpet').show();
+    //             error = 1;
+    //         } else {
+    //             $('#max_pet').removeClass('is-invalid');
+    //             $('#err-maxpet').hide();
+    //         }
+    //         if ($('#depositPrice').hasClass('d-block')) {
+    //             if (!$('#price_extra_pet').val()) {
+    //                 $('#price_extra_pet').addClass('is-invalid');
+    //                 $('#err-expet').show();
+    //                 error = 1;
+    //             } else {
+    //                 $('#price_extra_pet').removeClass('is-invalid');
+    //                 $('#err-expet').hide();
+    //             }
+    //         }
+    //         if (error == 1) {
+    //             e.preventDefault();
+    //         } else {
+    //             let btn = document.getElementById("sbmt-extra");
+    //             btn.textContent = "Saving...";
+    //             btn.classList.add("disabled");
+    //         }
+    //     });
+    // });
 </script>
 <script>
     $(function() {
@@ -986,7 +938,22 @@
             $('#disc').removeClass('is-invalid');
             $('#err-disc').hide();
         });
-
+        $('#max_guest').keyup(function(e) {
+            $('#max_guest').removeClass('is-invalid');
+            $('#err-mxguest').hide();
+        });
+        $('#price_extra_guest').keyup(function(e) {
+            $('#price_extra_guest').removeClass('is-invalid');
+            $('#err-exguest').hide();
+        });
+        $('#max_bed').keyup(function(e) {
+            $('#max_bed').removeClass('is-invalid');
+            $('#err-maxbed').hide();
+        });
+        $('#price_extra_bed').keyup(function(e) {
+            $('#price_extra_bed').removeClass('is-invalid');
+            $('#err-exbed').hide();
+        });
         $("#edit-price").submit(function(e) {
             let error = 0;
             if (!parseInt($('#villa-price').val())) {
@@ -1033,33 +1000,78 @@
     }
 
     function saveExtra() {
+        var error = 0;
         var max_guest = $("#max_guest").val()
         var price_extra_guest = $("#price_extra_guest").val()
         var max_bed = $("#max_bed").val()
         var price_extra_bed = $("#price_extra_bed").val()
+        if($('#extraBedForm').hasClass('d-block')) {
+            if (!$('#max_bed').val()) {
+                $('#max_bed').addClass('is-invalid');
+                $('#err-maxbed').show();
+                error = 1;
+            } else {
+                $('#max_bed').removeClass('is-invalid');
+                $('#err-maxbed').hide();
+            }
+            if (!$('#price_extra_bed').val()) {
+                $('#price_extra_bed').addClass('is-invalid');
+                $('#err-exbed').show();
+                error = 1;
+            } else {
+                $('#price_extra_bed').removeClass('is-invalid');
+                $('#err-exbed').hide();
+            }
+        } else {
+            if (!$('#max_guest').val()) {
+                $('#max_guest').addClass('is-invalid');
+                $('#err-mxguest').show();
+                error = 1;
+            } else {
+                $('#max_guest').removeClass('is-invalid');
+                $('#err-mxguest').hide();
+            }
+            if (!$('#price_extra_guest').val()) {
+                $('#price_extra_guest').addClass('is-invalid');
+                $('#err-exguest').show();
+                error = 1;
+            } else {
+                $('#price_extra_guest').removeClass('is-invalid');
+                $('#err-exguest').hide();
+            }
+        }
 
-        $.ajax({
-            type: "POST",
-            headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-            },
-            url: "/villa/update/extra",
-            data: {
-                id_villa: id_villa,
-                max_guest: max_guest,
-                price_extra_guest: price_extra_guest,
-                max_bed: max_bed,
-                price_extra_bed: price_extra_bed,
-            },
-            success: function(response) {
-                $("#modal-edit_price").modal("hide");
-                iziToast.success({
-                    title: "Success",
-                    message: response.message,
-                    position: "topRight",
-                });
-            },
-        });
+        if (error == 1) {
+            return false;
+        } else {
+            let btn = document.getElementById("sbmt-extra");
+            btn.textContent = "Saving...";
+            btn.classList.add("disabled");
+            $.ajax({
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                url: "/villa/update/extra",
+                data: {
+                    id_villa: id_villa,
+                    max_guest: max_guest,
+                    price_extra_guest: price_extra_guest,
+                    max_bed: max_bed,
+                    price_extra_bed: price_extra_bed,
+                },
+                success: function(response) {
+                btn.textContent = "Save";
+                btn.classList.remove("disabled");
+                    $("#modal-edit_price").modal("hide");
+                    iziToast.success({
+                        title: "Success",
+                        message: response.message,
+                        position: "topRight",
+                    });
+                },
+            });
+        }
     }
 </script>
 

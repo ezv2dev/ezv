@@ -1107,7 +1107,7 @@
                                 @if ($photo->count() > 0)
                                     @foreach ($photo as $item)
                                         <div class="col-4 grid-photo" id="displayPhoto{{ $item->id_photo }}">
-                                            <a data-toggle="modal" data-target="#modal-photo-gallery" data-section="{{ $item->id_photo }}">
+                                            <a onclick="openModalGalleryMobile(`{{ $item->id_photo }}`)">
                                                 <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="{{ URL::asset('/foto/hotel/' . strtolower($hotel[0]->uid) . '/' . $item->name) }}" title="{{ $item->caption }}">
                                             </a>
                                             @auth
@@ -5439,7 +5439,7 @@
                 let path = "/foto/hotel/";
                 let slash = "/";
                 let uid = message.data.uid.uid;
-                // let lowerCaseUid = uid.toLowerCase();
+                let lowerCaseUid = uid.toLowerCase();
                 let content = "";
                 let contentStory = "";
                 let contentPositionModal;
@@ -5467,9 +5467,9 @@
                     content = '<div class="col-4 grid-photo" id="displayPhoto' +
                         message.data.photo[0].id_photo +
                         '"> <a href="' +
-                        path + uid + slash + message.data.photo[0].name +
+                        path + lowerCaseUid + slash + message.data.photo[0].name +
                         '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
-                        path + uid + slash + message.data.photo[0].name +
+                        path + lowerCaseUid + slash + message.data.photo[0].name +
                         '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $hotel[0]->id_hotel }}" data-photo="' +
                         message.data.photo[0].id_photo +
                         '" onclick="delete_photo_photo(this)"><i class="fa fa-trash"></i></button> </span> </div>';
@@ -5477,7 +5477,7 @@
                     contentPositionModal = '<li class="ui-state-default" data-id="' + message.data.photo[0]
                         .id_photo + '" id="positionPhotoGallery' + message.data.photo[0].id_photo +
                         '"> <img src="' +
-                        path + uid + slash + message.data.photo[0].name +
+                        path + lowerCaseUid + slash + message.data.photo[0].name +
                         '" title="' + message.data.photo[0].name + '"> </li>';
 
                     $('.gallery').append(content);
@@ -5487,7 +5487,7 @@
                     content = '<div class="col-4 grid-photo" id="displayVideo' + message.data.video[0].id_video +
                         '"> <a class="pointer-normal" onclick="view(' + message.data.video[0].id_video +
                         ')" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="' +
-                        path + uid + slash + message.data.video[0].name +
+                        path + lowerCaseUid + slash + message.data.video[0].name +
                         '#t=5.0"> </video> <span class="video-grid-button"><i class="fa fa-play"></i></span></a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $hotel[0]->id_hotel }}" data-video="' +
                         message.data.video[0].id_video +
                         '" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
@@ -5498,7 +5498,7 @@
                         message.data.video[0].id_video +
                         ')"> <div class="story-video-player"><i class="fa fa-play"></i> </div> <video href="javascript:void(0)" class="story-video-grid" loading="lazy" style="object-fit: cover;" src="' +
                         path +
-                        uid +
+                        lowerCaseUid +
                         slash +
                         message.data.video[0].name +
                         '#t=1.0"> </video> <a class="delete-story" href="javascript:void(0);" data-id="' +
@@ -5510,7 +5510,7 @@
                     contentPositionModalVideo = '<li class="ui-state-default" data-id="' + message.data.video[0]
                         .id_video + '" id="positionVideoGallery' + message.data.video[0].id_video +
                         '"> <video src="' +
-                        path + uid + slash + message.data.video[0].name +
+                        path + lowerCaseUid + slash + message.data.video[0].name +
                         '#t=1.0"> </li>';
 
                     $('.gallery').append(content);
@@ -6407,14 +6407,7 @@
         });
     </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script>
-        $('#modal-photo-gallery').on('shown.bs.modal', function(event) {
-        $('#modal-photo-gallery .modal-body-gallery').scrollTop();
-        var section = $(event.relatedTarget).data('section');
-        var position = $('#' + section).position();
-        $("#modal-photo-gallery").scrollTop(position.top);
-        });
-    </script>
+    
 </body>
 
 </html>

@@ -20,14 +20,13 @@
         justify-content: right;
     }
     .modal-gallery {
-        background: #000;
+        background: white;
     }
     .modal-gallery img {
         min-width: 100%;
         border: solid 1px #cbcbcb;
         object-fit: cover;
         aspect-ratio: 1/1.2;
-        margin: 20px 0;
     }
     .modal-fullwidth {
         margin: 50px 0;
@@ -41,7 +40,7 @@
     }
 </style>
 
-<div id="modal-photo-gallery" class="modal fade bs-example-modal-lg">
+<!-- <div id="modal-photo-gallery" class="modal fade bs-example-modal-lg">
     <div class="modal-dialog modal-fullwidth modal-lg" role="document">
         <div class="modal-content-photo">
             <div class="modal-header-photo">
@@ -64,4 +63,61 @@
             </div>
         </div>
     </div>
+</div> -->
+
+<div id="modal-photo-gallery" class="modal" tabindex="-1">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Photo Gallery</h5>
+        <button type="button" class="btn-close" onClick="closeModalGalleryMobile()"></button>
+      </div>
+      <div class="modal-body p-0" style="height: 100vh; overflow-y: auto;">
+                @if ($restaurant->photo->count() > 0)
+                    @foreach ($restaurant->photo->sortBy('order') as $item)
+                    <div id="{{ $item->id_photo }}">
+                        <div class="modal-gallery">
+                            <img id="displayPhoto{{ $item->id_photo }}" class="lozad-gallery-load lozad-gallery mb-2"
+                                    src="{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/' . $item->name) }}"
+                                    title="{{ $item->caption }}">
+                            </div>
+                    </div>
+                    @endforeach
+                @endif
+      </div>
+    </div>
+  </div>
 </div>
+
+<script>
+    function closeModalGalleryMobile() {
+        $('#modal-photo-gallery').modal('hide');
+    }
+    function openModalGalleryMobile(id_photo) {
+        $('#modal-photo-gallery').modal('show');
+        var position = $('#' + id_photo).position();
+        $("#modal-photo-gallery").find('.modal-body').scrollTop(position.top);
+    }
+</script>
+
+<!-- <script>
+    function closeModalGalleryMobile() {
+        $('#modal-menu-gallery').modal('hide');
+    }
+    function openModalGalleryMobile(id_photo) {
+        $('#modal-menu-gallery').modal('show');
+        var position = $('#' + id_photo).position();
+        $("#modal-menu-gallery").find('.modal-body').scrollTop(position.top);
+    }
+</script> -->
+
+
+<!-- <script>
+    // menu gallery
+    $('#modal-menu-gallery').on('shown.bs.modal', function(event) {
+    $('#modal-menu-gallery .modal-body-gallery').scrollTop();
+    var section = $(event.relatedTarget).data('section');
+    var position = $('#' + section).position();
+    $("#modal-menu-gallery").scrollTop(position.top);
+    });
+</script> -->

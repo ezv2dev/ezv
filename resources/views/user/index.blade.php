@@ -224,8 +224,8 @@
     {{-- NEW SEARCH MOBILE
     new search ui untuk mobile --}}
     <div class="search-container-mobile">
-        {{-- NEW SEARCH MOBILE
-        tombol dipaling atas untuk close atau kembali --}}
+        {{-- NEW SEARCH MOBILEa
+        tombol dipaling atas untuk close atau kembli --}}
         <button class="btn-top-search me-2">
             <i class="fa-solid fa-xmark close"></i>
             <i class="fa-solid fa-angle-left back d-none"></i>
@@ -274,7 +274,7 @@
                 </div>
                 {{-- NEW SEARCH MOBILE
                 popup location untuk mobile --}}
-                <div id="sugest" class="location-popup display-none">
+                <div id="sugest_mobile" class="location-popup display-none">
                     @php
                         $location = App\Http\Controllers\ViewController::get_location();
                         $hotelName = App\Http\Controllers\HotelController::get_name();
@@ -418,12 +418,14 @@
             <div class="dates-container mx-2 mt-2">
                 {{-- NEW SEARCH MOBILE
                 ui ketika user belum atau sudah pilih date untuk mobile --}}
-                <div class="d-flex collapsible_check_search">
+                <div class="d-flex collapsible-check-search">
                     <p class="text-secondary text-small mb-0 dates-mobile">When</p>
+                    <input type="hidden" id="check_in_mobile" value="" name="sCheck_in">
+                    <input type="hidden" id="check_out_mobile" value="" name="sCheck_out">
                     <div class="btn-transparent-action ms-auto">Add Dates</div>
                 </div>
                 {{-- calendar --}}
-                <div class="content sidebar-popup" id="popup_check_search">
+                <div class="content sidebar-popup" id="popup_check_search_mobile">
                     <div class="flatpickr" id="inline_reserve_search" style="text-align: left;">
                     </div>
                 </div>
@@ -456,7 +458,7 @@
                                 <i class="fa-solid fa-minus guests-style" style="padding:0px"></i>
                             </a>
                             <div style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
-                                <input type="number" id="adult2" name="sAdult" value="1"
+                                <input type="number" id="adult_mobile" name="sAdult" value="1"
                                     style="text-align: center; border:none; width:40px; -moz-appearance: textfield; background-color: transparent;"
                                     min="0" readonly>
                             </div>
@@ -482,7 +484,7 @@
                                 <i class="fa-solid fa-minus guests-style" style="padding:0px"></i>
                             </a>
                             <div style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
-                                <input type="number" id="child2" name="sChild" value="0"
+                                <input type="number" id="child_mobile" name="sChild" value="0"
                                     style="text-align: center; border:none; width:40px; -moz-appearance: textfield; background-color: transparent;"
                                     min="0" readonly>
                             </div>
@@ -508,7 +510,7 @@
                                 <i class="fa-solid fa-minus guests-style" style="padding:0px"></i>
                             </a>
                             <div style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
-                                <input type="number" id="infant2" name="" value="0"
+                                <input type="number" id="infant_mobile" name="" value="0"
                                     style="text-align: center; border:none; width:40px; -moz-appearance: textfield; background-color: transparent;"
                                     min="0" readonly>
                             </div>
@@ -534,7 +536,7 @@
                                 <i class="fa-solid fa-minus guests-style" style="padding:0px"></i>
                             </a>
                             <div style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
-                                <input type="number" id="pet2" name="" value="0"
+                                <input type="number" id="pet_mobile" name="" value="0"
                                     style="text-align: center; border:none; width:40px; -moz-appearance: textfield; background-color: transparent;"
                                     min="0" readonly>
                             </div>
@@ -588,7 +590,6 @@
                     </div>
 
                     <div class="col-lg-4" style="height: 90px !important;">
-
                         <div id="searchbox" class="searchbox display-none" onclick="popUp();"
                             style="cursor: pointer;">
                             <p>{{ __('user_page.Search here') }} <span class="top-search"><i
@@ -673,7 +674,7 @@
                                                         $activityName = App\Http\Controllers\Activity\ActivityController::get_name();
                                                     @endphp
                                                     <div class="location-popup-container h-100">
-                                                        <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                        <div class="col-lg-12 location-popup-desc-container sugest-list-first-desktop"
                                                             style="display: none;">
                                                             <div onclick="checkGeo();"
                                                                 class="location-popup-map sugest-list-map">
@@ -688,7 +689,7 @@
                                                                     Location</a>
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                        <div class="col-lg-12 location-popup-desc-container sugest-list-first-desktop"
                                                             style="display: none ">
                                                             <div class="location-popup-map sugest-list-map">
                                                                 <img class="location-popup-map-image lozad"
@@ -700,7 +701,7 @@
                                                                     data-value="Canggu">Canggu</a>
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                        <div class="col-lg-12 location-popup-desc-container sugest-list-first-desktop"
                                                             style="display: none ">
                                                             <div class="location-popup-map sugest-list-map">
                                                                 <img class="location-popup-map-image lozad"
@@ -712,7 +713,7 @@
                                                                     data-value="Seminyak">Seminyak</a>
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                        <div class="col-lg-12 location-popup-desc-container sugest-list-first-desktop"
                                                             style="display: none ">
                                                             <div class="location-popup-map sugest-list-map">
                                                                 <img class="location-popup-map-image lozad"
@@ -724,7 +725,7 @@
                                                                     data-value="Ubud">Ubud</a>
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                        <div class="col-lg-12 location-popup-desc-container sugest-list-first-desktop"
                                                             style="display: none ">
                                                             <div class="location-popup-map sugest-list-map">
                                                                 <img class="location-popup-map-image lozad"
@@ -736,7 +737,7 @@
                                                                     data-value="Kuta">Kuta</a>
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                        <div class="col-lg-12 location-popup-desc-container sugest-list-first-desktop"
                                                             style="display: none ">
                                                             <div class="location-popup-map sugest-list-map">
                                                                 <img class="location-popup-map-image lozad"
@@ -749,7 +750,7 @@
                                                             </div>
                                                         </div>
                                                         @foreach ($location as $item)
-                                                            <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                            <div class="col-lg-12 location-popup-desc-container sugest-list-first-desktop"
                                                                 style="display: none ">
                                                                 <div class="location-popup-map sugest-list-map">
                                                                     <img class="location-popup-map-image lozad"
@@ -831,16 +832,16 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="check-in" onclick="calendar_search_desktop()">
+                                            <div class="check-in">
                                                 <a type="button"
                                                     style="position : absolute; z-index:1; width:367px; height: 60px; margin-left: -90px; margin-top: -8px"
-                                                    class="collapsible_check_search"></a>
+                                                    class="collapsible-check-search-desktop"></a>
                                                 <p>{{ __('user_page.Check in') }}</p>
                                                 <input type="text" placeholder="{{ __('user_page.Add dates') }}"
                                                     class="form-control input-transparant" value=""
                                                     id="check_in2" name="sCheck_in">
                                             </div>
-                                            <div class="check-out" onclick="calendar_search_desktop()">
+                                            <div class="check-out">
                                                 <p>{{ __('user_page.Check out') }}</p>
                                                 <input type="text" placeholder="{{ __('user_page.Add dates') }}"
                                                     class="form-control input-transparant" value=""
@@ -850,7 +851,7 @@
                                                 <p>{{ __('user_page.Guests') }}</p>
                                                 <ul class="nav">
                                                     <li class="button-dropdown">
-                                                        <input type="number" id="total_guest2" value="1"
+                                                        <input type="number" id="total_guest_desktop" value="1"
                                                             style="width: 30px; border: 0; margin-right: 0; text-align: right; -moz-appearance: textfield; background-color: transparent;"
                                                             disabled min="1"> {{ __('user_page.Guest') }}
                                                         <a href="javascript:void(0)"
@@ -884,7 +885,7 @@
                                                                     </a>
                                                                     <div
                                                                         style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
-                                                                        <input type="number" id="adult2"
+                                                                        <input type="number" id="adult_desktop"
                                                                             name="sAdult" value="1"
                                                                             style="text-align: center; border:none; width:40px; -moz-appearance: textfield; background-color: transparent;"
                                                                             min="0" readonly>
@@ -921,7 +922,7 @@
                                                                     </a>
                                                                     <div
                                                                         style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
-                                                                        <input type="number" id="child2"
+                                                                        <input type="number" id="child_desktop"
                                                                             name="sChild" value="0"
                                                                             style="text-align: center; border:none; width:40px; -moz-appearance: textfield; background-color: transparent;"
                                                                             min="0" readonly>
@@ -958,7 +959,7 @@
                                                                     </a>
                                                                     <div
                                                                         style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
-                                                                        <input type="number" id="infant2"
+                                                                        <input type="number" id="infant_desktop"
                                                                             name="" value="0"
                                                                             style="text-align: center; border:none; width:40px; -moz-appearance: textfield; background-color: transparent;"
                                                                             min="0" readonly>
@@ -994,7 +995,7 @@
                                                                     </a>
                                                                     <div
                                                                         style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
-                                                                        <input type="number" id="pet2"
+                                                                        <input type="number" id="pet_desktop"
                                                                             name="" value="0"
                                                                             style="text-align: center; border:none; width:40px; -moz-appearance: textfield; background-color: transparent;"
                                                                             min="0" readonly>
@@ -1150,12 +1151,6 @@
                                         data-src="{{ URL::asset('assets/flags/flag_en.svg') }}">
                                 @endif
                             </a>
-                            <!-- <a type="button" onclick="view_LoginModal();" href="#{{-- {{ route('login') }} --}}"
-                                                                        class="btn btn-fill border-0 navbar-gap"
-                                                                        style="color: #ffffff;margin-right: 0px;padding-top: 12px;padding-left:7px;padding-right:8px;width: 50px;height: 50px;border-radius: 50%;"
-                                                                        id="login">
-                                                                        <i class="fa-solid fa-user"></i>
-                                                                    </a> -->
                             <div class="dropdown">
                                 <button type="button" class="btn-dropdwn dropbtn btn border-0 navbar-gap"></button>
                                 <div class="dropdown-content">
@@ -1530,59 +1525,71 @@
         {{-- Increment Decrement --}}
         <script>
             function adult_increment_index() {
-                document.getElementById('adult2').stepUp();
-                document.getElementById('total_guest2').value = parseInt(document.getElementById('adult2').value) +
-                    parseInt(document.getElementById('child2').value);
+                document.getElementById('adult_desktop').stepUp();
+                document.getElementById('adult_mobile').stepUp();
+                document.getElementById('total_guest_desktop').value = parseInt(document.getElementById('adult_desktop')
+                        .value) +
+                    parseInt(document.getElementById('child_desktop').value);
                 // NEW SEARCH MOBILE
                 // fungsi untuk mengisi guest di mobile
-                document.querySelector('.guests-mobile').innerHTML = parseInt(document.getElementById('adult2').value) +
-                    parseInt(document.getElementById('child2').value) + " Guests";
+                document.querySelector('.guests-mobile').innerHTML = parseInt(document.getElementById('adult_mobile').value) +
+                    parseInt(document.getElementById('child_mobile').value) + " Guests";
             }
 
             function adult_decrement_index() {
-                document.getElementById('adult2').stepDown();
-                document.getElementById('total_guest2').value = parseInt(document.getElementById('adult2').value) +
-                    parseInt(document.getElementById('child2').value);
+                document.getElementById('adult_desktop').stepDown();
+                document.getElementById('adult_desktop').stepDown();
+                document.getElementById('total_guest_desktop').value = parseInt(document.getElementById('adult_desktop')
+                        .value) +
+                    parseInt(document.getElementById('child_desktop').value);
                 // NEW SEARCH MOBILE
                 // fungsi untuk mengisi guest di mobile
-                document.querySelector('.guests-mobile').innerHTML = parseInt(document.getElementById('adult2').value) +
-                    parseInt(document.getElementById('child2').value) + " Guests";
+                document.querySelector('.guests-mobile').innerHTML = parseInt(document.getElementById('adult_mobile').value) +
+                    parseInt(document.getElementById('child_mobile').value) + " Guests";
             }
 
             function child_increment_index() {
-                document.getElementById('child2').stepUp();
-                document.getElementById('total_guest2').value = parseInt(document.getElementById('adult2').value) +
-                    parseInt(document.getElementById('child2').value);
+                document.getElementById('child_desktop').stepUp();
+                document.getElementById('child_mobile').stepUp();
+                document.getElementById('total_guest_desktop').value = parseInt(document.getElementById('adult_desktop')
+                        .value) +
+                    parseInt(document.getElementById('child_desktop').value);
                 // NEW SEARCH MOBILE
                 // fungsi untuk mengisi guest di mobile
-                document.querySelector('.guests-mobile').innerHTML = parseInt(document.getElementById('adult2').value) +
-                    parseInt(document.getElementById('child2').value) + " Guests";
+                document.querySelector('.guests-mobile').innerHTML = parseInt(document.getElementById('adult_mobile').value) +
+                    parseInt(document.getElementById('child_mobile').value) + " Guests";
             }
 
             function child_decrement_index() {
-                document.getElementById('child2').stepDown();
-                document.getElementById('total_guest2').value = parseInt(document.getElementById('adult2').value) +
-                    parseInt(document.getElementById('child2').value);
+                document.getElementById('child_desktop').stepDown();
+                document.getElementById('child_mobile').stepDown();
+                document.getElementById('total_guest_desktop').value = parseInt(document.getElementById('adult_desktop')
+                        .value) +
+                    parseInt(document.getElementById('child_desktop').value);
                 // NEW SEARCH MOBILE
                 // fungsi untuk mengisi guest di mobile
-                document.querySelector('.guests-mobile').innerHTML = parseInt(document.getElementById('adult2').value) +
-                    parseInt(document.getElementById('child2').value) + " Guests";
+                document.querySelector('.guests-mobile').innerHTML = parseInt(document.getElementById('adult_mobile').value) +
+                    parseInt(document.getElementById('child_mobile').value) + " Guests";
             }
 
             function infant_increment_index() {
-                document.getElementById('infant2').stepUp();
+                document.getElementById('infant_desktop').stepUp();
+                document.getElementById('infant_mobile').stepUp();
             }
 
             function infant_decrement_index() {
-                document.getElementById('infant2').stepDown();
+                document.getElementById('infant_desktop').stepDown();
+                document.getElementById('infant_mobile').stepDown();
             }
 
             function pet_increment_index() {
-                document.getElementById('pet2').stepUp();
+                document.getElementById('pet_desktop').stepUp();
+                document.getElementById('pet_mobile').stepUp();
             }
 
             function pet_decrement_index() {
-                document.getElementById('pet2').stepDown();
+                document.getElementById('pet_desktop').stepDown();
+                document.getElementById('pet_mobile').stepDown();
             }
         </script>
 
@@ -1602,7 +1609,7 @@
                 $(".search-container-mobile .clear-all-mobile").removeClass("d-none");
                 $(".search-container-mobile .clear-date-mobile").addClass("d-none");
                 if ($("#check_in2").val() != "" && $("#check_out2").val() != "" &&
-                    parseInt($("#total_guest2").val()) >= 1 && $("#loc_sugest").val() != "") {
+                    parseInt($("#total_guest_desktop").val()) >= 1 && $("#loc_sugest").val() != "") {
                     $(".search-container-mobile .submit-mobile").removeClass("d-none");
                     $(".search-container-mobile .next-mobile").addClass("d-none");
                 } else {
@@ -1614,7 +1621,7 @@
                 $(".search-container-mobile .btn-top-search .back").addClass("d-none");
                 $(".search-container-mobile .location-container")
                     .addClass("mx-2").removeClass("h-100");
-                $('#sugest').removeClass("display-block").addClass("display-none");
+                $('#sugest_mobile').removeClass("display-block").addClass("display-none");
                 $("#loc_sugest").attr("readonly", true);
             }
             // NEW SEARCH MOBILE
@@ -1641,13 +1648,13 @@
                 $(".search-container-mobile .location-has-selected-container")
                     .removeClass("d-flex").addClass("d-none");
                 $(".search-container-mobile .select-location-mobile-container").removeClass("d-none");
-                $('#sugest').removeClass("display-none");
-                $('#sugest').addClass("display-block");
+                $('#sugest_mobile').removeClass("display-none");
+                $('#sugest_mobile').addClass("display-block");
             }
             // NEW SEARCH MOBILE
             // fungsi untuk berpindah ke select date di mobile
             function moveToDateMobile() {
-                $('#popup_check_search').removeClass('d-none').addClass('d-block');
+                $('#popup_check_search_mobile').removeClass('d-none').addClass('d-block');
                 $(".location-has-selected-container").removeClass("d-none").addClass("d-flex");
                 $(".select-location-mobile-container").addClass("d-none");
                 $(".search-container-mobile form").addClass("h-100");
@@ -1660,7 +1667,7 @@
                 $(".search-container-mobile .btn-top-search .back").addClass("d-none");
                 $(".search-container-mobile .location-container")
                     .addClass("mx-2").removeClass("h-100");
-                $('#sugest').removeClass("display-block").addClass("display-none");
+                $('#sugest_mobile').removeClass("display-block").addClass("display-none");
                 $("#loc_sugest").attr("readonly", true);
                 $(".search-container-mobile .clear-date-mobile").removeClass("d-none");
                 $(".search-container-mobile .clear-all-mobile").addClass("d-none");
@@ -1677,7 +1684,7 @@
             // NEW SEARCH MOBILE
             // fungsi untuk berpindah ke select guest di mobile
             function moveToGuestsMobile() {
-                $('#popup_check_search').addClass("d-none");
+                $('#popup_check_search_mobile').addClass("d-none");
                 $(".location-has-selected-container").removeClass("d-none").addClass("d-flex");
                 $(".select-location-mobile-container").addClass("d-none");
                 $(".search-container-mobile form").removeClass("h-100");
@@ -1752,17 +1759,15 @@
                     var ids = $(".sugest-list-first");
                     ids.hide();
                     for (let index = 0; index < 5; index++) {
-                        // var rndInt = Math.floor(Math.random() * (ids.length - 1));
-                        // console.log(rndInt);
                         ids.show();
                     };
 
-                    $('#sugest').removeClass("display-none");
-                    $('#sugest').addClass("display-block"); //add the class to the clicked element
+                    $('#sugest_mobile').removeClass("display-none");
+                    $('#sugest_mobile').addClass("display-block"); //add the class to the clicked element
                 });
 
                 $(document).mouseup(function(e) {
-                    var container = $('#sugest');
+                    var container = $('#sugest_mobile');
 
                     // if the target of the click isn't the container nor a descendant of the container
                     // NEW SEARCH MOBILE
@@ -1813,13 +1818,15 @@
                     // fungsi untuk isi nilai dari location di mobile ketika user udh milih
                     $('#loc_sugest').val($(this).parents(".col-4").children(".location-popup-text").children(
                         ".location_op").data("value"));
+                    $('#loc_sugest_desktop').val($(this).parents(".col-4").children(".location-popup-text")
+                        .children(".location_op").data("value"));
                     $('.loc_sugest_mobile').html($(this).parents(".col-4").children(".location-popup-text")
                         .children(".location_op").data("value"));
 
                     // NEW SEARCH MOBILE
                     // fungsi untuk sembunyiin popup location
-                    $('#sugest').removeClass("display-block");
-                    $('#sugest').addClass("display-none");
+                    $('#sugest_mobile').removeClass("display-block");
+                    $('#sugest_mobile').addClass("display-none");
 
                     // NEW SEARCH MOBILE
                     // fungsi untuk berpindah ke select date di mobile
@@ -1846,14 +1853,14 @@
                 });
 
                 $(".location_op").on('click', function(e) {
-                    $('#loc_sugest').val($(this).data("value"));
+                    $('#loc_sugest_desktop').val($(this).data("value"));
 
                     // NEW SEARCH MOBILE
                     // fungsi untuk isi nilai dari location di mobile ketika user udh milih
                     $('.loc_sugest_mobile').html($(this).data("value"));
 
-                    $('#sugest').removeClass("display-block");
-                    $('#sugest').addClass("display-none");
+                    $('#sugest_mobile').removeClass("display-block");
+                    $('#sugest_mobile').addClass("display-none");
 
                     // NEW SEARCH MOBILE
                     // fungsi untuk berpindah ke select date di mobile
@@ -1884,11 +1891,9 @@
                 });
 
                 $("#loc_sugest_desktop").on('click', function() { //use a class, since your ID gets mangled
-                    var ids = $(".sugest-list-first");
+                    var ids = $(".sugest-list-first-desktop");
                     ids.hide();
                     for (let index = 0; index < 5; index++) {
-                        // var rndInt = Math.floor(Math.random() * (ids.length - 1));
-                        // console.log(rndInt);
                         ids.show();
                     };
 
@@ -1907,7 +1912,7 @@
                 });
 
                 $("#loc_sugest_desktop").on('keyup change', async () => {
-                    var close = $(".sugest-list-first");
+                    var close = $(".sugest-list-first-desktop");
                     close.hide();
                     var ids = $(".sugest-list");
                     ids.hide();
@@ -1939,11 +1944,17 @@
 
                 $(".location_op_desktop").on('click', function(e) {
                     $('#loc_sugest_desktop').val($(this).data("value"));
+                    $('#loc_sugest_mobile').val($(this).data("value"));
                     $('#sugest_desktop').removeClass("display-block");
                     $('#sugest_desktop').addClass("display-none");
 
+                    $('.loc_sugest_mobile').html($(this).data("value"));
+                    $('#sugest_mobile').removeClass("display-block");
+                    $('#sugest_mobile').addClass("display-none");
+                    moveToGuestsMobile();
+
                     //calendar show when location click
-                    var content_flatpickr = document.getElementById('popup_check_search');
+                    var content_flatpickr = document.getElementById('popup_check_search_desktop');
                     if (content_flatpickr.style.display === "block") {
                         content_flatpickr.style.display = "none";
                     } else {
@@ -1972,7 +1983,7 @@
                     "block") {
                     moveToLocationMobile();
                 } else if ($("#loc_sugest").val() != "" && $("#check_in2").val() == "" &&
-                    $("#check_out2").val() == "" && parseInt($("#total_guest2").val()) < 1) {
+                    $("#check_out2").val() == "" && parseInt($("#total_guest_desktop").val()) < 1) {
                     moveToDateMobile();
                 } else if (($("#check_in2").val() == "" ||
                         $("#check_out2").val() == "") || $(".search-container-mobile .sidebar-popup").css("display") ==
@@ -1986,22 +1997,24 @@
                 $("#loc_sugest").val("");
                 $("#check_in2").val("");
                 $("#check_out2").val("");
-                $("#total_guest2").val("");
+                $("#check_in_mobile").val("");
+                $("#check_out_mobile").val("");
+                $("#total_guest_desktop").val("");
                 $(".search-container-mobile .loc_sugest_mobile").html("Location");
                 $(".search-container-mobile .dates-mobile").html("When");
                 $(".search-container-mobile .guests-mobile").html("1 Guests");
-                calendar_search(2);
+                calendarSearch(2);
             });
         </script>
 
         <script>
-            var coll = document.getElementsByClassName("collapsible_check_search");
+            var coll = document.getElementsByClassName("collapsible-check-search");
             var i;
 
             for (i = 0; i < coll.length; i++) {
                 coll[i].addEventListener("click", function() {
                     this.classList.toggle("active");
-                    var content_flatpickr = document.getElementById('popup_check_search');
+                    var content_flatpickr = document.getElementById('popup_check_search_mobile');
                     if (content_flatpickr.style.display === "block" && window.innerWidth > 649) {
                         content_flatpickr.style.display = "none";
                     } else {
@@ -2016,26 +2029,28 @@
                     }
                 });
             }
-        </script>
 
-        {{-- <script>
-            $("#dates").flatpickr({
-                enableTime: false,
-                dateFormat: "Y-m-d",
-                minDate: "today",
-                mode: "range",
-                showMonths: 2,
-                disableMobile: "true",
-                onReady(_, __, fp) {
-                    fp.calendarContainer.classList.add("flat-margin");
-                },
-                onChange: function(selectedDates, dateStr, instance) {
-                    $('#dates').val("");
-                    $('#check_in2').val(flatpickr.formatDate(selectedDates[0], "Y-m-d"));
-                    $('#check_out2').val(flatpickr.formatDate(selectedDates[1], "Y-m-d"))
-                }
-            });
-        </script> --}}
+            var collDesktop = document.getElementsByClassName("collapsible-check-search-desktop");
+            var j;
+
+            for (j = 0; j < collDesktop.length; j++) {
+                collDesktop[j].addEventListener("click", function() {
+                    this.classList.toggle("active");
+                    var content_flatpickr = document.getElementById('popup_check_search_desktop');
+                    if (content_flatpickr.style.display === "block") {
+                        content_flatpickr.style.display = "none";
+                    } else {
+                        content_flatpickr.style.display = "block";
+                        document.addEventListener('mouseup', function(e) {
+                            let container = content_flatpickr;
+                            if (!container.contains(e.target)) {
+                                container.style.display = 'none';
+                            }
+                        });
+                    }
+                });
+            }
+        </script>
 
         <script>
             function addClass(elements, className) {
@@ -2309,7 +2324,7 @@
             // NEW SEARCH MOBILE
             window.countMonthsMobile = 3;
 
-            function calendar_search(months) {
+            function calendarSearch(months) {
                 if (!$("#check_in2").val()) {
                     var check_in_val = "";
                 } else {
@@ -2353,7 +2368,7 @@
                             );
                             $(".btn-load-more-calendar-mobile").on("click", function() {
                                 window.countMonthsMobile += 3;
-                                calendar_search(window.countMonthsMobile);
+                                calendarSearch(window.countMonthsMobile);
                             });
                         }
                     },
@@ -2369,9 +2384,11 @@
                             // fungsi untuk isi date di mobile
                             $(".search-container-mobile .dates-mobile").html(
                                 instance.formatDate(selectedDates[0], "Y-m-d") +
-                                "-" +
+                                " to " +
                                 instance.formatDate(selectedDates[1], "Y-m-d")
                             );
+                            $("#check_in_mobile").val(instance.formatDate(selectedDates[0], "Y-m-d"));
+                            $("#check_out_mobile").val(instance.formatDate(selectedDates[1], "Y-m-d"));
                             // NEW SEARCH MOBILE
                             // fungsi untuk mengubah tombol dibawah jadi next ketika sudah selesai milih
                             $(".search-container-mobile .next-mobile").html("Next");
@@ -2379,7 +2396,7 @@
                         // NEW SEARCH MOBILE
                         // fungsi untuk menutup calendar ketika sudah selesai milih hanya berlaku ketika bukan dimobile
                         if (window.innerWidth > 649) {
-                            let content = document.getElementById("popup_check_search");
+                            let content = document.getElementById("popup_check_search_mobile");
                             content.style.display = "none";
                         }
                         // NEW SEARCH MOBILE
@@ -2404,20 +2421,59 @@
                             );
                             $(".btn-load-more-calendar-mobile").on("click", function() {
                                 window.countMonthsMobile += 3;
-                                calendar_search(window.countMonthsMobile);
+                                calendarSearch(window.countMonthsMobile);
                             });
                         }
                     }
                 });
             }
-            calendar_search(2);
+            calendarSearch(2);
+
+            function calendarSearchDesktop(months) {
+                if (!$("#check_in2").val()) {
+                    var check_in_val = "";
+                } else {
+                    var check_in_val = $("#check_in2").val();
+                }
+
+                if (!$("#check_out2").val()) {
+                    var check_out_val = "";
+                } else {
+                    var check_out_val = $("#check_out2").val();
+                }
+                $("#inline_reserve_search_desktop").flatpickr({
+                    enableTime: false,
+                    dateFormat: "Y-m-d",
+                    minDate: "today",
+                    inline: true,
+                    mode: "range",
+                    showMonths: months,
+                    // disable: data,
+                    defaultDate: [check_in_val, check_out_val],
+                    onChange: function(selectedDates, dateStr, instance) {
+                        $("#check_in2").val(instance.formatDate(selectedDates[0], "Y-m-d"));
+                        $("#check_out2").val(instance.formatDate(selectedDates[1], "Y-m-d"));
+                        $("#check_in_mobile").val(instance.formatDate(selectedDates[0], "Y-m-d"));
+                        $("#check_out_mobile").val(instance.formatDate(selectedDates[1], "Y-m-d"));
+                        $('.dates-mobile').html(
+                            instance.formatDate(selectedDates[0], "Y-m-d") +
+                            " to " +
+                            instance.formatDate(selectedDates[1], "Y-m-d")
+                        );
+
+                        let content = document.getElementById("popup_check_search_desktop");
+                        content.style.display = "none";
+                    },
+                });
+            }
+            calendarSearchDesktop(2);
         </script>
 
         <script>
             $(document).ready(function() {
                 function handleResponsive(windowWidth) {
                     if (windowWidth <= 649) {
-                        calendar_search(window.countMonthsMobile);
+                        calendarSearch(window.countMonthsMobile);
                         $("#clear_date_header").click(function() {
                             $("#check_in2").val("");
                             $("#check_out2").val("");
@@ -2429,10 +2485,10 @@
 
                             // Fungsi untuk menyembunyikan calendar ketika clear date hanya berlaku kalo bukan mobile
                             if (windowWidth > 649) {
-                                let content = document.getElementById("popup_check_search");
+                                let content = document.getElementById("popup_check_search_mobile");
                                 content.style.display = "none";
                             }
-                            calendar_search(window.countMonthsMobile);
+                            calendarSearch(window.countMonthsMobile);
                         });
                     } else {
                         $("#clear_date_header").click(function() {
@@ -2444,11 +2500,11 @@
                             $(".search-container-mobile .dates-mobile").html("");
                             $(".search-container-mobile .next-mobile").html("Skip");
 
-                            let content = document.getElementById("popup_check_search");
+                            let content = document.getElementById("popup_check_search_mobile");
                             content.style.display = "none";
-                            calendar_search(2);
+                            calendarSearch(2);
                         });
-                        calendar_search(2);
+                        calendarSearch(2);
                     }
                     if (windowWidth <= 991) {
                         $("#search_bar #bar").addClass("row");

@@ -2236,18 +2236,6 @@ class ViewController extends Controller
         //     $villa = collect([]);
         // }
 
-        // if ($villa->count() > 0) {
-        //     // dd($villa->pluck('grade', 'id_villa'));
-        //     $page = 1;
-        //     $perPage = 5;
-        //     $villa = new \Illuminate\Pagination\LengthAwarePaginator(
-        //         $villa->forPage($page, $perPage),
-        //         $villa->count(),
-        //         $perPage,
-        //         $page
-        //     );
-        // }
-
         // if ($request->ajax()) {
         //     $view = view('user.data_list_villa', compact('villa'))->render();
         //     return response()->json(['html' => $view]);
@@ -2343,10 +2331,6 @@ class ViewController extends Controller
         $villaCategory = VillaCategory::all();
         $villaFilter = VillaFilter::all();
         $amenities = Amenities::select('icon', 'name', 'order', 'id_amenities')->get();
-
-        // if ($request->ajax()) {
-        //     return view('user.data_list_villa', compact('villa', 'amenities'))->render();
-        // }
 
         return view('user.list_villa', compact('villa', 'amenities', 'host_language', 'propertyType', 'villaCategory', 'villaFilter', 'accessibility_features', 'accessibility_features_detail'));
     }
