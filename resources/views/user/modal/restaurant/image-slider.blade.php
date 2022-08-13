@@ -20,14 +20,13 @@
         justify-content: right;
     }
     .modal-gallery {
-        background: #000;
+        background: white;
     }
     .modal-gallery img {
         min-width: 100%;
         border: solid 1px #cbcbcb;
         object-fit: cover;
         aspect-ratio: 1/1.2;
-        margin: 20px 0;
     }
     .modal-fullwidth {
         margin: 50px 0;
@@ -73,21 +72,18 @@
         <h5 class="modal-title">Photo Gallery</h5>
         <button type="button" class="btn-close" onClick="closeModalGalleryMobile()"></button>
       </div>
-      <div class="modal-body" style="height: 100vh; overflow-y: auto;">
+      <div class="modal-body p-0" style="height: 100vh; overflow-y: auto;">
                 @if ($restaurant->photo->count() > 0)
                     @foreach ($restaurant->photo->sortBy('order') as $item)
                     <div id="{{ $item->id_photo }}">
                         <div class="modal-gallery">
-                            <img id="displayPhoto{{ $item->id_photo }}" class="lozad-gallery-load lozad-gallery"
+                            <img id="displayPhoto{{ $item->id_photo }}" class="lozad-gallery-load lozad-gallery mb-2"
                                     src="{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/' . $item->name) }}"
                                     title="{{ $item->caption }}">
                             </div>
                     </div>
                     @endforeach
                 @endif
-      </div>
-      <div class="modal-footer">
-       
       </div>
     </div>
   </div>

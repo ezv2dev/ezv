@@ -4,7 +4,6 @@
         min-width: 100%;
         height: auto;
         border: solid 1px #cbcbcb;
-        margin: 20px 0;
     }
 </style>
 <!-- <div id="modal-menu-gallery" class="modal fade bs-example-modal-lg">
@@ -39,21 +38,18 @@
         <h5 class="modal-title">Menu Gallery</h5>
         <button type="button" class="btn-close" onClick="closeModalMenuMobile()"></button>
       </div>
-      <div class="modal-body" style="height: 100vh; overflow-y: auto;">
+      <div class="modal-body p-0" style="height: 100vh; overflow-y: auto;">
             @if ($restaurant->menu->count() > 0)
                     @foreach ($restaurant->menu as $menu)
                     <div id="{{ $menu->id_menu }}">
                         <div class="modal-menu-gallery">
-                            <img id="displayMenu{{ $menu->id_menu }}" class="lozad-gallery-load lozad-gallery"
+                            <img id="displayMenu{{ $menu->id_menu }}" class="lozad-gallery-load lozad-gallery mb-2"
                                     src="{{ URL::asset('/foto/restaurant/' . strtolower($restaurant->uid) . '/' . 'menu/' . $menu->foto) }}"
                                     title="{{ $menu->name }}">
                             </div>
                     </div>
                     @endforeach
                 @endif
-      </div>
-      <div class="modal-footer">
-       
       </div>
     </div>
   </div>
