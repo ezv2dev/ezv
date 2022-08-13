@@ -2184,35 +2184,37 @@ class ViewController extends Controller
         $accessibility_features = VillaAccessibilityFeatures::all();
         $accessibility_features_detail = VillaAccessibilitiyFeaturesDetail::all();
 
-        //get all villa grade a - d
-        $villa = Villa::where('status', 1)->where('grade', '!=', 'AA')->inRandomOrder()->get()->sortBy('grade')->toArray();
+        $villa = Villa::where('status', 1)->paginate(env('CONTENT_PER_PAGE_LIST_VILLA') ?? 5);
+        $villa->appends(request()->query());
+
         // TODO uncomment when lazy load, start
-        $villa_aa = Villa::where('grade', '=', 'AA')->where('status', 1)->inRandomOrder()->get()->toArray();
-        dd($villa_aa);
+        $villas = Villa::where('grade', '!=', 'AA')->where('status', 1)->inRandomOrder()->get()->sortBy('grade');
+        $villa_aa = Villa::where('grade', '=', 'AA')->where('status', 1)->inRandomOrder()->get();
+
         // if ($request->itemIds) {
         //     $villas = Villa::where('grade', '!=', 'AA')->where('status', 1)->whereNotIn('id_villa', $request->itemIds)->inRandomOrder()->get()->sortBy('grade');
         //     $villa_aa = Villa::where('grade', '=', 'AA')->where('status', 1)->whereNotIn('id_villa', $request->itemIds)->inRandomOrder()->get();
         // }
 
-        if ($villas->count() > 0 && $villa_aa->count() > 0) {
-            $split_count = $villas->count() / 4;
-            $villas_parted = $villas->split(ceil($split_count));
-            for ($i = 0; $i < $villa_aa->count(); $i++) {
-                if ($i == 0) {
-                    $villa = $villas_parted[0];
-                    $villa->push($villa_aa[0]);
-                } else {
-                    if (isset($villas_parted[$i])) {
-                        foreach ($villas_parted[$i] as $item) {
-                            $villa->push($item);
-                        }
-                        $villa->push($villa_aa[$i]);
-                    } elseif ($villa_aa[$i]) {
-                        $villa->push($villa_aa[$i]);
-                    }
-                }
-            }
-        }
+        // if ($villas->count() > 0 && $villa_aa->count() > 0) {
+        //     $split_count = $villas->count() / 4;
+        //     $villas_parted = $villas->split(ceil($split_count));
+        //     for ($i = 0; $i < $villa_aa->count(); $i++) {
+        //         if ($i == 0) {
+        //             $villa = $villas_parted[0];
+        //             $villa->push($villa_aa[0]);
+        //         } else {
+        //             if (isset($villas_parted[$i])) {
+        //                 foreach ($villas_parted[$i] as $item) {
+        //                     $villa->push($item);
+        //                 }
+        //                 $villa->push($villa_aa[$i]);
+        //             } elseif ($villa_aa[$i]) {
+        //                 $villa->push($villa_aa[$i]);
+        //             }
+        //         }
+        //     }
+        // }
 
         // if ($villas->count() > 0 && $villa_aa->count() <= 0) {
         //     $villa = $villas;
