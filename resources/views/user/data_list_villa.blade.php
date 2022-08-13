@@ -399,7 +399,7 @@ if (isset($_COOKIE['tema'])) {
                                                         <div>
                                                             {{ $service }}
                                                         </div>
-                                                    
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -486,6 +486,6 @@ if (isset($_COOKIE['tema'])) {
         $(`#modal-share-${value}`).modal('show');
     }
 </script>
-<script>
+{{-- <script>
     add(@json($villas->pluck('id_villa')));
-</script>
+</script> --}}
