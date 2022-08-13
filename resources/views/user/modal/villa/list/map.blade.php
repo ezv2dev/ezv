@@ -535,7 +535,7 @@
                                             ${image}
                                         </div>
                                     </div>
-                                    
+
                                     <div class="description-prop-in-modal">
                                         <div>
                                             <a href="${contentLink}" target="_blank">
@@ -555,7 +555,7 @@
                                                             <a href="https://www.apple.com/id/app-store/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-app-store">
                                                                 <img style="width:30%;" src="{{ URL::asset('assets/media/photos/desktop/app-store-badge.svg') }}">
                                                             </a>
-    
+
                                                             <a href="https://play.google.com/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-play-store">
                                                                 <img style="width:37%;" src="{{ URL::asset('assets/media/photos/desktop/google-play-badge.svg') }}">
                                                             </a>
@@ -571,15 +571,29 @@
                                                     <i class=" text-orange fa-solid fa-arrow-right"></i>
                                                 </a>
                                             </div>
-        
-                                            <div class="d-flex justify-content-end">
-                                                <div class="me-2 d-flex align-items-center flex-column">
-                                                    <button class="button-prev" id="modal-map-right-prev" disabled="true" onclick="prev_marker('restaurant', ${restaurantLocations.id_restaurant})"><i class="fa-solid fa-chevron-left"></i></button>
-                                                    <small class="text-13">Prev</small>
+
+                                            <div id="modal-map-right-next-prev-disabled">
+                                                <div class="d-flex justify-content-end">
+                                                    <div class="me-2 d-flex align-items-center flex-column">
+                                                        <button class="button-prev" id="modal-map-right-prev" disabled onclick="prev_marker('restaurant', ${restaurantLocations.id_restaurant})"><i class="fa-solid fa-chevron-left"></i></button>
+                                                        <small class="text-13">Prev</small>
+                                                    </div>
+                                                    <div class="d-flex align-items-center flex-column">
+                                                        <button class="button-next" id="modal-map-right-next" disabled onclick="next_marker('restaurant', ${restaurantLocations.id_restaurant})"><i class="fa-solid fa-chevron-right"></i></button>
+                                                        <small class="text-13">Next</small>
+                                                    </div>
                                                 </div>
-                                                <div class="d-flex align-items-center flex-column">
-                                                    <button class="button-next" id="modal-map-right-next" disabled="true" onclick="next_marker('restaurant', ${restaurantLocations.id_restaurant})"><i class="fa-solid fa-chevron-right"></i></button>
-                                                    <small class="text-13">Next</small>
+                                            </div>
+                                            <div class="d-none" id="modal-map-right-next-prev">
+                                                <div class="d-flex justify-content-end">
+                                                    <div class="me-2 d-flex align-items-center flex-column">
+                                                        <button class="button-prev" id="modal-map-right-prev" onclick="prev_marker('restaurant', ${restaurantLocations.id_restaurant})"><i class="fa-solid fa-chevron-left"></i></button>
+                                                        <small class="text-13">Prev</small>
+                                                    </div>
+                                                    <div class="d-flex align-items-center flex-column">
+                                                        <button class="button-next" id="modal-map-right-next" onclick="next_marker('restaurant', ${restaurantLocations.id_restaurant})"><i class="fa-solid fa-chevron-right"></i></button>
+                                                        <small class="text-13">Next</small>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -856,14 +870,28 @@
                                         </div>
                                         <p class="map-price-mobile">${price}/Night</p>
 
-                                        <div class="d-flex justify-content-end">
-                                            <div class="me-2 d-flex align-items-center flex-column">
-                                                <button class="button-next" id="modal-map-right-prev" disabled="true" onclick="prev_marker('villa', ${villaLocations.id_villa})"><i class="fa-solid fa-chevron-left"></i></button>
-                                                <small class="text-13">Prev</small>
+                                        <div id="modal-map-right-next-prev-disabled">
+                                            <div class="d-flex justify-content-end">
+                                                <div class="me-2 d-flex align-items-center flex-column">
+                                                    <button class="button-next" id="modal-map-right-prev" disabled onclick="prev_marker('villa', ${villaLocations.id_villa})"><i class="fa-solid fa-chevron-left"></i></button>
+                                                    <small class="text-13">Prev</small>
+                                                </div>
+                                                <div class="d-flex align-items-center flex-column">
+                                                    <button class="button-prev" id="modal-map-right-next" disabled onclick="next_marker('villa', ${villaLocations.id_villa})"><i class="fa-solid fa-chevron-right"></i></button>
+                                                    <small class="text-13">Next</small>
+                                                </div>
                                             </div>
-                                            <div class="d-flex align-items-center flex-column">
-                                                <button class="button-prev" id="modal-map-right-next" disabled="true" onclick="next_marker('villa', ${villaLocations.id_villa})"><i class="fa-solid fa-chevron-right"></i></button>
-                                                <small class="text-13">Next</small>
+                                        </div>
+                                        <div class="d-none" id="modal-map-right-next-prev">
+                                            <div class="d-flex justify-content-end">
+                                                <div class="me-2 d-flex align-items-center flex-column">
+                                                    <button class="button-next" id="modal-map-right-prev" onclick="prev_marker('villa', ${villaLocations.id_villa})"><i class="fa-solid fa-chevron-left"></i></button>
+                                                    <small class="text-13">Prev</small>
+                                                </div>
+                                                <div class="d-flex align-items-center flex-column">
+                                                    <button class="button-prev" id="modal-map-right-next" onclick="next_marker('villa', ${villaLocations.id_villa})"><i class="fa-solid fa-chevron-right"></i></button>
+                                                    <small class="text-13">Next</small>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -1108,7 +1136,7 @@
                                                         <a href="https://www.apple.com/id/app-store/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-app-store">
                                                             <img style="width:30%;" src="{{ URL::asset('assets/media/photos/desktop/app-store-badge.svg') }}">
                                                         </a>
-    
+
                                                         <a href="https://play.google.com/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-play-store">
                                                             <img style="width:37%;" src="{{ URL::asset('assets/media/photos/desktop/google-play-badge.svg') }}">
                                                         </a>
@@ -1124,20 +1152,33 @@
                                                 <i class=" text-orange fa-solid fa-arrow-right"></i>
                                             </a>
                                         </div>
-                                        <div class="d-flex justify-content-end">
-                                            <div class="me-2 d-flex align-items-center flex-column">
-                                                <button class="button-prev" id="modal-map-right-prev" disabled="true" onclick="prev_marker('hotel', ${hotelLocations.id_hotel})"><i class="fa-solid fa-chevron-left"></i></button>
-                                                <small class="text-13">Prev</small>
+
+                                        <div id="modal-map-right-next-prev-disabled">
+                                            <div class="d-flex justify-content-end">
+                                                <div class="me-2 d-flex align-items-center flex-column">
+                                                    <button class="button-prev" id="modal-map-right-prev" disabled onclick="prev_marker('hotel', ${hotelLocations.id_hotel})"><i class="fa-solid fa-chevron-left"></i></button>
+                                                    <small class="text-13">Prev</small>
+                                                </div>
+                                                <div class="d-flex align-items-center flex-column">
+                                                    <button class="button-next" id="modal-map-right-next" disabled onclick="next_marker('hotel', ${hotelLocations.id_hotel})"><i class="fa-solid fa-chevron-right"></i></button>
+                                                    <small class="text-13">Next</small>
+                                                </div>
                                             </div>
-                                            <div class="d-flex align-items-center flex-column">
-                                                <button class="button-next" id="modal-map-right-next" disabled="true" onclick="next_marker('hotel', ${hotelLocations.id_hotel})"><i class="fa-solid fa-chevron-right"></i></button>
-                                                <small class="text-13">Next</small>
+                                        </div>
+                                        <div class="d-none" id="modal-map-right-next-prev">
+                                            <div class="d-flex justify-content-end">
+                                                <div class="me-2 d-flex align-items-center flex-column">
+                                                    <button class="button-prev" id="modal-map-right-prev" onclick="prev_marker('hotel', ${hotelLocations.id_hotel})"><i class="fa-solid fa-chevron-left"></i></button>
+                                                    <small class="text-13">Prev</small>
+                                                </div>
+                                                <div class="d-flex align-items-center flex-column">
+                                                    <button class="button-next" id="modal-map-right-next" onclick="next_marker('hotel', ${hotelLocations.id_hotel})"><i class="fa-solid fa-chevron-right"></i></button>
+                                                    <small class="text-13">Next</small>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
-
                             </div>`;
 
         return customContent;
@@ -1412,7 +1453,7 @@
                                                     <a href="https://www.apple.com/id/app-store/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-app-store">
                                                         <img style="width:30%;" src="{{ URL::asset('assets/media/photos/desktop/app-store-badge.svg') }}">
                                                     </a>
-    
+
                                                     <a href="https://play.google.com/" target="_blank" class="btn-donwload-mobile-app" id="btn-to-play-store">
                                                         <img style="width:37%;" src="{{ URL::asset('assets/media/photos/desktop/google-play-badge.svg') }}">
                                                     </a>
@@ -1428,14 +1469,29 @@
                                                 <i class=" text-orange fa-solid fa-arrow-right"></i>
                                             </a>
                                         </div>
-                                        <div class="d-flex justify-content-end">
-                                            <div class="me-2 d-flex align-items-center flex-column">
-                                                <button class="button-prev" id="modal-map-right-prev" disabled="true" onclick="prev_marker('activity', ${activityLocations.id_activity})"><i class="fa-solid fa-chevron-left"></i></button>
-                                                <small class="text-13">Prev</small>
+
+                                        <div id="modal-map-right-next-prev-disabled">
+                                            <div class="d-flex justify-content-end">
+                                                <div class="me-2 d-flex align-items-center flex-column">
+                                                    <button class="button-prev" id="modal-map-right-prev" disabled onclick="prev_marker('activity', ${activityLocations.id_activity})"><i class="fa-solid fa-chevron-left"></i></button>
+                                                    <small class="text-13">Prev</small>
+                                                </div>
+                                                <div class="d-flex align-items-center flex-column">
+                                                    <button class="button-next" id="modal-map-right-next" disabled onclick="next_marker('activity', ${activityLocations.id_activity})"><i class="fa-solid fa-chevron-right"></i></button>
+                                                    <small class="text-13">Next</small>
+                                                </div>
                                             </div>
-                                            <div class="d-flex align-items-center flex-column">
-                                                <button class="button-next" id="modal-map-right-next" disabled="true" onclick="next_marker('activity', ${activityLocations.id_activity})"><i class="fa-solid fa-chevron-right"></i></button>
-                                                <small class="text-13">Next</small>
+                                        </div>
+                                        <div class="d-none" id="modal-map-right-next-prev">
+                                            <div class="d-flex justify-content-end">
+                                                <div class="me-2 d-flex align-items-center flex-column">
+                                                    <button class="button-prev" id="modal-map-right-prev" onclick="prev_marker('activity', ${activityLocations.id_activity})"><i class="fa-solid fa-chevron-left"></i></button>
+                                                    <small class="text-13">Prev</small>
+                                                </div>
+                                                <div class="d-flex align-items-center flex-column">
+                                                    <button class="button-next" id="modal-map-right-next" onclick="next_marker('activity', ${activityLocations.id_activity})"><i class="fa-solid fa-chevron-right"></i></button>
+                                                    <small class="text-13">Next</small>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -1606,21 +1662,25 @@
 
     // function to disabled prev next button on right content
     function disabledPrevNextButton() {
-        if($('#modal-map-right-prev' == 0)){
-            $('#modal-map-right-prev').prop('disabled', true);
-        }
-        if($('#modal-map-right-next' == 0)){
-            $('#modal-map-right-next').prop('disabled', true);
-        }
+        $('#modal-map-right-next-prev-disabled').removeClass('d-none');
+        $('#modal-map-right-next-prev').addClass('d-none');
+        // if($('#modal-map-right-prev' == 0)){
+        //     $('#modal-map-right-prev').prop('disabled', true);
+        // }
+        // if($('#modal-map-right-next' == 0)){
+        //     $('#modal-map-right-next').prop('disabled', true);
+        // }
     }
     // function to enabled prev next button on right content
     function enabledPrevNextButton() {
-        if($('#modal-map-right-prev' == 0)){
-            $('#modal-map-right-prev').prop('disabled', false);
-        }
-        if($('#modal-map-right-next' == 0)){
-            $('#modal-map-right-next').prop('disabled', false);
-        }
+        $('#modal-map-right-next-prev-disabled').addClass('d-none');
+        $('#modal-map-right-next-prev').removeClass('d-none');
+        // if($('#modal-map-right-prev' == 0)){
+        //     $('#modal-map-right-prev').prop('disabled', false);
+        // }
+        // if($('#modal-map-right-next' == 0)){
+        //     $('#modal-map-right-next').prop('disabled', false);
+        // }
     }
 
     // function to set map loading
