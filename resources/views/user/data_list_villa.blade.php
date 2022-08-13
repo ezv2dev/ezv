@@ -405,9 +405,9 @@ if (isset($_COOKIE['tema'])) {
                                             </div>
 
                                             <!-- Start modal price breakdown -->
-                                            <div class="modal fade" id="modal_price_breakdown-{{$data->id_villa}}" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
+                                            <div class="modal fade pe-0" id="modal_price_breakdown-{{$data->id_villa}}" tabindex="-1" role="dialog" aria-labelledby="modal-default-fadein"
                                             aria-hidden="true">
-                                            <div class="modal-dialog modal-fullscreen-md-down modal-lg modal-dialog-centered modal-horizontal-centered"
+                                            <div class="modal-dialog modal-fullscreen-md-down modal-md modal-dialog-centered modal-horizontal-centered"
                                                 role="document" style="overflow-y: initial !important">
                                                 <div class="modal-content" style="background: #fff;">
                                                     <div class="modal-header">
