@@ -224,8 +224,8 @@
     {{-- NEW SEARCH MOBILE
     new search ui untuk mobile --}}
     <div class="search-container-mobile">
-        {{-- NEW SEARCH MOBILE
-        tombol dipaling atas untuk close atau kembali --}}
+        {{-- NEW SEARCH MOBILEa
+        tombol dipaling atas untuk close atau kembli --}}
         <button class="btn-top-search me-2">
             <i class="fa-solid fa-xmark close"></i>
             <i class="fa-solid fa-angle-left back d-none"></i>
@@ -456,7 +456,7 @@
                                 <i class="fa-solid fa-minus guests-style" style="padding:0px"></i>
                             </a>
                             <div style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
-                                <input type="number" id="adult2" name="sAdult" value="1"
+                                <input type="number" id="adult_mobile" name="sAdult" value="1"
                                     style="text-align: center; border:none; width:40px; -moz-appearance: textfield; background-color: transparent;"
                                     min="0" readonly>
                             </div>
@@ -482,7 +482,7 @@
                                 <i class="fa-solid fa-minus guests-style" style="padding:0px"></i>
                             </a>
                             <div style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
-                                <input type="number" id="child2" name="sChild" value="0"
+                                <input type="number" id="child_mobile" name="sChild" value="0"
                                     style="text-align: center; border:none; width:40px; -moz-appearance: textfield; background-color: transparent;"
                                     min="0" readonly>
                             </div>
@@ -508,7 +508,7 @@
                                 <i class="fa-solid fa-minus guests-style" style="padding:0px"></i>
                             </a>
                             <div style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
-                                <input type="number" id="infant2" name="" value="0"
+                                <input type="number" id="infant_mobile" name="" value="0"
                                     style="text-align: center; border:none; width:40px; -moz-appearance: textfield; background-color: transparent;"
                                     min="0" readonly>
                             </div>
@@ -534,7 +534,7 @@
                                 <i class="fa-solid fa-minus guests-style" style="padding:0px"></i>
                             </a>
                             <div style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
-                                <input type="number" id="pet2" name="" value="0"
+                                <input type="number" id="pet_mobile" name="" value="0"
                                     style="text-align: center; border:none; width:40px; -moz-appearance: textfield; background-color: transparent;"
                                     min="0" readonly>
                             </div>
@@ -850,7 +850,7 @@
                                                 <p>{{ __('user_page.Guests') }}</p>
                                                 <ul class="nav">
                                                     <li class="button-dropdown">
-                                                        <input type="number" id="total_guest2" value="1"
+                                                        <input type="number" id="total_guest_desktop" value="1"
                                                             style="width: 30px; border: 0; margin-right: 0; text-align: right; -moz-appearance: textfield; background-color: transparent;"
                                                             disabled min="1"> {{ __('user_page.Guest') }}
                                                         <a href="javascript:void(0)"
@@ -884,7 +884,7 @@
                                                                     </a>
                                                                     <div
                                                                         style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
-                                                                        <input type="number" id="adult2"
+                                                                        <input type="number" id="adult_desktop"
                                                                             name="sAdult" value="1"
                                                                             style="text-align: center; border:none; width:40px; -moz-appearance: textfield; background-color: transparent;"
                                                                             min="0" readonly>
@@ -921,7 +921,7 @@
                                                                     </a>
                                                                     <div
                                                                         style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
-                                                                        <input type="number" id="child2"
+                                                                        <input type="number" id="child_desktop"
                                                                             name="sChild" value="0"
                                                                             style="text-align: center; border:none; width:40px; -moz-appearance: textfield; background-color: transparent;"
                                                                             min="0" readonly>
@@ -958,7 +958,7 @@
                                                                     </a>
                                                                     <div
                                                                         style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
-                                                                        <input type="number" id="infant2"
+                                                                        <input type="number" id="infant_desktop"
                                                                             name="" value="0"
                                                                             style="text-align: center; border:none; width:40px; -moz-appearance: textfield; background-color: transparent;"
                                                                             min="0" readonly>
@@ -994,7 +994,7 @@
                                                                     </a>
                                                                     <div
                                                                         style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
-                                                                        <input type="number" id="pet2"
+                                                                        <input type="number" id="pet_desktop"
                                                                             name="" value="0"
                                                                             style="text-align: center; border:none; width:40px; -moz-appearance: textfield; background-color: transparent;"
                                                                             min="0" readonly>
@@ -1151,11 +1151,11 @@
                                 @endif
                             </a>
                             <!-- <a type="button" onclick="view_LoginModal();" href="#{{-- {{ route('login') }} --}}"
-                                                                        class="btn btn-fill border-0 navbar-gap"
-                                                                        style="color: #ffffff;margin-right: 0px;padding-top: 12px;padding-left:7px;padding-right:8px;width: 50px;height: 50px;border-radius: 50%;"
-                                                                        id="login">
-                                                                        <i class="fa-solid fa-user"></i>
-                                                                    </a> -->
+                                                                                            class="btn btn-fill border-0 navbar-gap"
+                                                                                            style="color: #ffffff;margin-right: 0px;padding-top: 12px;padding-left:7px;padding-right:8px;width: 50px;height: 50px;border-radius: 50%;"
+                                                                                            id="login">
+                                                                                            <i class="fa-solid fa-user"></i>
+                                                                                        </a> -->
                             <div class="dropdown">
                                 <button type="button" class="btn-dropdwn dropbtn btn border-0 navbar-gap"></button>
                                 <div class="dropdown-content">
@@ -1530,59 +1530,71 @@
         {{-- Increment Decrement --}}
         <script>
             function adult_increment_index() {
-                document.getElementById('adult2').stepUp();
-                document.getElementById('total_guest2').value = parseInt(document.getElementById('adult2').value) +
-                    parseInt(document.getElementById('child2').value);
+                document.getElementById('adult_desktop').stepUp();
+                document.getElementById('adult_mobile').stepUp();
+                document.getElementById('total_guest_desktop').value = parseInt(document.getElementById('adult_desktop')
+                        .value) +
+                    parseInt(document.getElementById('child_desktop').value);
                 // NEW SEARCH MOBILE
                 // fungsi untuk mengisi guest di mobile
-                document.querySelector('.guests-mobile').innerHTML = parseInt(document.getElementById('adult2').value) +
-                    parseInt(document.getElementById('child2').value) + " Guests";
+                document.querySelector('.guests-mobile').innerHTML = parseInt(document.getElementById('adult_mobile').value) +
+                    parseInt(document.getElementById('child_mobile').value) + " Guests";
             }
 
             function adult_decrement_index() {
-                document.getElementById('adult2').stepDown();
-                document.getElementById('total_guest2').value = parseInt(document.getElementById('adult2').value) +
-                    parseInt(document.getElementById('child2').value);
+                document.getElementById('adult_desktop').stepDown();
+                document.getElementById('adult_desktop').stepDown();
+                document.getElementById('total_guest_desktop').value = parseInt(document.getElementById('adult_desktop')
+                        .value) +
+                    parseInt(document.getElementById('child_desktop').value);
                 // NEW SEARCH MOBILE
                 // fungsi untuk mengisi guest di mobile
-                document.querySelector('.guests-mobile').innerHTML = parseInt(document.getElementById('adult2').value) +
-                    parseInt(document.getElementById('child2').value) + " Guests";
+                document.querySelector('.guests-mobile').innerHTML = parseInt(document.getElementById('adult_mobile').value) +
+                    parseInt(document.getElementById('child_mobile').value) + " Guests";
             }
 
             function child_increment_index() {
-                document.getElementById('child2').stepUp();
-                document.getElementById('total_guest2').value = parseInt(document.getElementById('adult2').value) +
-                    parseInt(document.getElementById('child2').value);
+                document.getElementById('child_desktop').stepUp();
+                document.getElementById('child_mobile').stepUp();
+                document.getElementById('total_guest_desktop').value = parseInt(document.getElementById('adult_desktop')
+                        .value) +
+                    parseInt(document.getElementById('child_desktop').value);
                 // NEW SEARCH MOBILE
                 // fungsi untuk mengisi guest di mobile
-                document.querySelector('.guests-mobile').innerHTML = parseInt(document.getElementById('adult2').value) +
-                    parseInt(document.getElementById('child2').value) + " Guests";
+                document.querySelector('.guests-mobile').innerHTML = parseInt(document.getElementById('adult_mobile').value) +
+                    parseInt(document.getElementById('child_mobile').value) + " Guests";
             }
 
             function child_decrement_index() {
-                document.getElementById('child2').stepDown();
-                document.getElementById('total_guest2').value = parseInt(document.getElementById('adult2').value) +
-                    parseInt(document.getElementById('child2').value);
+                document.getElementById('child_desktop').stepDown();
+                document.getElementById('child_mobile').stepDown();
+                document.getElementById('total_guest_desktop').value = parseInt(document.getElementById('adult_desktop')
+                        .value) +
+                    parseInt(document.getElementById('child_desktop').value);
                 // NEW SEARCH MOBILE
                 // fungsi untuk mengisi guest di mobile
-                document.querySelector('.guests-mobile').innerHTML = parseInt(document.getElementById('adult2').value) +
-                    parseInt(document.getElementById('child2').value) + " Guests";
+                document.querySelector('.guests-mobile').innerHTML = parseInt(document.getElementById('adult_mobile').value) +
+                    parseInt(document.getElementById('child_mobile').value) + " Guests";
             }
 
             function infant_increment_index() {
-                document.getElementById('infant2').stepUp();
+                document.getElementById('infant_desktop').stepUp();
+                document.getElementById('infant_mobile').stepUp();
             }
 
             function infant_decrement_index() {
-                document.getElementById('infant2').stepDown();
+                document.getElementById('infant_desktop').stepDown();
+                document.getElementById('infant_mobile').stepDown();
             }
 
             function pet_increment_index() {
-                document.getElementById('pet2').stepUp();
+                document.getElementById('pet_desktop').stepUp();
+                document.getElementById('pet_mobile').stepUp();
             }
 
             function pet_decrement_index() {
-                document.getElementById('pet2').stepDown();
+                document.getElementById('pet_desktop').stepDown();
+                document.getElementById('pet_mobile').stepDown();
             }
         </script>
 
@@ -1602,7 +1614,7 @@
                 $(".search-container-mobile .clear-all-mobile").removeClass("d-none");
                 $(".search-container-mobile .clear-date-mobile").addClass("d-none");
                 if ($("#check_in2").val() != "" && $("#check_out2").val() != "" &&
-                    parseInt($("#total_guest2").val()) >= 1 && $("#loc_sugest").val() != "") {
+                    parseInt($("#total_guest_desktop").val()) >= 1 && $("#loc_sugest").val() != "") {
                     $(".search-container-mobile .submit-mobile").removeClass("d-none");
                     $(".search-container-mobile .next-mobile").addClass("d-none");
                 } else {
@@ -1972,7 +1984,7 @@
                     "block") {
                     moveToLocationMobile();
                 } else if ($("#loc_sugest").val() != "" && $("#check_in2").val() == "" &&
-                    $("#check_out2").val() == "" && parseInt($("#total_guest2").val()) < 1) {
+                    $("#check_out2").val() == "" && parseInt($("#total_guest_desktop").val()) < 1) {
                     moveToDateMobile();
                 } else if (($("#check_in2").val() == "" ||
                         $("#check_out2").val() == "") || $(".search-container-mobile .sidebar-popup").css("display") ==
@@ -1986,7 +1998,7 @@
                 $("#loc_sugest").val("");
                 $("#check_in2").val("");
                 $("#check_out2").val("");
-                $("#total_guest2").val("");
+                $("#total_guest_desktop").val("");
                 $(".search-container-mobile .loc_sugest_mobile").html("Location");
                 $(".search-container-mobile .dates-mobile").html("When");
                 $(".search-container-mobile .guests-mobile").html("1 Guests");
