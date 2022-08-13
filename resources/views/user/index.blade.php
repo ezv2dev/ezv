@@ -274,7 +274,7 @@
                 </div>
                 {{-- NEW SEARCH MOBILE
                 popup location untuk mobile --}}
-                <div id="sugest" class="location-popup display-none">
+                <div id="sugest_mobile" class="location-popup display-none">
                     @php
                         $location = App\Http\Controllers\ViewController::get_location();
                         $hotelName = App\Http\Controllers\HotelController::get_name();
@@ -673,7 +673,7 @@
                                                         $activityName = App\Http\Controllers\Activity\ActivityController::get_name();
                                                     @endphp
                                                     <div class="location-popup-container h-100">
-                                                        <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                        <div class="col-lg-12 location-popup-desc-container sugest-list-first-desktop"
                                                             style="display: none;">
                                                             <div onclick="checkGeo();"
                                                                 class="location-popup-map sugest-list-map">
@@ -688,7 +688,7 @@
                                                                     Location</a>
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                        <div class="col-lg-12 location-popup-desc-container sugest-list-first-desktop"
                                                             style="display: none ">
                                                             <div class="location-popup-map sugest-list-map">
                                                                 <img class="location-popup-map-image lozad"
@@ -700,7 +700,7 @@
                                                                     data-value="Canggu">Canggu</a>
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                        <div class="col-lg-12 location-popup-desc-container sugest-list-first-desktop"
                                                             style="display: none ">
                                                             <div class="location-popup-map sugest-list-map">
                                                                 <img class="location-popup-map-image lozad"
@@ -712,7 +712,7 @@
                                                                     data-value="Seminyak">Seminyak</a>
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                        <div class="col-lg-12 location-popup-desc-container sugest-list-first-desktop"
                                                             style="display: none ">
                                                             <div class="location-popup-map sugest-list-map">
                                                                 <img class="location-popup-map-image lozad"
@@ -724,7 +724,7 @@
                                                                     data-value="Ubud">Ubud</a>
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                        <div class="col-lg-12 location-popup-desc-container sugest-list-first-desktop"
                                                             style="display: none ">
                                                             <div class="location-popup-map sugest-list-map">
                                                                 <img class="location-popup-map-image lozad"
@@ -736,7 +736,7 @@
                                                                     data-value="Kuta">Kuta</a>
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                        <div class="col-lg-12 location-popup-desc-container sugest-list-first-desktop"
                                                             style="display: none ">
                                                             <div class="location-popup-map sugest-list-map">
                                                                 <img class="location-popup-map-image lozad"
@@ -749,7 +749,7 @@
                                                             </div>
                                                         </div>
                                                         @foreach ($location as $item)
-                                                            <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                            <div class="col-lg-12 location-popup-desc-container sugest-list-first-desktop"
                                                                 style="display: none ">
                                                                 <div class="location-popup-map sugest-list-map">
                                                                     <img class="location-popup-map-image lozad"
@@ -1150,12 +1150,6 @@
                                         data-src="{{ URL::asset('assets/flags/flag_en.svg') }}">
                                 @endif
                             </a>
-                            <!-- <a type="button" onclick="view_LoginModal();" href="#{{-- {{ route('login') }} --}}"
-                                                                                            class="btn btn-fill border-0 navbar-gap"
-                                                                                            style="color: #ffffff;margin-right: 0px;padding-top: 12px;padding-left:7px;padding-right:8px;width: 50px;height: 50px;border-radius: 50%;"
-                                                                                            id="login">
-                                                                                            <i class="fa-solid fa-user"></i>
-                                                                                        </a> -->
                             <div class="dropdown">
                                 <button type="button" class="btn-dropdwn dropbtn btn border-0 navbar-gap"></button>
                                 <div class="dropdown-content">
@@ -1626,7 +1620,7 @@
                 $(".search-container-mobile .btn-top-search .back").addClass("d-none");
                 $(".search-container-mobile .location-container")
                     .addClass("mx-2").removeClass("h-100");
-                $('#sugest').removeClass("display-block").addClass("display-none");
+                $('#sugest_mobile').removeClass("display-block").addClass("display-none");
                 $("#loc_sugest").attr("readonly", true);
             }
             // NEW SEARCH MOBILE
@@ -1653,8 +1647,8 @@
                 $(".search-container-mobile .location-has-selected-container")
                     .removeClass("d-flex").addClass("d-none");
                 $(".search-container-mobile .select-location-mobile-container").removeClass("d-none");
-                $('#sugest').removeClass("display-none");
-                $('#sugest').addClass("display-block");
+                $('#sugest_mobile').removeClass("display-none");
+                $('#sugest_mobile').addClass("display-block");
             }
             // NEW SEARCH MOBILE
             // fungsi untuk berpindah ke select date di mobile
@@ -1672,7 +1666,7 @@
                 $(".search-container-mobile .btn-top-search .back").addClass("d-none");
                 $(".search-container-mobile .location-container")
                     .addClass("mx-2").removeClass("h-100");
-                $('#sugest').removeClass("display-block").addClass("display-none");
+                $('#sugest_mobile').removeClass("display-block").addClass("display-none");
                 $("#loc_sugest").attr("readonly", true);
                 $(".search-container-mobile .clear-date-mobile").removeClass("d-none");
                 $(".search-container-mobile .clear-all-mobile").addClass("d-none");
@@ -1764,17 +1758,15 @@
                     var ids = $(".sugest-list-first");
                     ids.hide();
                     for (let index = 0; index < 5; index++) {
-                        // var rndInt = Math.floor(Math.random() * (ids.length - 1));
-                        // console.log(rndInt);
                         ids.show();
                     };
 
-                    $('#sugest').removeClass("display-none");
-                    $('#sugest').addClass("display-block"); //add the class to the clicked element
+                    $('#sugest_mobile').removeClass("display-none");
+                    $('#sugest_mobile').addClass("display-block"); //add the class to the clicked element
                 });
 
                 $(document).mouseup(function(e) {
-                    var container = $('#sugest');
+                    var container = $('#sugest_mobile');
 
                     // if the target of the click isn't the container nor a descendant of the container
                     // NEW SEARCH MOBILE
@@ -1825,13 +1817,15 @@
                     // fungsi untuk isi nilai dari location di mobile ketika user udh milih
                     $('#loc_sugest').val($(this).parents(".col-4").children(".location-popup-text").children(
                         ".location_op").data("value"));
+                    $('#loc_sugest_desktop').val($(this).parents(".col-4").children(".location-popup-text")
+                        .children(".location_op").data("value"));
                     $('.loc_sugest_mobile').html($(this).parents(".col-4").children(".location-popup-text")
                         .children(".location_op").data("value"));
 
                     // NEW SEARCH MOBILE
                     // fungsi untuk sembunyiin popup location
-                    $('#sugest').removeClass("display-block");
-                    $('#sugest').addClass("display-none");
+                    $('#sugest_mobile').removeClass("display-block");
+                    $('#sugest_mobile').addClass("display-none");
 
                     // NEW SEARCH MOBILE
                     // fungsi untuk berpindah ke select date di mobile
@@ -1858,14 +1852,14 @@
                 });
 
                 $(".location_op").on('click', function(e) {
-                    $('#loc_sugest').val($(this).data("value"));
+                    $('#loc_sugest_desktop').val($(this).data("value"));
 
                     // NEW SEARCH MOBILE
                     // fungsi untuk isi nilai dari location di mobile ketika user udh milih
                     $('.loc_sugest_mobile').html($(this).data("value"));
 
-                    $('#sugest').removeClass("display-block");
-                    $('#sugest').addClass("display-none");
+                    $('#sugest_mobile').removeClass("display-block");
+                    $('#sugest_mobile').addClass("display-none");
 
                     // NEW SEARCH MOBILE
                     // fungsi untuk berpindah ke select date di mobile
@@ -1896,11 +1890,9 @@
                 });
 
                 $("#loc_sugest_desktop").on('click', function() { //use a class, since your ID gets mangled
-                    var ids = $(".sugest-list-first");
+                    var ids = $(".sugest-list-first-desktop");
                     ids.hide();
                     for (let index = 0; index < 5; index++) {
-                        // var rndInt = Math.floor(Math.random() * (ids.length - 1));
-                        // console.log(rndInt);
                         ids.show();
                     };
 
@@ -1919,7 +1911,7 @@
                 });
 
                 $("#loc_sugest_desktop").on('keyup change', async () => {
-                    var close = $(".sugest-list-first");
+                    var close = $(".sugest-list-first-desktop");
                     close.hide();
                     var ids = $(".sugest-list");
                     ids.hide();
@@ -1951,8 +1943,14 @@
 
                 $(".location_op_desktop").on('click', function(e) {
                     $('#loc_sugest_desktop').val($(this).data("value"));
+                    $('#loc_sugest_mobile').val($(this).data("value"));
                     $('#sugest_desktop').removeClass("display-block");
                     $('#sugest_desktop').addClass("display-none");
+
+                    $('.loc_sugest_mobile').html($(this).data("value"));
+                    $('#sugest_mobile').removeClass("display-block");
+                    $('#sugest_mobile').addClass("display-none");
+                    moveToGuestsMobile();
 
                     //calendar show when location click
                     var content_flatpickr = document.getElementById('popup_check_search');

@@ -2184,21 +2184,18 @@ class ViewController extends Controller
         $accessibility_features = VillaAccessibilityFeatures::all();
         $accessibility_features_detail = VillaAccessibilitiyFeaturesDetail::all();
 
-        $villa = Villa::where('status', 1)->paginate(env('CONTENT_PER_PAGE_LIST_VILLA') ?? 5);
-        $villa->appends(request()->query());
-
+        //get all villa grade a - d
+        $villa = Villa::where('status', 1)->where('grade', '!=', 'AA')->inRandomOrder()->get()->sortBy('grade');
         // TODO uncomment when lazy load, start
-        $villas = Villa::where('grade', '!=', 'AA')->where('status', 1)->inRandomOrder()->get()->sortBy('grade');
         $villa_aa = Villa::where('grade', '=', 'AA')->where('status', 1)->inRandomOrder()->get();
-
         // if ($request->itemIds) {
         //     $villas = Villa::where('grade', '!=', 'AA')->where('status', 1)->whereNotIn('id_villa', $request->itemIds)->inRandomOrder()->get()->sortBy('grade');
         //     $villa_aa = Villa::where('grade', '=', 'AA')->where('status', 1)->whereNotIn('id_villa', $request->itemIds)->inRandomOrder()->get();
         // }
 
-        if ($villas->count() > 0 && $villa_aa->count() > 0) {
-            $split_count = $villas->count() / 4;
-            $villas_parted = $villas->split(ceil($split_count));
+        if ($villa->count() > 0 && $villa_aa->count() > 0) {
+            $split_count = $villa->count() / 4;
+            $villas_parted = $villa->split(ceil($split_count));
             for ($i = 0; $i < $villa_aa->count(); $i++) {
                 if ($i == 0) {
                     $villa = $villas_parted[0];
@@ -2216,6 +2213,20 @@ class ViewController extends Controller
             }
         }
 
+        $page = null;
+        $perPage = env('CONTENT_PER_PAGE_LIST_VILLA');
+        $villa = new \Illuminate\Pagination\LengthAwarePaginator(
+            $villa->forPage($page, $perPage),
+            $villa->count(),
+            $perPage,
+            $page,
+        );
+
+        $villa->withPath(env('APP_URL')."/homes-list");
+        $villa->appends(request()->query());
+
+        dd($villa);
+
         // if ($villas->count() > 0 && $villa_aa->count() <= 0) {
         //     $villa = $villas;
         // }
@@ -2225,18 +2236,6 @@ class ViewController extends Controller
         // }
         // if ($villas->count() <= 0 && $villa_aa->count() <= 0) {
         //     $villa = collect([]);
-        // }
-
-        // if ($villa->count() > 0) {
-        //     // dd($villa->pluck('grade', 'id_villa'));
-        //     $page = 1;
-        //     $perPage = 5;
-        //     $villa = new \Illuminate\Pagination\LengthAwarePaginator(
-        //         $villa->forPage($page, $perPage),
-        //         $villa->count(),
-        //         $perPage,
-        //         $page
-        //     );
         // }
 
         // if ($request->ajax()) {
