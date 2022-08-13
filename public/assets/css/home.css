@@ -1243,6 +1243,7 @@ body {
     text-align: left;
     border: 2px solid #ff7400;
     height: 287px;
+    z-index: 1;
 }
 
 .location-popup-container {
@@ -2118,6 +2119,7 @@ span.flatpickr-weekday {
     background-color: #f7f7f7;
     width: 100%;
     height: 100%;
+    transform: translate(0, 100%);
 }
 
 .search-container-mobile .btn-top-search {
@@ -2187,6 +2189,14 @@ span.flatpickr-weekday {
     border-color: transparent !important;
     top: 0 !important;
     height: 100% !important;
+}
+.search-container-mobile-closed {
+    transform: translate(0, 100%);
+    transition-duration: 0.5s;
+}
+.search-container-mobile-open {
+    transform: translate(0, 0%);
+    transition-duration: 0.5s;
 }
 /* END NEW SEARCH MOBILE */
 

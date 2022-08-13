@@ -274,7 +274,7 @@
                 </div>
                 {{-- NEW SEARCH MOBILE
                 popup location untuk mobile --}}
-                <div id="sugest_mobile" class="location-popup display-none">
+                <div id="sugest_mobile" class="location-popup w-100 display-none">
                     @php
                         $location = App\Http\Controllers\ViewController::get_location();
                         $hotelName = App\Http\Controllers\HotelController::get_name();
@@ -552,7 +552,7 @@
             {{-- NEW SEARCH MOBILE
             tombol action dipaling bawah untuk mobile --}}
             <div class="bottom-action-container">
-                <div class="d-flex">
+                <div class="d-flex align-items-center">
                     <div id="clear_date_header" class="btn-transparent-action clear-date-mobile d-none">
                         {{ __('user_page.Clear Dates') }}</div>
                     <div class="btn-transparent-action clear-all-mobile">Clear All</div>
@@ -1594,6 +1594,13 @@
         </script>
 
         <script>
+            $(".search-container-mobile .close").on("click", function() {
+                $(".search-container-mobile").removeClass("search-container-mobile-open")
+                    .addClass("search-container-mobile-closed");
+            });
+        </script>
+
+        <script>
             // NEW SEARCH MOBILE
             // fungsi untuk kembali ke bagian awal search di mobile
             function backToMainMobile() {
@@ -1638,6 +1645,7 @@
                 $(".search-container-mobile form").addClass("h-100");
                 $(".search-container-mobile .first-sugest-location").addClass("d-none");
                 $(".search-container-mobile .dates-container").addClass("d-none");
+                $('#popup_check_search_mobile').removeClass('d-block').addClass('d-none');
                 $(".search-container-mobile .guests-container").addClass("d-none");
                 $(".search-container-mobile .guest-popup").removeClass("d-block");
                 $(".search-container-mobile .bottom-action-container").addClass("d-none");
@@ -1684,7 +1692,7 @@
             // NEW SEARCH MOBILE
             // fungsi untuk berpindah ke select guest di mobile
             function moveToGuestsMobile() {
-                $('#popup_check_search_mobile').addClass("d-none");
+                $('#popup_check_search_mobile').removeClass("d-block").addClass("d-none");
                 $(".location-has-selected-container").removeClass("d-none").addClass("d-flex");
                 $(".select-location-mobile-container").addClass("d-none");
                 $(".search-container-mobile form").removeClass("h-100");
@@ -1692,6 +1700,8 @@
                 $(".search-container-mobile .guests-container").removeClass("d-none").addClass("p-0");
                 $(".search-container-mobile .dates-container").removeClass("d-none px-0");
                 $(".search-container-mobile .sidebar-popup").removeAttr("style");
+                $(".search-container-mobile .location-container")
+                    .addClass("mx-2").removeClass("h-100");
                 $(".search-container-mobile .selected-guest-mobile").removeClass("d-flex").addClass("d-none");
                 $(".search-container-mobile .guest-popup").addClass("d-block");
                 $(".search-container-mobile .bottom-action-container").removeClass("d-none bottom-select-date");
@@ -1897,8 +1907,13 @@
                         ids.show();
                     };
 
-                    $('#sugest_desktop').removeClass("display-none");
-                    $('#sugest_desktop').addClass("display-block"); //add the class to the clicked element
+                    if (window.innerWidth <= 649) {
+                        $(".search-container-mobile").removeClass("search-container-mobile-closed")
+                            .addClass("search-container-mobile-open");
+                    }else {
+                        $('#sugest_desktop').removeClass("display-none");
+                        $('#sugest_desktop').addClass("display-block"); //add the class to the clicked element
+                    }
                 });
 
                 $(document).mouseup(function(e) {
@@ -2040,13 +2055,19 @@
                     if (content_flatpickr.style.display === "block") {
                         content_flatpickr.style.display = "none";
                     } else {
-                        content_flatpickr.style.display = "block";
-                        document.addEventListener('mouseup', function(e) {
-                            let container = content_flatpickr;
-                            if (!container.contains(e.target)) {
-                                container.style.display = 'none';
-                            }
-                        });
+                        if (window.innerWidth <= 649) {
+                            $(".search-container-mobile").removeClass("search-container-mobile-closed")
+                                .addClass("search-container-mobile-open");
+                        } else {
+                            content_flatpickr.style.display = "block";
+                            document.addEventListener('mouseup', function(e) {
+                                let container = content_flatpickr;
+                                if (!container.contains(e.target)) {
+                                    container.style.display = 'none';
+                                }
+                            });
+                        }
+                        
                     }
                 });
             }
@@ -2120,14 +2141,20 @@
                     })
                 }
                 e(".dropdown-toggle").click(function() {
-                    var t = e(this).parents(".button-dropdown").children(".dropdown-menu").is(
+                    if (window.innerWidth <= 649) {
+                        $(".search-container-mobile").removeClass("search-container-mobile-closed")
+                            .addClass("search-container-mobile-open");
+                    }else {
+                        var t = e(this).parents(".button-dropdown").children(".dropdown-menu").is(
                         ":hidden");
-                    e(".button-dropdown .dropdown-menu").hide();
-                    e(".button-dropdown .dropdown-toggle").removeClass("active");
-                    if (t) {
-                        e(this).parents(".button-dropdown").children(".dropdown-menu").toggle().parents(
-                            ".button-dropdown").children(".dropdown-toggle").addClass("active")
+                        e(".button-dropdown .dropdown-menu").hide();
+                        e(".button-dropdown .dropdown-toggle").removeClass("active");
+                        if (t) {
+                            e(this).parents(".button-dropdown").children(".dropdown-menu").toggle().parents(
+                                ".button-dropdown").children(".dropdown-toggle").addClass("active")
+                        }
                     }
+                    
                 });
                 e(document).bind("click", function(t) {
                     var n = e(t.target);
@@ -2480,7 +2507,7 @@
 
                             // NEW SEARCH MOBILE
                             // clear date untuk mobile
-                            $(".search-container-mobile .dates-mobile").html("");
+                            $(".search-container-mobile .dates-mobile").html("When");
                             $(".search-container-mobile .next-mobile").html("Skip");
 
                             // Fungsi untuk menyembunyikan calendar ketika clear date hanya berlaku kalo bukan mobile
@@ -2497,14 +2524,14 @@
 
                             // NEW SEARCH MOBILE
                             // clear date untuk mobile
-                            $(".search-container-mobile .dates-mobile").html("");
+                            $(".search-container-mobile .dates-mobile").html("When");
                             $(".search-container-mobile .next-mobile").html("Skip");
 
                             let content = document.getElementById("popup_check_search_mobile");
                             content.style.display = "none";
-                            calendarSearch(2);
+                            calendarSearchDesktop(2);
                         });
-                        calendarSearch(2);
+                        calendarSearchDesktop(2);
                     }
                     if (windowWidth <= 991) {
                         $("#search_bar #bar").addClass("row");
