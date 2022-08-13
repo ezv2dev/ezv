@@ -2225,8 +2225,6 @@ class ViewController extends Controller
         $villa->withPath(env('APP_URL')."/homes-list");
         $villa->appends(request()->query());
 
-        dd($villa);
-
         // if ($villas->count() > 0 && $villa_aa->count() <= 0) {
         //     $villa = $villas;
         // }

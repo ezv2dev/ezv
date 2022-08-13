@@ -418,12 +418,14 @@
             <div class="dates-container mx-2 mt-2">
                 {{-- NEW SEARCH MOBILE
                 ui ketika user belum atau sudah pilih date untuk mobile --}}
-                <div class="d-flex collapsible_check_search">
+                <div class="d-flex collapsible-check-search">
                     <p class="text-secondary text-small mb-0 dates-mobile">When</p>
+                    <input type="hidden" id="check_in_mobile" value="" name="sCheck_in">
+                    <input type="hidden" id="check_out_mobile" value="" name="sCheck_out">
                     <div class="btn-transparent-action ms-auto">Add Dates</div>
                 </div>
                 {{-- calendar --}}
-                <div class="content sidebar-popup" id="popup_check_search">
+                <div class="content sidebar-popup" id="popup_check_search_mobile">
                     <div class="flatpickr" id="inline_reserve_search" style="text-align: left;">
                     </div>
                 </div>
@@ -588,7 +590,6 @@
                     </div>
 
                     <div class="col-lg-4" style="height: 90px !important;">
-
                         <div id="searchbox" class="searchbox display-none" onclick="popUp();"
                             style="cursor: pointer;">
                             <p>{{ __('user_page.Search here') }} <span class="top-search"><i
@@ -831,16 +832,16 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="check-in" onclick="calendar_search_desktop()">
+                                            <div class="check-in">
                                                 <a type="button"
                                                     style="position : absolute; z-index:1; width:367px; height: 60px; margin-left: -90px; margin-top: -8px"
-                                                    class="collapsible_check_search"></a>
+                                                    class="collapsible-check-search-desktop"></a>
                                                 <p>{{ __('user_page.Check in') }}</p>
                                                 <input type="text" placeholder="{{ __('user_page.Add dates') }}"
                                                     class="form-control input-transparant" value=""
                                                     id="check_in2" name="sCheck_in">
                                             </div>
-                                            <div class="check-out" onclick="calendar_search_desktop()">
+                                            <div class="check-out">
                                                 <p>{{ __('user_page.Check out') }}</p>
                                                 <input type="text" placeholder="{{ __('user_page.Add dates') }}"
                                                     class="form-control input-transparant" value=""
@@ -1653,7 +1654,7 @@
             // NEW SEARCH MOBILE
             // fungsi untuk berpindah ke select date di mobile
             function moveToDateMobile() {
-                $('#popup_check_search').removeClass('d-none').addClass('d-block');
+                $('#popup_check_search_mobile').removeClass('d-none').addClass('d-block');
                 $(".location-has-selected-container").removeClass("d-none").addClass("d-flex");
                 $(".select-location-mobile-container").addClass("d-none");
                 $(".search-container-mobile form").addClass("h-100");
@@ -1683,7 +1684,7 @@
             // NEW SEARCH MOBILE
             // fungsi untuk berpindah ke select guest di mobile
             function moveToGuestsMobile() {
-                $('#popup_check_search').addClass("d-none");
+                $('#popup_check_search_mobile').addClass("d-none");
                 $(".location-has-selected-container").removeClass("d-none").addClass("d-flex");
                 $(".select-location-mobile-container").addClass("d-none");
                 $(".search-container-mobile form").removeClass("h-100");
@@ -1953,7 +1954,7 @@
                     moveToGuestsMobile();
 
                     //calendar show when location click
-                    var content_flatpickr = document.getElementById('popup_check_search');
+                    var content_flatpickr = document.getElementById('popup_check_search_desktop');
                     if (content_flatpickr.style.display === "block") {
                         content_flatpickr.style.display = "none";
                     } else {
@@ -1996,22 +1997,24 @@
                 $("#loc_sugest").val("");
                 $("#check_in2").val("");
                 $("#check_out2").val("");
+                $("#check_in_mobile").val("");
+                $("#check_out_mobile").val("");
                 $("#total_guest_desktop").val("");
                 $(".search-container-mobile .loc_sugest_mobile").html("Location");
                 $(".search-container-mobile .dates-mobile").html("When");
                 $(".search-container-mobile .guests-mobile").html("1 Guests");
-                calendar_search(2);
+                calendarSearch(2);
             });
         </script>
 
         <script>
-            var coll = document.getElementsByClassName("collapsible_check_search");
+            var coll = document.getElementsByClassName("collapsible-check-search");
             var i;
 
             for (i = 0; i < coll.length; i++) {
                 coll[i].addEventListener("click", function() {
                     this.classList.toggle("active");
-                    var content_flatpickr = document.getElementById('popup_check_search');
+                    var content_flatpickr = document.getElementById('popup_check_search_mobile');
                     if (content_flatpickr.style.display === "block" && window.innerWidth > 649) {
                         content_flatpickr.style.display = "none";
                     } else {
@@ -2026,26 +2029,28 @@
                     }
                 });
             }
-        </script>
 
-        {{-- <script>
-            $("#dates").flatpickr({
-                enableTime: false,
-                dateFormat: "Y-m-d",
-                minDate: "today",
-                mode: "range",
-                showMonths: 2,
-                disableMobile: "true",
-                onReady(_, __, fp) {
-                    fp.calendarContainer.classList.add("flat-margin");
-                },
-                onChange: function(selectedDates, dateStr, instance) {
-                    $('#dates').val("");
-                    $('#check_in2').val(flatpickr.formatDate(selectedDates[0], "Y-m-d"));
-                    $('#check_out2').val(flatpickr.formatDate(selectedDates[1], "Y-m-d"))
-                }
-            });
-        </script> --}}
+            var collDesktop = document.getElementsByClassName("collapsible-check-search-desktop");
+            var j;
+
+            for (j = 0; j < collDesktop.length; j++) {
+                collDesktop[j].addEventListener("click", function() {
+                    this.classList.toggle("active");
+                    var content_flatpickr = document.getElementById('popup_check_search_desktop');
+                    if (content_flatpickr.style.display === "block") {
+                        content_flatpickr.style.display = "none";
+                    } else {
+                        content_flatpickr.style.display = "block";
+                        document.addEventListener('mouseup', function(e) {
+                            let container = content_flatpickr;
+                            if (!container.contains(e.target)) {
+                                container.style.display = 'none';
+                            }
+                        });
+                    }
+                });
+            }
+        </script>
 
         <script>
             function addClass(elements, className) {
@@ -2319,7 +2324,7 @@
             // NEW SEARCH MOBILE
             window.countMonthsMobile = 3;
 
-            function calendar_search(months) {
+            function calendarSearch(months) {
                 if (!$("#check_in2").val()) {
                     var check_in_val = "";
                 } else {
@@ -2363,7 +2368,7 @@
                             );
                             $(".btn-load-more-calendar-mobile").on("click", function() {
                                 window.countMonthsMobile += 3;
-                                calendar_search(window.countMonthsMobile);
+                                calendarSearch(window.countMonthsMobile);
                             });
                         }
                     },
@@ -2379,9 +2384,11 @@
                             // fungsi untuk isi date di mobile
                             $(".search-container-mobile .dates-mobile").html(
                                 instance.formatDate(selectedDates[0], "Y-m-d") +
-                                "-" +
+                                " to " +
                                 instance.formatDate(selectedDates[1], "Y-m-d")
                             );
+                            $("#check_in_mobile").val(instance.formatDate(selectedDates[0], "Y-m-d"));
+                            $("#check_out_mobile").val(instance.formatDate(selectedDates[1], "Y-m-d"));
                             // NEW SEARCH MOBILE
                             // fungsi untuk mengubah tombol dibawah jadi next ketika sudah selesai milih
                             $(".search-container-mobile .next-mobile").html("Next");
@@ -2389,7 +2396,7 @@
                         // NEW SEARCH MOBILE
                         // fungsi untuk menutup calendar ketika sudah selesai milih hanya berlaku ketika bukan dimobile
                         if (window.innerWidth > 649) {
-                            let content = document.getElementById("popup_check_search");
+                            let content = document.getElementById("popup_check_search_mobile");
                             content.style.display = "none";
                         }
                         // NEW SEARCH MOBILE
@@ -2414,20 +2421,59 @@
                             );
                             $(".btn-load-more-calendar-mobile").on("click", function() {
                                 window.countMonthsMobile += 3;
-                                calendar_search(window.countMonthsMobile);
+                                calendarSearch(window.countMonthsMobile);
                             });
                         }
                     }
                 });
             }
-            calendar_search(2);
+            calendarSearch(2);
+
+            function calendarSearchDesktop(months) {
+                if (!$("#check_in2").val()) {
+                    var check_in_val = "";
+                } else {
+                    var check_in_val = $("#check_in2").val();
+                }
+
+                if (!$("#check_out2").val()) {
+                    var check_out_val = "";
+                } else {
+                    var check_out_val = $("#check_out2").val();
+                }
+                $("#inline_reserve_search_desktop").flatpickr({
+                    enableTime: false,
+                    dateFormat: "Y-m-d",
+                    minDate: "today",
+                    inline: true,
+                    mode: "range",
+                    showMonths: months,
+                    // disable: data,
+                    defaultDate: [check_in_val, check_out_val],
+                    onChange: function(selectedDates, dateStr, instance) {
+                        $("#check_in2").val(instance.formatDate(selectedDates[0], "Y-m-d"));
+                        $("#check_out2").val(instance.formatDate(selectedDates[1], "Y-m-d"));
+                        $("#check_in_mobile").val(instance.formatDate(selectedDates[0], "Y-m-d"));
+                        $("#check_out_mobile").val(instance.formatDate(selectedDates[1], "Y-m-d"));
+                        $('.dates-mobile').html(
+                            instance.formatDate(selectedDates[0], "Y-m-d") +
+                            " to " +
+                            instance.formatDate(selectedDates[1], "Y-m-d")
+                        );
+
+                        let content = document.getElementById("popup_check_search_desktop");
+                        content.style.display = "none";
+                    },
+                });
+            }
+            calendarSearchDesktop(2);
         </script>
 
         <script>
             $(document).ready(function() {
                 function handleResponsive(windowWidth) {
                     if (windowWidth <= 649) {
-                        calendar_search(window.countMonthsMobile);
+                        calendarSearch(window.countMonthsMobile);
                         $("#clear_date_header").click(function() {
                             $("#check_in2").val("");
                             $("#check_out2").val("");
@@ -2439,10 +2485,10 @@
 
                             // Fungsi untuk menyembunyikan calendar ketika clear date hanya berlaku kalo bukan mobile
                             if (windowWidth > 649) {
-                                let content = document.getElementById("popup_check_search");
+                                let content = document.getElementById("popup_check_search_mobile");
                                 content.style.display = "none";
                             }
-                            calendar_search(window.countMonthsMobile);
+                            calendarSearch(window.countMonthsMobile);
                         });
                     } else {
                         $("#clear_date_header").click(function() {
@@ -2454,11 +2500,11 @@
                             $(".search-container-mobile .dates-mobile").html("");
                             $(".search-container-mobile .next-mobile").html("Skip");
 
-                            let content = document.getElementById("popup_check_search");
+                            let content = document.getElementById("popup_check_search_mobile");
                             content.style.display = "none";
-                            calendar_search(2);
+                            calendarSearch(2);
                         });
-                        calendar_search(2);
+                        calendarSearch(2);
                     }
                     if (windowWidth <= 991) {
                         $("#search_bar #bar").addClass("row");
