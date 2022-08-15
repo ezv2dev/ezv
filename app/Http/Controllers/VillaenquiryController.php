@@ -12,6 +12,7 @@ class VillaenquiryController extends Controller
 {
     public function store(Request $request)
     {
+        $email = "tangkas@ezvillasbali.com";
         if(Auth::user())
         {
             $user = User::where('id', $request->id_user)->first();
@@ -59,7 +60,7 @@ class VillaenquiryController extends Controller
             'villa_name' => $villa->original_name,
         ];
 
-        \Mail::to('tangkas@ezvillasbali.com')->send(new \App\Mail\VillaEnquiry($details));
+        \Mail::to($email)->send(new \App\Mail\VillaEnquiry($details));
 
         if ($enquiry) {
             return response()->json([
