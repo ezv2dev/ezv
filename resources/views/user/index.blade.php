@@ -277,6 +277,7 @@
                 <div id="sugest_mobile" class="location-popup w-100 display-none">
                     @php
                         $location = App\Http\Controllers\ViewController::get_location();
+                        $addressName = App\Http\Controllers\ViewController::get_address();
                         $hotelName = App\Http\Controllers\HotelController::get_name();
                         $restaurantName = App\Http\Controllers\Restaurant\RestaurantController::get_name();
                         $activityName = App\Http\Controllers\Activity\ActivityController::get_name();
@@ -359,6 +360,20 @@
                                 <div class="location-popup-text sugest-list-text">
                                     <a type="button" class="location_op"
                                         data-value="{{ $item->name }}">{{ $item->name }}</a>
+                                </div>
+                            </div>
+                        @endforeach
+                        @foreach ($addressName as $item)
+                            <div class="col-lg-12 location-popup-desc-container sugest-list"
+                                style="display: none; cursor: pointer;">
+                                <div class="location-popup-map sugest-list-map">
+                                    <img class="location-popup-map-image lozad" src="{{ LazyLoad::show() }}"
+                                        data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
+                                </div>
+                                <div class="location-popup-text sugest-list-text">
+                                    <a type="button" class="location_op"
+                                        data-value="{{ $item->address }}, {{ $item->location->name }}">{{ $item->address }},
+                                        {{ $item->location->name }}</a>
                                 </div>
                             </div>
                         @endforeach
@@ -669,6 +684,7 @@
                                                 <div id="sugest_desktop" class="location-popup display-none">
                                                     @php
                                                         $location = App\Http\Controllers\ViewController::get_location();
+                                                        $addressName = App\Http\Controllers\ViewController::get_address();
                                                         $hotelName = App\Http\Controllers\HotelController::get_name();
                                                         $restaurantName = App\Http\Controllers\Restaurant\RestaurantController::get_name();
                                                         $activityName = App\Http\Controllers\Activity\ActivityController::get_name();
@@ -774,6 +790,21 @@
                                                                 <div class="location-popup-text sugest-list-text">
                                                                     <a type="button" class="location_op_desktop"
                                                                         data-value="{{ $item->name }}">{{ $item->name }}</a>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                        @foreach ($addressName as $item)
+                                                            <div class="col-lg-12 location-popup-desc-container sugest-list"
+                                                                style="display: none; cursor: pointer;">
+                                                                <div class="location-popup-map sugest-list-map">
+                                                                    <img class="location-popup-map-image lozad"
+                                                                        src="{{ LazyLoad::show() }}"
+                                                                        data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
+                                                                </div>
+                                                                <div class="location-popup-text sugest-list-text">
+                                                                    <a type="button" class="location_op_desktop"
+                                                                        data-value="{{ $item->address }}, {{ $item->location->name }}">{{ $item->address }},
+                                                                        {{ $item->location->name }}</a>
                                                                 </div>
                                                             </div>
                                                         @endforeach
@@ -1529,8 +1560,8 @@
         {{-- Increment Decrement --}}
         <script>
             function adult_increment_index() {
-                if (parseInt(document.getElementById('total_guest_desktop').value) < 10
-                    && parseInt(document.querySelector('.guests-mobile').innerHTML) < 10) {
+                if (parseInt(document.getElementById('total_guest_desktop').value) < 10 &&
+                    parseInt(document.querySelector('.guests-mobile').innerHTML) < 10) {
                     document.getElementById('adult_desktop').stepUp();
                     document.getElementById('adult_mobile').stepUp();
                     document.getElementById('total_guest_desktop').value = parseInt(document.getElementById('adult_desktop')
@@ -1538,8 +1569,9 @@
                         parseInt(document.getElementById('child_desktop').value);
                     // NEW SEARCH MOBILE
                     // fungsi untuk mengisi guest di mobile
-                    document.querySelector('.guests-mobile').innerHTML = parseInt(document.getElementById('adult_mobile').value) +
-                        parseInt(document.getElementById('child_mobile').value) + " Guests";    
+                    document.querySelector('.guests-mobile').innerHTML = parseInt(document.getElementById('adult_mobile')
+                        .value) +
+                        parseInt(document.getElementById('child_mobile').value) + " Guests";
                 }
             }
 
@@ -1556,8 +1588,8 @@
             }
 
             function child_increment_index() {
-                if (parseInt(document.getElementById('total_guest_desktop').value) < 10
-                    && parseInt(document.querySelector('.guests-mobile').innerHTML) < 10) {
+                if (parseInt(document.getElementById('total_guest_desktop').value) < 10 &&
+                    parseInt(document.querySelector('.guests-mobile').innerHTML) < 10) {
                     document.getElementById('child_desktop').stepUp();
                     document.getElementById('child_mobile').stepUp();
                     document.getElementById('total_guest_desktop').value = parseInt(document.getElementById('adult_desktop')
@@ -1565,7 +1597,8 @@
                         parseInt(document.getElementById('child_desktop').value);
                     // NEW SEARCH MOBILE
                     // fungsi untuk mengisi guest di mobile
-                    document.querySelector('.guests-mobile').innerHTML = parseInt(document.getElementById('adult_mobile').value) +
+                    document.querySelector('.guests-mobile').innerHTML = parseInt(document.getElementById('adult_mobile')
+                        .value) +
                         parseInt(document.getElementById('child_mobile').value) + " Guests";
                 }
             }
@@ -1933,7 +1966,7 @@
                             "height": "100%",
                             "overflow": "hidden"
                         });
-                    }else {
+                    } else {
                         $('#sugest_desktop').removeClass("display-none");
                         $('#sugest_desktop').addClass("display-block"); //add the class to the clicked element
                     }
@@ -2096,7 +2129,7 @@
                                 }
                             });
                         }
-                        
+
                     }
                 });
             }
@@ -2178,9 +2211,9 @@
                             "height": "100%",
                             "overflow": "hidden"
                         });
-                    }else {
+                    } else {
                         var t = e(this).parents(".button-dropdown").children(".dropdown-menu").is(
-                        ":hidden");
+                            ":hidden");
                         e(".button-dropdown .dropdown-menu").hide();
                         e(".button-dropdown .dropdown-toggle").removeClass("active");
                         if (t) {
@@ -2188,7 +2221,7 @@
                                 ".button-dropdown").children(".dropdown-toggle").addClass("active")
                         }
                     }
-                    
+
                 });
                 e(document).bind("click", function(t) {
                     var n = e(t.target);
