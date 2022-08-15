@@ -64,7 +64,7 @@
         .list-link-sidebar {
             gap: 12px;
             display: flex;
-            align-items:center;
+            align-items: center;
         }
 
         .list-link-sidebar i {
@@ -189,34 +189,34 @@ if (isset($_COOKIE['tema'])) {
                         <i class="fa-solid fa-key text-center"></i>
                         <p class="m-0">{{ __('user_page.Change Password') }}</p>
                     </a>
-                    <a href="{{ route('switch') }}" class="list-link-sidebar mb-2">
+                    {{-- <a href="{{ route('switch') }}" class="list-link-sidebar mb-2">
                         <i class="fa fa-refresh text-center" aria-hidden="true"></i>
                         <p class="m-0">{{ __('user_page.Switch to Hosting') }}</p>
-                    </a>
+                    </a> --}}
                     <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="moreCategory()">
                         <i class="fa fa-th text-center" aria-hidden="true"></i>
                         <p class="m-0">{{ __('user_page.Category') }}</p>
                     </div>
                     @if ($condition_villa)
-                    <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="modalFiltersHomes()">
-                        <i class="fas fa-ellipsis text-center"></i>
-                        <p class="m-0">Filters</p>
-                    </div>
+                        <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="modalFiltersHomes()">
+                            <i class="fas fa-ellipsis text-center"></i>
+                            <p class="m-0">Filters</p>
+                        </div>
                     @elseif($condition_restaurant)
-                    <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="moreSubCategory()">
-                        <i class="fa-solid fa-ellipsis text-center"></i>
-                        <p class="m-0">{{ __('user_page.Filters') }}</p>
-                    </div>
+                        <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="moreSubCategory()">
+                            <i class="fa-solid fa-ellipsis text-center"></i>
+                            <p class="m-0">{{ __('user_page.Filters') }}</p>
+                        </div>
                     @elseif($condition_hotel)
-                    <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="modalFiltersHotel()">
-                        <i class="fa-solid fa-ellipsis text-center"></i>
-                        <p class="m-0">{{ __('user_page.Filters') }}</p>
-                    </div>
+                        <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="modalFiltersHotel()">
+                            <i class="fa-solid fa-ellipsis text-center"></i>
+                            <p class="m-0">{{ __('user_page.Filters') }}</p>
+                        </div>
                     @elseif($condition_things_to_do)
-                    <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="moreSubCategory()">
-                        <i class="fa-solid fa-ellipsis text-center"></i>
-                        <p class="m-0">{{ __('user_page.Filters') }}</p>
-                    </div>
+                        <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="moreSubCategory()">
+                            <i class="fa-solid fa-ellipsis text-center"></i>
+                            <p class="m-0">{{ __('user_page.Filters') }}</p>
+                        </div>
                     @endif
                     <a class="list-link-sidebar mb-2" href="#!"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit()">
@@ -256,7 +256,8 @@ if (isset($_COOKIE['tema'])) {
                                 <div class="checkmark-mode"></div>
                             </label>
                         </div>
-                        <p class="mb-0 ms-2" id="switcher" style="cursor: pointer; color: #585656;">Light / Dark Mode</p>
+                        <p class="mb-0 ms-2" id="switcher" style="cursor: pointer; color: #585656;">Light / Dark Mode
+                        </p>
                     </div>
                     <a type="button" onclick="currency()" class="list-link-sidebar navbar-gap mb-2">
                         <img class="lozad"
@@ -298,25 +299,25 @@ if (isset($_COOKIE['tema'])) {
                     <p class="m-0">{{ __('user_page.Category') }}</p>
                 </div>
                 @if ($condition_villa)
-                <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="modalFiltersHomes()">
-                    <i class="fas fa-ellipsis text-center"></i>
-                    <p class="m-0">Filters</p>
-                </div>
+                    <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="modalFiltersHomes()">
+                        <i class="fas fa-ellipsis text-center"></i>
+                        <p class="m-0">Filters</p>
+                    </div>
                 @elseif($condition_restaurant)
-                <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="moreSubCategory()">
-                    <i class="fa-solid fa-ellipsis text-center"></i>
-                    <p class="m-0">{{ __('user_page.Filters') }}</p>
-                </div>
+                    <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="moreSubCategory()">
+                        <i class="fa-solid fa-ellipsis text-center"></i>
+                        <p class="m-0">{{ __('user_page.Filters') }}</p>
+                    </div>
                 @elseif($condition_hotel)
-                <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="modalFiltersHotel()">
-                    <i class="fa-solid fa-ellipsis text-center"></i>
-                    <p class="m-0">{{ __('user_page.Filters') }}</p>
-                </div>
+                    <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="modalFiltersHotel()">
+                        <i class="fa-solid fa-ellipsis text-center"></i>
+                        <p class="m-0">{{ __('user_page.Filters') }}</p>
+                    </div>
                 @elseif($condition_things_to_do)
-                <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="moreSubCategory()">
-                    <i class="fa-solid fa-ellipsis text-center"></i>
-                    <p class="m-0">{{ __('user_page.Filters') }}</p>
-                </div>
+                    <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="moreSubCategory()">
+                        <i class="fa-solid fa-ellipsis text-center"></i>
+                        <p class="m-0">{{ __('user_page.Filters') }}</p>
+                    </div>
                 @endif
                 <hr>
                 <a type="button" onclick="language()" class="navbar-gap list-link-sidebar mb-2" id="language">
@@ -339,21 +340,19 @@ if (isset($_COOKIE['tema'])) {
                     </div>
                     <p class="mb-0" id="switcher" style="cursor: pointer; color: #585656;">Light / Dark Mode</p>
                 </div>
-                <a type="button" onclick="currency()" class="navbar-gap list-link-sidebar mb-2"
-                        style="color: white;">
-                        <img class="lozad"
-                            style=" width: 27px; border: solid 1px #858585; padding: 2px; border-radius: 3px;"
-                            src="{{ LazyLoad::show() }}"
-                            data-src="{{ URL::asset('assets/icon/currency/dollar-sign.svg') }}">
-                        @if (session()->has('currency'))
-                            <p class="mb-0" style="color: #585656">Change Currency ({{ session('currency') }})</p>
-                            {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                <a type="button" onclick="currency()" class="navbar-gap list-link-sidebar mb-2" style="color: white;">
+                    <img class="lozad" style=" width: 27px; border: solid 1px #858585; padding: 2px; border-radius: 3px;"
+                        src="{{ LazyLoad::show() }}"
+                        data-src="{{ URL::asset('assets/icon/currency/dollar-sign.svg') }}">
+                    @if (session()->has('currency'))
+                        <p class="mb-0" style="color: #585656">Change Currency ({{ session('currency') }})</p>
+                        {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
                             data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}"> --}}
-                        @else
-                            <p class="mb-0" style="color: #585656">Choose Currency</p>
-                            {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                    @else
+                        <p class="mb-0" style="color: #585656">Choose Currency</p>
+                        {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
                             data-src="{{ URL::asset('assets/flags/flag_en.svg') }}"> --}}
-                        @endif
+                    @endif
 
                 </a>
             @endauth
@@ -415,11 +414,10 @@ if (isset($_COOKIE['tema'])) {
         @foreach ($subCategory->take(4) as $item)
             <div class="list-link-sidebar subcategory-in-sidebar mb-2"
                 onclick="wowFilter({{ $item->id_category }}, {{ $item->id_subcategory }}, null, false)">
-                <i class="{{ $item->icon }} text-center"
-                    @php
-                        $isChecked = '';
-                        $filterIds = explode(',', request()->get('fSubCategory'));
-                    @endphp @if (in_array($item->id_subcategory, $filterIds))
+                <i class="{{ $item->icon }} text-center" @php
+                    $isChecked = '';
+                    $filterIds = explode(',', request()->get('fSubCategory'));
+                @endphp @if (in_array($item->id_subcategory, $filterIds))
                     style="color: #ff7400 !important;"
         @endif>
         </i>
@@ -427,11 +425,365 @@ if (isset($_COOKIE['tema'])) {
     </div>
     @endforeach
     </div>
-@endif
+    @endif
     </div>
 
     </div>
     <div id="overlay"></div>
+    @if ($condition_villa || $condition_hotel)
+        {{-- NEW SEARCH MOBILE
+        new search ui untuk mobile --}}
+        <div class="search-container-mobile">
+            {{-- NEW SEARCH MOBILEa
+            tombol dipaling atas untuk close atau kembli --}}
+            <button class="btn-top-search me-2">
+                <i class="fa-solid fa-xmark close"></i>
+                <i class="fa-solid fa-angle-left back d-none"></i>
+            </button>
+            <form onsubmit="event.preventDefault();" autocomplete="off">
+                {{-- NEW SEARCH MOBILE
+                location untuk mobile --}}
+                <div class="location-container mx-2 mt-2">
+                    {{-- NEW SEARCH MOBILE
+                    ui ketika user belum pilih location untuk mobile
+                    berisi input dan location paling populer --}}
+                    <div class="select-location-mobile-container">
+                        <h3 class="mb-2">{{ __('user_page.Location') }}</h3>
+                        <input type="text" onfocus="this.value=''" class="form-control input-transparant d-block"
+                            id="loc_sugest" name="sLocation" placeholder="{{ __('user_page.Where are you going?') }}"
+                            readonly>
+                        <div class="row mt-2 first-sugest-location">
+                            <div class="col-4">
+                                <img class="d-block w-100 lozad" src="{{ LazyLoad::show() }}"
+                                    data-src="https://pix10.agoda.net/hotelImages/931/931511/931511_15082814490035280393.jpg?ca=5&ce=1&s=768x1024">
+                                <div class="location-popup-text sugest-list-text">
+                                    <a type="button" class="location_op" data-value="Canggu">Canggu</a>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <img class="d-block w-100 lozad" src="{{ LazyLoad::show() }}"
+                                    data-src="https://pix10.agoda.net/hotelImages/71995/-1/090e900e653bb0af941ba8ae8ccc6a77.jpg?ca=11&ce=1&s=1024x768">
+                                <div class="location-popup-text sugest-list-text">
+                                    <a type="button" class="location_op" data-value="Seminyak">Seminyak</a>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <img class="d-block w-100 lozad" src="{{ LazyLoad::show() }}"
+                                    data-src="https://pix4.agoda.net/hotelimages/412153/-1/d38ca3ce2e65312e961e0b80636510f9.jpg">
+                                <div class="location-popup-text sugest-list-text">
+                                    <a type="button" class="location_op" data-value="Ubud">Ubud</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{-- NEW SEARCH MOBILE
+                    ui ketika user sudah pilih location untuk mobile --}}
+                    <div class="location-has-selected-container d-none">
+                        <p class="text-secondary text-small mb-0 loc_sugest_mobile">Location</p>
+                        <div class="btn-transparent-action ms-auto">{{ __('user_page.Where are you going?') }}</div>
+                    </div>
+                    {{-- NEW SEARCH MOBILE
+                    popup location untuk mobile --}}
+                    <div id="sugest_mobile" class="location-popup w-100 display-none">
+                        @php
+                            $location = App\Http\Controllers\ViewController::get_location();
+                            $hotelName = App\Http\Controllers\HotelController::get_name();
+                            $restaurantName = App\Http\Controllers\Restaurant\RestaurantController::get_name();
+                            $activityName = App\Http\Controllers\Activity\ActivityController::get_name();
+                        @endphp
+                        <div class="location-popup-container h-100">
+                            <div class="col-lg-12 location-popup-desc-container sugest-list-first" style="display: none;">
+                                <div onclick="checkGeo();" class="location-popup-map sugest-list-map">
+                                    <img class="location-popup-map-image lozad" src="{{ LazyLoad::show() }}"
+                                        data-src="https://icon-library.com/images/current-location-icon/current-location-icon-23.jpg">
+                                </div>
+                                <div onclick="checkGeo();" class="location-popup-text sugest-list-text">
+                                    <a id="current_location" type="button" class="location_op" data-value="">Current
+                                        Location</a>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 location-popup-desc-container sugest-list-first" style="display: none ">
+                                <div class="location-popup-map sugest-list-map">
+                                    <img class="location-popup-map-image lozad" src="{{ LazyLoad::show() }}"
+                                        data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
+                                </div>
+                                <div class="location-popup-text sugest-list-text">
+                                    <a type="button" class="location_op" data-value="Canggu">Canggu</a>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 location-popup-desc-container sugest-list-first" style="display: none ">
+                                <div class="location-popup-map sugest-list-map">
+                                    <img class="location-popup-map-image lozad" src="{{ LazyLoad::show() }}"
+                                        data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
+                                </div>
+                                <div class="location-popup-text sugest-list-text">
+                                    <a type="button" class="location_op" data-value="Seminyak">Seminyak</a>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 location-popup-desc-container sugest-list-first" style="display: none ">
+                                <div class="location-popup-map sugest-list-map">
+                                    <img class="location-popup-map-image lozad" src="{{ LazyLoad::show() }}"
+                                        data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
+                                </div>
+                                <div class="location-popup-text sugest-list-text">
+                                    <a type="button" class="location_op" data-value="Ubud">Ubud</a>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 location-popup-desc-container sugest-list-first" style="display: none ">
+                                <div class="location-popup-map sugest-list-map">
+                                    <img class="location-popup-map-image lozad" src="{{ LazyLoad::show() }}"
+                                        data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
+                                </div>
+                                <div class="location-popup-text sugest-list-text">
+                                    <a type="button" class="location_op" data-value="Kuta">Kuta</a>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 location-popup-desc-container sugest-list-first" style="display: none ">
+                                <div class="location-popup-map sugest-list-map">
+                                    <img class="location-popup-map-image lozad" src="{{ LazyLoad::show() }}"
+                                        data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
+                                </div>
+                                <div class="location-popup-text sugest-list-text">
+                                    <a type="button" class="location_op" data-value="Pecatu">Pecatu</a>
+                                </div>
+                            </div>
+                            @foreach ($location as $item)
+                                <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                    style="display: none ">
+                                    <div class="location-popup-map sugest-list-map">
+                                        <img class="location-popup-map-image lozad" src="{{ LazyLoad::show() }}"
+                                            data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
+                                    </div>
+                                    <div class="location-popup-text sugest-list-text">
+                                        <a type="button" class="location_op"
+                                            data-value="{{ $item->name }}">{{ $item->name }}</a>
+                                    </div>
+                                </div>
+                            @endforeach
+                            @foreach ($location as $item)
+                                <div class="col-lg-12 location-popup-desc-container sugest-list" style="display: none ">
+                                    <div class="location-popup-map sugest-list-map">
+                                        <img class="location-popup-map-image lozad" src="{{ LazyLoad::show() }}"
+                                            data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
+                                    </div>
+                                    <div class="location-popup-text sugest-list-text">
+                                        <a type="button" class="location_op"
+                                            data-value="{{ $item->name }}">{{ $item->name }}</a>
+                                    </div>
+                                </div>
+                            @endforeach
+                            @foreach ($hotelName as $item2)
+                                <div class="col-lg-12 location-popup-desc-container sugest-list"
+                                    style="display: none; cursor: pointer;"
+                                    onclick="window.open('{{ route('hotel', $item2->id_hotel) }}', '_blank');">
+                                    <div class="location-popup-map sugest-list-map">
+                                        <img class="location-popup-map-image"
+                                            src="{{ asset('assets/icon/hotel/hotel.png') }}">
+                                    </div>
+                                    <div class="location-popup-text sugest-list-text">
+                                        <a href="{{ route('hotel', $item2->id_hotel) }}" type="button"
+                                            class="location_op" target="_blank"
+                                            data-value="{{ $item2->name }}">{{ $item2->name }}</a>
+                                    </div>
+                                </div>
+                            @endforeach
+                            @foreach ($restaurantName as $item3)
+                                <div class="col-lg-12 location-popup-desc-container sugest-list"
+                                    style="display: none; cursor: pointer;"
+                                    onclick="window.open('{{ route('restaurant', $item3->id_restaurant) }}', '_blank');">
+                                    <div class="location-popup-map sugest-list-map">
+                                        <img class="location-popup-map-image"
+                                            src="{{ asset('assets/icon/map/restaurant.png') }}">
+                                    </div>
+                                    <div class="location-popup-text sugest-list-text">
+                                        <a href="{{ route('restaurant', $item3->id_restaurant) }}" type="button"
+                                            class="location_op" target="_blank"
+                                            data-value="{{ $item3->name }}">{{ $item3->name }}</a>
+                                    </div>
+                                </div>
+                            @endforeach
+                            @foreach ($activityName as $item4)
+                                <div class="col-lg-12 location-popup-desc-container sugest-list"
+                                    style="display: none; cursor: pointer;"
+                                    onclick="window.open('{{ route('activity', $item4->id_activity) }}', '_blank');">
+                                    <div class="location-popup-map sugest-list-map">
+                                        <img class="location-popup-map-image"
+                                            src="{{ asset('assets/icon/map/activity.png') }}">
+                                    </div>
+                                    <div class="location-popup-text sugest-list-text">
+                                        <a href="{{ route('activity', $item4->id_activity) }}" type="button"
+                                            class="location_op" target="_blank"
+                                            data-value="{{ $item4->name }}">{{ $item4->name }}</a>
+                                    </div>
+                                </div>
+                            @endforeach
+                            <div class="col-lg-12 location-popup-desc-container sugest-list-empty" style="display: none">
+                                <p>{{ __('user_page.Location not found') }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{-- NEW SEARCH MOBILE
+                date untuk mobile --}}
+                <div class="dates-container mx-2 mt-2">
+                    {{-- NEW SEARCH MOBILE
+                    ui ketika user belum atau sudah pilih date untuk mobile --}}
+                    <div class="d-flex collapsible-check-search">
+                        <p class="text-secondary text-small mb-0 dates-mobile">When</p>
+                        <input type="hidden" id="check_in_mobile" value="" name="sCheck_in">
+                        <input type="hidden" id="check_out_mobile" value="" name="sCheck_out">
+                        <div class="btn-transparent-action ms-auto">Add Dates</div>
+                    </div>
+                    {{-- calendar --}}
+                    <div class="content sidebar-popup" id="popup_check_search_mobile">
+                        <div class="flatpickr" id="inline_reserve_search" style="text-align: left;">
+                        </div>
+                    </div>
+                </div>
+                {{-- NEW SEARCH MOBILE
+                guests untuk mobile --}}
+                <div class="guests-container mx-2 mt-2">
+                    {{-- NEW SEARCH MOBILE
+                    ui ketika user belum atau sudah pilih guests untuk mobile --}}
+                    <div class="d-flex selected-guest-mobile">
+                        <p class="text-secondary text-small mb-0 guests-mobile">1 Guests</p>
+                        <div class="btn-transparent-action ms-auto">Add Guests</div>
+                    </div>
+                    {{-- NEW SEARCH MOBILE
+                    ui popup guest untuk mobile --}}
+                    <div class="guest-popup dropdown-menu">
+                        <h5 class="mb-2">Guests</h5>
+                        <div class="d-flex mb-2">
+                            <div class="guest-type-container flex-fill">
+                                <p class="guest-type-title mb-0">
+                                    {{ __('user_page.Adults') }}
+                                </p>
+                                <p class="guest-type-desc mb-0">
+                                    {{ __('user_page.Age 13 or above') }}
+                                </p>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <a type="button" onclick="adult_decrement_header_list()"
+                                    style="height: 39px; width: 39px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fa-solid fa-minus guests-style" style="padding:0px"></i>
+                                </a>
+                                <div style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
+                                    <input type="number" id="adult_mobile" name="sAdult" value="1"
+                                        style="text-align: center; border:none; width:40px; -moz-appearance: textfield; background-color: transparent;"
+                                        min="0" readonly>
+                                </div>
+                                <a type="button" onclick="adult_increment_header_list()"
+                                    style="height: 39px; width:39px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fa-solid fa-plus" style="padding:0px;"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="d-flex mb-2">
+                            <div class="guest-type-container flex-fill">
+                                <p class="guest-type-title mb-0">
+                                    {{ __('user_page.Children') }}
+                                </p>
+                                <p class="guest-type-desc mb-0">
+                                    {{ __('user_page.Ages 2–12') }}
+                                </p>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <a type="button" onclick="child_decrement_header_list()"
+                                    style="height: 39px; width: 39px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fa-solid fa-minus guests-style" style="padding:0px"></i>
+                                </a>
+                                <div style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
+                                    <input type="number" id="child_mobile" name="sChild" value="0"
+                                        style="text-align: center; border:none; width:40px; -moz-appearance: textfield; background-color: transparent;"
+                                        min="0" readonly>
+                                </div>
+                                <a type="button" onclick="child_increment_header_list()"
+                                    style="height: 39px; width:39px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fa-solid fa-plus" style="padding:0px;"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="d-flex mb-2">
+                            <div class="guest-type-container flex-fill">
+                                <p class="guest-type-title mb-0">
+                                    {{ __('user_page.Infants') }}
+                                </p>
+                                <p class="guest-type-desc mb-0">
+                                    {{ __('user_page.Under 2') }}
+                                </p>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <a type="button" onclick="infant_decrement_header_list()"
+                                    style="height: 39px; width: 39px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fa-solid fa-minus guests-style" style="padding:0px"></i>
+                                </a>
+                                <div style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
+                                    <input type="number" id="infant_mobile" name="" value="0"
+                                        style="text-align: center; border:none; width:40px; -moz-appearance: textfield; background-color: transparent;"
+                                        min="0" readonly>
+                                </div>
+                                <a type="button" onclick="infant_increment_header_list()"
+                                    style="height: 39px; width: 39px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fa-solid fa-plus guests-style" style="padding:0px"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="d-flex mb-2">
+                            <div class="guest-type-container flex-fill">
+                                <p class="guest-type-title mb-0">
+                                    {{ __('user_page.Pets') }}
+                                </p>
+                                <p class="guest-type-desc mb-0">
+                                    {{ __('user_page.Service animal ?') }}
+                                </p>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <a type="button" onclick="pet_decrement_header_list()"
+                                    style="height: 39px; width: 39px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fa-solid fa-minus guests-style" style="padding:0px"></i>
+                                </a>
+                                <div style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
+                                    <input type="number" id="pet_mobile" name="" value="0"
+                                        style="text-align: center; border:none; width:40px; -moz-appearance: textfield; background-color: transparent;"
+                                        min="0" readonly>
+                                </div>
+                                <a type="button" onclick="pet_increment_header_list()"
+                                    style="height: 39px; width: 39px; color: grey; background-color: white; border: 1px solid grey; border-radius: 50%; font-size: 12px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fa-solid fa-plus guests-style" style="padding:0px"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                {{-- NEW SEARCH MOBILE
+                tombol action dipaling bawah untuk mobile --}}
+                <div class="bottom-action-container">
+                    <div class="d-flex align-items-center">
+                        <div id="clear_date_mobile" class="btn-transparent-action clear-date-mobile d-none">
+                            {{ __('user_page.Clear Dates') }}</div>
+                        <div class="btn-transparent-action clear-all-mobile">Clear All</div>
+                        <div class="btn-company next-mobile ms-auto">Next</div>
+                        @if ($condition_villa)
+                            <button class="btn-company submit-mobile ms-auto d-none" 
+                                onclick="homesFilter({{ request()->get('fPropertyType') ?? 'null' }}, {{ request()->get('fAmenities') ?? 'null' }})">
+                                Search
+                            </button>
+                        @endif
+                        @if ($condition_hotel)
+                            <button class="btn-company submit-mobile ms-auto d-none" 
+                            onclick="hotelFilter({{ request()->get('fCategory') ?? 'null' }}, {{ request()->get('filter') ?? 'null' }}, false)">
+                                Search
+                            </button>
+                        @endif
+                    </div>
+                </div>
+            </form>
+        </div>
+    @endif
     <div id="page-container">
         <!-- Header -->
         <header>
@@ -1360,10 +1712,10 @@ if (isset($_COOKIE['tema'])) {
             $('#categoryModal').css("overflow-y", "hidden")
 
             // close sidebar di mobile size
-            $( ".btn-close-expand-navbar-mobile" ).trigger( "click" )
+            $(".btn-close-expand-navbar-mobile").trigger("click")
 
             // close searchbar di mobile size
-            $( "#bodyList #overlay" ).trigger( "click" )
+            $("#bodyList #overlay").trigger("click")
         }
 
         function moreSubCategory() {
@@ -1373,10 +1725,10 @@ if (isset($_COOKIE['tema'])) {
             $('#modalSubCategory').css("overflow-y", "hidden")
 
             // close sidebar di mobile size
-            $( ".btn-close-expand-navbar-mobile" ).trigger( "click" )
+            $(".btn-close-expand-navbar-mobile").trigger("click")
 
             // close searchbar di mobile size
-            $( "#bodyList #overlay" ).trigger( "click" )
+            $("#bodyList #overlay").trigger("click")
         }
 
         function modalFiltersHomes() {
@@ -1386,10 +1738,10 @@ if (isset($_COOKIE['tema'])) {
             $('#modalFiltersHome').css("overflow-y", "hidden")
 
             // close sidebar di mobile size
-            $( ".btn-close-expand-navbar-mobile" ).trigger( "click" )
+            $(".btn-close-expand-navbar-mobile").trigger("click")
 
             // close searchbar di mobile size
-            $( "#bodyList #overlay" ).trigger( "click" )
+            $("#bodyList #overlay").trigger("click")
         }
 
         function modalFiltersHotel() {
@@ -1397,11 +1749,11 @@ if (isset($_COOKIE['tema'])) {
             $('#modalFiltersHotel').modal('show');
             $('#modalFiltersHotel').css("overflow-y", "hidden")
 
-           // close sidebar di mobile size
-           $( ".btn-close-expand-navbar-mobile" ).trigger( "click" )
+            // close sidebar di mobile size
+            $(".btn-close-expand-navbar-mobile").trigger("click")
 
             // close searchbar di mobile size
-            $( "#bodyList #overlay" ).trigger( "click" )
+            $("#bodyList #overlay").trigger("click")
         }
 
         function filterCollab() {
@@ -1409,11 +1761,11 @@ if (isset($_COOKIE['tema'])) {
             $('#modalFiltersCollab').modal('show');
             $('#modalFiltersCollab').css("overflow-y", "hidden")
 
-           // close sidebar di mobile size
-           $( ".btn-close-expand-navbar-mobile" ).trigger( "click" )
+            // close sidebar di mobile size
+            $(".btn-close-expand-navbar-mobile").trigger("click")
 
             // close searchbar di mobile size
-            $( "#bodyList #overlay" ).trigger( "click" )
+            $("#bodyList #overlay").trigger("click")
         }
 
         // fix bug scroll ketika open sidebar dan open modal subcategory di mobile size
@@ -1546,7 +1898,10 @@ if (isset($_COOKIE['tema'])) {
     </script>
 
     <script>
-        function calendar_search(months) {
+        // NEW SEARCH MOBILE
+        window.countMonthsMobile = 3;
+
+        function calendarSearch(months) {
             if (!$("#check_in2").val()) {
                 var check_in_val = "";
             } else {
@@ -1567,18 +1922,131 @@ if (isset($_COOKIE['tema'])) {
                 showMonths: months,
                 // disable: data,
                 defaultDate: [check_in_val, check_out_val],
+                onReady: function(selectedDates, dateStr, instance) {
+                    // NEW SEARCH MOBILE
+                    // Meredesign calendar untuk mobile
+                    if (window.innerWidth <= 649) {
+                        var indexMonth = instance.currentMonth;
+                        var year = instance.currentYear;
+                        $(".dayContainer").each(function(i, curr) {
+                            var month = instance.l10n.months.longhand[indexMonth];
+                            $(this).before("<h5 class='text-start'>" + month + " " + year + "</h5>");
+                            if (indexMonth == 11) {
+                                indexMonth = 0;
+                                year++;
+                            } else {
+                                indexMonth++;
+                            }
+                        });
+                        $(".flatpickr-weekdaycontainer").addClass("d-none");
+                        $(".flatpickr-weekdaycontainer:first-child").removeClass("d-none");
+                        $(".flatpickr-days").append(
+                            "<button class='btn-company btn-load-more-calendar-mobile' style='border: none;'>Load More</button>"
+                        );
+                        $(".btn-load-more-calendar-mobile").on("click", function() {
+                            window.countMonthsMobile += 3;
+                            calendarSearch(window.countMonthsMobile);
+                        });
+                    }
+                },
                 onChange: function(selectedDates, dateStr, instance) {
                     $("#check_in2").val(instance.formatDate(selectedDates[0], "Y-m-d"));
-                    $("#check_out2").val(
+                    $(".search-container-mobile .dates-mobile").html(instance.formatDate(selectedDates[0],
+                        "Y-m-d"));
+                    if (selectedDates.length > 1) {
+                        $("#check_out2").val(
+                            instance.formatDate(selectedDates[1], "Y-m-d")
+                        );
+                        // NEW SEARCH MOBILE
+                        // fungsi untuk isi date di mobile
+                        $(".search-container-mobile .dates-mobile").html(
+                            instance.formatDate(selectedDates[0], "Y-m-d") +
+                            " to " +
+                            instance.formatDate(selectedDates[1], "Y-m-d")
+                        );
+                        $("#check_in_mobile").val(instance.formatDate(selectedDates[0], "Y-m-d"));
+                        $("#check_out_mobile").val(instance.formatDate(selectedDates[1], "Y-m-d"));
+                        // NEW SEARCH MOBILE
+                        // fungsi untuk mengubah tombol dibawah jadi next ketika sudah selesai milih
+                        $(".search-container-mobile .next-mobile").html("Next");
+                    }
+                    // NEW SEARCH MOBILE
+                    // fungsi untuk menutup calendar ketika sudah selesai milih hanya berlaku ketika bukan dimobile
+                    if (window.innerWidth > 649) {
+                        let content = document.getElementById("popup_check_search_mobile");
+                        content.style.display = "none";
+                    }
+                    // NEW SEARCH MOBILE
+                    // Meredesign calendar mobile
+                    if (window.innerWidth <= 649) {
+                        var indexMonth = instance.currentMonth;
+                        var year = instance.currentYear;
+                        $(".dayContainer").each(function(i, curr) {
+                            var month = instance.l10n.months.longhand[indexMonth];
+                            $(this).before("<h5 class='text-start'>" + month + " " + year + "</h5>");
+                            if (indexMonth == 11) {
+                                indexMonth = 0;
+                                year++;
+                            } else {
+                                indexMonth++;
+                            }
+                        });
+                        $(".flatpickr-weekdaycontainer").addClass("d-none");
+                        $(".flatpickr-weekdaycontainer:first-child").removeClass("d-none");
+                        $(".flatpickr-days").append(
+                            "<button class='btn-company btn-load-more-calendar-mobile' style='border: none;'>Load More</button>"
+                        );
+                        $(".btn-load-more-calendar-mobile").on("click", function() {
+                            window.countMonthsMobile += 3;
+                            calendarSearch(window.countMonthsMobile);
+                        });
+                    }
+                }
+            });
+        }
+        calendarSearch(2);
+
+        function calendarSearchDesktop(months) {
+            if (!$("#check_in2").val()) {
+                var check_in_val = "";
+            } else {
+                var check_in_val = $("#check_in2").val();
+            }
+
+            if (!$("#check_out2").val()) {
+                var check_out_val = "";
+            } else {
+                var check_out_val = $("#check_out2").val();
+            }
+            $("#inline_reserve_search_desktop").flatpickr({
+                enableTime: false,
+                dateFormat: "Y-m-d",
+                minDate: "today",
+                inline: true,
+                mode: "range",
+                showMonths: months,
+                // disable: data,
+                defaultDate: [check_in_val, check_out_val],
+                onChange: function(selectedDates, dateStr, instance) {
+                    $("#check_in2").val(instance.formatDate(selectedDates[0], "Y-m-d"));
+                    $("#check_out2").val(instance.formatDate(selectedDates[1], "Y-m-d"));
+                    $("#check_in_mobile").val(instance.formatDate(selectedDates[0], "Y-m-d"));
+                    $("#check_out_mobile").val(instance.formatDate(selectedDates[1], "Y-m-d"));
+                    $('.dates-mobile').html(
+                        instance.formatDate(selectedDates[0], "Y-m-d") +
+                        " to " +
                         instance.formatDate(selectedDates[1], "Y-m-d")
                     );
-                    let content = document.getElementById("popup_check_search");
+
+                    let content = document.getElementById("popup_check_search_desktop");
                     content.style.display = "none";
                 },
             });
         }
-        calendar_search(2);
+        calendarSearchDesktop(2);
+    </script>
 
+    <script>
         $(document).ready(() => {
             var mode = localStorage.getItem("mode");
             if (mode == 'dark') {

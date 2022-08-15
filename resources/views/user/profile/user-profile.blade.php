@@ -752,6 +752,7 @@ input::-ms-reveal,input::-ms-clear{display:none;}
             </div>
         </div>
         <hr>
+        <div id="new-bar-black" class="page-header-fixed d-flex flex-column bg-body-light pt-5p">
         <div class="px-0 row nav-row">
             <div id="navbar-first-dekstop" class="col-lg-2 logo mb-lg-0 villa-list-header-logo d-flex align-items-center">
                 <button type="button" class="btn btn-primary btn-sm" style="background: #fff; color: #000; border-color: #000;">
@@ -801,6 +802,11 @@ input::-ms-reveal,input::-ms-clear{display:none;}
                </div>
             </div>
          </div>
+         <div class="row row-cat-container">
+            <div id="myBtnContainer" class="menu col-12">
+            </div>
+         </div>
+        </div>
 
         <div class="container-fluid">
             <h1 class="mt-2">Homes in Seminyak</h1>
@@ -1498,4 +1504,100 @@ input::-ms-reveal,input::-ms-clear{display:none;}
             </div>
         </div>
     </div>
+    <script>
+        function popUp() {
+            document.getElementById("myBtnContainer").classList.add("display-none");
+            document.getElementById("searchbox").classList.remove("searchbox-display-block");
+            document.getElementById("searchbox").classList.add("searchbox-display-none");
+            document.getElementById("change_display_block").classList.remove("display-none");
+            document.getElementById("change_display_block").classList.add("display-block");
+            document.getElementById("new-bar-black").classList.add("header-popup-list");
+            document.getElementById("new-bar-black").classList.add("search-height");
+            document.getElementById("search_bar").classList.add("searchbar-list-display-block");
+            document.getElementById("search_bar").classList.remove("searchbar-list-display-none");
+            $("#overlay").css("display", "block");
+
+            function addClass(elements, className) {
+                for (var i = 0; i < elements.length; i++) {
+                    var element = elements[i];
+                    if (element.classList) {
+                        element.classList.add(className);
+                    } else {
+                        element.className += ' ' + className;
+                    }
+                }
+            }
+
+            function removeClass(elements, className) {
+                for (var i = 0; i < elements.length; i++) {
+                    var element = elements[i];
+                    if (element.classList) {
+                        element.classList.remove(className);
+                    } else {
+                        element.className = element.className.replace(new RegExp('(^|\\b)' + className.split(
+                                ' ')
+                            .join('|') + '(\\b|$)', 'gi'), ' ');
+                    }
+                }
+            }
+
+            var elss = document.getElementsByClassName("flatpickr-calendar");
+            removeClass(elss, 'display-none');
+        }
+    </script>
+
+    <script>
+        window.onscroll = function() {
+            whenScroll()
+        };
+
+        function whenScroll() {
+            function addClass(elements, className) {
+                for (var i = 0; i < elements.length; i++) {
+                    var element = elements[i];
+                    if (element.classList) {
+                        element.classList.add(className);
+                    } else {
+                        element.className += ' ' + className;
+                    }
+                }
+            }
+
+            function removeClass(elements, className) {
+                for (var i = 0; i < elements.length; i++) {
+                    var element = elements[i];
+                    if (element.classList) {
+                        element.classList.remove(className);
+                    } else {
+                        element.className = element.className.replace(new RegExp('(^|\\b)' + className.split(' ')
+                            .join('|') + '(\\b|$)', 'gi'), ' ');
+                    }
+                }
+            }
+
+            var isFocused = document.querySelector("#loc_sugest") == document.activeElement ||
+                document.querySelector("#search_sugest") == document.activeElement;
+
+            if (!isFocused || window.innerWidth > 768) {
+                document.getElementById("myBtnContainer").classList.remove("display-none");
+                document.getElementById("searchbox").classList.add("searchbox-display-block");
+                document.getElementById("searchbox").classList.remove("searchbox-display-none");
+                document.getElementById("search_bar").classList.remove("active");
+                document.getElementById("change_display_block").classList.add("display-none");
+                document.getElementById("change_display_block").classList.remove("display-block");
+                document.getElementById("new-bar-black").classList.remove("header-popup-list");
+                document.getElementById("new-bar-black").classList.remove("search-height");
+                document.getElementById("search_bar").classList.remove("searchbar-list-display-block");
+                document.getElementById("search_bar").classList.add("searchbar-list-display-none");
+
+                // hide overlay ketika scroll, dan ketika sidebar close di mobile size
+                if ($('.expand-navbar-mobile').attr('aria-expanded') == 'false') {
+                    $("#overlay").css("display", "none");
+                }
+
+                var els = document.getElementsByClassName("flatpickr-calendar");
+                addClass(els, 'display-none');
+            }
+        }
+    </script>
 @endsection

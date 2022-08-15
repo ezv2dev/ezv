@@ -4235,14 +4235,6 @@
         }
     </script>
 
-    @if ($villa[0]->instant_book == 'yes')
-        @include('user.modal.villa.details_reserve')
-    @else
-        @auth
-            @include('user.modal.villa.quick_enquiry')
-        @endauth
-    @endif
-
     <script src="{{ asset('assets/js/dashmix.app.min.js') }}"></script>
     <script src="{{ asset('assets/js/lib/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
@@ -4270,6 +4262,14 @@
 
     {{-- SweetAlert JS --}}
     <script src="{{ asset('assets/js/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+
+    @if ($villa[0]->instant_book == 'yes')
+        @include('user.modal.villa.details_reserve')
+    @else
+        @auth
+            @include('user.modal.villa.quick_enquiry')
+        @endauth
+    @endif
 
     {{-- Like --}}
     @auth
