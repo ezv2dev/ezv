@@ -141,7 +141,7 @@ return [
     'Share' => 'Share',
     'Share this place with your friend and family' => 'Share this place with your friend and family',
     'Copy Link' => 'Copy Link',
-    'Edit Position Video' => 'Edit Position Video',
+    'Edit Video Position' => 'Edit Video Position',
     'there is no image yet' => 'there is no image yet',
 
     'Kitchen' => 'Kitchen',
