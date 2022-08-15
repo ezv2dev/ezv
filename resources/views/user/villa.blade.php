@@ -4483,6 +4483,7 @@
                     let content = "";
                     let contentMobile = "";
                     let contentPositionModal = "";
+                    let contentPhotoModalMobile = "";
 
                     // let galleryDiv = $('.gallery');
                     // let galleryLength = galleryDiv.find('a').length;
@@ -4506,7 +4507,7 @@
 
                         contentMobile += '<div class="col-4 grid-photo" id="displayPhoto' +
                             response.data.photo[i].id_photo +
-                            '"> <a data-toggle="modal" data-target="#modal-photo-gallery" data-section="'+response.data.photo[i].id_photo+'"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
+                            '"> <a onclick="openModalGalleryMobile('+response.data.photo[i].id_photo+')"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
                             path + lowerCaseUid + slash + response.data.photo[i].name +
                             '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $villa[0]->id_villa }}" data-photo="' +
                             response.data.photo[i].id_photo +
@@ -4517,6 +4518,13 @@
                             '"> <img src="' +
                             path + lowerCaseUid + slash + response.data.photo[i].name +
                             '" title="' + response.data.photo[i].name + '"> </li>';
+
+                        contentPhotoModalMobile += '<div id="'+ response.data.photo[i].id_photo +'">';
+                        contentPhotoModalMobile += '<div class="modal-gallery">'
+                        contentPhotoModalMobile += '<img id="displayPhoto'+ response.data.photo[i].id_photo +'" class="lozad-gallery-load lozad-gallery mb-2"';
+                        contentPhotoModalMobile += 'src="' +
+                            path + lowerCaseUid + slash + response.data.photo[i].name +
+                            '" title="' + response.data.photo[i].name + '"> </div></div>';
                     }
 
                     if (response.data.video.length > 0) {
@@ -4548,6 +4556,9 @@
 
                     const mobile = $(".mobile");
                     const desktop = $(".desktop");
+
+                    $("#content-modal-photo-mobile").html("");
+                    $("#content-modal-photo-mobile").append(contentPhotoModalMobile);
 
                     desktop.find('.gallery').html("");
                     desktop.find('.gallery').append(content);
@@ -5418,6 +5429,8 @@
                             const desktop = $(".desktop");
                             desktop.find('#displayPhoto'+photo).remove();
                             // $(`#displayPhoto${photo}`).remove();
+                            const modalPhotoGallery = $("#content-modal-photo-mobile");
+                            modalPhotoGallery.find('#displayPhoto'+photo).remove();
                             $("#positionPhotoGallery"+photo).remove();
 
                             let galleryDiv = $('.gallery');
@@ -5470,7 +5483,10 @@
                         success: async function(data) {
                             // console.log(data.message);
                             await Swal.fire('Deleted', data.message, 'success');
-                            $("#displayVideo" + video).remove();
+                            const mobile = $(".mobile");
+                            mobile.find('#displayVideo'+video).remove();
+                            const desktop = $(".desktop");
+                            desktop.find('#displayVideo'+video).remove();
                             $("#positionVideoGallery" + video).remove();
                             $("#displayStoryVideo" + video).remove();
 
