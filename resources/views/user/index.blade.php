@@ -121,10 +121,10 @@
                         <i class="fa-solid fa-key text-center"></i>
                         <p class="m-0">{{ __('user_page.Change Password') }}</p>
                     </a>
-                    <a href="{{ route('switch') }}" class="list-link-sidebar mb-2">
+                    {{-- <a href="{{ route('switch') }}" class="list-link-sidebar mb-2">
                         <i class="fa fa-refresh text-center" aria-hidden="true"></i>
                         <p class="m-0">{{ __('user_page.Switch to Hosting') }}</p>
-                    </a>
+                    </a> --}}
                     <a class="list-link-sidebar mb-2" href="#!"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit()">
                         <i class="fa fa-sign-out text-center" aria-hidden="true"></i>
@@ -615,7 +615,7 @@
                         <div id="ul" class="ul-display-block">
 
                             <!--Search Option Navbar Uncomment this section when back to old design-->
-                                <!-- <ul class="navbar-nav me-auto mt-2 mt-lg-0 ">
+                            <!-- <ul class="navbar-nav me-auto mt-2 mt-lg-0 ">
                                     <div class="nav-link-form" id="villa-form">
                                         <li class="nav-item">
                                             <a class="nav-link nav-link-style nav-link-margin" id="villa-button"
@@ -1083,7 +1083,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         {{-- End Header Search --}}
                     </div>
 
@@ -1091,9 +1091,9 @@
                         style="display: flex; align-items: center; justify-content: flex-end;">
                         @auth
                             <div class="d-flex" style="display: inline-block; align-items: center;">
-                                <a href="{{ route('switch') }}" class="navbar-gap" style="color: #b9b9b9;">
+                                {{-- <a href="{{ route('switch') }}" class="navbar-gap" style="color: #b9b9b9;">
                                     {{ __('user_page.Switch to Hosting') }}
-                                </a>
+                                </a> --}}
 
                                 <a type="button" onclick="language()" class="navbar-gap"
                                     style="color: white; width:27px;">
@@ -1217,7 +1217,7 @@
             <div class="mx-auto d-flex flex-lg-row flex-column hero">
 
                 <!-- Hero uncomment this when back to old design -->
-                    <!-- <div class="col-12">
+                <!-- <div class="col-12">
                         <div class="card card-overlay bg-dark text-white border-0 overflow-hidden lozad-gallery lozad-gallery-load index-jumbotron"
                             data-src="{{ URL::asset('assets/media/photos/desktop/batur.webp') }}">
                             <div class="card-img-overlay card-overlay d-flex align-items-center justify-content-center">
@@ -1241,34 +1241,34 @@
                         </div>
                     </div> -->
                 <!-- End Hero uncomment this when back to old design -->
-                
-                <!-- Hero comment this when back to old design -->
-                    <div class="col-12">
-                        <div class="card card-overlay bg-dark text-white border-0 overflow-hidden lozad-gallery lozad-gallery-load index-jumbotron"
-                            data-src="{{ URL::asset('assets/media/photos/desktop/batur.webp') }}">
-                            <div class="card-img-overlay card-overlay d-flex align-items-center justify-content-center">
-                                <div>
-                                    <p class="text-white text-center" style="font-size: 22px;">
-                                        The Best Way To Search & Explore Accomodation in Bali
-                                    </p>
-                                    <p class="text-white text-center" style="font-size: 22px;">
-                                        {{-- __('user_page.The Best Way To Find Accommodation, Restaurants, And Things To Do') --}}
 
-                                        {{ __('user_page.The Best Way To Find Accomodation, Restaurant, And Things To Do') }}
-                                    </p>
-                                    <div
-                                        class="d-flex flex-sm-row flex-column align-items-center mx-lg-0 mx-auto justify-content-center gap-3">
-                                        <form action="{{ route('list') }}" method="GET" id="villa-form">
-                                            {{-- <button class="btn d-inline-flex mb-md-0 btn-try border-0" style="color: #ffffff;"> --}}
-                                            <button class="btn d-inline-flex mb-md-0 btn-company">
-                                                {{ __("user_page.Let's Go") }}
-                                            </button>
-                                        </form>
-                                    </div>
+                <!-- Hero comment this when back to old design -->
+                <div class="col-12">
+                    <div class="card card-overlay bg-dark text-white border-0 overflow-hidden lozad-gallery lozad-gallery-load index-jumbotron"
+                        data-src="{{ URL::asset('assets/media/photos/desktop/batur.webp') }}">
+                        <div class="card-img-overlay card-overlay d-flex align-items-center justify-content-center">
+                            <div>
+                                <p class="text-white text-center" style="font-size: 22px;">
+                                    The Best Way To Search & Explore Accomodation in Bali
+                                </p>
+                                <p class="text-white text-center" style="font-size: 22px;">
+                                    {{-- __('user_page.The Best Way To Find Accommodation, Restaurants, And Things To Do') --}}
+
+                                    {{ __('user_page.The Best Way To Find Accomodation, Restaurant, And Things To Do') }}
+                                </p>
+                                <div
+                                    class="d-flex flex-sm-row flex-column align-items-center mx-lg-0 mx-auto justify-content-center gap-3">
+                                    <form action="{{ route('list') }}" method="GET" id="villa-form">
+                                        {{-- <button class="btn d-inline-flex mb-md-0 btn-try border-0" style="color: #ffffff;"> --}}
+                                        <button class="btn d-inline-flex mb-md-0 btn-company">
+                                            {{ __("user_page.Let's Go") }}
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
                 <!-- End Hero comment this when back to old design -->
 
             </div>
@@ -1277,7 +1277,7 @@
 
     <div class="header-4-4 position-relative" style="font-family: 'Poppins', sans-serif">
         <div class="container-xxl mx-auto p-0">
-            
+
             <!-- Advert Download App Uncomment this when back to old design -->
             <!-- <div class="mx-auto d-flex flex-lg-row flex-column hero">
                 <div class="col-12">
@@ -1322,13 +1322,14 @@
                         <div class="sp-75"></div>
                         <button class="letsgo" onclick="open_form()">Support</button>
                         <div class="sp-75"></div>
-                        <p>Click the support button above to connect with one<br> of our team to help speed up the lsiting
+                        <p>Click the support button above to connect with one<br> of our team to help speed up the
+                            lsiting
                             process</p>
                     </div>
                 </div>
             </section>
-             <!-- Support section Comment this when back to old design -->
-          
+            <!-- Support section Comment this when back to old design -->
+
             {{-- end hero --}}
             {{-- experience --}}
 
@@ -1340,203 +1341,63 @@
                 <h3 class="host-body-text mb-0 text-center text-orange">A World of Possibilities</h3>
 
                 <div class="row-grid-img-home pt-5">
-                    <!-- Image row 1-->
-                    <div class="grid-img-container">
-                        <img src="https://source.unsplash.com/featured?people,student">
-                        <div class="grid-text">
-                            Pizza
+                    @foreach ($villaCategory as $item)
+                        <div class="grid-img-container">
+                            <img src="https://source.unsplash.com/random/?{{ $item->name }}">
+                            <div class="grid-text">
+                                {{ $item->name }}
+                            </div>
                         </div>
-                    </div>
-                    <div class="grid-img-container">
-                        <img src="https://source.unsplash.com/featured?cyscling,boxing">
-                        <div class="grid-text">
-                            Villa
-                        </div>
-                    </div>
-                    <div class="grid-img-container">
-                        <img src="https://source.unsplash.com/featured?sunrise,shores">
-                        <div class="grid-text">
-                            Diving
-                        </div>
-                    </div>
-                    <div class="grid-img-container">
-                        <img src="https://source.unsplash.com/featured?accident,crash">
-                        <div class="grid-text">
-                            Beach
-                        </div>
-                    </div>
-                    <div class="grid-img-container">
-                        <img src="https://source.unsplash.com/featured?eating,drink">
-                        <div class="grid-text">
-                            waterfall
-                        </div>
-                    </div>
-                    <div class="grid-img-container">
-                        <img src="https://source.unsplash.com/featured?happy,sadness">
-                        <div class="grid-text">
-                            Hiking
-                        </div>
-                    </div>
-                    <div class="grid-img-container">
-                        <img src="https://source.unsplash.com/featured?rush,war">
-                        <div class="grid-text">
-                            Surf
-                        </div>
-                    </div>
-                    <div class="grid-img-container">
-                        <img src="https://source.unsplash.com/featured?pool,garden">
-                        <div class="grid-text">
-                            Paintball
-                        </div>
-                    </div>
-                    <!-- Image row 2 -->
-                    <div class="grid-img-container">
-                        <img src="https://source.unsplash.com/featured?space,planet">
-                        <div class="grid-text">
-                            Soccer
-                        </div>
-                    </div>
-                    <div class="grid-img-container">
-                        <img src="https://source.unsplash.com/featured?rock,metal">
-                        <div class="grid-text">
-                            Luxury Villa
-                        </div>
-                    </div>
-                    <div class="grid-img-container">
-                        <img src="https://source.unsplash.com/featured?horses,deer">
-                        <div class="grid-text">
-                            Hotel
-                        </div>
-                    </div>
-                    <div class="grid-img-container">
-                        <img src="https://source.unsplash.com/featured?angry,yelling">
-                        <div class="grid-text">
-                            Babi guling
-                        </div>
-                    </div>
-                    <div class="grid-img-container">
-                        <img src="https://source.unsplash.com/featured?traditional,religion">
-                        <div class="grid-text">
-                            Bakery
-                        </div>
-                    </div>
-                    <div class="grid-img-container">
-                        <img src="https://source.unsplash.com/featured?music,tools">
-                        <div class="grid-text">
-                            Bakso
-                        </div>
-                    </div>
-                    <div class="grid-img-container">
-                        <img src="https://source.unsplash.com/featured?popular,newspaper">
-                        <div class="grid-text">
-                            Cabins
-                        </div>
-                    </div>
-                    <div class="grid-img-container">
-                        <img src="https://source.unsplash.com/featured?local,activity">
-                        <div class="grid-text">
-                            Bungalow
-                        </div>
-                    </div>
-                    <!-- Image row 3 -->
-                    <div class="grid-img-container">
-                        <img src="https://source.unsplash.com/featured?teacher,teaching">
-                        <div class="grid-text">
-                            Cottage
-                        </div>
-                    </div>
-                    <div class="grid-img-container">
-                        <img src="https://source.unsplash.com/featured?machinal,musical">
-                        <div class="grid-text">
-                            Glamping
-                        </div>
-                    </div>
-                    <div class="grid-img-container">
-                        <img src="https://source.unsplash.com/featured?baby,givebirth">
-                        <div class="grid-text">
-                            Boat
-                        </div>
-                    </div>
-                    <div class="grid-img-container">
-                        <img src="https://source.unsplash.com/featured?smile,teardrops">
-                        <div class="grid-text">
-                            Estate
-                        </div>
-                    </div>
-                    <div class="grid-img-container">
-                        <img src="https://source.unsplash.com/featured?leaf,wind">
-                        <div class="grid-text">
-                            Bowling
-                        </div>
-                    </div>
-                    <div class="grid-img-container">
-                        <img src="https://source.unsplash.com/featured?kites,doll">
-                        <div class="grid-text">
-                            Day Spa
-                        </div>
-                    </div>
-                    <div class="grid-img-container">
-                        <img src="https://source.unsplash.com/featured?studios,radios">
-                        <div class="grid-text">
-                            Water Park
-                        </div>
-                    </div>
-                    <div class="grid-img-container">
-                        <img src="https://source.unsplash.com/featured?xray,medicine">
-                        <div class="grid-text">
-                            ATM
-                        </div>
-                    </div>
-                   
+                    @endforeach
                 </div>
             </section>
             <!-- Recomendation section Comment this when back to old design -->
 
             <!-- Location section Comment this when back to old design-->
-                <section class="location-section">
+            <section class="location-section">
 
-                    <h3 class="host-body-text mb-0 text-center">The Finest Locations</h3>
+                <h3 class="host-body-text mb-0 text-center">The Finest Locations</h3>
 
-                    <div class="row-grid-img-location pt-5">
-                        <!-- Image row 1-->
-                        <div class="grid-img-container flex-column">
-                            <img src="https://source.unsplash.com/featured?people,student">
-                            <div class="">
-                                Seminyak
-                            </div>
-                        </div>
-                        <div class="grid-img-container flex-column">
-                            <img src="https://source.unsplash.com/featured?cyscling,boxing">
-                            <div class="">
-                                Canggu
-                            </div>
-                        </div>
-                        <div class="grid-img-container flex-column">
-                            <img src="https://source.unsplash.com/featured?sunrise,shores">
-                            <div class="">
-                                Uluwatu
-                            </div>
-                        </div>
-                        <div class="grid-img-container flex-column">
-                            <img src="https://source.unsplash.com/featured?accident,crash">
-                            <div class="">
-                                Kuta
-                            </div>
-                        </div>
-                        <div class="grid-img-container flex-column">
-                            <img src="https://source.unsplash.com/featured?eating,drink">
-                            <div class="">
-                                Nusa Dua
-                            </div>
-                        </div>
-                        <div class="grid-img-container flex-column">
-                            <img src="https://source.unsplash.com/featured?happy,sadness">
-                            <div class="">
-                                Ubud
-                            </div>
+                <div class="row-grid-img-location pt-5">
+                    <!-- Image row 1-->
+                    <div class="grid-img-container flex-column">
+                        <img src="https://source.unsplash.com/featured?people,student">
+                        <div class="">
+                            Seminyak
                         </div>
                     </div>
-                </section>
+                    <div class="grid-img-container flex-column">
+                        <img src="https://source.unsplash.com/featured?cyscling,boxing">
+                        <div class="">
+                            Canggu
+                        </div>
+                    </div>
+                    <div class="grid-img-container flex-column">
+                        <img src="https://source.unsplash.com/featured?sunrise,shores">
+                        <div class="">
+                            Uluwatu
+                        </div>
+                    </div>
+                    <div class="grid-img-container flex-column">
+                        <img src="https://source.unsplash.com/featured?accident,crash">
+                        <div class="">
+                            Kuta
+                        </div>
+                    </div>
+                    <div class="grid-img-container flex-column">
+                        <img src="https://source.unsplash.com/featured?eating,drink">
+                        <div class="">
+                            Nusa Dua
+                        </div>
+                    </div>
+                    <div class="grid-img-container flex-column">
+                        <img src="https://source.unsplash.com/featured?happy,sadness">
+                        <div class="">
+                            Ubud
+                        </div>
+                    </div>
+                </div>
+            </section>
             <!-- Location section Comment this when back to old design -->
 
             <!-- Join advert section Comment this when back to old design -->
@@ -1562,14 +1423,14 @@
                             </h4>
                             <div class="sp-75"></div>
                             <button class="letsgo" onclick="viewModalcontact()">
-                                    Let's go
+                                Let's go
                             </button>
                         </div>
                     </div>
                     <div class="col-12 col-lg-6 d-none d-sm-block">
                         <div class="bottom-image-home">
                             <div class="bottom-content-home">
-                                
+
                             </div>
                         </div>
                     </div>
@@ -1578,7 +1439,7 @@
             </section>
             <!-- Join advert section Comment this when back to old design -->
 
-            
+
 
 
             <!-- Discover Restuarant section Uncomment this when back to old design -->
@@ -1607,7 +1468,7 @@
                             <div class="mb-3">
                                 <div class="row-grid-img">
                                     @foreach ($restaurantSubCategory->sortBy('order')->take(9) as $item)
-                                        <div class="pointer">
+<div class="pointer">
                                             <div onclick="foodFilter({{ request()->get('fCuisine') ?? 'null' }}, {{ $item->id_subcategory }})"
                                                 class="grid-img-container">
                                                 <img class="grid-img lozad" src="{{ LazyLoad::show() }}"
@@ -1617,7 +1478,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    @endforeach
+@endforeach
                                 </div>
                             </div>
                         </div>
@@ -1627,7 +1488,7 @@
             <!-- Discover Restuarant section Uncomment this when back to old design -->
 
             {{-- Things To Do --}}
-            
+
             <!-- Discover activity section Uncomment this when back to old design -->
             <!-- <section class="h-100 w-100 bg-white">
                 <div class="container-xxl mx-auto p-0">
@@ -1638,7 +1499,7 @@
                             <div class="mb-3">
                                 <div class="row-grid-img">
                                     @foreach ($activitySubCategory->sortBy('order')->take(9) as $item)
-                                        <div class="pointer">
+<div class="pointer">
                                             <div onclick="wowFilter({{ $item->id_category }}, {{ $item->id_subcategory }}, null)"
                                                 class="grid-img-container">
                                                 <img class="grid-img lozad" src="{{ LazyLoad::show() }}"
@@ -1648,7 +1509,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    @endforeach
+@endforeach
                                 </div>
                             </div>
                             <div class="mb-3">
@@ -1672,7 +1533,7 @@
                     </div>
                 </div>
             </section> -->
-             <!-- Discover activity section Uncomment this when back to old design -->
+            <!-- Discover activity section Uncomment this when back to old design -->
 
             {{-- end experience --}}
 
@@ -1890,7 +1751,7 @@
                     // NEW SEARCH MOBILE
                     // fungsi untuk mengisi guest di mobile
                     document.querySelector('.guests-mobile').innerHTML = parseInt(document.getElementById('adult_mobile')
-                        .value) +
+                            .value) +
                         parseInt(document.getElementById('child_mobile').value) + " Guests";
                 }
             }
@@ -1918,7 +1779,7 @@
                     // NEW SEARCH MOBILE
                     // fungsi untuk mengisi guest di mobile
                     document.querySelector('.guests-mobile').innerHTML = parseInt(document.getElementById('adult_mobile')
-                        .value) +
+                            .value) +
                         parseInt(document.getElementById('child_mobile').value) + " Guests";
                 }
             }

@@ -11,6 +11,7 @@ use App\Services\DeviceCheckService;
 use App\Models\Location;
 use App\Models\RestaurantSubCategory;
 use App\Models\Villa;
+use App\Models\VillaCategory;
 
 class HomeController extends Controller
 {
@@ -127,8 +128,9 @@ class HomeController extends Controller
 
         $restaurantSubCategory = RestaurantSubCategory::select('id_subcategory', 'name', 'order')->get();
         $activitySubCategory = ActivitySubcategory::select('id_category', 'id_subcategory', 'name', 'order')->get();
+        $villaCategory = VillaCategory::select('id_villa_category', 'name')->get();
 
-        return view('user.index')->with(compact('restaurantSubCategory', 'activitySubCategory'));
+        return view('user.index')->with(compact('restaurantSubCategory', 'activitySubCategory', 'villaCategory'));
     }
 
     public function get_lat_long(Request $request)
