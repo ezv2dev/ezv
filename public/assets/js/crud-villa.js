@@ -266,16 +266,16 @@ function editShortDescriptionCancel() {
 async function editBedroomVilla(id_villa, bedroomDetails) {
     // save bedrroom
     var bedroom =
-        bedroomDetails.room_count ? ? $("input[name='bedroom']:checked").val();
+        bedroomDetails.room_count ?? $("input[name='bedroom']:checked").val();
     var beds =
-        bedroomDetails.bed_count ? ? $("input[name='beds']:checked").val();
+        bedroomDetails.bed_count ?? $("input[name='beds']:checked").val();
     var bathroom = $("input[name='bathroom']:checked").val();
     var adult = $("input[name='adult']:checked").val();
     var children = $("input[name='children']:checked").val();
 
     var bedroom1 =
-        bedroomDetails.room_count ? ? $("input[name='bedroom1']").val();
-    var beds1 = bedroomDetails.bed_count ? ? $("input[name='beds1']").val();
+        bedroomDetails.room_count ?? $("input[name='bedroom1']").val();
+    var beds1 = bedroomDetails.bed_count ?? $("input[name='beds1']").val();
     var bathroom1 = $("input[name='bathroom1']").val();
     var adult1 = $("input[name='adult1']").val();
     var children1 = $("input[name='children1']").val();
