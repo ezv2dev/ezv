@@ -65,7 +65,29 @@ class RestaurantListController extends Controller
             'cuisine',
             'detailReview',
             'menu'
-        ])->where('status', 1)->paginate(env('CONTENT_PER_PAGE_LIST_RESTAURANT'));
+        ])->where('status', 1)->inRandomOrder('1234')->paginate(env('CONTENT_PER_PAGE_LIST_RESTAURANT'));
+
+        // dd($restaurant->pluck('id_restaurant'));
+
+        // $viewedIds = [];
+        // if(isset($_SESSION["viewed_id"])){
+        //     // session()->forget('viewed_id');
+        //     dd('hit reset session');
+        //     // foreach (session()->has('viewed_id') as $item) {
+        //     //     $viewedIds[] = (int)$item;
+        //     // }
+        // }
+        // if($restaurant){
+        //     foreach ($restaurant as $item) {
+        //         $viewedIds[] = $item->id_restaurant;
+        //     }
+        //     session(['viewed_id' => $viewedIds]);
+        //     // $restaurant->appends([
+        //     //     'viewed_id' => $viewedIds
+        //     // ]);
+        //     dd(session('viewed_id'), $request->session()->has('viewed_id'));
+        // }
+        // dd($restaurant);
 
         // $restaurant->each(function ($item, $key) {
         //     $item->setAppends(['villa_nearby', 'activity_nearby', 'hotel_nearby']);
@@ -1723,8 +1745,8 @@ class RestaurantListController extends Controller
                 ],
                 [
                     'id_subcategory' => $request->tag,
-                    'created_by' => Auth::user()->id,
-                    'updated_by' => Auth::user()->id,
+                    'created_by' => auth()->user()->id,
+                    'updated_by' => auth()->user()->id,
                 ]
             );
 
@@ -1760,8 +1782,8 @@ class RestaurantListController extends Controller
                 ],
                 [
                     'id_subcategory' => $request->tag,
-                    'created_by' => Auth::user()->id,
-                    'updated_by' => Auth::user()->id,
+                    'created_by' => auth()->user()->id,
+                    'updated_by' => auth()->user()->id,
                 ]
             );
 

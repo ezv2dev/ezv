@@ -169,11 +169,13 @@
         .guests {
             min-width: 241px;
         }
+
         @media only screen and (max-width: 328px) {
             .guests {
                 min-width: 234px;
             }
         }
+
         .btn-filter-header {
             outline: none;
             background: #ff7400;
@@ -674,8 +676,8 @@
                                             </p>
                                         </a>
                                     @endif
-                                    <a href="{{ route('ahost') }}" id="activity-form"
-                                        class="nav-link-form-detail" target="_blank" style="margin-left: 60px;">
+                                    <a href="{{ route('ahost') }}" id="activity-form" class="nav-link-form-detail"
+                                        target="_blank" style="margin-left: 60px;">
                                         <div
                                             class="list-description nav-link-gap nav-link-style-detail nav-link-icon-style-detail {{ $textColor }}">
                                             <img src="{{ asset('assets/icon/menu/list.svg') }}"
@@ -699,19 +701,20 @@
                                         <input autocomplete="off" type="text" onfocus="this.value=''"
                                             class="form-control input-transparant"
                                             value="{{ Request::is('homes-list*') || $get_loc == null ? '' : $get_loc }}"
-                                            id="loc_sugest" name="sLocation"
-                                            style="width: 100% !important; height: 60px; position: absolute; padding-top: 12px; top: 4px; left: 3px; cursor: pointer;"
+                                            id="loc_sugest_desktop" name="sLocation"
+                                            style="width: 100% !important; height: 60px; position: absolute; padding-top: 12px; top: 4px; left: 3px; cursor: pointer; border: none;"
                                             placeholder="{{ __('user_page.Where are you going?') }}">
 
-                                        <div id="sugest" class="location-popup display-none">
+                                        <div id="sugest_desktop" class="location-popup display-none">
                                             @php
                                                 $location = App\Http\Controllers\ViewController::get_location();
                                                 $hotelName = App\Http\Controllers\HotelController::get_name();
+                                                $addressName = App\Http\Controllers\ViewController::get_address();
                                                 $restaurantName = App\Http\Controllers\Restaurant\RestaurantController::get_name();
                                                 $activityName = App\Http\Controllers\Activity\ActivityController::get_name();
                                             @endphp
                                             <div class="location-popup-container h-100">
-                                                <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                <div class="col-lg-12 location-popup-desc-container sugest-list-first-desktop"
                                                     style="display: none ">
                                                     <div class="location-popup-map sugest-list-map">
                                                         <img class="location-popup-map-image lozad"
@@ -719,11 +722,11 @@
                                                             data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
                                                     </div>
                                                     <div class="location-popup-text sugest-list-text">
-                                                        <a type="button" class="location_op"
+                                                        <a type="button" class="location_op_desktop"
                                                             data-value="Canggu">Canggu</a>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                <div class="col-lg-12 location-popup-desc-container sugest-list-first-desktop"
                                                     style="display: none ">
                                                     <div class="location-popup-map sugest-list-map">
                                                         <img class="location-popup-map-image lozad"
@@ -731,11 +734,11 @@
                                                             data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
                                                     </div>
                                                     <div class="location-popup-text sugest-list-text">
-                                                        <a type="button" class="location_op"
+                                                        <a type="button" class="location_op_desktop"
                                                             data-value="Seminyak">Seminyak</a>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                <div class="col-lg-12 location-popup-desc-container sugest-list-first-desktop"
                                                     style="display: none ">
                                                     <div class="location-popup-map sugest-list-map">
                                                         <img class="location-popup-map-image lozad"
@@ -743,11 +746,11 @@
                                                             data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
                                                     </div>
                                                     <div class="location-popup-text sugest-list-text">
-                                                        <a type="button" class="location_op"
+                                                        <a type="button" class="location_op_desktop"
                                                             data-value="Ubud">Ubud</a>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                <div class="col-lg-12 location-popup-desc-container sugest-list-first-desktop"
                                                     style="display: none ">
                                                     <div class="location-popup-map sugest-list-map">
                                                         <img class="location-popup-map-image lozad"
@@ -755,11 +758,11 @@
                                                             data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
                                                     </div>
                                                     <div class="location-popup-text sugest-list-text">
-                                                        <a type="button" class="location_op"
+                                                        <a type="button" class="location_op_desktop"
                                                             data-value="Kuta">Kuta</a>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                <div class="col-lg-12 location-popup-desc-container sugest-list-first-desktop"
                                                     style="display: none ">
                                                     <div class="location-popup-map sugest-list-map">
                                                         <img class="location-popup-map-image lozad"
@@ -767,12 +770,12 @@
                                                             data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
                                                     </div>
                                                     <div class="location-popup-text sugest-list-text">
-                                                        <a type="button" class="location_op"
+                                                        <a type="button" class="location_op_desktop"
                                                             data-value="Pecatu">Pecatu</a>
                                                     </div>
                                                 </div>
                                                 @foreach ($location as $item)
-                                                    <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                    <div class="col-lg-12 location-popup-desc-container sugest-list-first-desktop"
                                                         style="display: none ">
                                                         <div class="location-popup-map sugest-list-map">
                                                             <img class="location-popup-map-image lozad"
@@ -780,7 +783,7 @@
                                                                 data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
                                                         </div>
                                                         <div class="location-popup-text sugest-list-text">
-                                                            <a type="button" class="location_op"
+                                                            <a type="button" class="location_op_desktop"
                                                                 data-value="{{ $item->name }}">{{ $item->name }}</a>
                                                         </div>
                                                     </div>
@@ -793,8 +796,21 @@
                                                                 src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
                                                         </div>
                                                         <div class="location-popup-text sugest-list-text">
-                                                            <a type="button" class="location_op"
+                                                            <a type="button" class="location_op_desktop"
                                                                 data-value="{{ $item->name }}">{{ $item->name }}</a>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                                @foreach ($addressName as $item)
+                                                    <div class="col-lg-12 location-popup-desc-container sugest-list"
+                                                        style="display: none ">
+                                                        <div class="location-popup-map sugest-list-map">
+                                                            <img class="location-popup-map-image"
+                                                                src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
+                                                        </div>
+                                                        <div class="location-popup-text sugest-list-text">
+                                                            <a type="button" class="location_op"
+                                                                data-value="{{ $item->address }}, {{ $item->location->name }}">{{ $item->address }}, {{ $item->location->name }}</a>
                                                         </div>
                                                     </div>
                                                 @endforeach
@@ -808,7 +824,7 @@
                                                         </div>
                                                         <div class="location-popup-text sugest-list-text">
                                                             <a href="{{ route('hotel', $item2->id_hotel) }}"
-                                                                type="button" class="location_op" target="_blank"
+                                                                type="button" class="location_op_desktop" target="_blank"
                                                                 data-value="{{ $item2->name }}">{{ $item2->name }}</a>
                                                         </div>
                                                     </div>
@@ -823,7 +839,7 @@
                                                         </div>
                                                         <div class="location-popup-text sugest-list-text">
                                                             <a href="{{ route('restaurant', $item3->id_restaurant) }}"
-                                                                type="button" class="location_op" target="_blank"
+                                                                type="button" class="location_op_desktop" target="_blank"
                                                                 data-value="{{ $item3->name }}">{{ $item3->name }}</a>
                                                         </div>
                                                     </div>
@@ -838,12 +854,12 @@
                                                         </div>
                                                         <div class="location-popup-text sugest-list-text">
                                                             <a href="{{ route('activity', $item4->id_activity) }}"
-                                                                type="button" class="location_op" target="_blank"
+                                                                type="button" class="location_op_desktop" target="_blank"
                                                                 data-value="{{ $item4->name }}">{{ $item4->name }}</a>
                                                         </div>
                                                     </div>
                                                 @endforeach
-                                                <div class="col-lg-12 location-popup-desc-container sugest-list-empty"
+                                                <div class="col-lg-12 location-popup-desc-container sugest-list-empty-desktop"
                                                     style="display: none">
                                                     <p>{{ __('user_page.location not found') }}
                                                     </p>
@@ -854,7 +870,7 @@
                                     <div class="check-in">
                                         <a type="button"
                                             style="position : absolute; z-index:1; width:300px; height: 60px; margin-left: -70px; margin-top: -8px"
-                                            class="collapsible_check_search"></a>
+                                            class="collapsible-check-search-desktop"></a>
                                         <p>{{ __('user_page.Check in') }}</p>
                                         <input type="text" onfocus="this.value=''"
                                             placeholder="{{ __('user_page.Add dates') }}" class="form-control"
@@ -874,7 +890,7 @@
                                         <ul class="nav">
                                             <li
                                                 class="button-dropdown d-flex align-items-center justify-content-center">
-                                                <input type="number" id="total_guest5" value="{{ $get_guest }}"
+                                                <input type="number" id="total_guest_desktop" value="{{ $get_guest }}"
                                                     style="width: 30px; border: 0;margin-right:5px; text-align: right; -moz-appearance: textfield; background: transparent;"
                                                     disabled min="1">
                                                 {{ __('user_page.Guest') }}
@@ -907,7 +923,7 @@
                                                             </a>
                                                             <div
                                                                 style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
-                                                                <input type="number" id="adult5" name="sAdult"
+                                                                <input type="number" id="adult_desktop" name="sAdult"
                                                                     value="{{ $get_adult }}"
                                                                     style="text-align: center; border:none; width:40px; -moz-appearance: textfield;"
                                                                     min="1" readonly>
@@ -941,7 +957,7 @@
                                                             </a>
                                                             <div
                                                                 style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
-                                                                <input type="number" id="child5" name="sChild"
+                                                                <input type="number" id="child_desktop" name="sChild"
                                                                     value="{{ $get_child }}"
                                                                     style="text-align: center; border:none; width:40px; -moz-appearance: textfield;"
                                                                     min="0" readonly>
@@ -975,7 +991,7 @@
                                                             </a>
                                                             <div
                                                                 style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
-                                                                <input type="number" id="infant5" name="sInfant"
+                                                                <input type="number" id="infant_desktop" name="sInfant"
                                                                     value="{{ $get_infant }}"
                                                                     style="text-align: center; border:none; width:40px; -moz-appearance: textfield;"
                                                                     min="0" readonly>
@@ -1010,7 +1026,7 @@
                                                             </a>
                                                             <div
                                                                 style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
-                                                                <input type="number" id="pet5" name="sPet"
+                                                                <input type="number" id="pet_desktop" name="sPet"
                                                                     value="{{ $get_pet }}"
                                                                     style="text-align: center; border:none; width:40px; -moz-appearance: textfield;"
                                                                     min="0" readonly>
@@ -1034,13 +1050,14 @@
                                     </div>
 
                                     <div class="button">
-                                        <button type="submit" class="d-block ms-auto me-1"
-                                            style="z-index: 1; border: none; background: transparent;"
+                                        <button type="submit" class="btn-company d-block ms-auto me-1"
+                                            style="z-index: 1; border: none; background: transparent; padding: 10px 15px !important;"
                                             onclick="homesFilter({{ request()->get('fPropertyType') ?? 'null' }}, {{ request()->get('fAmenities') ?? 'null' }})">
-                                            <div class="cari">
+                                            Search
+                                            {{-- <div class="cari">
                                                 <img src="{{ asset('assets/icon/menu/search.svg') }}"
                                                     style="width: 20px; height: auto;">
-                                            </div>
+                                            </div> --}}
                                             <!-- <i class="fa fa-search cari"></i> -->
                                         </button>
                                     </div>
@@ -1048,7 +1065,7 @@
                                 </div>
 
                                 {{-- calendar --}}
-                                <div class="content sidebar-popup" id="popup_check_search"
+                                <div class="content sidebar-popup" id="popup_check_search_desktop"
                                     style="margin-left: -955px; width: fit-content; padding: 0px;z-index: 999; min-height: 450px; max-height: 450px;">
                                     <div class="desk-e-call">
                                         <div class="flatpickr-container"
@@ -1062,7 +1079,7 @@
                                                         style="padding-bottom: 20px; margin: 0px; font-size: 13px;">{{ __('user_page.Clear Dates') }}</a>
                                                     <p style="margin: 0px; font-size: 13px;"></p>
                                                 </div>
-                                                <div class="flatpickr" id="inline_reserve_search"
+                                                <div class="flatpickr" id="inline_reserve_search_desktop"
                                                     style="text-align: left;">
                                                 </div>
                                             </div>
@@ -1432,13 +1449,13 @@
                                         <input autocomplete="off" type="text" onfocus="this.value=''"
                                             class="form-control input-transparant"
                                             value="{{ Request::is('hotel-list*') || $get_loc == null ? '' : $get_loc }}"
-                                            id="loc_sugest" name="sLocation"
-                                            style="width: 100% !important; height: 60px; position: absolute; padding-top: 14px; top: 4px; left: 3px; cursor: pointer;"
+                                            id="loc_sugest_desktop" name="sLocation"
+                                            style="width: 100% !important; height: 60px; position: absolute; padding-top: 14px; top: 4px; left: 3px; cursor: pointer; border: none;"
                                             placeholder="{{ __('user_page.Where are you going?') }}">
 
-                                        <div id="sugest" class="location-popup display-none">
+                                        <div id="sugest_desktop" class="location-popup display-none">
                                             <div class="location-popup-container h-100">
-                                                <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                <div class="col-lg-12 location-popup-desc-container sugest-list-first-desktop"
                                                     style="display: none ">
                                                     <div class="location-popup-map sugest-list-map">
                                                         <img class="location-popup-map-image lozad"
@@ -1450,7 +1467,7 @@
                                                             data-value="Canggu">Canggu</a>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                <div class="col-lg-12 location-popup-desc-container sugest-list-first-desktop"
                                                     style="display: none ">
                                                     <div class="location-popup-map sugest-list-map">
                                                         <img class="location-popup-map-image lozad"
@@ -1458,11 +1475,11 @@
                                                             data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
                                                     </div>
                                                     <div class="location-popup-text sugest-list-text">
-                                                        <a type="button" class="location_op"
+                                                        <a type="button" class="location_op_desktop"
                                                             data-value="Seminyak">Seminyak</a>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                <div class="col-lg-12 location-popup-desc-container sugest-list-first-desktop"
                                                     style="display: none ">
                                                     <div class="location-popup-map sugest-list-map">
                                                         <img class="location-popup-map-image lozad"
@@ -1470,11 +1487,11 @@
                                                             data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
                                                     </div>
                                                     <div class="location-popup-text sugest-list-text">
-                                                        <a type="button" class="location_op"
+                                                        <a type="button" class="location_op_desktop"
                                                             data-value="Ubud">Ubud</a>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                <div class="col-lg-12 location-popup-desc-container sugest-list-first-desktop"
                                                     style="display: none ">
                                                     <div class="location-popup-map sugest-list-map">
                                                         <img class="location-popup-map-image lozad"
@@ -1482,11 +1499,11 @@
                                                             data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
                                                     </div>
                                                     <div class="location-popup-text sugest-list-text">
-                                                        <a type="button" class="location_op"
+                                                        <a type="button" class="location_op_desktop"
                                                             data-value="Kuta">Kuta</a>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-12 location-popup-desc-container sugest-list-first"
+                                                <div class="col-lg-12 location-popup-desc-container sugest-list-first-desktop"
                                                     style="display: none ">
                                                     <div class="location-popup-map sugest-list-map">
                                                         <img class="location-popup-map-image lozad"
@@ -1494,7 +1511,7 @@
                                                             data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
                                                     </div>
                                                     <div class="location-popup-text sugest-list-text">
-                                                        <a type="button" class="location_op"
+                                                        <a type="button" class="location_op_desktop"
                                                             data-value="Pecatu">Pecatu</a>
                                                     </div>
                                                 </div>
@@ -1513,7 +1530,7 @@
                                                                 data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
                                                         </div>
                                                         <div class="location-popup-text sugest-list-text">
-                                                            <a type="button" class="location_op"
+                                                            <a type="button" class="location_op_desktop"
                                                                 data-value="{{ $item->name }}">{{ $item->name }}</a>
                                                         </div>
                                                     </div>
@@ -1526,7 +1543,7 @@
                                                                 src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
                                                         </div>
                                                         <div class="location-popup-text sugest-list-text">
-                                                            <a type="button" class="location_op"
+                                                            <a type="button" class="location_op_desktop"
                                                                 data-value="{{ $item->name }}">{{ $item->name }}</a>
                                                         </div>
                                                     </div>
@@ -1541,7 +1558,7 @@
                                                         </div>
                                                         <div class="location-popup-text sugest-list-text">
                                                             <a href="{{ route('hotel', $item2->id_hotel) }}"
-                                                                type="button" class="location_op" target="_blank"
+                                                                type="button" class="location_op_desktop" target="_blank"
                                                                 data-value="{{ $item2->name }}">{{ $item2->name }}</a>
                                                         </div>
                                                     </div>
@@ -1556,7 +1573,7 @@
                                                         </div>
                                                         <div class="location-popup-text sugest-list-text">
                                                             <a href="{{ route('restaurant', $item3->id_restaurant) }}"
-                                                                type="button" class="location_op" target="_blank"
+                                                                type="button" class="location_op_desktop" target="_blank"
                                                                 data-value="{{ $item3->name }}">{{ $item3->name }}</a>
                                                         </div>
                                                     </div>
@@ -1571,12 +1588,12 @@
                                                         </div>
                                                         <div class="location-popup-text sugest-list-text">
                                                             <a href="{{ route('activity', $item4->id_activity) }}"
-                                                                type="button" class="location_op" target="_blank"
+                                                                type="button" class="location_op_desktop" target="_blank"
                                                                 data-value="{{ $item4->name }}">{{ $item4->name }}</a>
                                                         </div>
                                                     </div>
                                                 @endforeach
-                                                <div class="col-lg-12 location-popup-desc-container sugest-list-empty"
+                                                <div class="col-lg-12 location-popup-desc-container sugest-list-empty-desktop"
                                                     style="display: none">
                                                     <p>{{ __('user_page.location not found') }}
                                                     </p>
@@ -1588,7 +1605,7 @@
                                     <div class="check-in">
                                         <a type="button"
                                             style="position : absolute; z-index:1; width:300px; height: 60px; margin-left: -70px; margin-top: -8px"
-                                            class="collapsible_check_search"></a>
+                                            class="collapsible-check-search-desktop"></a>
                                         <p>{{ __('user_page.Check in') }}</p>
                                         <input type="text" onfocus="this.value=''"
                                             placeholder="{{ __('user_page.Add dates') }}" class="form-control"
@@ -1608,7 +1625,7 @@
                                         <ul class="nav">
                                             <li
                                                 class="button-dropdown d-flex align-items-center justify-content-center">
-                                                <input type="number" id="total_guest5" value="{{ $get_guest }}"
+                                                <input type="number" id="total_guest_desktop" value="{{ $get_guest }}"
                                                     style="width: 30px;margin-right:5px; border: 0; text-align: right; background: transparent; -moz-appearance: textfield;"
                                                     disabled min="1">
                                                 {{ __('user_page.Guest') }}
@@ -1641,7 +1658,7 @@
                                                             </a>
                                                             <div
                                                                 style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
-                                                                <input type="number" id="adult5" name="sAdult"
+                                                                <input type="number" id="adult_desktop" name="sAdult"
                                                                     value="{{ $get_adult }}"
                                                                     style="text-align: center; border:none; width:40px; -moz-appearance: textfield;"
                                                                     min="1" readonly>
@@ -1675,7 +1692,7 @@
                                                             </a>
                                                             <div
                                                                 style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
-                                                                <input type="number" id="child5" name="sChild"
+                                                                <input type="number" id="child_desktop" name="sChild"
                                                                     value="{{ $get_child }}"
                                                                     style="text-align: center; border:none; width:40px; -moz-appearance: textfield;"
                                                                     min="0" readonly>
@@ -1709,7 +1726,7 @@
                                                             </a>
                                                             <div
                                                                 style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
-                                                                <input type="number" id="infant5" name="sInfant"
+                                                                <input type="number" id="infant_desktop" name="sInfant"
                                                                     value="{{ $get_infant }}"
                                                                     style="text-align: center; border:none; width:40px; -moz-appearance: textfield;"
                                                                     min="0" readonly>
@@ -1744,7 +1761,7 @@
                                                             </a>
                                                             <div
                                                                 style="width: 40px; text-align: center; color: grey; font-size: 13px; padding: 0px;">
-                                                                <input type="number" id="pet5" name="sPet"
+                                                                <input type="number" id="pet_desktop" name="sPet"
                                                                     value="{{ $get_pet }}"
                                                                     style="text-align: center; border:none; width:40px; -moz-appearance: textfield;"
                                                                     min="0" readonly>
@@ -1768,20 +1785,21 @@
                                     </div>
 
                                     <div class="button">
-                                        <button type="submit" class="d-block ms-auto me-1"
-                                            style="z-index: 1; border: none; background: transparent;"
+                                        <button type="submit" class="btn-company d-block ms-auto me-1"
+                                            style="z-index: 1; border: none; background: transparent; padding: 10px 15px !important;"
                                             onclick="hotelFilter({{ request()->get('fCategory') ?? 'null' }}, {{ request()->get('filter') ?? 'null' }}, false)">
-                                            <div class="cari">
+                                            Search
+                                            {{-- <div class="cari">
                                                 <img src="{{ asset('assets/icon/menu/search.svg') }}"
                                                     style="width: 20px; height: auto;">
-                                            </div>
+                                            </div> --}}
                                             <!-- <i class="fa fa-search cari"></i> -->
                                         </button>
                                     </div>
 
                                 </div>
                                 {{-- calendar --}}
-                                <div class="content sidebar-popup" id="popup_check_search"
+                                <div class="content sidebar-popup" id="popup_check_search_desktop"
                                     style="margin-left: -975px; width:800px; padding:0px; min-height: 450px; max-height: 450px;">
                                     <div class="desk-e-call">
                                         <div class="flatpickr-container"
@@ -1795,7 +1813,7 @@
                                                         style="padding-bottom: 20px; margin: 0px; font-size: 13px;">{{ __('user_page.Clear Dates') }}</a>
                                                     <p style="margin: 0px; font-size: 13px;"></p>
                                                 </div>
-                                                <div class="flatpickr" id="inline_reserve_search"
+                                                <div class="flatpickr" id="inline_reserve_search_desktop"
                                                     style="text-align: left;">
                                                 </div>
                                             </div>
@@ -2094,8 +2112,8 @@
                                             </p>
                                         </a>
                                     @endif
-                                    <a href="{{ route('ahost') }}" id="activity-form"
-                                        target="_blank" class="nav-link-form-detail" style="margin-left: 60px;">
+                                    <a href="{{ route('ahost') }}" id="activity-form" target="_blank"
+                                        class="nav-link-form-detail" style="margin-left: 60px;">
                                         <div
                                             class="list-description nav-link-gap nav-link-style-detail nav-link-icon-style-detail {{ $textColor }}">
                                             <img src="{{ asset('assets/icon/menu/list.svg') }}"
@@ -2657,8 +2675,9 @@
                                     <div class="guests" style="min-width: max-content !important;">
                                         <p>{{ __('user_page.What do you want to eat ?') }}</p>
                                         <input autocomplete="off" type="text" onfocus="this.value=''"
-                                            class="form-control input-transparant input-search-food" name="sKeyword" value=""
-                                            id="search_sugest" placeholder="{{ __('user_page.Search here') }}">
+                                            class="form-control input-transparant input-search-food" name="sKeyword"
+                                            value="" id="search_sugest"
+                                            placeholder="{{ __('user_page.Search here') }}">
 
                                         <div id="sugest2" class="location-popup display-none"
                                             style="width: 560px; left: -262px; height: 390px;">
@@ -3050,9 +3069,8 @@
                                                 </p>
                                             </a>
                                         @endif
-                                        <a href="{{ route('ahost') }}" id="activity-form"
-                                            target="_blank" class="nav-link-form-detail"
-                                            style="margin-left: 64px;">
+                                        <a href="{{ route('ahost') }}" id="activity-form" target="_blank"
+                                            class="nav-link-form-detail" style="margin-left: 64px;">
                                             <div
                                                 class="list-description nav-link-gap nav-link-style-detail nav-link-icon-style-detail {{ $textColor }}">
                                                 <img src="{{ asset('assets/icon/menu/list.svg') }}"
@@ -3967,9 +3985,9 @@
                     </label>
                     <div style="width: 60%;">
                         <!-- <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap"
-                                                                                                                                                                                                                                style="color: #ff7400; width: 35px; height: 35px; border-radius: 50%; background-color: white; display: inline-block; display: flex; align-items: center; justify-content: center;">
-                                                                                                                                                                                                                                <i class="fa-solid fa-user icon-clear"></i>
-                                                                                                                                                                                                                            </a> -->
+                                                                                                                                                                                                                                        style="color: #ff7400; width: 35px; height: 35px; border-radius: 50%; background-color: white; display: inline-block; display: flex; align-items: center; justify-content: center;">
+                                                                                                                                                                                                                                        <i class="fa-solid fa-user icon-clear"></i>
+                                                                                                                                                                                                                                    </a> -->
                         <div class="dropdown">
                             <button type="button" id="btnMenuDropdown"
                                 class="btn-dropdwn dropbtn btn border-0 navbar-gap"></button>
@@ -4060,23 +4078,56 @@
             });
         </script>
         <script>
-            var coll = document.getElementsByClassName("collapsible_check_search");
+            var coll = document.getElementsByClassName("collapsible-check-search");
             var i;
 
             for (i = 0; i < coll.length; i++) {
                 coll[i].addEventListener("click", function() {
                     this.classList.toggle("active");
-                    var content_flatpickr = document.getElementById('popup_check_search');
-                    if (content_flatpickr.style.display === "block") {
+                    var content_flatpickr = document.getElementById('popup_check_search_mobile');
+                    if (content_flatpickr.style.display === "block" && window.innerWidth > 649) {
                         content_flatpickr.style.display = "none";
                     } else {
                         content_flatpickr.style.display = "block";
+                        moveToDateMobile();
                         document.addEventListener('mouseup', function(e) {
                             let container = content_flatpickr;
-                            if (!container.contains(e.target)) {
+                            if (!container.contains(e.target) && window.innerWidth > 649) {
                                 container.style.display = 'none';
                             }
                         });
+                    }
+                });
+            }
+
+            var collDesktop = document.getElementsByClassName("collapsible-check-search-desktop");
+            var j;
+
+            for (j = 0; j < collDesktop.length; j++) {
+                collDesktop[j].addEventListener("click", function() {
+                    this.classList.toggle("active");
+                    var content_flatpickr = document.getElementById('popup_check_search_desktop');
+                    if (content_flatpickr.style.display === "block") {
+                        content_flatpickr.style.display = "none";
+                    } else {
+                        if (window.innerWidth <= 649) {
+                            backToMainMobile();
+                            $(".search-container-mobile").removeClass("search-container-mobile-closed")
+                                .addClass("search-container-mobile-open");
+                            $("body").css({
+                                "height": "100%",
+                                "overflow": "hidden"
+                            });
+                        } else {
+                            content_flatpickr.style.display = "block";
+                            document.addEventListener('mouseup', function(e) {
+                                let container = content_flatpickr;
+                                if (!container.contains(e.target)) {
+                                    container.style.display = 'none';
+                                }
+                            });
+                        }
+                        
                     }
                 });
             }
@@ -4150,7 +4201,7 @@
                     $(this).removeAttr("style");
                 });
 
-                $(window).resize(function(){
+                $(window).resize(function() {
                     if (window.innerWidth > 991) {
                         $(".btn-close-expand-navbar-mobile").trigger('click')
                     }
@@ -4186,26 +4237,56 @@
                     document.getElementById("search_bar").classList.remove("searchbar-list-display-block");
                     document.getElementById("search_bar").classList.add("searchbar-list-display-none");
                 })
+                // NEW SEARCH MOBILE
+                // fungsi untuk ketika tombol kembali diklik
+                $(".search-container-mobile .btn-top-search .back").on('click', backToMainMobile);
+
+                // NEW SEARCH MOBILE
+                // fungsi untuk munculin location-popup ketika input search location di mobile diklik
+                $(".search-container-mobile #loc_sugest").on('click', moveToLocationMobile);
+
+                // NEW SEARCH MOBILE
+                // fungsi untuk munculin location-popup ketika search location di mobile diklik
+                $(".search-container-mobile .location-has-selected-container").on('click', moveToLocationMobile);
+
                 $("#loc_sugest").on('click', function() { //use a class, since your ID gets mangled
                     var ids = $(".sugest-list-first");
                     ids.hide();
                     for (let index = 0; index < 5; index++) {
-                        // var rndInt = Math.floor(Math.random() * (ids.length - 1));
-                        // console.log(rndInt);
                         ids.show();
                     };
 
-                    $('#sugest').removeClass("display-none");
-                    $('#sugest').addClass("display-block"); //add the class to the clicked element
+                    $('#sugest_mobile').removeClass("display-none");
+                    $('#sugest_mobile').addClass("display-block"); //add the class to the clicked element
+
+                    // condition sementara untuk selain villa dan hotel.
+                    // karena yang lain masih belum ada design untuk isi search untuk mobile
+                    if ($('#sugest') != null) {
+                        $('#sugest').removeClass("display-none");
+                        $('#sugest').addClass("display-block"); //add the class to the clicked element
+                    }
                 });
 
                 $(document).mouseup(function(e) {
-                    var container = $('#sugest');
+                    var container = $('#sugest_mobile');
 
                     // if the target of the click isn't the container nor a descendant of the container
-                    if (!container.is(e.target) && container.has(e.target).length === 0) {
+                    // NEW SEARCH MOBILE
+                    // fungsi untuk menyembunyikan location-popup hanya berlaku ketika bukan dimobile
+                    if (!container.is(e.target) && container.has(e.target).length === 0 && window.innerWidth >
+                        649) {
                         container.removeClass("display-block");
                         container.addClass("display-none");
+                    }
+
+                    // condition sementara untuk selain villa dan hotel.
+                    // karena yang lain masih belum ada design untuk isi search untuk mobile
+                    if ($('#sugest') != null) {
+                        var containerSugest = $('#sugest');
+                        if (!containerSugest.is(e.target) && containerSugest.has(e.target).length === 0) {
+                            containerSugest.removeClass("display-block");
+                            containerSugest.addClass("display-none");
+                        }
                     }
                 });
 
@@ -4240,13 +4321,169 @@
                     console.log('done');
                 });
 
+                // NEW SEARCH MOBILE
+                // fungsi untuk isi nilai dari location di mobile ketika user udh milih
+                // dari location yang paling populer di mobile
+                $(".first-sugest-location img").on('click', function(e) {
+                    // NEW SEARCH MOBILE
+                    // fungsi untuk isi nilai dari location di mobile ketika user udh milih
+                    $('#loc_sugest').val($(this).parents(".col-4").children(".location-popup-text").children(
+                        ".location_op").data("value"));
+                    $('#loc_sugest_desktop').val($(this).parents(".col-4").children(".location-popup-text")
+                        .children(".location_op").data("value"));
+                    $('.loc_sugest_mobile').html($(this).parents(".col-4").children(".location-popup-text")
+                        .children(".location_op").data("value"));
+
+                    // NEW SEARCH MOBILE
+                    // fungsi untuk sembunyiin popup location
+                    $('#sugest_mobile').removeClass("display-block");
+                    $('#sugest_mobile').addClass("display-none");
+
+                    // NEW SEARCH MOBILE
+                    // fungsi untuk berpindah ke select date di mobile
+                    moveToDateMobile();
+
+                    //calendar show when user filled location
+                    var content_flatpickr = document.getElementById('popup_check_search');
+
+                    // NEW SEARCH MOBILE
+                    // fungsi untuk menyembunyikan calendar hanya berlaku ketika bukan dimobile
+                    if (content_flatpickr.style.display === "block" && window.innerWidth > 649) {
+                        content_flatpickr.style.display = "none";
+                    } else {
+                        content_flatpickr.style.display = "block";
+                        document.addEventListener('mouseup', function(e) {
+                            let container = content_flatpickr;
+                            // NEW SEARCH MOBILE
+                            // fungsi untuk menyembunyikan calendar hanya berlaku ketika bukan dimobile
+                            if (!container.contains(e.target) && window.innerWidth > 649) {
+                                container.style.display = 'none';
+                            }
+                        });
+                    }
+                });
+
                 $(".location_op").on('click', function(e) {
+                    $('#loc_sugest_desktop').val($(this).data("value"));
+
+                    // NEW SEARCH MOBILE
+                    // fungsi untuk isi nilai dari location di mobile ketika user udh milih
                     $('#loc_sugest').val($(this).data("value"));
-                    $('#sugest').removeClass("display-block");
-                    $('#sugest').addClass("display-none");
+                    $('.loc_sugest_mobile').html($(this).data("value"));
+
+                    $('#sugest_mobile').removeClass("display-block");
+                    $('#sugest_mobile').addClass("display-none");
+
+                    // condition sementara untuk selain villa dan hotel.
+                    // karena yang lain masih belum ada design untuk isi search untuk mobile
+                    if ($('#sugest') != null) {
+                        $('#sugest').removeClass("display-block");
+                        $('#sugest').addClass("display-none");
+                    }
+
+                    // NEW SEARCH MOBILE
+                    // fungsi untuk berpindah ke select date di mobile
+                    if ($("#check_in2").val() == "") {
+                        moveToDateMobile();
+                    } else {
+                        moveToGuestsMobile();
+                    }
+
+                    //calendar show when user filled location
+                    var content_flatpickr = document.getElementById('popup_check_search');
+
+                    // NEW SEARCH MOBILE
+                    // fungsi untuk menyembunyikan calendar hanya berlaku ketika bukan dimobile
+                    if (content_flatpickr.style.display === "block" && window.innerWidth > 649) {
+                        content_flatpickr.style.display = "none";
+                    } else {
+                        content_flatpickr.style.display = "block";
+                        document.addEventListener('mouseup', function(e) {
+                            let container = content_flatpickr;
+                            // NEW SEARCH MOBILE
+                            // fungsi untuk menyembunyikan calendar hanya berlaku ketika bukan dimobile
+                            if (!container.contains(e.target) && window.innerWidth > 649) {
+                                container.style.display = 'none';
+                            }
+                        });
+                    }
+                });
+
+                $("#loc_sugest_desktop").on('click', function() { //use a class, since your ID gets mangled
+                    var ids = $(".sugest-list-first-desktop");
+                    ids.hide();
+                    for (let index = 0; index < 5; index++) {
+                        ids.show();
+                    };
+
+                    if (window.innerWidth <= 649) {
+                        backToMainMobile();
+                        $(".search-container-mobile").removeClass("search-container-mobile-closed")
+                            .addClass("search-container-mobile-open");
+                        $("body").css({
+                            "height": "100%",
+                            "overflow": "hidden"
+                        });
+                    }else {
+                        $('#sugest_desktop').removeClass("display-none");
+                        $('#sugest_desktop').addClass("display-block"); //add the class to the clicked element
+                    }
+                });
+
+                $(document).mouseup(function(e) {
+                    var container = $('#sugest_desktop');
+
+                    // if the target of the click isn't the container nor a descendant of the container
+                    if (!container.is(e.target) && container.has(e.target).length === 0) {
+                        container.removeClass("display-block");
+                        container.addClass("display-none");
+                    }
+                });
+
+                $("#loc_sugest_desktop").on('keyup change', async () => {
+                    var close = $(".sugest-list-first-desktop");
+                    close.hide();
+                    var ids = $(".sugest-list");
+                    ids.hide();
+                    $(".sugest-list-empty-desktop").eq(0).hide();
+
+                    var formValue = $("#loc_sugest_desktop").val();
+                    var isEmpty = true;
+
+                    $(".sugest-list").map((data) => {
+                        var name = $(".sugest-list").eq(data).children(".sugest-list-text")
+                            .children('a').text();
+                        if (name.toLowerCase().includes(formValue.toLowerCase())) {
+                            $(".sugest-list").eq(data).show();
+                            isEmpty = false;
+                        }
+                    });
+
+                    if (isEmpty) {
+                        $(".sugest-list-empty-desktop").eq(0).show();
+                    }
+
+                    if (formValue.length === 0) {
+                        close.show();
+                        ids.hide();
+                    }
+
+                    console.log('done');
+                });
+
+                $(".location_op_desktop").on('click', function(e) {
+                    $('#loc_sugest_desktop').val($(this).data("value"));
+                    $('#loc_sugest').val($(this).data("value"));
+                    $('#sugest_desktop').removeClass("display-block");
+                    $('#sugest_desktop').addClass("display-none");
+
+                    $('.loc_sugest_mobile').html($(this).data("value"));
+                    $('#sugest_mobile').removeClass("display-block");
+                    $('#sugest_mobile').addClass("display-none");
+                    moveToGuestsMobile();
 
                     //calendar show when location click
-                    var content_flatpickr = document.getElementById('popup_check_search');
+                    var content_flatpickr = document.getElementById('popup_check_search_desktop');
                     if (content_flatpickr.style.display === "block") {
                         content_flatpickr.style.display = "none";
                     } else {
@@ -4259,6 +4496,126 @@
                         });
                     }
                 });
+
+                // NEW SEARCH MOBILE
+                // Guest mobile
+                $(".selected-guest-mobile").on("click", moveToGuestsMobile);
+
+                // $("#loc_sugest").on('click', function() { //use a class, since your ID gets mangled
+                //     var ids = $(".sugest-list-first");
+                //     ids.hide();
+                //     for (let index = 0; index < 5; index++) {
+                //         // var rndInt = Math.floor(Math.random() * (ids.length - 1));
+                //         // console.log(rndInt);
+                //         ids.show();
+                //     };
+
+                //     $('#sugest').removeClass("display-none");
+                //     $('#sugest').addClass("display-block"); //add the class to the clicked element
+                // });
+
+                // $(document).mouseup(function(e) {
+                //     var container = $('#sugest');
+
+                //     // if the target of the click isn't the container nor a descendant of the container
+                //     if (!container.is(e.target) && container.has(e.target).length === 0) {
+                //         container.removeClass("display-block");
+                //         container.addClass("display-none");
+                //     }
+                // });
+
+                // $("#loc_sugest").on('keyup change', async () => {
+                //     var close = $(".sugest-list-first");
+                //     close.hide();
+                //     var ids = $(".sugest-list");
+                //     ids.hide();
+                //     $(".sugest-list-empty").eq(0).hide();
+
+                //     var formValue = $("#loc_sugest").val();
+                //     var isEmpty = true;
+
+                //     $(".sugest-list").map((data) => {
+                //         var name = $(".sugest-list").eq(data).children(".sugest-list-text")
+                //             .children('a').text();
+                //         if (name.toLowerCase().includes(formValue.toLowerCase())) {
+                //             $(".sugest-list").eq(data).show();
+                //             isEmpty = false;
+                //         }
+                //     });
+
+                //     if (isEmpty) {
+                //         $(".sugest-list-empty").eq(0).show();
+                //     }
+
+                //     if (formValue.length === 0) {
+                //         close.show();
+                //         ids.hide();
+                //     }
+
+                //     console.log('done');
+                // });
+
+                // $(".location_op").on('click', function(e) {
+                //     $('#loc_sugest').val($(this).data("value"));
+                //     $('#sugest').removeClass("display-block");
+                //     $('#sugest').addClass("display-none");
+
+                //     //calendar show when location click
+                //     var content_flatpickr = document.getElementById('popup_check_search');
+                //     if (content_flatpickr.style.display === "block") {
+                //         content_flatpickr.style.display = "none";
+                //     } else {
+                //         content_flatpickr.style.display = "block";
+                //         document.addEventListener('mouseup', function(e) {
+                //             let container = content_flatpickr;
+                //             if (!container.contains(e.target)) {
+                //                 container.style.display = 'none';
+                //             }
+                //         });
+                //     }
+                // });
+            });
+        </script>
+
+        <script>
+            // NEW SEARCH MOBILE
+            // fungsi untuk tombol next atau skip di mobile
+            $(".next-mobile").on("click", function() {
+                if ($("#loc_sugest").val() == "" && $("#check_in2").val() == "" &&
+                    $("#check_out2").val() == "" && $(".search-container-mobile .sidebar-popup").css("display") !=
+                    "block") {
+                    moveToLocationMobile();
+                } else if ($("#loc_sugest").val() != "" && $("#check_in2").val() == "" &&
+                    $("#check_out2").val() == "" && parseInt($("#total_guest_desktop").val()) < 1) {
+                    moveToDateMobile();
+                } else if (($("#check_in2").val() == "" ||
+                        $("#check_out2").val() == "") || $(".search-container-mobile .sidebar-popup").css("display") ==
+                    "block") {
+                    moveToGuestsMobile();
+                }
+            });
+            // NEW SEARCH MOBILE
+            // fungsi untuk clear all di mobile
+            $(".clear-all-mobile").on("click", function() {
+                $("#loc_sugest_desktop").val("");
+                $("#loc_sugest").val("");
+                $("#check_in2").val("");
+                $("#check_out2").val("");
+                $("#check_in_mobile").val("");
+                $("#check_out_mobile").val("");
+                $("#total_guest_desktop").val("1");
+                $("#adult_desktop").val("1");
+                $("#adult_mobile").val("1");
+                $("#child_desktop").val("0");
+                $("#child_mobile").val("0");
+                $("#infant_desktop").val("0");
+                $("#infant_mobile").val("0");
+                $("#pet_desktop").val("0");
+                $("#pet_mobile").val("0");
+                $(".search-container-mobile .loc_sugest_mobile").html("Location");
+                $(".search-container-mobile .dates-mobile").html("When");
+                $(".search-container-mobile .guests-mobile").html("1 Guests");
+                calendarSearch(window.countMonthsMobile);
             });
         </script>
 
@@ -4266,14 +4623,24 @@
             $(document).ready(() => {
                 function handleResponsive(windowWidth) {
                     if (windowWidth <= 649) {
-                        calendar_search(1);
+                        $("#loc_sugest_desktop").attr("readonly", true);
+                        calendarSearch(window.countMonthsMobile);
                         calendar_wow(1);
-                        $("#clear_date_header").click(function() {
+                        $("#clear_date_mobile").click(function() {
                             $("#check_in2").val("");
                             $("#check_out2").val("");
-                            let content = document.getElementById("popup_check_search");
-                            content.style.display = "none";
-                            calendar_search(1);
+
+                            // NEW SEARCH MOBILE
+                            // clear date untuk mobile
+                            $(".search-container-mobile .dates-mobile").html("When");
+                            $(".search-container-mobile .next-mobile").html("Skip");
+
+                            // Fungsi untuk menyembunyikan calendar ketika clear date hanya berlaku kalo bukan mobile
+                            if (windowWidth > 649) {
+                                let content = document.getElementById("popup_check_search_mobile");
+                                content.style.display = "none";
+                            }
+                            calendarSearch(window.countMonthsMobile);
                         });
                         $("#clear_date_wow").click(function() {
                             // $("#check_in2").val("");
@@ -4283,14 +4650,25 @@
                             calendar_wow(1);
                         });
                     } else {
-                        calendar_search(2);
+                        backToMainMobile();
+                        $(".search-container-mobile").removeClass("search-container-mobile-open")
+                            .addClass("search-container-mobile-closed");
+                        $("body").removeAttr("style");
+                        $("#loc_sugest_desktop").attr("readonly", false);
+                        calendarSearchDesktop(2);
                         calendar_wow(2);
                         $("#clear_date_header").click(function() {
                             $("#check_in2").val("");
                             $("#check_out2").val("");
-                            let content = document.getElementById("popup_check_search");
+
+                            // NEW SEARCH MOBILE
+                            // clear date untuk mobile
+                            $(".search-container-mobile .dates-mobile").html("When");
+                            $(".search-container-mobile .next-mobile").html("Skip");
+
+                            let content = document.getElementById("popup_check_search_mobile");
                             content.style.display = "none";
-                            calendar_search(2);
+                            calendarSearchDesktop(2);
                         });
                         $("#clear_date_wow").click(function() {
                             // $("#check_in2").val("");
@@ -4320,8 +4698,15 @@
                         $(".bar .check-out").removeClass("col-6 mb-2");
                         $(".bar-activity .check-out").removeClass("col-12 mb-2");
                         $(".bar-collaborator .check-out").removeClass("col-12 mb-2");
-                        $(".bar .guests").removeClass("col-10");
-                        $(".bar .button").removeClass("col-2");
+                        $(".bar .guests").removeClass("col-6 col-10");
+                        $(".bar .button").removeClass("col-6 col-2");
+                    }
+                    if (windowWidth <= 649) {
+                        $(".bar-villa .guests").removeClass("col-10").addClass("col-6");
+                        $(".bar-villa .button").removeClass("col-2").addClass("col-6");
+                    } else if (windowWidth > 649 && windowWidth <= 991) {
+                        $(".bar-villa .guests").removeClass("col-6").addClass("col-10");
+                        $(".bar-villa .button").removeClass("col-6").addClass("col-2");
                     }
                     if (windowWidth > 1360) {
                         var gap = ((windowWidth - 1360) / 2) + 100;
@@ -4444,43 +4829,221 @@
 
         <script>
             function adult_increment_header_list() {
-                document.getElementById('adult5').stepUp();
-                document.getElementById('total_guest5').value = parseInt(document.getElementById('adult5').value) +
-                    parseInt(document.getElementById('child5').value);
+                // document.getElementById('adult5').stepUp();
+                // document.getElementById('total_guest5').value = parseInt(document.getElementById('adult5').value) +
+                //     parseInt(document.getElementById('child5').value);
+                if (parseInt(document.getElementById('total_guest_desktop').value) < 10
+                    && parseInt(document.querySelector('.guests-mobile').innerHTML) < 10) {
+                    document.getElementById('adult_desktop').stepUp();
+                    document.getElementById('adult_mobile').stepUp();
+                    document.getElementById('total_guest_desktop').value = parseInt(document.getElementById('adult_desktop')
+                            .value) +
+                        parseInt(document.getElementById('child_desktop').value);
+                    // NEW SEARCH MOBILE
+                    // fungsi untuk mengisi guest di mobile
+                    document.querySelector('.guests-mobile').innerHTML = parseInt(document.getElementById('adult_mobile').value) +
+                        parseInt(document.getElementById('child_mobile').value) + " Guests";    
+                }
             }
 
             function adult_decrement_header_list() {
-                document.getElementById('adult5').stepDown();
-                document.getElementById('total_guest5').value = parseInt(document.getElementById('adult5').value) +
-                    parseInt(document.getElementById('child5').value);
+                // document.getElementById('adult5').stepDown();
+                // document.getElementById('total_guest5').value = parseInt(document.getElementById('adult5').value) +
+                //     parseInt(document.getElementById('child5').value);
+                document.getElementById('adult_desktop').stepDown();
+                document.getElementById('adult_mobile').stepDown();
+                document.getElementById('total_guest_desktop').value = parseInt(document.getElementById('adult_desktop')
+                        .value) +
+                    parseInt(document.getElementById('child_desktop').value);
+                // NEW SEARCH MOBILE
+                // fungsi untuk mengisi guest di mobile
+                document.querySelector('.guests-mobile').innerHTML = parseInt(document.getElementById('adult_mobile').value) +
+                    parseInt(document.getElementById('child_mobile').value) + " Guests";
             }
 
             function child_increment_header_list() {
-                document.getElementById('child5').stepUp();
-                document.getElementById('total_guest5').value = parseInt(document.getElementById('adult5').value) +
-                    parseInt(document.getElementById('child5').value);
+                // document.getElementById('child5').stepUp();
+                // document.getElementById('total_guest5').value = parseInt(document.getElementById('adult5').value) +
+                //     parseInt(document.getElementById('child5').value);
+                if (parseInt(document.getElementById('total_guest_desktop').value) < 10
+                    && parseInt(document.querySelector('.guests-mobile').innerHTML) < 10) {
+                    document.getElementById('child_desktop').stepUp();
+                    document.getElementById('child_mobile').stepUp();
+                    document.getElementById('total_guest_desktop').value = parseInt(document.getElementById('adult_desktop')
+                            .value) +
+                        parseInt(document.getElementById('child_desktop').value);
+                    // NEW SEARCH MOBILE
+                    // fungsi untuk mengisi guest di mobile
+                    document.querySelector('.guests-mobile').innerHTML = parseInt(document.getElementById('adult_mobile').value) +
+                        parseInt(document.getElementById('child_mobile').value) + " Guests";
+                }
             }
 
             function child_decrement_header_list() {
-                document.getElementById('child5').stepDown();
-                document.getElementById('total_guest5').value = parseInt(document.getElementById('adult5').value) +
-                    parseInt(document.getElementById('child5').value);
+                // document.getElementById('child5').stepDown();
+                // document.getElementById('total_guest5').value = parseInt(document.getElementById('adult5').value) +
+                //     parseInt(document.getElementById('child5').value);
+                document.getElementById('child_desktop').stepDown();
+                document.getElementById('child_mobile').stepDown();
+                document.getElementById('total_guest_desktop').value = parseInt(document.getElementById('adult_desktop')
+                        .value) +
+                    parseInt(document.getElementById('child_desktop').value);
+                // NEW SEARCH MOBILE
+                // fungsi untuk mengisi guest di mobile
+                document.querySelector('.guests-mobile').innerHTML = parseInt(document.getElementById('adult_mobile').value) +
+                    parseInt(document.getElementById('child_mobile').value) + " Guests";
             }
 
             function infant_increment_header_list() {
-                document.getElementById('infant5').stepUp();
+                // document.getElementById('infant5').stepUp();
+                document.getElementById('infant_desktop').stepUp();
+                document.getElementById('infant_mobile').stepUp();
             }
 
             function infant_decrement_header_list() {
-                document.getElementById('infant5').stepDown();
+                // document.getElementById('infant5').stepDown();
+                document.getElementById('infant_desktop').stepDown();
+                document.getElementById('infant_mobile').stepDown();
             }
 
             function pet_increment_header_list() {
-                document.getElementById('pet5').stepUp();
+                // document.getElementById('pet5').stepUp();
+                document.getElementById('pet_desktop').stepUp();
+                document.getElementById('pet_mobile').stepUp();
             }
 
             function pet_decrement_header_list() {
-                document.getElementById('pet5').stepDown();
+                // document.getElementById('pet5').stepDown();
+                document.getElementById('pet_desktop').stepDown();
+                document.getElementById('pet_mobile').stepDown();
+            }
+        </script>
+
+        <script>
+            $(".search-container-mobile .close").on("click", function() {
+                backToMainMobile();
+                $(".search-container-mobile").removeClass("search-container-mobile-open")
+                    .addClass("search-container-mobile-closed");
+                $("body").removeAttr("style");
+            });
+        </script>
+
+        <script>
+            // NEW SEARCH MOBILE
+            // fungsi untuk kembali ke bagian awal search di mobile
+            function backToMainMobile() {
+                $(".search-container-mobile form").removeClass("h-100");
+                $("#sugest").removeClass("display-block").addClass("display-none");
+                $(".search-container-mobile .select-location-mobile-container").removeClass("d-none");
+                $(".search-container-mobile .location-has-selected-container").removeClass("d-flex").addClass("d-none");
+                $(".search-container-mobile .first-sugest-location").removeClass("d-none");
+                $(".search-container-mobile .dates-container").removeClass("d-none h-100 px-0");
+                $(".search-container-mobile .sidebar-popup").removeAttr("style");
+                $(".search-container-mobile .sidebar-popup").removeClass("d-block").addClass("d-none");
+                $(".search-container-mobile .guests-container").removeClass("d-none p-0");
+                $(".search-container-mobile .guest-popup").removeClass("d-block").addClass("d-none");
+                $(".search-container-mobile .selected-guest-mobile").removeClass("d-none").addClass("d-flex");
+                $(".search-container-mobile .bottom-action-container").removeClass("d-none bottom-select-date");
+                $(".search-container-mobile .bottom-action-container").removeClass("d-none");
+                $(".search-container-mobile .clear-all-mobile").removeClass("d-none");
+                $(".search-container-mobile .clear-date-mobile").addClass("d-none");
+                if ($("#check_in2").val() != "" && $("#check_out2").val() != "" &&
+                    parseInt($("#total_guest_desktop").val()) >= 1 && $("#loc_sugest").val() != "") {
+                    $(".search-container-mobile .submit-mobile").removeClass("d-none");
+                    $(".search-container-mobile .next-mobile").addClass("d-none");
+                } else {
+                    $(".search-container-mobile .next-mobile").removeClass("d-none");
+                    $(".search-container-mobile .next-mobile").html("Next");
+                    $(".search-container-mobile .submit-mobile").addClass("d-none");
+                }
+                $(".search-container-mobile .btn-top-search .close").removeClass("d-none");
+                $(".search-container-mobile .btn-top-search .back").addClass("d-none");
+                $(".search-container-mobile .location-container")
+                    .addClass("mx-2").removeClass("h-100");
+                $('#sugest_mobile').removeClass("display-block").addClass("display-none");
+                $("#loc_sugest").attr("readonly", true);
+            }
+            // NEW SEARCH MOBILE
+            // fungsi untuk berpindah ke select location di mobile
+            function moveToLocationMobile() {
+                $("#loc_sugest").removeAttr("readonly");
+                var ids = $(".sugest-list-first");
+                ids.hide();
+                for (let index = 0; index < 5; index++) {
+                    // var rndInt = Math.floor(Math.random() * (ids.length - 1));
+                    // console.log(rndInt);
+                    ids.show();
+                };
+                $(".search-container-mobile form").addClass("h-100");
+                $(".search-container-mobile .first-sugest-location").addClass("d-none");
+                $(".search-container-mobile .dates-container").addClass("d-none");
+                $('#popup_check_search_mobile').removeClass('d-block').addClass('d-none');
+                $(".search-container-mobile .guests-container").addClass("d-none");
+                $(".search-container-mobile .guest-popup").removeClass("d-block");
+                $(".search-container-mobile .bottom-action-container").addClass("d-none");
+                $(".search-container-mobile .btn-top-search .close").addClass("d-none");
+                $(".search-container-mobile .btn-top-search .back").removeClass("d-none");
+                $(".search-container-mobile .location-container")
+                    .removeClass("mx-2").addClass("h-100");
+                $(".search-container-mobile .location-has-selected-container")
+                    .removeClass("d-flex").addClass("d-none");
+                $(".search-container-mobile .select-location-mobile-container").removeClass("d-none");
+                $('#sugest_mobile').removeClass("display-none");
+                $('#sugest_mobile').addClass("display-block");
+            }
+            // NEW SEARCH MOBILE
+            // fungsi untuk berpindah ke select date di mobile
+            function moveToDateMobile() {
+                $('#popup_check_search_mobile').removeClass('d-none').addClass('d-block');
+                $(".location-has-selected-container").removeClass("d-none").addClass("d-flex");
+                $(".select-location-mobile-container").addClass("d-none");
+                $(".search-container-mobile form").addClass("h-100");
+                $(".search-container-mobile .first-sugest-location").removeClass("d-none");
+                $(".search-container-mobile .dates-container").removeClass("d-none").addClass("h-100 px-0");
+                $(".search-container-mobile .guests-container").addClass("d-none");
+                $(".search-container-mobile .guest-popup").removeClass("d-block");
+                $(".search-container-mobile .bottom-action-container").removeClass("d-none").addClass("bottom-select-date");
+                $(".search-container-mobile .btn-top-search .close").removeClass("d-none");
+                $(".search-container-mobile .btn-top-search .back").addClass("d-none");
+                $(".search-container-mobile .location-container")
+                    .addClass("mx-2").removeClass("h-100");
+                $('#sugest_mobile').removeClass("display-block").addClass("display-none");
+                $("#loc_sugest").attr("readonly", true);
+                $(".search-container-mobile .clear-date-mobile").removeClass("d-none");
+                $(".search-container-mobile .clear-all-mobile").addClass("d-none");
+                if ($("#check_in2").val() == "" && $("#check_out2").val() == "") {
+                    $(".search-container-mobile .next-mobile").html("Skip");
+                    $(".search-container-mobile .next-mobile").removeClass("d-none");
+                    $(".search-container-mobile .submit-mobile").addClass("d-none");
+                } else {
+                    $(".search-container-mobile .next-mobile").html("Next");
+                    $(".search-container-mobile .next-mobile").removeClass("d-none");
+                    $(".search-container-mobile .submit-mobile").addClass("d-none");
+                }
+            }
+            // NEW SEARCH MOBILE
+            // fungsi untuk berpindah ke select guest di mobile
+            function moveToGuestsMobile() {
+                $('#popup_check_search_mobile').removeClass("d-block").addClass("d-none");
+                $(".location-has-selected-container").removeClass("d-none").addClass("d-flex");
+                $(".select-location-mobile-container").addClass("d-none");
+                $(".search-container-mobile form").removeClass("h-100");
+                $(".search-container-mobile .first-sugest-location").addClass("d-none");
+                $(".search-container-mobile .guests-container").removeClass("d-none").addClass("p-0");
+                $(".search-container-mobile .dates-container").removeClass("d-none px-0");
+                $(".search-container-mobile .sidebar-popup").removeAttr("style");
+                $(".search-container-mobile .sidebar-popup").removeClass("d-block").addClass("d-none");
+                $(".search-container-mobile .location-container")
+                    .addClass("mx-2").removeClass("h-100");
+                $(".search-container-mobile .selected-guest-mobile").removeClass("d-flex").addClass("d-none");
+                $(".search-container-mobile .guest-popup").removeClass("d-none").addClass("d-block");
+                $(".search-container-mobile .bottom-action-container").removeClass("d-none bottom-select-date");
+                $(".search-container-mobile .btn-top-search .close").removeClass("d-none");
+                $(".search-container-mobile .btn-top-search .back").addClass("d-none");
+                $(".search-container-mobile .clear-date-mobile").addClass("d-none");
+                $(".search-container-mobile .clear-all-mobile").removeClass("d-none");
+                $(".search-container-mobile .next-mobile").addClass("d-none");
+                $(".search-container-mobile .submit-mobile").removeClass("d-none");
             }
         </script>
 
@@ -4565,10 +5128,7 @@
                     }
                 }
 
-                var isFocused = document.querySelector("#loc_sugest") == document.activeElement ||
-                    document.querySelector("#search_sugest") == document.activeElement;
-
-                if (!isFocused || window.innerWidth > 768) {
+                function closeNavbar() {
                     document.getElementById("myBtnContainer").classList.remove("display-none");
                     document.getElementById("searchbox").classList.add("searchbox-display-block");
                     document.getElementById("searchbox").classList.remove("searchbox-display-none");
@@ -4587,6 +5147,19 @@
 
                     var els = document.getElementsByClassName("flatpickr-calendar");
                     addClass(els, 'display-none');
+                }
+
+                var isFocused = document.querySelector("#loc_sugest") == document.activeElement ||
+                    document.querySelector("#search_sugest") == document.activeElement;
+
+                if (!isFocused || window.innerWidth > 768) {
+                    if (document.querySelector(".search-container-mobile") != null) {
+                        if (!document.querySelector(".search-container-mobile").classList.contains("search-container-mobile-open")) {
+                            closeNavbar();
+                        }
+                    }else {
+                        closeNavbar();
+                    }
                 }
             }
         </script>
@@ -4632,13 +5205,23 @@
                     })
                 }
                 e(".dropdown-toggle").click(function() {
-                    var t = e(this).parents(".button-dropdown").children(".dropdown-menu").is(
+                    if (window.innerWidth <= 649) {
+                        backToMainMobile();
+                        $(".search-container-mobile").removeClass("search-container-mobile-closed")
+                            .addClass("search-container-mobile-open");
+                        $("body").css({
+                            "height": "100%",
+                            "overflow": "hidden"
+                        });
+                    }else {
+                        var t = e(this).parents(".button-dropdown").children(".dropdown-menu").is(
                         ":hidden");
-                    e(".button-dropdown .dropdown-menu").hide();
-                    e(".button-dropdown .dropdown-toggle").removeClass("active");
-                    if (t) {
-                        e(this).parents(".button-dropdown").children(".dropdown-menu").toggle().parents(
-                            ".button-dropdown").children(".dropdown-toggle").addClass("active")
+                        e(".button-dropdown .dropdown-menu").hide();
+                        e(".button-dropdown .dropdown-toggle").removeClass("active");
+                        if (t) {
+                            e(this).parents(".button-dropdown").children(".dropdown-menu").toggle().parents(
+                                ".button-dropdown").children(".dropdown-toggle").addClass("active")
+                        }
                     }
                 });
                 e(document).bind("click", function(t) {
@@ -4860,7 +5443,7 @@
                 if (tipe == 'light') {
                     fontLight.addClass('font-black');
                     fontLight.removeClass('font-light');
-                    
+
                     text.classList.remove('bg-body-black');
                     text.classList.add('bg-body-light');
                     nav.classList.remove('bg-body-black');

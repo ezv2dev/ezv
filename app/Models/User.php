@@ -23,7 +23,7 @@ class User extends Authenticatable
         'google_id', 'facebook_id',
         'email_google', 'email_facebook',
         'email_verified_at', 'first_name',
-        'last_name', 'address', 'username',
+        'last_name', 'address', 'username', 'phone',
         'email', 'password', 'role_id', 'avatar',
         'user_code', 'gender', 'birthday', 'active', 'foto_profile',
         'id_language', 'id_currency', 'id_timezone'

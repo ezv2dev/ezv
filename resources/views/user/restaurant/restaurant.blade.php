@@ -209,10 +209,10 @@
                             <i class="fa-solid fa-key text-center"></i>
                             <p class="m-0">{{ __('user_page.Change Password') }}</p>
                         </a>
-                        <a href="{{ route('switch') }}" class="list-link-sidebar mb-2">
+                        {{-- <a href="{{ route('switch') }}" class="list-link-sidebar mb-2">
                             <i class="fa fa-refresh text-center" aria-hidden="true"></i>
                             <p class="m-0">{{ __('user_page.Switch to Hosting') }}</p>
-                        </a>
+                        </a> --}}
                         <a class="list-link-sidebar mb-2" href="#!"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit()">
                             <i class="fa fa-sign-out text-center" aria-hidden="true"></i>
@@ -4122,7 +4122,7 @@
         <div class="modal-content" style="background: white;">
             <div class="modal-header" style="padding-left: 18px;">
                 <h7 class="modal-title" style="font-size: 1.875rem;">
-                    {{ __('user_page.Edit Position Photos') }}</h7>
+                    {{ __('user_page.Edit Photo Position') }}</h7>
                 <button type="button" class="btn-close-modal" data-bs-dismiss="modal" aria-label="Close">
                     <i style="font-size: 22px;" class="fa-solid fa-xmark"></i>
                 </button>
@@ -4165,7 +4165,7 @@
         <div class="modal-content" style="background: white;">
             <div class="modal-header" style="padding-left: 18px;">
                 <h7 class="modal-title" style="font-size: 1.875rem;">
-                    {{ __('user_page.Edit Position Video') }}</h7>
+                    {{ __('user_page.Edit Video Position') }}</h7>
                 <button type="button" class="btn-close-modal" data-bs-dismiss="modal" aria-label="Close">
                     <i style="font-size: 22px;" class="fa-solid fa-xmark"></i>
                 </button>

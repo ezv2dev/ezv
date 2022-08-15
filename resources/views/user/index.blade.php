@@ -121,10 +121,10 @@
                         <i class="fa-solid fa-key text-center"></i>
                         <p class="m-0">{{ __('user_page.Change Password') }}</p>
                     </a>
-                    <a href="{{ route('switch') }}" class="list-link-sidebar mb-2">
+                    {{-- <a href="{{ route('switch') }}" class="list-link-sidebar mb-2">
                         <i class="fa fa-refresh text-center" aria-hidden="true"></i>
                         <p class="m-0">{{ __('user_page.Switch to Hosting') }}</p>
-                    </a>
+                    </a> --}}
                     <a class="list-link-sidebar mb-2" href="#!"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit()">
                         <i class="fa fa-sign-out text-center" aria-hidden="true"></i>
@@ -230,7 +230,7 @@
             <i class="fa-solid fa-xmark close"></i>
             <i class="fa-solid fa-angle-left back d-none"></i>
         </button>
-        <form action="{{ route('search_home_combine') }}" method="GET" id="basic-form" autocomplete="off">
+        <form action="{{ route('search_home_combine') }}" method="GET" id="basic-form-mobile" autocomplete="off">
             {{-- NEW SEARCH MOBILE
             location untuk mobile --}}
             <div class="location-container mx-2 mt-2">
@@ -259,9 +259,9 @@
                         </div>
                         <div class="col-4">
                             <img class="d-block w-100 lozad" src="{{ LazyLoad::show() }}"
-                                data-src="https://cf.bstatic.com/xdata/images/xphoto/max500_ao/85179701.jpg?k=ce7f1e159c7c0a6ce44bab2342d2145165d0d5dd2235dce5df882ae89ee01f07&o=">
+                                data-src="https://pix4.agoda.net/hotelimages/412153/-1/d38ca3ce2e65312e961e0b80636510f9.jpg">
                             <div class="location-popup-text sugest-list-text">
-                                <a type="button" class="location_op" data-value="Berawa">Berawa</a>
+                                <a type="button" class="location_op" data-value="Ubud">Ubud</a>
                             </div>
                         </div>
                     </div>
@@ -277,6 +277,7 @@
                 <div id="sugest_mobile" class="location-popup w-100 display-none">
                     @php
                         $location = App\Http\Controllers\ViewController::get_location();
+                        $addressName = App\Http\Controllers\ViewController::get_address();
                         $hotelName = App\Http\Controllers\HotelController::get_name();
                         $restaurantName = App\Http\Controllers\Restaurant\RestaurantController::get_name();
                         $activityName = App\Http\Controllers\Activity\ActivityController::get_name();
@@ -359,6 +360,20 @@
                                 <div class="location-popup-text sugest-list-text">
                                     <a type="button" class="location_op"
                                         data-value="{{ $item->name }}">{{ $item->name }}</a>
+                                </div>
+                            </div>
+                        @endforeach
+                        @foreach ($addressName as $item)
+                            <div class="col-lg-12 location-popup-desc-container sugest-list"
+                                style="display: none; cursor: pointer;">
+                                <div class="location-popup-map sugest-list-map">
+                                    <img class="location-popup-map-image lozad" src="{{ LazyLoad::show() }}"
+                                        data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
+                                </div>
+                                <div class="location-popup-text sugest-list-text">
+                                    <a type="button" class="location_op"
+                                        data-value="{{ $item->address }}, {{ $item->location->name }}">{{ $item->address }},
+                                        {{ $item->location->name }}</a>
                                 </div>
                             </div>
                         @endforeach
@@ -553,7 +568,7 @@
             tombol action dipaling bawah untuk mobile --}}
             <div class="bottom-action-container">
                 <div class="d-flex align-items-center">
-                    <div id="clear_date_header" class="btn-transparent-action clear-date-mobile d-none">
+                    <div id="clear_date_mobile" class="btn-transparent-action clear-date-mobile d-none">
                         {{ __('user_page.Clear Dates') }}</div>
                     <div class="btn-transparent-action clear-all-mobile">Clear All</div>
                     <div class="btn-company next-mobile ms-auto">Next</div>
@@ -598,58 +613,62 @@
                         <!--Start of serach option 1 -->
 
                         <div id="ul" class="ul-display-block">
-                            <ul class="navbar-nav me-auto mt-2 mt-lg-0 ">
-                                <div class="nav-link-form" id="villa-form">
-                                    <li class="nav-item">
-                                        <a class="nav-link nav-link-style nav-link-margin" id="villa-button"
-                                            target="_blank" href="{{ route('list') }}"><img
-                                                src="{{ asset('assets/icon/menu/homes.svg') }}"
-                                                style="width: 33px; height: auto;"></a>
-                                    </li>
-                                    <p>
-                                        {{ __('user_page.Homes') }}
-                                    </p>
-                                </div>
-                                <div class="nav-link-form" id="hotel-form">
-                                    <li class="nav-item">
-                                        <a class="nav-link nav-link-style nav-link-margin" id="hotel-button"
-                                            target="_blank" href="{{ route('restaurant_list') }}"><img
-                                                src="{{ asset('assets/icon/menu/food.svg') }}"
-                                                style="width: 21px; height: auto;"></a>
-                                    </li>
-                                    <p>
-                                        {{ __('user_page.Food') }}
-                                    </p>
-                                </div>
-                                <div class="nav-link-form" id="restaurant-form">
-                                    <li class="nav-item">
-                                        <a class="nav-link nav-link-style nav-link-margin" id="restaurant-button"
-                                            target="_blank" href="{{ route('hotel_list') }}"><img
-                                                src="{{ asset('assets/icon/menu/hotel.svg') }}"
-                                                style="width: 28px; height: auto;"></a>
-                                    </li>
-                                    <p>{{ __('user_page.Hotels') }}</p>
-                                </div>
-                                <div class="nav-link-form" id="activity-form">
-                                    <li class="nav-item">
-                                        <a class="nav-link nav-link-style nav-link-margin" id="activity-button"
-                                            target="_blank" href="{{ route('activity_list') }}"><img
-                                                src="{{ asset('assets/icon/menu/wow.svg') }}"
-                                                style="width: 27px; height: auto;"></a>
-                                    </li>
-                                    {{-- <p>{{ __('user_page.Things to do') }}</p> --}}
-                                    <p>WoW</p>
-                                </div>
-                                <div class="nav-link-form" id="collaborator-form">
-                                    <li class="nav-item">
-                                        <a class="nav-link nav-link-style nav-link-margin" id="collaborator-button"
-                                            target="_blank" href="{{ route('collaborator_list') }}"><img
-                                                src="{{ asset('assets/icon/menu/collab1-white.svg') }}"
-                                                style="width: 34px; height: auto;"></a>
-                                    </li>
-                                    <p>{{ __('user_page.Collabs') }}</p>
-                                </div>
-                            </ul>
+
+                            <!--Search Option Navbar Uncomment this section when back to old design-->
+                            <!-- <ul class="navbar-nav me-auto mt-2 mt-lg-0 ">
+                                    <div class="nav-link-form" id="villa-form">
+                                        <li class="nav-item">
+                                            <a class="nav-link nav-link-style nav-link-margin" id="villa-button"
+                                                target="_blank" href="{{ route('list') }}"><img
+                                                    src="{{ asset('assets/icon/menu/homes.svg') }}"
+                                                    style="width: 33px; height: auto;"></a>
+                                        </li>
+                                        <p>
+                                            {{ __('user_page.Homes') }}
+                                        </p>
+                                    </div>
+                                    <div class="nav-link-form" id="hotel-form">
+                                        <li class="nav-item">
+                                            <a class="nav-link nav-link-style nav-link-margin" id="hotel-button"
+                                                target="_blank" href="{{ route('restaurant_list') }}"><img
+                                                    src="{{ asset('assets/icon/menu/food.svg') }}"
+                                                    style="width: 21px; height: auto;"></a>
+                                        </li>
+                                        <p>
+                                            {{ __('user_page.Food') }}
+                                        </p>
+                                    </div>
+                                    <div class="nav-link-form" id="restaurant-form">
+                                        <li class="nav-item">
+                                            <a class="nav-link nav-link-style nav-link-margin" id="restaurant-button"
+                                                target="_blank" href="{{ route('hotel_list') }}"><img
+                                                    src="{{ asset('assets/icon/menu/hotel.svg') }}"
+                                                    style="width: 28px; height: auto;"></a>
+                                        </li>
+                                        <p>{{ __('user_page.Hotels') }}</p>
+                                    </div>
+                                    <div class="nav-link-form" id="activity-form">
+                                        <li class="nav-item">
+                                            <a class="nav-link nav-link-style nav-link-margin" id="activity-button"
+                                                target="_blank" href="{{ route('activity_list') }}"><img
+                                                    src="{{ asset('assets/icon/menu/wow.svg') }}"
+                                                    style="width: 27px; height: auto;"></a>
+                                        </li>
+                                        {{-- <p>{{ __('user_page.Things to do') }}</p> --}}
+                                        <p>WoW</p>
+                                    </div>
+                                    <div class="nav-link-form" id="collaborator-form">
+                                        <li class="nav-item">
+                                            <a class="nav-link nav-link-style nav-link-margin" id="collaborator-button"
+                                                target="_blank" href="{{ route('collaborator_list') }}"><img
+                                                    src="{{ asset('assets/icon/menu/collab1-white.svg') }}"
+                                                    style="width: 34px; height: auto;"></a>
+                                        </li>
+                                        <p>{{ __('user_page.Collabs') }}</p>
+                                    </div>
+                                </ul> -->
+                            <!--End of search option Navbar Uncomment this section when back to old design-->
+
                             <!--End of serach option 1 -->
 
                             {{-- Header Search --}}
@@ -669,6 +688,7 @@
                                                 <div id="sugest_desktop" class="location-popup display-none">
                                                     @php
                                                         $location = App\Http\Controllers\ViewController::get_location();
+                                                        $addressName = App\Http\Controllers\ViewController::get_address();
                                                         $hotelName = App\Http\Controllers\HotelController::get_name();
                                                         $restaurantName = App\Http\Controllers\Restaurant\RestaurantController::get_name();
                                                         $activityName = App\Http\Controllers\Activity\ActivityController::get_name();
@@ -774,6 +794,21 @@
                                                                 <div class="location-popup-text sugest-list-text">
                                                                     <a type="button" class="location_op_desktop"
                                                                         data-value="{{ $item->name }}">{{ $item->name }}</a>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                        @foreach ($addressName as $item)
+                                                            <div class="col-lg-12 location-popup-desc-container sugest-list"
+                                                                style="display: none; cursor: pointer;">
+                                                                <div class="location-popup-map sugest-list-map">
+                                                                    <img class="location-popup-map-image lozad"
+                                                                        src="{{ LazyLoad::show() }}"
+                                                                        data-src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
+                                                                </div>
+                                                                <div class="location-popup-text sugest-list-text">
+                                                                    <a type="button" class="location_op_desktop"
+                                                                        data-value="{{ $item->address }}, {{ $item->location->name }}">{{ $item->address }},
+                                                                        {{ $item->location->name }}</a>
                                                                 </div>
                                                             </div>
                                                         @endforeach
@@ -1007,6 +1042,10 @@
                                                                     </a>
                                                                 </div>
                                                             </div>
+                                                            <button type="submit" class="d-block m-auto"
+                                                                style="background: #ff7400; color: white; padding: 5px 15px; border-radius: 10px; font-size: 18px; border: none;">
+                                                                Search
+                                                            </button>
                                                         </div>
                                                     </li>
                                                 </ul>
@@ -1044,6 +1083,7 @@
                                 </div>
                             </div>
                         </div>
+
                         {{-- End Header Search --}}
                     </div>
 
@@ -1051,9 +1091,9 @@
                         style="display: flex; align-items: center; justify-content: flex-end;">
                         @auth
                             <div class="d-flex" style="display: inline-block; align-items: center;">
-                                <a href="{{ route('switch') }}" class="navbar-gap" style="color: #b9b9b9;">
+                                {{-- <a href="{{ route('switch') }}" class="navbar-gap" style="color: #b9b9b9;">
                                     {{ __('user_page.Switch to Hosting') }}
-                                </a>
+                                </a> --}}
 
                                 <a type="button" onclick="language()" class="navbar-gap"
                                     style="color: white; width:27px;">
@@ -1137,8 +1177,8 @@
                             </div>
                         @else
                             <a href="{{ route('ahost') }}" class="navbar-gap" style="color: #b9b9b9;" target="_blank">
-                                {{ __('user_page.Become a host') }}
-                            </a>
+                                {{ __('user_page.Create Listing') }}
+                            </a> 
 
                             <a type="button" onclick="language()" class="navbar-gap"
                                 style="color: white; margin-right: 9px; width:27px;" id="language">
@@ -1175,11 +1215,42 @@
         <div class="header-4-4 container-xxl mx-auto p-0 position-relative"
             style="font-family: 'Poppins', sans-serif">
             <div class="mx-auto d-flex flex-lg-row flex-column hero">
+
+                <!-- Hero uncomment this when back to old design -->
+                <!-- <div class="col-12">
+                        <div class="card card-overlay bg-dark text-white border-0 overflow-hidden lozad-gallery lozad-gallery-load index-jumbotron"
+                            data-src="{{ URL::asset('assets/media/photos/desktop/batur.webp') }}">
+                            <div class="card-img-overlay card-overlay d-flex align-items-center justify-content-center">
+                                <div>
+                                    <p class="text-white text-center" style="font-size: 22px;">
+                                        {{-- __('user_page.The Best Way To Find Accommodation, Restaurants, And Things To Do') --}}
+
+                                        {{ __('user_page.The Best Way To Find Accomodation, Restaurant, And Things To Do') }}
+                                    </p>
+                                    <div
+                                        class="d-flex flex-sm-row flex-column align-items-center mx-lg-0 mx-auto justify-content-center gap-3">
+                                        <form action="{{ route('list') }}" method="GET" id="villa-form">
+                                            {{-- <button class="btn d-inline-flex mb-md-0 btn-try border-0" style="color: #ffffff;"> --}}
+                                            <button class="btn d-inline-flex mb-md-0 btn-company">
+                                                {{ __("user_page.Let's Go") }}
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                <!-- End Hero uncomment this when back to old design -->
+
+                <!-- Hero comment this when back to old design -->
                 <div class="col-12">
                     <div class="card card-overlay bg-dark text-white border-0 overflow-hidden lozad-gallery lozad-gallery-load index-jumbotron"
                         data-src="{{ URL::asset('assets/media/photos/desktop/batur.webp') }}">
                         <div class="card-img-overlay card-overlay d-flex align-items-center justify-content-center">
                             <div>
+                                <p class="text-white text-center" style="font-size: 22px;">
+                                    The Best Way To Search & Explore Accomodation in Bali
+                                </p>
                                 <p class="text-white text-center" style="font-size: 22px;">
                                     {{-- __('user_page.The Best Way To Find Accommodation, Restaurants, And Things To Do') --}}
 
@@ -1198,13 +1269,17 @@
                         </div>
                     </div>
                 </div>
+                <!-- End Hero comment this when back to old design -->
+
             </div>
         </div>
     </section>
 
     <div class="header-4-4 position-relative" style="font-family: 'Poppins', sans-serif">
         <div class="container-xxl mx-auto p-0">
-            <div class="mx-auto d-flex flex-lg-row flex-column hero">
+
+            <!-- Advert Download App Uncomment this when back to old design -->
+            <!-- <div class="mx-auto d-flex flex-lg-row flex-column hero">
                 <div class="col-12">
                     <div class="card card-overlay bg-dark text-white border-0 overflow-hidden lozad-gallery lozad-gallery-load"
                         data-src="{{ URL::asset('assets/media/photos/desktop/app.webp') }}"
@@ -1234,13 +1309,121 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
+            <!-- End Advert Download App Uncomment this when back to old design -->
+
+            <!-- Support section Comment this when back to old design -->
+            <section class="support-section pt-5">
+                <div class="col-12">
+                    <div class="help-section-home text-right text-white">
+                        <h1>We are here to help 24/7</h1>
+                        <p>Would you like some assistance creating your new listing?</p>
+                        <p>Already have your property listed on another travel platform?</p>
+                        <div class="sp-75"></div>
+                        <button class="letsgo" onclick="viewModalcontact()">Support</button>
+                        <div class="sp-75"></div>
+                        <p>Click the support button above to connect with one<br> of our team to help speed up the
+                            lsiting
+                            process</p>
+                    </div>
+                </div>
             </section>
+            <!-- Support section Comment this when back to old design -->
+
             {{-- end hero --}}
             {{-- experience --}}
 
             {{-- Restaurant --}}
-            <section class="h-100 w-100 bg-white">
+
+            <!-- Recomendation section Comment this when back to old design-->
+            <section class="recomendation-section">
+
+                <h3 class="host-body-text mb-0 text-center text-orange">A World of Possibilities</h3>
+
+                <div class="row-grid-img-home pt-5">
+                    @foreach ($villaCategory->take(24) as $item)
+                        <div class="grid-img-container">
+                            <img src="https://source.unsplash.com/random/?{{ $item->villaCategory->name }}">
+                            <div class="grid-text">
+                                {{ $item->villaCategory->name }}
+                            </div>
+                        </div>
+                    @endforeach
+                    @if ($villaCategory->count() <= 24)
+                        @foreach ($categoryTemp as $item)
+                            <div class="grid-img-container">
+                                <img src="https://source.unsplash.com/random/?{{ $item['name'] }}">
+                                <div class="grid-text">
+                                    {{ $item['name'] }}
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
+                </div>
+            </section>
+            <!-- Recomendation section Comment this when back to old design -->
+
+            <!-- Location section Comment this when back to old design-->
+            <section class="location-section">
+
+                <h3 class="host-body-text mb-0 text-center">The Finest Locations</h3>
+
+                <div class="row-grid-img-location pt-5">
+                    @foreach ($villaLocation as $item)
+                        <div class="grid-img-container flex-column">
+                            <img src="https://source.unsplash.com/random/?{{ $item->location->name }}">
+                            <div class="">
+                                {{ $item->location->name }}
+                            </div>
+                        </div>
+                    @endforeach
+            </section>
+            <!-- Location section Comment this when back to old design -->
+
+            <!-- Join advert section Comment this when back to old design -->
+            <section class="h-100 pt-3 pt-lg-5 w-100">
+
+                <div class="row flex-column flex-lg-row">
+                    <div class="col-12 col-lg-6">
+
+                        <div class="bottom p-3 p-lg-5 text-center">
+                            <h1>
+                                Open your door to more<br>
+                                guests with EZV
+                            </h1>
+                            <div class="sp-75"></div>
+                            <h2>
+                                FREE TO JOIN
+                            </h2>
+                            <div class="sp-75"></div>
+                            <h4>
+                                Power your bookings with the villa experts<br>
+                                Try listing your property today
+
+                            </h4>
+                            <div class="sp-75"></div>
+                            <button class="letsgo" onclick="viewModalcontact()">
+                                Let's go
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 d-none d-sm-block">
+                        <div class="bottom-image-home">
+                            <div class="bottom-content-home">
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+            <!-- Join advert section Comment this when back to old design -->
+
+
+
+
+            <!-- Discover Restuarant section Uncomment this when back to old design -->
+            <!-- <section class="h-100 w-100 bg-white">
                 <div class="container-xxl mx-auto p-0">
                     <div style="padding: 0rem 6rem 2rem 6rem;" class="discover-experiences-container">
                         <h1 class="mb-5" style="margin-bottom: 1rem !important;">
@@ -1265,7 +1448,7 @@
                             <div class="mb-3">
                                 <div class="row-grid-img">
                                     @foreach ($restaurantSubCategory->sortBy('order')->take(9) as $item)
-                                        <div class="pointer">
+<div class="pointer">
                                             <div onclick="foodFilter({{ request()->get('fCuisine') ?? 'null' }}, {{ $item->id_subcategory }})"
                                                 class="grid-img-container">
                                                 <img class="grid-img lozad" src="{{ LazyLoad::show() }}"
@@ -1275,16 +1458,19 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    @endforeach
+@endforeach
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> -->
+            <!-- Discover Restuarant section Uncomment this when back to old design -->
 
             {{-- Things To Do --}}
-            <section class="h-100 w-100 bg-white">
+
+            <!-- Discover activity section Uncomment this when back to old design -->
+            <!-- <section class="h-100 w-100 bg-white">
                 <div class="container-xxl mx-auto p-0">
                     <div style="padding: 0rem 6rem 0rem 6rem;" class="discover-experiences-container">
                         <h1 class="mb-5" style="margin-bottom: 1rem !important;">
@@ -1293,7 +1479,7 @@
                             <div class="mb-3">
                                 <div class="row-grid-img">
                                     @foreach ($activitySubCategory->sortBy('order')->take(9) as $item)
-                                        <div class="pointer">
+<div class="pointer">
                                             <div onclick="wowFilter({{ $item->id_category }}, {{ $item->id_subcategory }}, null)"
                                                 class="grid-img-container">
                                                 <img class="grid-img lozad" src="{{ LazyLoad::show() }}"
@@ -1303,7 +1489,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    @endforeach
+@endforeach
                                 </div>
                             </div>
                             <div class="mb-3">
@@ -1326,11 +1512,15 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> -->
+            <!-- Discover activity section Uncomment this when back to old design -->
+
             {{-- end experience --}}
 
             {{-- QA desktop --}}
-            <section class="h-100 w-100" style="box-sizing: border-box;">
+
+            <!-- Section Learn About Uncomment this when back to old design -->
+            <!-- <section class="h-100 w-100" style="box-sizing: border-box;">
                 <div class="not-header-4-4 container-xxl mx-auto p-0 position-relative"
                     style="font-family: 'Poppins', sans-serif">
                     <div class="mx-auto d-flex flex-lg-row flex-column hero" id="qa-container">
@@ -1358,8 +1548,14 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> -->
+            <!-- Section Learn About Uncomment this when back to old design -->
         </div>
+
+
+        {{-- Modal --}}
+        @include('user.modal.home-contact-modal')
+        {{-- footer --}}
 
 
         {{-- modal laguage and currency --}}
@@ -1525,20 +1721,24 @@
         {{-- Increment Decrement --}}
         <script>
             function adult_increment_index() {
-                document.getElementById('adult_desktop').stepUp();
-                document.getElementById('adult_mobile').stepUp();
-                document.getElementById('total_guest_desktop').value = parseInt(document.getElementById('adult_desktop')
-                        .value) +
-                    parseInt(document.getElementById('child_desktop').value);
-                // NEW SEARCH MOBILE
-                // fungsi untuk mengisi guest di mobile
-                document.querySelector('.guests-mobile').innerHTML = parseInt(document.getElementById('adult_mobile').value) +
-                    parseInt(document.getElementById('child_mobile').value) + " Guests";
+                if (parseInt(document.getElementById('total_guest_desktop').value) < 10 &&
+                    parseInt(document.querySelector('.guests-mobile').innerHTML) < 10) {
+                    document.getElementById('adult_desktop').stepUp();
+                    document.getElementById('adult_mobile').stepUp();
+                    document.getElementById('total_guest_desktop').value = parseInt(document.getElementById('adult_desktop')
+                            .value) +
+                        parseInt(document.getElementById('child_desktop').value);
+                    // NEW SEARCH MOBILE
+                    // fungsi untuk mengisi guest di mobile
+                    document.querySelector('.guests-mobile').innerHTML = parseInt(document.getElementById('adult_mobile')
+                            .value) +
+                        parseInt(document.getElementById('child_mobile').value) + " Guests";
+                }
             }
 
             function adult_decrement_index() {
                 document.getElementById('adult_desktop').stepDown();
-                document.getElementById('adult_desktop').stepDown();
+                document.getElementById('adult_mobile').stepDown();
                 document.getElementById('total_guest_desktop').value = parseInt(document.getElementById('adult_desktop')
                         .value) +
                     parseInt(document.getElementById('child_desktop').value);
@@ -1549,15 +1749,19 @@
             }
 
             function child_increment_index() {
-                document.getElementById('child_desktop').stepUp();
-                document.getElementById('child_mobile').stepUp();
-                document.getElementById('total_guest_desktop').value = parseInt(document.getElementById('adult_desktop')
-                        .value) +
-                    parseInt(document.getElementById('child_desktop').value);
-                // NEW SEARCH MOBILE
-                // fungsi untuk mengisi guest di mobile
-                document.querySelector('.guests-mobile').innerHTML = parseInt(document.getElementById('adult_mobile').value) +
-                    parseInt(document.getElementById('child_mobile').value) + " Guests";
+                if (parseInt(document.getElementById('total_guest_desktop').value) < 10 &&
+                    parseInt(document.querySelector('.guests-mobile').innerHTML) < 10) {
+                    document.getElementById('child_desktop').stepUp();
+                    document.getElementById('child_mobile').stepUp();
+                    document.getElementById('total_guest_desktop').value = parseInt(document.getElementById('adult_desktop')
+                            .value) +
+                        parseInt(document.getElementById('child_desktop').value);
+                    // NEW SEARCH MOBILE
+                    // fungsi untuk mengisi guest di mobile
+                    document.querySelector('.guests-mobile').innerHTML = parseInt(document.getElementById('adult_mobile')
+                            .value) +
+                        parseInt(document.getElementById('child_mobile').value) + " Guests";
+                }
             }
 
             function child_decrement_index() {
@@ -1595,8 +1799,10 @@
 
         <script>
             $(".search-container-mobile .close").on("click", function() {
+                backToMainMobile();
                 $(".search-container-mobile").removeClass("search-container-mobile-open")
                     .addClass("search-container-mobile-closed");
+                $("body").removeAttr("style");
             });
         </script>
 
@@ -1606,10 +1812,14 @@
             function backToMainMobile() {
                 $(".search-container-mobile form").removeClass("h-100");
                 $("#sugest").removeClass("display-block").addClass("display-none");
+                $(".search-container-mobile .select-location-mobile-container").removeClass("d-none");
+                $(".search-container-mobile .location-has-selected-container").removeClass("d-flex").addClass("d-none");
                 $(".search-container-mobile .first-sugest-location").removeClass("d-none");
                 $(".search-container-mobile .dates-container").removeClass("d-none h-100 px-0");
                 $(".search-container-mobile .sidebar-popup").removeAttr("style");
+                $(".search-container-mobile .sidebar-popup").removeClass("d-block").addClass("d-none");
                 $(".search-container-mobile .guests-container").removeClass("d-none p-0");
+                $(".search-container-mobile .guest-popup").removeClass("d-block").addClass("d-none");
                 $(".search-container-mobile .selected-guest-mobile").removeClass("d-none").addClass("d-flex");
                 $(".search-container-mobile .bottom-action-container").removeClass("d-none bottom-select-date");
                 $(".search-container-mobile .bottom-action-container").removeClass("d-none");
@@ -1700,10 +1910,11 @@
                 $(".search-container-mobile .guests-container").removeClass("d-none").addClass("p-0");
                 $(".search-container-mobile .dates-container").removeClass("d-none px-0");
                 $(".search-container-mobile .sidebar-popup").removeAttr("style");
+                $(".search-container-mobile .sidebar-popup").removeClass("d-block").addClass("d-none");
                 $(".search-container-mobile .location-container")
                     .addClass("mx-2").removeClass("h-100");
                 $(".search-container-mobile .selected-guest-mobile").removeClass("d-flex").addClass("d-none");
-                $(".search-container-mobile .guest-popup").addClass("d-block");
+                $(".search-container-mobile .guest-popup").removeClass("d-none").addClass("d-block");
                 $(".search-container-mobile .bottom-action-container").removeClass("d-none bottom-select-date");
                 $(".search-container-mobile .btn-top-search .close").removeClass("d-none");
                 $(".search-container-mobile .btn-top-search .back").addClass("d-none");
@@ -1867,6 +2078,7 @@
 
                     // NEW SEARCH MOBILE
                     // fungsi untuk isi nilai dari location di mobile ketika user udh milih
+                    $('#loc_sugest').val($(this).data("value"));
                     $('.loc_sugest_mobile').html($(this).data("value"));
 
                     $('#sugest_mobile').removeClass("display-block");
@@ -1908,9 +2120,14 @@
                     };
 
                     if (window.innerWidth <= 649) {
+                        backToMainMobile();
                         $(".search-container-mobile").removeClass("search-container-mobile-closed")
                             .addClass("search-container-mobile-open");
-                    }else {
+                        $("body").css({
+                            "height": "100%",
+                            "overflow": "hidden"
+                        });
+                    } else {
                         $('#sugest_desktop').removeClass("display-none");
                         $('#sugest_desktop').addClass("display-block"); //add the class to the clicked element
                     }
@@ -1959,7 +2176,7 @@
 
                 $(".location_op_desktop").on('click', function(e) {
                     $('#loc_sugest_desktop').val($(this).data("value"));
-                    $('#loc_sugest_mobile').val($(this).data("value"));
+                    $('#loc_sugest').val($(this).data("value"));
                     $('#sugest_desktop').removeClass("display-block");
                     $('#sugest_desktop').addClass("display-none");
 
@@ -2009,16 +2226,25 @@
             // NEW SEARCH MOBILE
             // fungsi untuk clear all di mobile
             $(".clear-all-mobile").on("click", function() {
+                $("#loc_sugest_desktop").val("");
                 $("#loc_sugest").val("");
                 $("#check_in2").val("");
                 $("#check_out2").val("");
                 $("#check_in_mobile").val("");
                 $("#check_out_mobile").val("");
-                $("#total_guest_desktop").val("");
+                $("#total_guest_desktop").val("1");
+                $("#adult_desktop").val("1");
+                $("#adult_mobile").val("1");
+                $("#child_desktop").val("0");
+                $("#child_mobile").val("0");
+                $("#infant_desktop").val("0");
+                $("#infant_mobile").val("0");
+                $("#pet_desktop").val("0");
+                $("#pet_mobile").val("0");
                 $(".search-container-mobile .loc_sugest_mobile").html("Location");
                 $(".search-container-mobile .dates-mobile").html("When");
                 $(".search-container-mobile .guests-mobile").html("1 Guests");
-                calendarSearch(2);
+                calendarSearch(window.countMonthsMobile);
             });
         </script>
 
@@ -2056,8 +2282,13 @@
                         content_flatpickr.style.display = "none";
                     } else {
                         if (window.innerWidth <= 649) {
+                            backToMainMobile();
                             $(".search-container-mobile").removeClass("search-container-mobile-closed")
                                 .addClass("search-container-mobile-open");
+                            $("body").css({
+                                "height": "100%",
+                                "overflow": "hidden"
+                            });
                         } else {
                             content_flatpickr.style.display = "block";
                             document.addEventListener('mouseup', function(e) {
@@ -2067,7 +2298,7 @@
                                 }
                             });
                         }
-                        
+
                     }
                 });
             }
@@ -2142,11 +2373,16 @@
                 }
                 e(".dropdown-toggle").click(function() {
                     if (window.innerWidth <= 649) {
+                        backToMainMobile();
                         $(".search-container-mobile").removeClass("search-container-mobile-closed")
                             .addClass("search-container-mobile-open");
-                    }else {
+                        $("body").css({
+                            "height": "100%",
+                            "overflow": "hidden"
+                        });
+                    } else {
                         var t = e(this).parents(".button-dropdown").children(".dropdown-menu").is(
-                        ":hidden");
+                            ":hidden");
                         e(".button-dropdown .dropdown-menu").hide();
                         e(".button-dropdown .dropdown-toggle").removeClass("active");
                         if (t) {
@@ -2154,7 +2390,7 @@
                                 ".button-dropdown").children(".dropdown-toggle").addClass("active")
                         }
                     }
-                    
+
                 });
                 e(document).bind("click", function(t) {
                     var n = e(t.target);
@@ -2500,8 +2736,9 @@
             $(document).ready(function() {
                 function handleResponsive(windowWidth) {
                     if (windowWidth <= 649) {
+                        $("#loc_sugest_desktop").attr("readonly", true);
                         calendarSearch(window.countMonthsMobile);
-                        $("#clear_date_header").click(function() {
+                        $("#clear_date_mobile").click(function() {
                             $("#check_in2").val("");
                             $("#check_out2").val("");
 
@@ -2518,6 +2755,11 @@
                             calendarSearch(window.countMonthsMobile);
                         });
                     } else {
+                        backToMainMobile();
+                        $(".search-container-mobile").removeClass("search-container-mobile-open")
+                            .addClass("search-container-mobile-closed");
+                        $("body").removeAttr("style");
+                        $("#loc_sugest_desktop").attr("readonly", false);
                         $("#clear_date_header").click(function() {
                             $("#check_in2").val("");
                             $("#check_out2").val("");
@@ -2755,6 +2997,12 @@
                     // document.activeElement.blur();//lose focus
                 });
             });
+        </script>
+
+        <script>
+            function viewModalcontact() {
+                $('#home-contact-modal').modal('show');
+            }
         </script>
 
         {{-- LAZY LOAD --}}

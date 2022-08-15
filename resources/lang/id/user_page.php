@@ -43,7 +43,7 @@ return [
     'Location' => 'Lokasi',
     'Host Profile' => 'Profil Tuan Rumah',
     'Fully Furlindable' => 'Dapat Di Refund Penuh',
-    'Reserve now pay later' => 'Bisa bayar belakangan',
+    'Reserve now pay later' => 'Pesan sekarang bayar nanti',
 
     'night' => 'malam',
     'Price is unknown' => 'Harga tidak diketahui',
@@ -136,7 +136,7 @@ return [
     'Share' => 'Bagikan',
     'Share this place with your friend and family' => 'Bagikan tempat ini dengan teman dan keluarga Anda',
     'Copy Link' => 'Salin Tautan',
-    'Edit Position Video' => 'Ubah Posisi Video',
+    'Edit Video Position' => 'Ubah Posisi Video',
     'there is no image yet' => 'belum ada gambar',
 
     'Kitchen' => 'Dapur',
@@ -154,7 +154,7 @@ return [
     'Loading More' => 'Memuat Lebih Banyak',
     'Guests' => 'Tamu',
     'Bedroom' => 'Kamar Tidur',
-    'Bath' => 'Mandi',
+    'Bath' => 'Pemandian',
     'Parking' => 'Parkir',
     'New' => 'Baru',
     'Reviews' => 'Ulasan',
@@ -240,7 +240,7 @@ return [
     'Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.' => 'Setiap pemesanan mencakup perlindungan gratis dari pembatalan oleh host, ketidakakuratan daftar, dan masalah lain seperti masalah saat check-in.',
     'Learn more' => 'Pelajari lebih lanjut',
 
-    'The Best Way To Find Home, Hotel, Food, And Wow' => 'Cara Terbaik Untuk Menemukan Rumah, Hotel, Kuliner, Dan Wow',
+    'The Best Way To Find Accomodation, Restaurant, And Things To Do' => 'Cara Terbaik Untuk Menemukan Akomodasi, Restoran, Dan Perkara Untuk Dilakukan',
     "Let's Go" => "Ayo Pergi",
     'Download The App' => 'Unduh Aplikasi',
     'Unlock all the features today' => 'Buka kunci semua fitur hari ini',
@@ -285,7 +285,7 @@ return [
     'Restaurant Rules' => 'Aturan Restoran',
     'Nearby Villas & Things To Do' => 'Vila & Aktivitas Terdekat',
     'No villas found' => 'Tidak ada vila yang ditemukan',
-    'No things to do found' => 'Tidak aktivitas yang ditemukan',
+    'No things to do found' => 'Tidak ada aktivitas yang ditemukan',
     'No reviews yet' => 'Belum ada penilaian',
     'All Facilities' => 'Semua Fasilitas',
     'All Tags' => 'Semua Tag',
@@ -302,7 +302,7 @@ return [
     'Contact' => 'Kontak',
     'FAQ' => 'FAQ',
     'Send' => 'Kirim',
-    'Edit Position Photos' => 'Ubah Posisi Foto',
+    'Edit Photo Position' => 'Ubah Posisi Foto',
 
     'Delete Menu' => 'Hapus Menu',
     'x stars' => '[1] :number bintang|[*] :number bintang',
@@ -498,7 +498,7 @@ return [
     "Hotel Name Here" => "Nama Hotel Disini",
     "Hotel Room Name Here" => "Nama Kamar Hotel Disini",
     "Wow Name Here" => "Wow Nama Disini",
-    "Wow Price Name Here" => "Nama Harga Wow Disini",
+    "Wow Price Here" => "Harga Wow Disini",
     "Make your short description here" => "Buat deskripsi singkat Anda di sini",
 
     "data not found" => "data tidak ditemukan",

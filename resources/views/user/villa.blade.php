@@ -4121,7 +4121,7 @@
             <div class="modal-content" style="background: white;">
                 <div class="modal-header" style="padding-left: 18px;">
                     <h7 class="modal-title" style="font-size: 1.875rem;">
-                        {{ __('user_page.Edit Position Photos') }}</h7>
+                        {{ __('user_page.Edit Photo Position') }}</h7>
                     <button type="button" class="btn-close-modal" data-bs-dismiss="modal" aria-label="Close"><i
                             style="font-size: 22px;" class="fa-solid fa-xmark"></i></button>
                 </div>
@@ -4163,7 +4163,7 @@
             <div class="modal-content" style="background: white;">
                 <div class="modal-header" style="padding-left: 18px;">
                     <h7 class="modal-title" style="font-size: 1.875rem;">
-                        {{ __('user_page.Edit Position Video') }}</h7>
+                        {{ __('user_page.Edit Video Position') }}</h7>
                     <button type="button" class="btn-close-modal" data-bs-dismiss="modal" aria-label="Close"><i
                             style="font-size: 22px;" class="fa-solid fa-xmark"></i></button>
                 </div>
@@ -4235,14 +4235,6 @@
         }
     </script>
 
-    @if ($villa[0]->instant_book == 'yes')
-        @include('user.modal.villa.details_reserve')
-    @else
-        @auth
-            @include('user.modal.villa.quick_enquiry')
-        @endauth
-    @endif
-
     <script src="{{ asset('assets/js/dashmix.app.min.js') }}"></script>
     <script src="{{ asset('assets/js/lib/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
@@ -4270,6 +4262,14 @@
 
     {{-- SweetAlert JS --}}
     <script src="{{ asset('assets/js/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+
+    @if ($villa[0]->instant_book == 'yes')
+        @include('user.modal.villa.details_reserve')
+    @else
+        @auth
+            @include('user.modal.villa.quick_enquiry')
+        @endauth
+    @endif
 
     {{-- Like --}}
     @auth
@@ -4483,6 +4483,7 @@
                     let content = "";
                     let contentMobile = "";
                     let contentPositionModal = "";
+                    let contentPhotoModalMobile = "";
 
                     // let galleryDiv = $('.gallery');
                     // let galleryLength = galleryDiv.find('a').length;
@@ -4506,7 +4507,7 @@
 
                         contentMobile += '<div class="col-4 grid-photo" id="displayPhoto' +
                             response.data.photo[i].id_photo +
-                            '"> <a data-toggle="modal" data-target="#modal-photo-gallery" data-section="'+response.data.photo[i].id_photo+'"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
+                            '"> <a onclick="openModalGalleryMobile('+response.data.photo[i].id_photo+')"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
                             path + lowerCaseUid + slash + response.data.photo[i].name +
                             '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $villa[0]->id_villa }}" data-photo="' +
                             response.data.photo[i].id_photo +
@@ -4517,6 +4518,13 @@
                             '"> <img src="' +
                             path + lowerCaseUid + slash + response.data.photo[i].name +
                             '" title="' + response.data.photo[i].name + '"> </li>';
+
+                        contentPhotoModalMobile += '<div id="'+ response.data.photo[i].id_photo +'">';
+                        contentPhotoModalMobile += '<div class="modal-gallery">'
+                        contentPhotoModalMobile += '<img id="displayPhoto'+ response.data.photo[i].id_photo +'" class="lozad-gallery-load lozad-gallery mb-2"';
+                        contentPhotoModalMobile += 'src="' +
+                            path + lowerCaseUid + slash + response.data.photo[i].name +
+                            '" title="' + response.data.photo[i].name + '"> </div></div>';
                     }
 
                     if (response.data.video.length > 0) {
@@ -4548,6 +4556,9 @@
 
                     const mobile = $(".mobile");
                     const desktop = $(".desktop");
+
+                    $("#content-modal-photo-mobile").html("");
+                    $("#content-modal-photo-mobile").append(contentPhotoModalMobile);
 
                     desktop.find('.gallery').html("");
                     desktop.find('.gallery').append(content);
@@ -4897,6 +4908,7 @@
                 let contentPositionModal;
                 let contentPositionModalVideo;
                 let contentStory = "";
+                let contentPhotoModalMobile = "";
 
                 let modalPhotoLength = $('#sortable-photo').find('li').length;
                 let modalVideoLength = $('#sortable-video').find('li').length;
@@ -4932,7 +4944,7 @@
 
                     contentMobile += '<div class="col-4 grid-photo" id="displayPhoto' +
                         message.data.photo[0].id_photo +
-                        '"> <a data-toggle="modal" data-target="#modal-photo-gallery" data-section="'+message.data.photo[0].id_photo+'"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
+                        '"> <a onclick="openModalGalleryMobile('+message.data.photo[0].id_photo+')"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
                         path + lowerCaseUid + slash + message.data.photo[0].name +
                         '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $villa[0]->id_villa }}" data-photo="' +
                         message.data.photo[0].id_photo +
@@ -4944,9 +4956,17 @@
                         path + lowerCaseUid + slash + message.data.photo[0].name +
                         '" title="' + message.data.photo[0].name + '"> </li>';
 
+                    contentPhotoModalMobile += '<div id="'+ message.data.photo[0].id_photo +'">';
+                    contentPhotoModalMobile += '<div class="modal-gallery">'
+                    contentPhotoModalMobile += '<img id="displayPhoto'+ message.data.photo[0].id_photo +'" class="lozad-gallery-load lozad-gallery mb-2"';
+                    contentPhotoModalMobile += 'src="' +
+                        path + lowerCaseUid + slash + message.data.photo[0].name +
+                        '" title="' + message.data.photo[0].name + '"> </div></div>';
+
                     desktop.find('.gallery').append(content);
                     mobile.find('.gallery').append(contentMobile);
                     $('#sortable-photo').append(contentPositionModal);
+                    $("#content-modal-photo-mobile").append(contentPhotoModalMobile);
                 }
 
                 if (message.data.video.length > 0) {
@@ -5418,6 +5438,8 @@
                             const desktop = $(".desktop");
                             desktop.find('#displayPhoto'+photo).remove();
                             // $(`#displayPhoto${photo}`).remove();
+                            const modalPhotoGallery = $("#content-modal-photo-mobile");
+                            modalPhotoGallery.find('#displayPhoto'+photo).remove();
                             $("#positionPhotoGallery"+photo).remove();
 
                             let galleryDiv = $('.gallery');
@@ -5470,7 +5492,10 @@
                         success: async function(data) {
                             // console.log(data.message);
                             await Swal.fire('Deleted', data.message, 'success');
-                            $("#displayVideo" + video).remove();
+                            const mobile = $(".mobile");
+                            mobile.find('#displayVideo'+video).remove();
+                            const desktop = $(".desktop");
+                            desktop.find('#displayVideo'+video).remove();
                             $("#positionVideoGallery" + video).remove();
                             $("#displayStoryVideo" + video).remove();
 

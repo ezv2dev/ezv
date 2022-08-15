@@ -94,6 +94,8 @@
                     <div class="col-12"
                         style="display: flex; border: 2px solid #FF7400; border-radius: 15px; padding-top: 15px; padding-bottom: 15px; box-shadow: 1px 1px 10px #a4a4a4">
 
+                        <input type="hidden" value="{{ $villa[0]->id_villa }}" id="id_villa_detail" name="id_villa_detail">
+
                         <div class="col-6 p-5-price line-right-orange">
                             <div class="col-12" style="text-align: center;">
                                 <button type="button" class="collapsible_check2" style="background-color: white;">
@@ -354,7 +356,7 @@
                     </div>
                 </div>
 
-                <div class="row">
+                {{-- <div class="row">
                     <div class="col-9">
                         <p class="price-box">
                             <span style="font-size:14px;">{{ Translate::translate('Cancellation policy') }}</span>
@@ -367,16 +369,53 @@
                                 2022.No refund if you cancel after Nov 3, 2022.</span>
                         </p>
                     </div>
-                </div>
+                </div> --}}
 
-                    <div class="col-12 text-center">
+                    {{-- <div class="col-12 text-center">
                         <input class="price-button" type="submit"
                         onclick="confirmBooking()"
                         value="{{ Translate::translate('RESERVE NOW') }}">
+                    </div> --}}
+
+                    <hr>
+                    @guest
+                        <div class="row my-3">
+                            <div class="col-6">
+                                <input type="text" id="first_name_enquiry" class="form-control" name="first_name_enquiry" placeholder="First Name">
+                                <small id="enq-fname" class="invalid-feedback">The last name field is required</small>
+                            </div>
+                            <div class="col-6">
+                                <input type="text" id="last_name_enquiry" class="form-control" name="last_name_enquiry" placeholder="Last Name">
+                                <small id="enq-lname" class="invalid-feedback">The first name field is required</small>
+                            </div>
+                        </div>
+                        <div class="col-12 my-3">
+                            <input type="email" id="email_enquiry" class="form-control" name="email_enquiry" placeholder="Email">
+                            <small id="enq-eml" class="invalid-feedback">The email field is required</small>
+                        </div>
+                        <div class="col-12 my-3" style="margin-bottom:10px;">
+                            <input type="number" id="phone_enquiry" class="form-control" name="phone_enquiry" placeholder="Phone/Whatsapp Number">
+                            <small id="enq-phn" class="invalid-feedback">The phone number field is required</small>
+                        </div>
+                    @endguest
+
+                    @auth
+                        <input type="hidden" id="id_user_enquiry" name="id_user_enquiry" value="{{ Auth::user()->id }}">
+                    @endauth
+
+                    <div class="col-12 text-center" id ="button_enquiry" style="display:block;">
+                        <input class="price-button" style="cursor: pointer; text-align: center;"
+                        onclick="enquirybooking()"
+                        value="ENQUIRY NOW">
                     </div>
+
+                    <div class="col-12 text-center" id ="loading-image" style="display:none;">
+                        <img src="{{ URL::asset('assets/ff7400-loading.gif') }}" style="width: 60px;">
+                    </div>
+
                 {{-- </form> --}}
 
-                <div id="success" style="display:none;">
+                {{-- <div id="success" style="display:none;">
                     <p>Success! Use the token id below to charge the credit card.</p>
                     <div class="request">
                         <span>REQUEST DATA</span>
@@ -394,7 +433,7 @@
                     </div>
                     <span>RESPONSE</span>
                     <pre class="result"></pre>
-                </div>
+                </div> --}}
 
 
                 {{-- <div class="overlay" style="display: none;"></div>
@@ -422,7 +461,7 @@
         </div>
     </div>
 </div>
-<script>
+{{-- <script>
     $(function() {
         // Virtual Account
         @guest
@@ -861,9 +900,179 @@
         }
 
     }
-</script>
-<script>
+</script> --}}
+{{-- <script>
     function confirmBooking() {
         $('#btnBookingDetail').trigger('click');
+    }
+</script> --}}
+
+<script>
+    $('#first_name_enquiry').keyup(function (e) {
+        $('#first_name_enquiry').removeClass('is-invalid');
+        $('#enq-fname').hide();
+    });
+    $('#last_name_enquiry').keyup(function (e) {
+        $('#last_name_enquiry').removeClass('is-invalid');
+        $('#enq-lname').hide();
+    });
+    $('#email_enquiry').keyup(function (e) {
+        $('#email_enquiry').removeClass('is-invalid');
+        $('#enq-eml').hide();
+    });
+    $('#phone_enquiry').keyup(function (e) {
+        $('#phone_enquiry').removeClass('is-invalid');
+        $('#enq-phn').hide();
+    });
+    function enquirybooking() {
+        let error = 0;
+        var regex = /^([a-zA-Z0-9_\.\-\+])+\@((.*))+$/;
+        if(!$('#first_name_enquiry').val()) {
+            $('#first_name_enquiry').addClass('is-invalid');
+            $('#enq-fname').show();
+            error = 1;
+        } else {
+            $('#first_name_enquiry').removeClass('is-invalid');
+            $('#enq-fname').hide();
+        }
+        if(!$('#last_name_enquiry').val()) {
+            $('#last_name_enquiry').addClass('is-invalid');
+            $('#enq-lname').show();
+            error = 1;
+        } else {
+            $('#last_name_enquiry').removeClass('is-invalid');
+            $('#enq-lname').hide();
+        }
+        if(!$('#email_enquiry').val()) {
+            $('#email_enquiry').addClass('is-invalid');
+            $('#enq-eml').show();
+            error = 1;
+        } else {
+            if (!regex.test($('#email_enquiry').val())) {
+                $('#email_enquiry').addClass('is-invalid');
+                $('#enq-eml').show();
+                error = 1;
+            } else {
+                $('#email_enquiry').removeClass('is-invalid');
+                $('#enq-eml').hide();
+            }
+        }
+        if(!$('#phone_enquiry').val()) {
+            $('#phone_enquiry').addClass('is-invalid');
+            $('#enq-phn').show();
+            error = 1;
+        } else {
+            $('#phone_enquiry').removeClass('is-invalid');
+            $('#enq-phn').hide();
+        }
+        if(error = 1) {
+            return false;
+        } else {
+            $('#button_enquiry').hide();
+            $('#loading-image').show();
+            if(`{{ Auth::check() }}` == 'true')
+            {
+                $.ajax({
+                    type: "POST",
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                    },
+                    url: "/villa/enquiry/store",
+                    data: {
+                        id_villa: $('#id_villa_detail').val(),
+                        adult: $('#adult4').val(),
+                        child: $('#child4').val(),
+                        infant: $('#infant4').val(),
+                        pet: $('#pet4').val(),
+                        check_in: $('#check_in3').val(),
+                        check_out: $('#check_out3').val(),
+                        id_user: $('#id_user_enquiry').val(),
+                    },
+                    success: function (response) {
+
+                        iziToast.success({
+                            title: "Success",
+                            message: response.message,
+                            position: "topRight",
+                        });
+
+                        $('#loading-image').hide();
+                        $('#button_enquiry').show();
+                        $('#modal-details-reserve').modal('hide');
+                    },
+                    error: function (jqXHR, exception) {
+                        $('#loading-image').hide();
+                        $('#button_enquiry').show();
+                        if (jqXHR.responseJSON.errors) {
+                            for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                                iziToast.error({
+                                    title: "Error",
+                                    message: jqXHR.responseJSON.errors[i],
+                                    position: "topRight",
+                                });
+                            }
+                        } else {
+                            iziToast.error({
+                                title: "Error",
+                                message: jqXHR.responseJSON.message,
+                                position: "topRight",
+                            });
+                        }
+                    },
+                });
+            }else{
+                $.ajax({
+                    type: "POST",
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                    },
+                    url: "/villa/enquiry/store",
+                    data: {
+                        id_villa: $('#id_villa_detail').val(),
+                        adult: $('#adult4').val(),
+                        child: $('#child4').val(),
+                        infant: $('#infant4').val(),
+                        pet: $('#pet4').val(),
+                        check_in: $('#check_in3').val(),
+                        check_out: $('#check_out3').val(),
+                        first_name: $('#first_name_enquiry').val(),
+                        last_name: $('#last_name_enquiry').val(),
+                        email: $('#email_enquiry').val(),
+                        phone: $('#phone_enquiry').val(),
+                    },
+                    success: function (response) {
+
+                        iziToast.success({
+                            title: "Success",
+                            message: response.message,
+                            position: "topRight",
+                        });
+
+                        $('#loading-image').hide();
+                        $('#button_enquiry').show();
+                        $('#modal-details-reserve').modal('hide');
+                    },
+                    error: function (jqXHR, exception) {
+                        $('#loading-image').hide();
+                        $('#button_enquiry').show();
+                        if (jqXHR.responseJSON.errors) {
+                            for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                                iziToast.error({
+                                    title: "Error",
+                                    message: jqXHR.responseJSON.errors[i],
+                                    position: "topRight",
+                                });
+                            }
+                        } else {
+                            iziToast.error({
+                                title: "Error",
+                                message: jqXHR.responseJSON.message,
+                                position: "topRight",
+                            });
+                        }
+                    },
+                });
+            }
+        }
     }
 </script>

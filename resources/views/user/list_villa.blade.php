@@ -65,9 +65,9 @@
             cursor: pointer;
         }
         @media only screen and (max-width: 328px) {
-            .guests {
+            /* .guests {
                 min-width: 234px;
-            }
+            } */
             .guest-popup {
                 left: -18px !important;
             }
@@ -215,6 +215,9 @@
             </div>
 
             <div id="villa-data" class="grid-container-43 container__grid">
+                {{-- <div id="load-data-villa" style="position: absolute;">
+                    <img style="position: absolute; left: 0; top: 0; z-index: 100000;" src="{{ asset('assets/ff7400-loading.gif') }}" />
+                </div> --}}
                 @include('user.data_list_villa')
             </div>
             <div></div>
@@ -567,6 +570,69 @@
             $('#modal-filters').modal('show');
         }
     </script>
+
+    <!-- Pagination AJAX -->
+    {{-- <script>
+    $(document).ready(function(){
+
+        $(document).on('click', '.pagination a', function(event){
+            event.preventDefault();
+            $('li').removeClass('active');
+            $(this).parent('li').addClass('active');
+
+            $("#load-data-villa").removeClass("d-none");
+            document.getElementById('body-color').scrollIntoView();
+
+            var url = $(this).attr('href');
+            var page = $(this).attr('href').split('page=')[1];
+            window.history.pushState({}, null, url);
+            fetch_data(page);
+        });
+
+        function fetch_data(page) {
+            $.ajax({
+                url: "/homes-list?page="+page,
+                type: "get",
+                datatype: "html",
+                success: function(data) {
+                    console.log(data);
+                    $("#villa-data").html(data);
+                    $("#load-data-villa").addClass("d-none");
+                    removeSkeletonClass();
+                    if ($('.js-slider-2').hasClass('slick-initialized')) {
+                        $('.js-slider-2').slick('unslick');
+                    }
+                    $(".js-slider-2").slick({
+                        rtl: false,
+                        autoplay: false,
+                        autoplaySpeed: 5000,
+                        speed: 800,
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        variableWidth: true,
+                        pauseOnHover: false,
+                        easing: "linear",
+                        arrows: true
+                    });
+                    $('.js-slider-2 .slick-next').css('display', 'none');
+                    $('.js-slider-2 .slick-prev').css('display', 'none');
+                    $('.js-slider-2').mouseenter(function(e) {
+                        $(this).children('.slick-prev').css('display', 'block');
+                        $(this).children('.slick-next').css('display', 'block');
+                    })
+                    $('.js-slider-2').mouseleave(function(e) {
+                        $(this).children('.slick-prev').css('display', 'none');
+                        $(this).children('.slick-next').css('display', 'none');
+                    })
+                },
+                error: function(jqXHR, ajaxOptions, thrownError){
+                    alert('No response from server');
+                }
+            });
+        }
+
+    });
+    </script> --}}
 
     @auth
         @include('components.favorit.like-favorit')

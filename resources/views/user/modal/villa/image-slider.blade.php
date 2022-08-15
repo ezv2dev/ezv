@@ -73,7 +73,7 @@
         <h5 class="modal-title">Photo Gallery</h5>
         <button type="button" class="btn-close" onClick="closeModalGalleryMobile()"></button>
       </div>
-      <div class="modal-body p-0" style="height: 100vh; overflow-y: auto;">
+      <div class="modal-body p-0" style="height: 100vh; overflow-y: auto;" id="content-modal-photo-mobile">
                 @if ($photo->count() > 0)
                     @foreach ($photo->sortBy('order') as $item)
                     <div id="{{ $item->id_photo }}">

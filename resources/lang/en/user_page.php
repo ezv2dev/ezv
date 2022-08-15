@@ -141,7 +141,7 @@ return [
     'Share' => 'Share',
     'Share this place with your friend and family' => 'Share this place with your friend and family',
     'Copy Link' => 'Copy Link',
-    'Edit Position Video' => 'Edit Position Video',
+    'Edit Video Position' => 'Edit Video Position',
     'there is no image yet' => 'there is no image yet',
 
     'Kitchen' => 'Kitchen',
@@ -304,7 +304,7 @@ return [
     'Contact' => 'Contact',
     'FAQ' => 'FAQ',
     'Send' => 'Send',
-    'Edit Position Photos' => 'Edit Position Photos',
+    'Edit Photo Position' => 'Edit Photo Position',
 
     'Delete Menu' => 'Delete Menu',
     'x stars' => '[1] :number star|[*] :number stars',
@@ -508,7 +508,7 @@ return [
     "Hotel Name Here" => "Hotel Name Here",
     "Hotel Room Name Here" => "Hotel Room Name Here",
     "Wow Name Here" => "Wow Name Here",
-    "Wow Price Name Here" => "Wow Price Name Here",
+    "Wow Price Here" => "Wow Price Here",
     "Make your short description here" => "Make your short description here",
 
     "data not found" => "data not found",

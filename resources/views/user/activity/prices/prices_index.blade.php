@@ -407,7 +407,7 @@
                                             required>
                                         <input type="text" style="width: 100%;" class="form-control" name="name"
                                             id="name-form-input" maxlength="100" value="{{ $activityPrice->name }}"
-                                            placeholder="{{ __('user_page.Wow Price Name Here') }}" required>
+                                            placeholder="{{ __('user_page.Wow Price Here') }}" required>
                                         <button type="submit" class="btn btn-sm btn-primary"
                                             style="background-color: #ff7400">
                                             <i class="fa fa-check"></i> Done
@@ -2413,7 +2413,7 @@
             form.classList.add("d-block");
             content.classList.add("d-none");
 
-            if(formInput.value == 'Wow Price Name Here'){
+            if(formInput.value == 'Wow Price Here'){
                 formInput.value = '';
             }
         }
@@ -2426,7 +2426,7 @@
             content.classList.remove("d-none");
             formInput.value = '{{ $activityPrice->name }}';
 
-            if(formInput.value == 'Wow Price Name Here'){
+            if(formInput.value == 'Wow Price Here'){
                 formInput.value = '';
             }
         }
@@ -2742,7 +2742,7 @@
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content" style="background: white; border-radius:25px">
                 <div class="modal-header" style="padding-left: 18px;">
-                    <h7 class="modal-title" style="font-size: 1.875rem;">Edit Position Photos</h7>
+                    <h7 class="modal-title" style="font-size: 1.875rem;">Edit Photo Position</h7>
                     <button type="button" class="btn-close-modal" data-bs-dismiss="modal" aria-label="Close">
                         <i style="font-size: 22px;" class="fa-solid fa-xmark"></i>
                     </button>
@@ -2782,7 +2782,7 @@
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content" style="background: white; border-radius:25px">
                 <div class="modal-header" style="padding-left: 18px;">
-                    <h7 class="modal-title" style="font-size: 1.875rem;">Edit Position Video</h7>
+                    <h7 class="modal-title" style="font-size: 1.875rem;">Edit Video Position</h7>
                     <button type="button" class="btn-close-modal" data-bs-dismiss="modal" aria-label="Close">
                         <i style="font-size: 22px;" class="fa-solid fa-xmark"></i>
                     </button>
