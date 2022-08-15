@@ -214,10 +214,10 @@
                 </div>
             </div>
 
-            <div id="load-data-villa" style="position: absolute;" class="d-none">
-                <img style="position: absolute; left: 0; top: 0; z-index: 100000;" src="{{ asset('assets/ff7400-loading.gif') }}" />
-            </div>
             <div id="villa-data" class="grid-container-43 container__grid">
+                <div id="load-data-villa" style="position: absolute;">
+                    <img style="position: absolute; left: 0; top: 0; z-index: 100000;" src="{{ asset('assets/ff7400-loading.gif') }}" />
+                </div>
                 @include('user.data_list_villa')
             </div>
             <div></div>
