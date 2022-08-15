@@ -2188,57 +2188,88 @@ class ViewController extends Controller
         $accessibility_features = VillaAccessibilityFeatures::all();
         $accessibility_features_detail = VillaAccessibilitiyFeaturesDetail::all();
 
+        // function to save viewed id to prevent double data on list
+        // reset session if request page doesnt exist
+        if (!$request->has('page')) {
+            $request->session()->forget('viewed_id');
+        }
         //get all villa grade a - d
-        // $villa_a = Villa::where('status', 1)->where('grade', '=', 'A')->inRandomOrder()->get();
-        // $villa_b = Villa::where('status', 1)->where('grade', '=', 'B')->inRandomOrder()->get();
-        // $villa_c = Villa::where('status', 1)->where('grade', '=', 'C')->inRandomOrder()->get();
-        // $villa_d = Villa::where('status', 1)->where('grade', '=', 'D')->inRandomOrder()->get();
-        $villa = Villa::where('status', 1)->where('grade', '!=', 'AA')->inRandomOrder()->get()->sortBy('grade');
-        $villa_aa = Villa::where('grade', '=', 'AA')->where('status', 1)->inRandomOrder()->get();
-
-        // $villa = Villa::where('status', 1)
-
-        // $array_abas = [];
-
-        // $i = 0;
-        // if ($i = 0 || $i / 2 == 0) {
-        //     foreach ($villa_a as $item) {
-        //         $array_abas[$i] = $item;
-        //     }
-        // }
-        // else if ($i = 1 || ) {
-        //     foreach ($villa_b as $item) {
-        //         $array_abas($i) =
-        //     }
-        // }
-
-
-        // TODO uncomment when lazy load, start
-        // if ($request->itemIds) {
-        //     $villas = Villa::where('grade', '!=', 'AA')->where('status', 1)->whereNotIn('id_villa', $request->itemIds)->inRandomOrder()->get()->sortBy('grade');
-        //     $villa_aa = Villa::where('grade', '=', 'AA')->where('status', 1)->whereNotIn('id_villa', $request->itemIds)->inRandomOrder()->get();
-        // }
-
-        if ($villa->count() > 0 && $villa_aa->count() > 0) {
-            $split_count = $villa->count() / 4;
-            $villas_parted = $villa->split(ceil($split_count));
-            for ($i = 0; $i < $villa_aa->count(); $i++) {
-                if ($i == 0) {
-                    $villa = $villas_parted[0];
-                    $villa->push($villa_aa[0]);
-                } else {
-                    if (isset($villas_parted[$i])) {
-                        foreach ($villas_parted[$i] as $item) {
-                            $villa->push($item);
-                        }
-                        $villa->push($villa_aa[$i]);
-                    } elseif ($villa_aa[$i]) {
-                        $villa->push($villa_aa[$i]);
+        $villa = Villa::where('status',1)->inRandomOrder()->get();
+        if($villa){
+            if($request->session()->has('viewed_id')){
+                for ($i=0; $i < collect($request->session()->get('viewed_id'))->count(); $i++) {
+                    $id = $request->session()->get('viewed_id');
+                    $targetVilla = $villa->where('id_villa', $id)->first();
+                    if($targetVilla){
+                        $villa[] = $targetVilla;
                     }
                 }
+            } else {
+                $viewedIds = [];
+                foreach ($villa as $item) {
+                    $viewedIds[] = $item->id_villa;
+                }
+                $request->session()->put('viewed_id', $viewedIds);
             }
         }
 
+        // reorder by grade
+        $pattern = 'ABAS';
+        $indexPattern = 0;
+        $villaSorted = null;
+        $existIdOnVillaSorted = null;
+        $VillaListTemp = null;
+        $count = 0;
+        while (collect($existIdOnVillaSorted)->count() < $villa->count()) {
+            $targetGrade = substr($pattern,$indexPattern,1);
+            // add villa to villa sorted
+            if($targetGrade == 'A'){
+                $villaTarget = $villa->whereNotIn('id_villa', $existIdOnVillaSorted)->where('grade', $targetGrade)->first();
+                if($villaTarget){
+                    $villaSorted[] = $villaTarget;
+                    $existIdOnVillaSorted[] = $villaTarget->id_villa;
+                } else {
+                    $villaTarget = $villa->whereNotIn('id_villa', $existIdOnVillaSorted)->whereIn('grade', ['B', 'C', 'D'])->sortBy('grade')->first();
+                    if($villaTarget){
+                        $villaSorted[] = $villaTarget;
+                        $existIdOnVillaSorted[] = $villaTarget->id_villa;
+                    }
+                }
+                $count++;
+            } else if($targetGrade == 'B'){
+                $villaTarget = $villa->whereNotIn('id_villa', $existIdOnVillaSorted)->where('grade', $targetGrade)->first();
+                if($villaTarget){
+                    $villaSorted[] = $villaTarget;
+                    $existIdOnVillaSorted[] = $villaTarget->id_villa;
+                } else {
+                    $villaTarget = $villa->whereNotIn('id_villa', $existIdOnVillaSorted)->whereIn('grade', ['B', 'C', 'D'])->sortBy('grade')->first();
+                    if($villaTarget){
+                        $villaSorted[] = $villaTarget;
+                        $existIdOnVillaSorted[] = $villaTarget->id_villa;
+                    }
+                }
+                $count++;
+            } else if($targetGrade == 'S'){
+                $villaTarget = $villa->whereNotIn('id_villa', $existIdOnVillaSorted)->where('grade', 'AA')->first();
+                if($villaTarget){
+                    $villaSorted[] = $villaTarget;
+                    $existIdOnVillaSorted[] = $villaTarget->id_villa;
+                } else {
+                    $villaTarget = $villa->whereNotIn('id_villa', $existIdOnVillaSorted)->whereIn('grade', ['B', 'C', 'D'])->sortBy('grade')->first();
+                    if($villaTarget){
+                        $villaSorted[] = $villaTarget;
+                        $existIdOnVillaSorted[] = $villaTarget->id_villa;
+                    }
+                }
+            }
+            $indexPattern++;
+            if($indexPattern >= strlen($pattern)){
+                $indexPattern = 0;
+            }
+        }
+        $villa = collect($villaSorted);
+
+        // pagination
         $page = null;
         $perPage = env('CONTENT_PER_PAGE_LIST_VILLA');
         $villa = new \Illuminate\Pagination\LengthAwarePaginator(
@@ -2247,7 +2278,6 @@ class ViewController extends Controller
             $perPage,
             $page,
         );
-
         $villa->withPath(env('APP_URL') . "/homes-list");
         $villa->appends(request()->query());
 
