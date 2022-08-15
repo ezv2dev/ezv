@@ -686,13 +686,21 @@ input::-ms-reveal,input::-ms-clear{display:none;}
     <div class="container mb-5">
         <div class="row">
             <div class="col-2">
-                @if (Auth::user()->foto_profile != null)
-                    <img class="img-fluid" src="{{ asset('foto_profile/' . Auth::user()->foto_profile) }} ">
-                @elseIf (Auth::user()->avatar != null)
-                    <img class="img-fluid" src="{{ Auth::user()->avatar }}">
-                @else
-                    <img class="img-fluid" src="{{ asset('assets/icon/menu/user_default.svg') }}">
-                @endif
+                <div class="row">
+                    @if (Auth::user()->foto_profile != null)
+                        <img class="img-fluid" src="{{ asset('foto_profile/' . Auth::user()->foto_profile) }} ">
+                    @elseIf (Auth::user()->avatar != null)
+                        <img class="img-fluid" src="{{ Auth::user()->avatar }}">
+                    @else
+                        <img class="img-fluid" src="{{ asset('assets/icon/menu/user_default.svg') }}">
+                    @endif
+                </div>
+                <div class="row">
+                    <p class="m-auto">add photo <i class="fas fa-plus"></i></p>
+                </div>
+                <div class="row">
+                    <p class="m-auto">Get verified <i class="fas fa-check-square" style="color: #FF7400"></i></p>
+                </div>
             </div>
 
             <div class="col-5">
