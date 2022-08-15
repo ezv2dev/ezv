@@ -304,7 +304,7 @@ return [
     'Contact' => 'Contact',
     'FAQ' => 'FAQ',
     'Send' => 'Send',
-    'Edit Position Photos' => 'Edit Position Photos',
+    'Edit Photo Position' => 'Edit Photo Position',
 
     'Delete Menu' => 'Delete Menu',
     'x stars' => '[1] :number star|[*] :number stars',

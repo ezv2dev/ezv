@@ -302,7 +302,7 @@ return [
     'Contact' => 'Kontak',
     'FAQ' => 'FAQ',
     'Send' => 'Kirim',
-    'Edit Position Photos' => 'Ubah Posisi Foto',
+    'Edit Photo Position' => 'Ubah Posisi Foto',
 
     'Delete Menu' => 'Hapus Menu',
     'x stars' => '[1] :number bintang|[*] :number bintang',

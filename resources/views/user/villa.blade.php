@@ -4121,7 +4121,7 @@
             <div class="modal-content" style="background: white;">
                 <div class="modal-header" style="padding-left: 18px;">
                     <h7 class="modal-title" style="font-size: 1.875rem;">
-                        {{ __('user_page.Edit Position Photos') }}</h7>
+                        {{ __('user_page.Edit Photo Position') }}</h7>
                     <button type="button" class="btn-close-modal" data-bs-dismiss="modal" aria-label="Close"><i
                             style="font-size: 22px;" class="fa-solid fa-xmark"></i></button>
                 </div>
