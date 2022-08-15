@@ -54,6 +54,7 @@ if (isset($_COOKIE['tema'])) {
 </script>
 
 <div class="price-breakdown-overlay d-none" onclick="closepricebreakdown()"></div>
+
     @if (count($villas) == 0)
         <div class="container">
             <div class="row justify-content-center">
