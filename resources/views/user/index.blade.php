@@ -1176,9 +1176,9 @@
                                 </div>
                             </div>
                         @else
-                            <a href="{{ route('ahost') }}" class="navbar-gap" style="color: #b9b9b9;" target="_blank">
+                            {{-- <a href="{{ route('ahost') }}" class="navbar-gap" style="color: #b9b9b9;" target="_blank">
                                 {{ __('user_page.Become a host') }}
-                            </a>
+                            </a> --}}
 
                             <a type="button" onclick="language()" class="navbar-gap"
                                 style="color: white; margin-right: 9px; width:27px;" id="language">
@@ -1320,7 +1320,7 @@
                         <p>Would you like some assistance creating your new listing?</p>
                         <p>Already have your property listed on another travel platform?</p>
                         <div class="sp-75"></div>
-                        <button class="letsgo" onclick="open_form()">Support</button>
+                        <button class="letsgo" onclick="viewModalcontact()">Support</button>
                         <div class="sp-75"></div>
                         <p>Click the support button above to connect with one<br> of our team to help speed up the
                             lsiting

@@ -2931,10 +2931,10 @@ span.flatpickr-weekday {
 
 @media (min-width: 1200px) { 
     .support-section{
-        padding: 3rem 5.7rem 1rem !important;
+        padding: 3rem 5.7rem 3rem !important;
     }
     .recomendation-section{
-        padding: 0rem 5.7rem 1rem !important;
+        padding: 0rem 5.7rem 3rem !important;
     }
     .location-section{
         padding: 0rem 5.7rem 1rem !important;
