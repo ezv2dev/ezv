@@ -377,11 +377,38 @@
                         value="{{ Translate::translate('RESERVE NOW') }}">
                     </div> --}}
 
-                    <div class="col-12 text-center">
+                    <hr>
+                    @guest
+                        <div class="row">
+                            <div class="col-6">
+                                <input type="text" id="first_name_enquiry" class="form-control" name="first_name_enquiry" placeholder="First Name">
+                            </div>
+                            <div class="col-6">
+                                <input type="text" id="last_name_enquiry" class="form-control" name="last_name_enquiry" placeholder="Last Name">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <input type="email" id="email_enquiry" class="form-control" name="email_enquiry" placeholder="Email">
+                        </div>
+                        <div class="col-12" style="margin-bottom:10px;">
+                            <input type="text" id="phone_enquiry" class="form-control" name="phone_enquiry" placeholder="Phone/Whatsapp Number">
+                        </div>
+                    @endguest
+
+                    @auth
+                        <input type="hidden" id="id_user_enquiry" name="id_user_enquiry" value="{{ Auth::user()->id }}">
+                    @endauth
+
+                    <div class="col-12 text-center" id ="button_enquiry" style="display:block;">
                         <input class="price-button" style="cursor: pointer; text-align: center;"
                         onclick="enquirybooking()"
                         value="ENQUIRY NOW">
                     </div>
+
+                    <div class="col-12 text-center" id ="loading-image" style="display:none;">
+                        <img src="{{ URL::asset('assets/ff7400-loading.gif') }}" style="width: 60px;">
+                    </div>
+
                 {{-- </form> --}}
 
                 {{-- <div id="success" style="display:none;">
@@ -430,7 +457,7 @@
         </div>
     </div>
 </div>
-<script>
+{{-- <script>
     $(function() {
         // Virtual Account
         @guest
@@ -869,7 +896,7 @@
         }
 
     }
-</script>
+</script> --}}
 {{-- <script>
     function confirmBooking() {
         $('#btnBookingDetail').trigger('click');
@@ -878,48 +905,110 @@
 
 <script>
     function enquirybooking() {
-        $.ajax({
-            type: "POST",
-            headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-            },
-            url: "/villa/enquiry/store",
-            data: {
-                id_villa: $('#id_villa_detail').val(),
-                adult: $('#adult4').val(),
-                child: $('#child4').val(),
-                infant: $('#infant4').val(),
-                pet: $('#pet4').val(),
-                check_in: $('#check_in3').val(),
-                check_out: $('#check_out3').val(),
-            },
-            success: function (response) {
+        $('#button_enquiry').hide();
+        $('#loading-image').show();
+        if(`{{ Auth::check() }}` == 'true')
+        {
+            $.ajax({
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                url: "/villa/enquiry/store",
+                data: {
+                    id_villa: $('#id_villa_detail').val(),
+                    adult: $('#adult4').val(),
+                    child: $('#child4').val(),
+                    infant: $('#infant4').val(),
+                    pet: $('#pet4').val(),
+                    check_in: $('#check_in3').val(),
+                    check_out: $('#check_out3').val(),
+                    id_user: $('#id_user_enquiry').val(),
+                },
+                success: function (response) {
 
-                iziToast.success({
-                    title: "Success",
-                    message: response.message,
-                    position: "topRight",
-                });
+                    iziToast.success({
+                        title: "Success",
+                        message: response.message,
+                        position: "topRight",
+                    });
 
-                $('#modal-cohost').modal('hide');
-            },
-            error: function (jqXHR, exception) {
-                if (jqXHR.responseJSON.errors) {
-                    for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                    $('#loading-image').hide();
+                    $('#button_enquiry').show();
+                    $('#modal-details-reserve').modal('hide');
+                },
+                error: function (jqXHR, exception) {
+                    $('#loading-image').hide();
+                    $('#button_enquiry').show();
+                    if (jqXHR.responseJSON.errors) {
+                        for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                            iziToast.error({
+                                title: "Error",
+                                message: jqXHR.responseJSON.errors[i],
+                                position: "topRight",
+                            });
+                        }
+                    } else {
                         iziToast.error({
                             title: "Error",
-                            message: jqXHR.responseJSON.errors[i],
+                            message: jqXHR.responseJSON.message,
                             position: "topRight",
                         });
                     }
-                } else {
-                    iziToast.error({
-                        title: "Error",
-                        message: jqXHR.responseJSON.message,
+                },
+            });
+        }else{
+            $.ajax({
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                url: "/villa/enquiry/store",
+                data: {
+                    id_villa: $('#id_villa_detail').val(),
+                    adult: $('#adult4').val(),
+                    child: $('#child4').val(),
+                    infant: $('#infant4').val(),
+                    pet: $('#pet4').val(),
+                    check_in: $('#check_in3').val(),
+                    check_out: $('#check_out3').val(),
+                    first_name: $('#first_name_enquiry').val(),
+                    last_name: $('#last_name_enquiry').val(),
+                    email: $('#email_enquiry').val(),
+                    phone: $('#phone_enquiry').val(),
+                },
+                success: function (response) {
+
+                    iziToast.success({
+                        title: "Success",
+                        message: response.message,
                         position: "topRight",
                     });
-                }
-            },
-        });
+
+                    $('#loading-image').hide();
+                    $('#button_enquiry').show();
+                    $('#modal-details-reserve').modal('hide');
+                },
+                error: function (jqXHR, exception) {
+                    $('#loading-image').hide();
+                    $('#button_enquiry').show();
+                    if (jqXHR.responseJSON.errors) {
+                        for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                            iziToast.error({
+                                title: "Error",
+                                message: jqXHR.responseJSON.errors[i],
+                                position: "topRight",
+                            });
+                        }
+                    } else {
+                        iziToast.error({
+                            title: "Error",
+                            message: jqXHR.responseJSON.message,
+                            position: "topRight",
+                        });
+                    }
+                },
+            });
+        }
     }
 </script>
