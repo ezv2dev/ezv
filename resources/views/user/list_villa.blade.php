@@ -65,9 +65,9 @@
             cursor: pointer;
         }
         @media only screen and (max-width: 328px) {
-            .guests {
+            /* .guests {
                 min-width: 234px;
-            }
+            } */
             .guest-popup {
                 left: -18px !important;
             }

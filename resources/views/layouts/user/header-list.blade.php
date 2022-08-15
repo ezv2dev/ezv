@@ -1050,13 +1050,14 @@
                                     </div>
 
                                     <div class="button">
-                                        <button type="submit" class="d-block ms-auto me-1"
-                                            style="z-index: 1; border: none; background: transparent;"
+                                        <button type="submit" class="btn-company d-block ms-auto me-1"
+                                            style="z-index: 1; border: none; background: transparent; padding: 10px 15px !important;"
                                             onclick="homesFilter({{ request()->get('fPropertyType') ?? 'null' }}, {{ request()->get('fAmenities') ?? 'null' }})">
-                                            <div class="cari">
+                                            Search
+                                            {{-- <div class="cari">
                                                 <img src="{{ asset('assets/icon/menu/search.svg') }}"
                                                     style="width: 20px; height: auto;">
-                                            </div>
+                                            </div> --}}
                                             <!-- <i class="fa fa-search cari"></i> -->
                                         </button>
                                     </div>
@@ -1449,7 +1450,7 @@
                                             class="form-control input-transparant"
                                             value="{{ Request::is('hotel-list*') || $get_loc == null ? '' : $get_loc }}"
                                             id="loc_sugest_desktop" name="sLocation"
-                                            style="width: 100% !important; height: 60px; position: absolute; padding-top: 14px; top: 4px; left: 3px; cursor: pointer;"
+                                            style="width: 100% !important; height: 60px; position: absolute; padding-top: 14px; top: 4px; left: 3px; cursor: pointer; border: none;"
                                             placeholder="{{ __('user_page.Where are you going?') }}">
 
                                         <div id="sugest_desktop" class="location-popup display-none">
@@ -1784,13 +1785,14 @@
                                     </div>
 
                                     <div class="button">
-                                        <button type="submit" class="d-block ms-auto me-1"
-                                            style="z-index: 1; border: none; background: transparent;"
+                                        <button type="submit" class="btn-company d-block ms-auto me-1"
+                                            style="z-index: 1; border: none; background: transparent; padding: 10px 15px !important;"
                                             onclick="hotelFilter({{ request()->get('fCategory') ?? 'null' }}, {{ request()->get('filter') ?? 'null' }}, false)">
-                                            <div class="cari">
+                                            Search
+                                            {{-- <div class="cari">
                                                 <img src="{{ asset('assets/icon/menu/search.svg') }}"
                                                     style="width: 20px; height: auto;">
-                                            </div>
+                                            </div> --}}
                                             <!-- <i class="fa fa-search cari"></i> -->
                                         </button>
                                     </div>
@@ -4696,8 +4698,15 @@
                         $(".bar .check-out").removeClass("col-6 mb-2");
                         $(".bar-activity .check-out").removeClass("col-12 mb-2");
                         $(".bar-collaborator .check-out").removeClass("col-12 mb-2");
-                        $(".bar .guests").removeClass("col-10");
-                        $(".bar .button").removeClass("col-2");
+                        $(".bar .guests").removeClass("col-6 col-10");
+                        $(".bar .button").removeClass("col-6 col-2");
+                    }
+                    if (windowWidth <= 649) {
+                        $(".bar-villa .guests").removeClass("col-10").addClass("col-6");
+                        $(".bar-villa .button").removeClass("col-2").addClass("col-6");
+                    } else if (windowWidth > 649 && windowWidth <= 991) {
+                        $(".bar-villa .guests").removeClass("col-6").addClass("col-10");
+                        $(".bar-villa .button").removeClass("col-6").addClass("col-2");
                     }
                     if (windowWidth > 1360) {
                         var gap = ((windowWidth - 1360) / 2) + 100;
