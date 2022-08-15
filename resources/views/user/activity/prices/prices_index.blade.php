@@ -407,7 +407,7 @@
                                             required>
                                         <input type="text" style="width: 100%;" class="form-control" name="name"
                                             id="name-form-input" maxlength="100" value="{{ $activityPrice->name }}"
-                                            placeholder="{{ __('user_page.Wow Price Name Here') }}" required>
+                                            placeholder="{{ __('user_page.Wow Price Here') }}" required>
                                         <button type="submit" class="btn btn-sm btn-primary"
                                             style="background-color: #ff7400">
                                             <i class="fa fa-check"></i> Done
@@ -2413,7 +2413,7 @@
             form.classList.add("d-block");
             content.classList.add("d-none");
 
-            if(formInput.value == 'Wow Price Name Here'){
+            if(formInput.value == 'Wow Price Here'){
                 formInput.value = '';
             }
         }
@@ -2426,7 +2426,7 @@
             content.classList.remove("d-none");
             formInput.value = '{{ $activityPrice->name }}';
 
-            if(formInput.value == 'Wow Price Name Here'){
+            if(formInput.value == 'Wow Price Here'){
                 formInput.value = '';
             }
         }

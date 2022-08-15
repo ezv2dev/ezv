@@ -508,7 +508,7 @@ return [
     "Hotel Name Here" => "Hotel Name Here",
     "Hotel Room Name Here" => "Hotel Room Name Here",
     "Wow Name Here" => "Wow Name Here",
-    "Wow Price Name Here" => "Wow Price Name Here",
+    "Wow Price Here" => "Wow Price Here",
     "Make your short description here" => "Make your short description here",
 
     "data not found" => "data not found",
