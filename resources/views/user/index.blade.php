@@ -1313,7 +1313,7 @@
             <!-- End Advert Download App Uncomment this when back to old design -->
 
             <!-- Support section Comment this when back to old design -->
-            <section style="padding: 0rem 5.7rem 1rem; !important" class="pt-5">
+            <section class="support-section pt-5">
                 <div class="col-12">
                     <div class="help-section-home text-right text-white">
                         <h1>We are here to help 24/7</h1>
@@ -1335,11 +1335,11 @@
             {{-- Restaurant --}}
 
             <!-- Recomendation section Comment this when back to old design-->
-            <section style="padding: 0rem 5.7rem 1rem; !important">
+            <section class="recomendation-section">
 
                 <h3 class="host-body-text mb-0 text-center text-orange">A World of Possibilities</h3>
 
-                <div class="row-grid-img-home pt-4">
+                <div class="row-grid-img-home pt-5">
                     <!-- Image row 1-->
                     <div class="grid-img-container">
                         <img src="https://source.unsplash.com/featured?people,student">
@@ -1493,11 +1493,11 @@
             <!-- Recomendation section Comment this when back to old design -->
 
             <!-- Location section Comment this when back to old design-->
-                <section style="padding: 0rem 5.7rem 1rem; !important">
+                <section class="location-section">
 
                     <h3 class="host-body-text mb-0 text-center">The Finest Locations</h3>
 
-                    <div class="row-grid-img-location pt-4">
+                    <div class="row-grid-img-location pt-5">
                         <!-- Image row 1-->
                         <div class="grid-img-container flex-column">
                             <img src="https://source.unsplash.com/featured?people,student">
