@@ -104,7 +104,7 @@ class ViewController extends Controller
     {
         $address = Villa::with(['location' => function ($query) {
             $query->select('id_location', 'name')->groupBy('id_location');
-        }])->select('address', 'id_location')->where('address', '!=', null)->orderBy('id_location')->get();
+        }])->select('address', 'id_location')->where('status', 1)->where('address', '!=', null)->orderBy('id_location')->get();
         return $address;
     }
 

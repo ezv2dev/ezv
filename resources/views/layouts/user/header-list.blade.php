@@ -169,11 +169,13 @@
         .guests {
             min-width: 241px;
         }
+
         @media only screen and (max-width: 328px) {
             .guests {
                 min-width: 234px;
             }
         }
+
         .btn-filter-header {
             outline: none;
             background: #ff7400;
@@ -674,8 +676,8 @@
                                             </p>
                                         </a>
                                     @endif
-                                    <a href="{{ route('ahost') }}" id="activity-form"
-                                        class="nav-link-form-detail" target="_blank" style="margin-left: 60px;">
+                                    <a href="{{ route('ahost') }}" id="activity-form" class="nav-link-form-detail"
+                                        target="_blank" style="margin-left: 60px;">
                                         <div
                                             class="list-description nav-link-gap nav-link-style-detail nav-link-icon-style-detail {{ $textColor }}">
                                             <img src="{{ asset('assets/icon/menu/list.svg') }}"
@@ -707,6 +709,7 @@
                                             @php
                                                 $location = App\Http\Controllers\ViewController::get_location();
                                                 $hotelName = App\Http\Controllers\HotelController::get_name();
+                                                $addressName = App\Http\Controllers\ViewController::get_address();
                                                 $restaurantName = App\Http\Controllers\Restaurant\RestaurantController::get_name();
                                                 $activityName = App\Http\Controllers\Activity\ActivityController::get_name();
                                             @endphp
@@ -795,6 +798,19 @@
                                                         <div class="location-popup-text sugest-list-text">
                                                             <a type="button" class="location_op"
                                                                 data-value="{{ $item->name }}">{{ $item->name }}</a>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                                @foreach ($addressName as $item)
+                                                    <div class="col-lg-12 location-popup-desc-container sugest-list"
+                                                        style="display: none ">
+                                                        <div class="location-popup-map sugest-list-map">
+                                                            <img class="location-popup-map-image"
+                                                                src="https://thumbs.dreamstime.com/b/isometric-d-map-location-pins-gps-navigation-vector-background-isometric-d-map-location-pins-gps-navigation-vector-101080012.jpg">
+                                                        </div>
+                                                        <div class="location-popup-text sugest-list-text">
+                                                            <a type="button" class="location_op"
+                                                                data-value="{{ $item->address }}, {{ $item->location->name }}">{{ $item->address }}, {{ $item->location->name }}</a>
                                                         </div>
                                                     </div>
                                                 @endforeach
@@ -2094,8 +2110,8 @@
                                             </p>
                                         </a>
                                     @endif
-                                    <a href="{{ route('ahost') }}" id="activity-form"
-                                        target="_blank" class="nav-link-form-detail" style="margin-left: 60px;">
+                                    <a href="{{ route('ahost') }}" id="activity-form" target="_blank"
+                                        class="nav-link-form-detail" style="margin-left: 60px;">
                                         <div
                                             class="list-description nav-link-gap nav-link-style-detail nav-link-icon-style-detail {{ $textColor }}">
                                             <img src="{{ asset('assets/icon/menu/list.svg') }}"
@@ -2657,8 +2673,9 @@
                                     <div class="guests" style="min-width: max-content !important;">
                                         <p>{{ __('user_page.What do you want to eat ?') }}</p>
                                         <input autocomplete="off" type="text" onfocus="this.value=''"
-                                            class="form-control input-transparant input-search-food" name="sKeyword" value=""
-                                            id="search_sugest" placeholder="{{ __('user_page.Search here') }}">
+                                            class="form-control input-transparant input-search-food" name="sKeyword"
+                                            value="" id="search_sugest"
+                                            placeholder="{{ __('user_page.Search here') }}">
 
                                         <div id="sugest2" class="location-popup display-none"
                                             style="width: 560px; left: -262px; height: 390px;">
@@ -3050,9 +3067,8 @@
                                                 </p>
                                             </a>
                                         @endif
-                                        <a href="{{ route('ahost') }}" id="activity-form"
-                                            target="_blank" class="nav-link-form-detail"
-                                            style="margin-left: 64px;">
+                                        <a href="{{ route('ahost') }}" id="activity-form" target="_blank"
+                                            class="nav-link-form-detail" style="margin-left: 64px;">
                                             <div
                                                 class="list-description nav-link-gap nav-link-style-detail nav-link-icon-style-detail {{ $textColor }}">
                                                 <img src="{{ asset('assets/icon/menu/list.svg') }}"
@@ -3967,9 +3983,9 @@
                     </label>
                     <div style="width: 60%;">
                         <!-- <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap"
-                                                                                                                                                                                                                                style="color: #ff7400; width: 35px; height: 35px; border-radius: 50%; background-color: white; display: inline-block; display: flex; align-items: center; justify-content: center;">
-                                                                                                                                                                                                                                <i class="fa-solid fa-user icon-clear"></i>
-                                                                                                                                                                                                                            </a> -->
+                                                                                                                                                                                                                                        style="color: #ff7400; width: 35px; height: 35px; border-radius: 50%; background-color: white; display: inline-block; display: flex; align-items: center; justify-content: center;">
+                                                                                                                                                                                                                                        <i class="fa-solid fa-user icon-clear"></i>
+                                                                                                                                                                                                                                    </a> -->
                         <div class="dropdown">
                             <button type="button" id="btnMenuDropdown"
                                 class="btn-dropdwn dropbtn btn border-0 navbar-gap"></button>
@@ -4150,7 +4166,7 @@
                     $(this).removeAttr("style");
                 });
 
-                $(window).resize(function(){
+                $(window).resize(function() {
                     if (window.innerWidth > 991) {
                         $(".btn-close-expand-navbar-mobile").trigger('click')
                     }
@@ -4860,7 +4876,7 @@
                 if (tipe == 'light') {
                     fontLight.addClass('font-black');
                     fontLight.removeClass('font-light');
-                    
+
                     text.classList.remove('bg-body-black');
                     text.classList.add('bg-body-light');
                     nav.classList.remove('bg-body-black');
