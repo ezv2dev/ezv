@@ -5,17 +5,17 @@
                 <div class="modal-header">
                     <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="modal-body">
-                    <section id="start" class="p-3 p-lg-5 h1-00 w-100">
+                <div class="modal-body p-0">
+                    <section id="start" class="p-3 p-lg-5 h1-00 w-100 bg-black">
                         <div>
                             <div class="row">
 
                                 <div class="col-12 col-md-6 video-text-section"> 
                                     <h1 style="color: #ff7400;">Video content is trending</h1>
-                                    <p>EZV Worlds 1<sup>st</sup> booking platform with a video search engine</p>
-                                    <p>68% of costumers prefer watching videos to learn about new</p>
-                                    <p>Show case what makes your property unique with short videos</p>
-                                    <p>EZV Collab Portal, allows host to meet & create high quality content with professional verified creators from Videographers, Photographers, Drone Pilots, Blogger and more</p> 
+                                    <p class="text-white">EZV Worlds 1<sup>st</sup> booking platform with a video search engine</p>
+                                    <p class="text-white">68% of costumers prefer watching videos to learn about new</p>
+                                    <p class="text-white">Show case what makes your property unique with short videos</p>
+                                    <p class="text-white">EZV Collab Portal, allows host to meet & create high quality content with professional verified creators from Videographers, Photographers, Drone Pilots, Blogger and more</p> 
                                     <div class="col-12 d-flex justify-content-center pt-5">
                                         <button class="letsgo" onclick="window.location.href='#start';">Get Started</button>
                                     </div>
@@ -57,7 +57,7 @@
                                         <div class="col-12 col-lg-6 left-20">
                                             <!-- <div class="add-link d-block" id="input-link-listing-button"
                                                 onclick="open_input_link_listing()">Add Link</div> -->
-                                            <input class="form-control" placeholder="Add link">
+                                            <input class="form-control" placeholder="Add link +">
                                             <p class="top-50">Please add a link to one of your current listings on another site to help with designing
                                                 your first EZV listing even faster</p>
                                             <div class="row">
