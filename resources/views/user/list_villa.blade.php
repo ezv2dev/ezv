@@ -568,6 +568,57 @@
         }
     </script>
 
+    <!-- Pagination AJAX -->
+    <script>
+    $(document).ready(function(){
+
+        $(document).on('click', '.pagination a', function(event){
+            event.preventDefault();
+            $('li').removeClass('active');
+            $(this).parent('li').addClass('active');
+
+            document.getElementById('body-color').scrollIntoView();
+
+            var url = $(this).attr('href');
+            var page = $(this).attr('href').split('page=')[1];
+            window.history.pushState({}, null, url);
+            fetch_data(page);
+        });
+
+        function fetch_data(page) {
+            $.ajax({
+                url: "/homes-list?page="+page,
+                type: "get",
+                datatype: "html",
+                success: function(data) {
+                    console.log(data);
+                    $("#villa-data").html(data);
+                    removeSkeletonClass();
+                    if ($('.js-slider-2').hasClass('slick-initialized')) {
+                        $('.js-slider-2').slick('unslick');
+                    }
+                    $(".js-slider-2").slick({
+                        rtl: false,
+                        autoplay: false,
+                        autoplaySpeed: 5000,
+                        speed: 800,
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        variableWidth: true,
+                        pauseOnHover: false,
+                        easing: "linear",
+                        arrows: true
+                    });
+                },
+                error: function(jqXHR, ajaxOptions, thrownError){
+                    alert('No response from server');
+                }
+            });
+        }
+
+    });
+    </script>
+
     @auth
         @include('components.favorit.like-favorit')
     @endauth

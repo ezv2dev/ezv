@@ -2185,9 +2185,31 @@ class ViewController extends Controller
         $accessibility_features_detail = VillaAccessibilitiyFeaturesDetail::all();
 
         //get all villa grade a - d
+        // $villa_a = Villa::where('status', 1)->where('grade', '=', 'A')->inRandomOrder()->get();
+        // $villa_b = Villa::where('status', 1)->where('grade', '=', 'B')->inRandomOrder()->get();
+        // $villa_c = Villa::where('status', 1)->where('grade', '=', 'C')->inRandomOrder()->get();
+        // $villa_d = Villa::where('status', 1)->where('grade', '=', 'D')->inRandomOrder()->get();
         $villa = Villa::where('status', 1)->where('grade', '!=', 'AA')->inRandomOrder()->get()->sortBy('grade');
-        // TODO uncomment when lazy load, start
         $villa_aa = Villa::where('grade', '=', 'AA')->where('status', 1)->inRandomOrder()->get();
+
+        // $villa = Villa::where('status', 1)
+
+        // $array_abas = [];
+
+        // $i = 0;
+        // if ($i = 0 || $i / 2 == 0) {
+        //     foreach ($villa_a as $item) {
+        //         $array_abas[$i] = $item;
+        //     }
+        // }
+        // else if ($i = 1 || ) {
+        //     foreach ($villa_b as $item) {
+        //         $array_abas($i) =
+        //     }
+        // }
+
+
+        // TODO uncomment when lazy load, start
         // if ($request->itemIds) {
         //     $villas = Villa::where('grade', '!=', 'AA')->where('status', 1)->whereNotIn('id_villa', $request->itemIds)->inRandomOrder()->get()->sortBy('grade');
         //     $villa_aa = Villa::where('grade', '=', 'AA')->where('status', 1)->whereNotIn('id_villa', $request->itemIds)->inRandomOrder()->get();
@@ -2344,9 +2366,10 @@ class ViewController extends Controller
         $villaFilter = VillaFilter::all();
         $amenities = Amenities::select('icon', 'name', 'order', 'id_amenities')->get();
 
-        // if ($request->ajax()) {
-        //     return view('user.data_list_villa', compact('villa', 'amenities'))->render();
-        // }
+        //pagination ajax
+        if ($request->ajax()) {
+            return view('user.data_list_villa', compact('villa', 'amenities'))->render();
+        }
 
         return view('user.list_villa', compact('villa', 'amenities', 'host_language', 'propertyType', 'villaCategory', 'villaFilter', 'accessibility_features', 'accessibility_features_detail'));
     }
