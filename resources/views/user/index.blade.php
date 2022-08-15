@@ -1176,9 +1176,9 @@
                                 </div>
                             </div>
                         @else
-                            {{-- <a href="{{ route('ahost') }}" class="navbar-gap" style="color: #b9b9b9;" target="_blank">
-                                {{ __('user_page.Become a host') }}
-                            </a> --}}
+                            <a href="{{ route('ahost') }}" class="navbar-gap" style="color: #b9b9b9;" target="_blank">
+                                {{ __('user_page.Create Listing') }}
+                            </a> 
 
                             <a type="button" onclick="language()" class="navbar-gap"
                                 style="color: white; margin-right: 9px; width:27px;" id="language">
