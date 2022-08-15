@@ -94,6 +94,8 @@
                     <div class="col-12"
                         style="display: flex; border: 2px solid #FF7400; border-radius: 15px; padding-top: 15px; padding-bottom: 15px; box-shadow: 1px 1px 10px #a4a4a4">
 
+                        <input type="hidden" value="{{ $villa[0]->id_villa }}" id="id_villa_detail" name="id_villa_detail">
+
                         <div class="col-6 p-5-price line-right-orange">
                             <div class="col-12" style="text-align: center;">
                                 <button type="button" class="collapsible_check2" style="background-color: white;">
@@ -354,7 +356,7 @@
                     </div>
                 </div>
 
-                <div class="row">
+                {{-- <div class="row">
                     <div class="col-9">
                         <p class="price-box">
                             <span style="font-size:14px;">{{ Translate::translate('Cancellation policy') }}</span>
@@ -367,16 +369,22 @@
                                 2022.No refund if you cancel after Nov 3, 2022.</span>
                         </p>
                     </div>
-                </div>
+                </div> --}}
 
-                    <div class="col-12 text-center">
+                    {{-- <div class="col-12 text-center">
                         <input class="price-button" type="submit"
                         onclick="confirmBooking()"
                         value="{{ Translate::translate('RESERVE NOW') }}">
+                    </div> --}}
+
+                    <div class="col-12 text-center">
+                        <input class="price-button" style="cursor: pointer; text-align: center;"
+                        onclick="enquirybooking()"
+                        value="ENQUIRY NOW">
                     </div>
                 {{-- </form> --}}
 
-                <div id="success" style="display:none;">
+                {{-- <div id="success" style="display:none;">
                     <p>Success! Use the token id below to charge the credit card.</p>
                     <div class="request">
                         <span>REQUEST DATA</span>
@@ -394,7 +402,7 @@
                     </div>
                     <span>RESPONSE</span>
                     <pre class="result"></pre>
-                </div>
+                </div> --}}
 
 
                 {{-- <div class="overlay" style="display: none;"></div>
@@ -862,8 +870,56 @@
 
     }
 </script>
-<script>
+{{-- <script>
     function confirmBooking() {
         $('#btnBookingDetail').trigger('click');
+    }
+</script> --}}
+
+<script>
+    function enquirybooking() {
+        $.ajax({
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: "/villa/enquiry/store",
+            data: {
+                id_villa: $('#id_villa_detail').val(),
+                adult: $('#adult4').val(),
+                child: $('#child4').val(),
+                infant: $('#infant4').val(),
+                pet: $('#pet4').val(),
+                check_in: $('#check_in3').val(),
+                check_out: $('#check_out3').val(),
+            },
+            success: function (response) {
+
+                iziToast.success({
+                    title: "Success",
+                    message: response.message,
+                    position: "topRight",
+                });
+
+                $('#modal-cohost').modal('hide');
+            },
+            error: function (jqXHR, exception) {
+                if (jqXHR.responseJSON.errors) {
+                    for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                        iziToast.error({
+                            title: "Error",
+                            message: jqXHR.responseJSON.errors[i],
+                            position: "topRight",
+                        });
+                    }
+                } else {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.message,
+                        position: "topRight",
+                    });
+                }
+            },
+        });
     }
 </script>
