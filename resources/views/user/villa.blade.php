@@ -4908,6 +4908,7 @@
                 let contentPositionModal;
                 let contentPositionModalVideo;
                 let contentStory = "";
+                let contentPhotoModalMobile = "";
 
                 let modalPhotoLength = $('#sortable-photo').find('li').length;
                 let modalVideoLength = $('#sortable-video').find('li').length;
@@ -4943,7 +4944,7 @@
 
                     contentMobile += '<div class="col-4 grid-photo" id="displayPhoto' +
                         message.data.photo[0].id_photo +
-                        '"> <a data-toggle="modal" data-target="#modal-photo-gallery" data-section="'+message.data.photo[0].id_photo+'"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
+                        '"> <a onclick="openModalGalleryMobile('+message.data.photo[0].id_photo+')"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
                         path + lowerCaseUid + slash + message.data.photo[0].name +
                         '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $villa[0]->id_villa }}" data-photo="' +
                         message.data.photo[0].id_photo +
@@ -4955,9 +4956,17 @@
                         path + lowerCaseUid + slash + message.data.photo[0].name +
                         '" title="' + message.data.photo[0].name + '"> </li>';
 
+                    contentPhotoModalMobile += '<div id="'+ message.data.photo[0].id_photo +'">';
+                    contentPhotoModalMobile += '<div class="modal-gallery">'
+                    contentPhotoModalMobile += '<img id="displayPhoto'+ message.data.photo[0].id_photo +'" class="lozad-gallery-load lozad-gallery mb-2"';
+                    contentPhotoModalMobile += 'src="' +
+                        path + lowerCaseUid + slash + message.data.photo[0].name +
+                        '" title="' + message.data.photo[0].name + '"> </div></div>';
+
                     desktop.find('.gallery').append(content);
                     mobile.find('.gallery').append(contentMobile);
                     $('#sortable-photo').append(contentPositionModal);
+                    $("#content-modal-photo-mobile").append(contentPhotoModalMobile);
                 }
 
                 if (message.data.video.length > 0) {
