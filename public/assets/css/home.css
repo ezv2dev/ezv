@@ -2726,3 +2726,221 @@ span.flatpickr-weekday {
 .modal-open {
     padding-right: 0 !important;
 }
+
+.help-section-home {
+    background: url(/assets/media/photos/customer-services.webp);
+    background-color: #000;
+    background-size: cover;
+    background-position: 50% 50%;
+    padding: 60px 30px;
+    border-radius: 12px;
+    height: 75vh;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.sp-75 {
+    height: 75px;
+}
+
+.letsgo {
+    background: #ff7400;
+    padding: 10px 22px;
+    color: #fff;
+    border: solid 1px #ff7400;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+.help-section-home p {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 20px;
+    line-height: 1.2;
+    text-shadow: 1px 1px 2px #000;
+}
+
+
+.row-grid-img-home {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    grid-template-rows: repeat(1, auto) !important;
+    gap: 15px;
+    display: grid;
+}
+
+.row-grid-img-location {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-rows: repeat(1, auto) !important;
+    gap: 15px;
+    display: grid;
+}
+
+.grid-img-container {
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    text-align: center;
+}
+
+.row-grid-img-home img {
+    max-width: 100%;
+    aspect-ratio: 1/1;
+    border-radius: 12px;
+    object-fit: cover;
+    box-shadow: 1px 1px 1px rgb(0 0 0 / 4%);
+    border: solid 1px #cdcdcd;
+    background: #cdcdcd;
+    filter: brightness(60%);
+}
+
+.row-grid-img-location img {
+    max-width: 100%;
+    aspect-ratio: 1/1;
+    border-radius: 12px;
+    object-fit: cover;
+    box-shadow: 1px 1px 1px rgb(0 0 0 / 4%);
+    border: solid 1px #cdcdcd;
+    background: #cdcdcd;
+    filter: brightness(60%);
+}
+
+.bottom-image-home {
+    background: url(/assets/media/photos/follow-that-dream-2.webp);
+    background-position: 80% 50%;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+}
+
+.bottom-content-home {
+    width: 100%;
+    height: 88vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.host-video-section {
+    display: flex;
+    justify-content: center;
+    height: 440px;
+    width: auto;
+}
+
+.host-video-container {
+    position: relative;
+    background: url(/assets/media/videos/mobile-phone.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
+.video-content {
+    width: 298px;
+    height: 359px;
+}
+
+.host-video-container video {
+    width: 61.5%;
+    border-radius: 10px;
+    position: relative;
+    top: 12.8%;
+    left: 32.6%;
+}
+
+.background-light-grey {
+    background: #f7f7f7;
+}
+
+.left-20 {
+    padding-left: 20px !important;
+}
+
+.right-20 {
+    padding-right: 20px !important;
+}
+
+.form-control {
+    margin-bottom: 10px;
+    height: 50px;
+    border-radius: 8px !important;
+}
+
+.add-link {
+    width: 100%;
+    border: solid 1px #ff7500;
+    background: #ff7400;
+    outline: none;
+    height: 48px;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 40px;
+}
+
+.customer-support-block {
+    border-radius: 12px;
+}
+
+.text-orange{
+    color: #ff7400;
+}
+
+@media (max-width: 575px) { 
+    .support-section{
+        padding: 3rem 1rem 0rem !important;
+    }
+    .help-section-home{
+        height: 82vh;
+    }
+    .recomendation-section{
+        padding: 3rem 1rem 0rem !important;
+    }
+    .location-section{
+        padding: 3rem 1rem 3rem !important;
+    }
+    .row-grid-img-home {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-rows: repeat(1, auto) !important;
+        gap: 10px;
+        display: grid;
+    }
+    .row-grid-img-location {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-rows: repeat(1, auto) !important;
+        gap: 10px;
+        display: grid;
+    }
+}
+
+@media (min-width: 576px) { 
+
+}
+
+@media (min-width: 768px) { 
+
+}
+
+@media (min-width: 992px) { 
+
+}
+
+@media (min-width: 1200px) { 
+    .support-section{
+        padding: 3rem 5.7rem 1rem !important;
+    }
+    .recomendation-section{
+        padding: 0rem 5.7rem 1rem !important;
+    }
+    .location-section{
+        padding: 0rem 5.7rem 1rem !important;
+    }
+}
+
+@media (min-width: 1400px) { 
+
+}

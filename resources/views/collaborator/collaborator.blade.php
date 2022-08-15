@@ -2858,7 +2858,7 @@
         <div class="modal-dialog modal-xl modal-fullscreen" role="document">
             <div class="modal-content" style="background: white;">
                 <div class="modal-header" style="padding-left: 18px;">
-                    <h7 class="modal-title" style="font-size: 1.875rem;">Edit Position Photos</h7>
+                    <h7 class="modal-title" style="font-size: 1.875rem;">Edit Photo Position</h7>
                     <button type="button" class="btn-close-modal" data-bs-dismiss="modal" aria-label="Close"><i style="font-size: 22px;"
                             class="fa-solid fa-xmark"></i></button>
                 </div>
@@ -2898,7 +2898,7 @@
         <div class="modal-dialog modal-xl modal-fullscreen" role="document">
             <div class="modal-content" style="background: white;">
                 <div class="modal-header" style="padding-left: 18px;">
-                    <h7 class="modal-title" style="font-size: 1.875rem;">Edit Position Video</h7>
+                    <h7 class="modal-title" style="font-size: 1.875rem;">Edit Video Position</h7>
                     <button type="button" class="btn-close-modal" data-bs-dismiss="modal" aria-label="Close"
                         style="margin-left: 1086px; position: absolute;"><i style="font-size: 22px;"
                             class="fa-solid fa-xmark"></i></button>

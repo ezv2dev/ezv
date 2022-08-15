@@ -4121,7 +4121,7 @@
             <div class="modal-content" style="background: white;">
                 <div class="modal-header" style="padding-left: 18px;">
                     <h7 class="modal-title" style="font-size: 1.875rem;">
-                        {{ __('user_page.Edit Position Photos') }}</h7>
+                        {{ __('user_page.Edit Photo Position') }}</h7>
                     <button type="button" class="btn-close-modal" data-bs-dismiss="modal" aria-label="Close"><i
                             style="font-size: 22px;" class="fa-solid fa-xmark"></i></button>
                 </div>
@@ -4163,7 +4163,7 @@
             <div class="modal-content" style="background: white;">
                 <div class="modal-header" style="padding-left: 18px;">
                     <h7 class="modal-title" style="font-size: 1.875rem;">
-                        {{ __('user_page.Edit Position Video') }}</h7>
+                        {{ __('user_page.Edit Video Position') }}</h7>
                     <button type="button" class="btn-close-modal" data-bs-dismiss="modal" aria-label="Close"><i
                             style="font-size: 22px;" class="fa-solid fa-xmark"></i></button>
                 </div>
@@ -4235,14 +4235,6 @@
         }
     </script>
 
-    @if ($villa[0]->instant_book == 'yes')
-        @include('user.modal.villa.details_reserve')
-    @else
-        @auth
-            @include('user.modal.villa.quick_enquiry')
-        @endauth
-    @endif
-
     <script src="{{ asset('assets/js/dashmix.app.min.js') }}"></script>
     <script src="{{ asset('assets/js/lib/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
@@ -4270,6 +4262,14 @@
 
     {{-- SweetAlert JS --}}
     <script src="{{ asset('assets/js/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+
+    @if ($villa[0]->instant_book == 'yes')
+        @include('user.modal.villa.details_reserve')
+    @else
+        @auth
+            @include('user.modal.villa.quick_enquiry')
+        @endauth
+    @endif
 
     {{-- Like --}}
     @auth

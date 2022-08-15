@@ -7,35 +7,45 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body pb-1">
-                <div id="editLocationForm">
+                <div id="editLocationForm" style="margin-top: -35px;">
                     <input type="hidden" name="id_villa" id="id_villa" value="{{ $villa[0]->id_villa }}">
-                    <label class="col-sm-3 col-form-label" for="bed" style="font-size: 20px;">{{ __('user_page.Location') }}</label>
+                    <label class="col-sm-3 col-form-label" for="bed"
+                        style="font-size: 20px;">{{ __('user_page.Location') }}</label>
                     <div class="col-sm-12 mb-3">
                         <select class="js-select2 form-select" id="id_location" name="id_location" style="width: 100%;">
                             <option></option>
                             @foreach ($location as $item)
-                            @php
-                            $selected = '';
-                            if($item->id_location == $villa[0]->id_location) // Any Id
-                            {
-                            $selected = 'selected="selected"';
-                            }
-                            @endphp
-                            <option value="{{ $item->id_location }}" {{$selected}}>{{ $item->name }}</option>
+                                @php
+                                    $selected = '';
+                                    if ($item->id_location == $villa[0]->id_location) {
+                                        // Any Id
+                                        $selected = 'selected="selected"';
+                                    }
+                                @endphp
+                                <option value="{{ $item->id_location }}" {{ $selected }}>{{ $item->name }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
+                    <div class="col-sm-12 mb-3">
+                        <input type="text" class="form-control" placeholder="Input Address Detail" size="50"
+                            id="addressDetail" name="addressDetail">
+                    </div>
                     <div class="col-sm-12">
-                        <input id="searchTextFieldVilla" type="text" class="form-control mb-3" size="50" onkeydown="preventPressEnterKey(event)">
+                        <input id="searchTextFieldVilla" type="text" class="form-control mb-3" size="50"
+                            onkeydown="preventPressEnterKey(event)">
                         <div id="mapVilla" style="width:100%;height:280px;"></div>
-                        <input type="hidden" class="form-control" id="latitudeVilla" name="latitude" placeholder="Enter a latitude.." value="{{ $villa[0]->latitude }}">
-                        <input type="hidden" class="form-control" id="longitudeVilla" name="longitude" placeholder="Enter a longitude.." value="{{ $villa[0]->longitude }}">
+                        <input type="hidden" class="form-control" id="latitudeVilla" name="latitude"
+                            placeholder="Enter a latitude.." value="{{ $villa[0]->latitude }}">
+                        <input type="hidden" class="form-control" id="longitudeVilla" name="longitude"
+                            placeholder="Enter a longitude.." value="{{ $villa[0]->longitude }}">
                     </div>
                     <br>
                     <!-- Submit -->
                     <div class="row items-push">
                         <div class="col-lg-7">
-                            <button type="submit" onclick="saveLocation()" id="btnSaveLocation" class="btn btn-sm btn-primary">
+                            <button type="submit" onclick="saveLocation()" id="btnSaveLocation"
+                                class="btn btn-sm btn-primary">
                                 <i class="fa fa-check"></i> {{ __('user_page.Save') }}
                             </button>
                         </div>
@@ -55,8 +65,8 @@
     // variabel global edit marker
     var markerEditLocation;
 
-    function taruhMarkerVilla(map, posisiTitik){
-        if( markerEditLocation ){
+    function taruhMarkerVilla(map, posisiTitik) {
+        if (markerEditLocation) {
             // pindahkan markerEditLocation
             markerEditLocation.setPosition(posisiTitik);
         } else {
@@ -73,7 +83,7 @@
                 }
             });
         }
-         // isi nilai koordinat ke form
+        // isi nilai koordinat ke form
         document.getElementById("latitudeVilla").value = posisiTitik.lat();
         document.getElementById("longitudeVilla").value = posisiTitik.lng();
     }
@@ -166,9 +176,9 @@
             var address = '';
             if (place.address_components) {
                 address = [
-                (place.address_components[0] && place.address_components[0].short_name || ''),
-                (place.address_components[1] && place.address_components[1].short_name || ''),
-                (place.address_components[2] && place.address_components[2].short_name || '')
+                    (place.address_components[0] && place.address_components[0].short_name || ''),
+                    (place.address_components[1] && place.address_components[1].short_name || ''),
+                    (place.address_components[2] && place.address_components[2].short_name || '')
                 ].join(' ');
             }
 
@@ -190,9 +200,92 @@
     google.maps.event.addDomListener(window, 'load', initEditLocationVilla(latitudeOld, longitudeOld));
 </script>
 
+<script>
+    function saveLocation() {
+        console.log("hit saveLocation");
+        let form = $("#editLocationForm");
+
+        const formData = {
+            id_villa: parseInt(form.find(`input[name='id_villa']`).val()),
+            id_location: parseInt(
+                form
+                .find(`select[name=id_location] option`)
+                .filter(":selected")
+                .val()
+            ),
+            longitude: form.find(`input[name='longitude']`).val(),
+            latitude: form.find(`input[name='latitude']`).val(),
+            address: form.find(`input[name='addressDetail']`).val(),
+        };
+
+        let btn = form.find("#btnSaveLocation");
+        btn.text("Saving...");
+        btn.addClass("disabled");
+
+        // save data
+        $.ajax({
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            url: "/villa/update/location",
+            data: formData,
+            // response data
+            success: function(response) {
+                console.log(response.data);
+                let latitudeOld = parseFloat(response.data.latitude);
+                let longitudeOld = parseFloat(response.data.longitude);
+                // variabel global edit marker
+                markerEditLocation = null;
+                // pin marker to map on edit map
+                initEditLocationVilla(latitudeOld, longitudeOld);
+                // refresh detail map
+                view_maps(parseInt(form.find(`input[name='id_villa']`).val()));
+                // alert success
+                iziToast.success({
+                    title: "Success",
+                    message: response.message,
+                    position: "topRight",
+                });
+                // enabled button
+                btn.html(`<i class='fa fa-check'></i> Save`);
+                btn.removeClass("disabled");
+                // close modal
+                $("#modal-edit_location").modal("hide");
+            },
+            // response error
+            error: function(jqXHR, exception) {
+                // console.log(jqXHR);
+                // console.log(exception);
+                // alert error
+                if (jqXHR.responseJSON.errors) {
+                    for (let i = 0; i < jqXHR.responseJSON.errors.length; i++) {
+                        iziToast.error({
+                            title: "Error",
+                            message: jqXHR.responseJSON.errors[i],
+                            position: "topRight",
+                        });
+                    }
+                } else {
+                    iziToast.error({
+                        title: "Error",
+                        message: jqXHR.responseJSON.message,
+                        position: "topRight",
+                    });
+                }
+                // enabled button
+                btn.html(`<i class='fa fa-check'></i> Save`);
+                btn.removeClass("disabled");
+                // close modal
+                $("#modal-edit_location").modal("hide");
+            },
+        });
+    }
+</script>
+
 {{-- disable enter button --}}
 <script>
-    function preventPressEnterKey(event){
+    function preventPressEnterKey(event) {
         if (event.which == '13') {
             event.preventDefault();
         }

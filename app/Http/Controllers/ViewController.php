@@ -93,17 +93,19 @@ use App\Services\CurrencyConversionService as CurrencyConversion;
 
 class ViewController extends Controller
 {
-    //============================ LOCATIO ON INDEX ===========================
+    //============================ LOCATION ON INDEX ===========================
     public static function get_location()
     {
-        // $location = Location::inRandomOrder()->limit(5)->get();
         $location = Location::inRandomOrder()->get();
         return $location;
     }
 
-    public static function get_name()
+    public static function get_address()
     {
-        $villa = Villa::where('created_by', Auth::user()->id)->select('name')->get();
+        $address = Villa::with(['location' => function ($query) {
+            $query->select('id_location', 'name')->groupBy('id_location');
+        }])->select('address', 'id_location')->where('status', 1)->where('address', '!=', null)->orderBy('id_location')->get();
+        return $address;
     }
 
     public static function get_location_ajax(Request $request)
@@ -1014,6 +1016,7 @@ class ViewController extends Controller
 
     public function villa_update_location(Request $request)
     {
+        // dd($request->all());
         // check if editor not authenticated
         if (!auth()->check()) {
             return response()->json([
@@ -1025,8 +1028,8 @@ class ViewController extends Controller
         $validator = Validator::make($request->all(), [
             'id_villa' => ['required', 'integer'],
             'id_location' => ['required', 'integer'],
-            'latitude' => ['required'],
-            'longitude' => ['required'],
+            // 'latitude' => ['required'],
+            // 'longitude' => ['required'],
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -1059,10 +1062,11 @@ class ViewController extends Controller
             'id_location' => $request->id_location,
             'longitude' => $request->longitude,
             'latitude' => $request->latitude,
+            'address' => $request->address,
             'updated_by' => auth()->user()->id,
         ]);
 
-        $homeData = Villa::where('id_villa', $request->id_villa)->select('latitude', 'longitude')->first();
+        $homeData = Villa::where('id_villa', $request->id_villa)->select('latitude', 'longitude', 'address')->first();
 
         // check if update is success or not
         if ($updatedVilla) {
@@ -2185,9 +2189,31 @@ class ViewController extends Controller
         $accessibility_features_detail = VillaAccessibilitiyFeaturesDetail::all();
 
         //get all villa grade a - d
+        // $villa_a = Villa::where('status', 1)->where('grade', '=', 'A')->inRandomOrder()->get();
+        // $villa_b = Villa::where('status', 1)->where('grade', '=', 'B')->inRandomOrder()->get();
+        // $villa_c = Villa::where('status', 1)->where('grade', '=', 'C')->inRandomOrder()->get();
+        // $villa_d = Villa::where('status', 1)->where('grade', '=', 'D')->inRandomOrder()->get();
         $villa = Villa::where('status', 1)->where('grade', '!=', 'AA')->inRandomOrder()->get()->sortBy('grade');
-        // TODO uncomment when lazy load, start
         $villa_aa = Villa::where('grade', '=', 'AA')->where('status', 1)->inRandomOrder()->get();
+
+        // $villa = Villa::where('status', 1)
+
+        // $array_abas = [];
+
+        // $i = 0;
+        // if ($i = 0 || $i / 2 == 0) {
+        //     foreach ($villa_a as $item) {
+        //         $array_abas[$i] = $item;
+        //     }
+        // }
+        // else if ($i = 1 || ) {
+        //     foreach ($villa_b as $item) {
+        //         $array_abas($i) =
+        //     }
+        // }
+
+
+        // TODO uncomment when lazy load, start
         // if ($request->itemIds) {
         //     $villas = Villa::where('grade', '!=', 'AA')->where('status', 1)->whereNotIn('id_villa', $request->itemIds)->inRandomOrder()->get()->sortBy('grade');
         //     $villa_aa = Villa::where('grade', '=', 'AA')->where('status', 1)->whereNotIn('id_villa', $request->itemIds)->inRandomOrder()->get();
@@ -2222,7 +2248,7 @@ class ViewController extends Controller
             $page,
         );
 
-        $villa->withPath(env('APP_URL')."/homes-list");
+        $villa->withPath(env('APP_URL') . "/homes-list");
         $villa->appends(request()->query());
 
         // if ($villas->count() > 0 && $villa_aa->count() <= 0) {
@@ -2344,9 +2370,10 @@ class ViewController extends Controller
         $villaFilter = VillaFilter::all();
         $amenities = Amenities::select('icon', 'name', 'order', 'id_amenities')->get();
 
-        // if ($request->ajax()) {
-        //     return view('user.data_list_villa', compact('villa', 'amenities'))->render();
-        // }
+        //pagination ajax
+        if ($request->ajax()) {
+            return view('user.data_list_villa', compact('villa', 'amenities'))->render();
+        }
 
         return view('user.list_villa', compact('villa', 'amenities', 'host_language', 'propertyType', 'villaCategory', 'villaFilter', 'accessibility_features', 'accessibility_features_detail'));
     }
@@ -2356,9 +2383,9 @@ class ViewController extends Controller
         $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
         $total = count($items);
         $currentpage = $page;
-        $offset = ($currentpage * $perPage) - $perPage ;
-        $itemstoshow = array_slice($items , $offset , $perPage);
-        return new LengthAwarePaginator($itemstoshow ,$total ,$perPage);
+        $offset = ($currentpage * $perPage) - $perPage;
+        $itemstoshow = array_slice($items, $offset, $perPage);
+        return new LengthAwarePaginator($itemstoshow, $total, $perPage);
     }
 
     public static  function gallery($id)

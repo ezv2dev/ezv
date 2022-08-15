@@ -50,6 +50,7 @@ use App\Http\Controllers\VillaReviewController;
 use App\Http\Controllers\ActivitysaveController;
 use App\Http\Controllers\Dashboard as Dashboard;
 use App\Http\Controllers\VillabookingController;
+use App\Http\Controllers\VillaenquiryController;
 use App\Http\Controllers\VillaListingController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\Restaurant as Restaurant;
@@ -822,6 +823,8 @@ Route::get('/villa/review/{id}', [ViewController::class, 'review'])->name('villa
 Route::get('/villa/availabality/{id}', [ViewController::class, 'availabality'])->name('villa_availabality');
 Route::post('/villa/confirm/', [VillabookingController::class, 'confirm'])->name('villa_booking_confirm');
 Route::post('/villa/confirm/store', [VillabookingController::class, 'user_store'])->name('villa_booking_user_store');
+//enquiry request
+Route::post('/villa/enquiry/store', [VillaenquiryController::class, 'store'])->name('villa_enquiry_store');
 
 Route::get('/villa/availability/{id}/datatable', [ViewController::class, 'datatable_availability'])->name('villa_availability_datatable');
 Route::get('/villa/availability/delete/{id}', [ViewController::class, 'delete_availability'])->name('delete_availability');

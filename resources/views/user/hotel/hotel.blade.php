@@ -100,7 +100,7 @@
         .list-link-sidebar {
             gap: 12px;
             display: flex;
-            align-items:center;
+            align-items: center;
         }
 
         .list-link-sidebar i {
@@ -108,21 +108,25 @@
         }
 
         .list-link-sidebar>*,
-        .list-link-sidebar:hover>*{
+        .list-link-sidebar:hover>* {
             color: #585656;
         }
+
         @media only screen and (min-width: 748px) {
             .mobile {
                 display: none;
             }
+
             .desktop {
                 display: block;
             }
         }
+
         @media only screen and (max-width: 747px) {
             .mobile {
                 display: block;
             }
+
             .desktop {
                 display: none;
             }
@@ -205,10 +209,10 @@
                             <i class="fa-solid fa-key text-center"></i>
                             <p class="m-0">{{ __('user_page.Change Password') }}</p>
                         </a>
-                        <a href="{{ route('switch') }}" class="list-link-sidebar mb-2">
+                        {{-- <a href="{{ route('switch') }}" class="list-link-sidebar mb-2">
                             <i class="fa fa-refresh text-center" aria-hidden="true"></i>
                             <p class="m-0">{{ __('user_page.Switch to Hosting') }}</p>
-                        </a>
+                        </a> --}}
                         <a class="list-link-sidebar mb-2" href="#!"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit()">
                             <i class="fa fa-sign-out text-center" aria-hidden="true"></i>
@@ -274,12 +278,10 @@
                     <hr>
                     <a type="button" onclick="language()" class="list-link-sidebar mb-2" id="language">
                         @if (session()->has('locale'))
-                            <img style="border-radius: 3px; width: 27px;" class="lozad"
-                                src="{{ LazyLoad::show() }}"
+                            <img style="border-radius: 3px; width: 27px;" class="lozad" src="{{ LazyLoad::show() }}"
                                 data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}">
                         @else
-                            <img style="border-radius: 3px; width: 27px;" class="lozad"
-                                src="{{ LazyLoad::show() }}"
+                            <img style="border-radius: 3px; width: 27px;" class="lozad" src="{{ LazyLoad::show() }}"
                                 data-src="{{ URL::asset('assets/flags/flag_en.svg') }}">
                         @endif
                         <p class="mb-0">{{ __('user_page.Choose a Language') }}</p>
@@ -1038,12 +1040,14 @@
                                                                 class="fa fa-pencil"></i></button>
                                                         <button data-bs-toggle="popover" data-bs-animation="true"
                                                             data-bs-placement="bottom"
-                                                            title="{{ __('user_page.Swap Photo Position') }}" type="button"
-                                                            onclick="position_photo()"><i class="fa fa-arrows"></i></button>
+                                                            title="{{ __('user_page.Swap Photo Position') }}"
+                                                            type="button" onclick="position_photo()"><i
+                                                                class="fa fa-arrows"></i></button>
                                                         <button data-bs-toggle="popover" data-bs-animation="true"
                                                             data-bs-placement="bottom"
                                                             title="{{ __('user_page.Delete Photo') }}"
-                                                            href="javascript:void(0);" data-id="{{ $hotel[0]->id_hotel }}"
+                                                            href="javascript:void(0);"
+                                                            data-id="{{ $hotel[0]->id_hotel }}"
                                                             data-photo="{{ $item->id_photo }}"
                                                             onclick="delete_photo_photo(this)"><i
                                                                 class="fa fa-trash"></i></button>
@@ -1059,7 +1063,8 @@
                                             onclick="videoViews()">
                                             @auth
                                                 @if (in_array(Auth::user()->role_id, [1, 2]) || Auth::user()->id == $hotel[0]->created_by)
-                                                    <a class="pointer-normal" onclick="view_video({{ $item->id_video }})"
+                                                    <a class="pointer-normal"
+                                                        onclick="view_video({{ $item->id_video }})"
                                                         href="javascript:void(0);">
                                                     @else
                                                         <a class="pointer-normal" onclick="showPromotionMobile()"
@@ -1108,7 +1113,9 @@
                                     @foreach ($photo as $item)
                                         <div class="col-4 grid-photo" id="displayPhoto{{ $item->id_photo }}">
                                             <a onclick="openModalGalleryMobile(`{{ $item->id_photo }}`)">
-                                                <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="{{ URL::asset('/foto/hotel/' . strtolower($hotel[0]->uid) . '/' . $item->name) }}" title="{{ $item->caption }}">
+                                                <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery"
+                                                    src="{{ URL::asset('/foto/hotel/' . strtolower($hotel[0]->uid) . '/' . $item->name) }}"
+                                                    title="{{ $item->caption }}">
                                             </a>
                                             @auth
                                                 @if (Auth::user()->id == $hotel[0]->created_by || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
@@ -1120,12 +1127,14 @@
                                                                 class="fa fa-pencil"></i></button>
                                                         <button data-bs-toggle="popover" data-bs-animation="true"
                                                             data-bs-placement="bottom"
-                                                            title="{{ __('user_page.Swap Photo Position') }}" type="button"
-                                                            onclick="position_photo()"><i class="fa fa-arrows"></i></button>
+                                                            title="{{ __('user_page.Swap Photo Position') }}"
+                                                            type="button" onclick="position_photo()"><i
+                                                                class="fa fa-arrows"></i></button>
                                                         <button data-bs-toggle="popover" data-bs-animation="true"
                                                             data-bs-placement="bottom"
                                                             title="{{ __('user_page.Delete Photo') }}"
-                                                            href="javascript:void(0);" data-id="{{ $hotel[0]->id_hotel }}"
+                                                            href="javascript:void(0);"
+                                                            data-id="{{ $hotel[0]->id_hotel }}"
                                                             data-photo="{{ $item->id_photo }}"
                                                             onclick="delete_photo_photo(this)"><i
                                                                 class="fa fa-trash"></i></button>
@@ -1141,7 +1150,8 @@
                                             onclick="videoViews()">
                                             @auth
                                                 @if (in_array(Auth::user()->role_id, [1, 2]) || Auth::user()->id == $hotel[0]->created_by)
-                                                    <a class="pointer-normal" onclick="view_video({{ $item->id_video }})"
+                                                    <a class="pointer-normal"
+                                                        onclick="view_video({{ $item->id_video }})"
                                                         href="javascript:void(0);">
                                                     @else
                                                         <a class="pointer-normal" onclick="showPromotionMobile()"
@@ -1791,7 +1801,8 @@
                                 <div class="col-12">
                                     <div class="col-12">
                                         <div class="content list-image-content">
-                                            <input type="hidden" value="{{ $item->id_hotel }}" id="id_hotel" name="id_hotel">
+                                            <input type="hidden" value="{{ $item->id_hotel }}" id="id_hotel"
+                                                name="id_hotel">
                                             <div class="js-slider list-slider slick-nav-black slick-dotted-inner slick-dotted-white"
                                                 data-dots="false" data-arrows="true">
                                                 @if (count($hotelRoomPhoto->where('id_hotel', $item->id_hotel)) > 0)
@@ -2178,9 +2189,9 @@
                     </a>
 
                     <!-- <a onclick="loginForm(2)" class="btn btn-fill border-0 navbar-gap"
-                                    style="color: #ffffff; width: 50px; height: 50px; border-radius: 50%; background-color: #ff7400; display: flex; align-items: center; justify-content: center; ">
-                                    <i class="fa-solid fa-user"></i>
-                                </a> -->
+                                            style="color: #ffffff; width: 50px; height: 50px; border-radius: 50%; background-color: #ff7400; display: flex; align-items: center; justify-content: center; ">
+                                            <i class="fa-solid fa-user"></i>
+                                        </a> -->
 
                     <div class="drodwn-container">
                         <button type="button" class="btn-dropdwn dropbtn btn border-0 navbar-gap"></button>
@@ -4424,7 +4435,7 @@
             <div class="modal-content" style="background: white;">
                 <div class="modal-header" style="padding-left: 18px;">
                     <h7 class="modal-title" style="font-size: 1.875rem;">
-                        {{ __('user_page.Edit Position Photos') }}</h7>
+                        {{ __('user_page.Edit Photo Position') }}</h7>
                     <button type="button" class="btn-close-modal" data-bs-dismiss="modal" aria-label="Close"><i
                             style="font-size: 22px;" class="fa-solid fa-xmark"></i></button>
                 </div>
@@ -4465,7 +4476,7 @@
             <div class="modal-content" style="background: white;">
                 <div class="modal-header" style="padding-left: 18px;">
                     <h7 class="modal-title" style="font-size: 1.875rem;">
-                        {{ __('user_page.Edit Position Video') }}</h7>
+                        {{ __('user_page.Edit Video Position') }}</h7>
                     <button type="button" class="btn-close-modal" data-bs-dismiss="modal" aria-label="Close"><i
                             style="font-size: 22px;" class="fa-solid fa-xmark"></i></button>
                 </div>
@@ -6407,7 +6418,7 @@
         });
     </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    
+
 </body>
 
 </html>

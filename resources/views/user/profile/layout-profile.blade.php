@@ -202,6 +202,28 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <div class="row" style="gap: 3rem; margin: auto; padding-left: 4rem;">
+                <div type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                    data-target="#exampleModal" style="background: #fff; color: #000; border-color: #000; width: 6rem;">
+                    Favourites
+                </div>
+                <div type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                        data-target="#exampleModal" style="background: #fff; color: #000; border-color: #000; width: 6rem;">
+                        Bookings
+                    </div>
+                    <div type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                        data-target="#exampleModal" style="background: #fff; color: #000; border-color: #000; width: 6rem;">
+                        Rewards
+                    </div>
+                    <div type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                        data-target="#exampleModal" style="background: #fff; color: #000; border-color: #000; width: 6rem;">
+                        History
+                    </div>
+                    <div type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                        data-target="#exampleModal" style="background: #fff; color: #000; border-color: #000; width: 6rem;">
+                        Inbox
+                    </div>
+                </div>
                 <ul class="navbar-nav mx-auto mb-lg-0">
                 </ul>
                 <ul class="navbar-nav align-items-center">
@@ -304,7 +326,7 @@
     </nav>
 
     <main>
-        <hr>
+        <hr style=" margin-top: 2rem;">
         @yield('content_admin')
         @include('new-admin.layouts.footer')
     </main>

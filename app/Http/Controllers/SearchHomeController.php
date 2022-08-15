@@ -75,7 +75,13 @@ class SearchHomeController extends Controller
         $ids = $villa->pluck('id_villa');
 
         if ($sLocation) {
-            $location = $sLocation;
+            if (strpos($sLocation, ',') !== false) {
+                $explode = explode(', ', $sLocation);
+                $location = $explode[1];
+            } else {
+                $location = $sLocation;
+            }
+
             if (!$fSort) {
                 // ! start
                 // * get latitude & longitude dari nama yang diinput user

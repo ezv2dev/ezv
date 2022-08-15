@@ -64,7 +64,7 @@
         .list-link-sidebar {
             gap: 12px;
             display: flex;
-            align-items:center;
+            align-items: center;
         }
 
         .list-link-sidebar i {
@@ -189,34 +189,34 @@ if (isset($_COOKIE['tema'])) {
                         <i class="fa-solid fa-key text-center"></i>
                         <p class="m-0">{{ __('user_page.Change Password') }}</p>
                     </a>
-                    <a href="{{ route('switch') }}" class="list-link-sidebar mb-2">
+                    {{-- <a href="{{ route('switch') }}" class="list-link-sidebar mb-2">
                         <i class="fa fa-refresh text-center" aria-hidden="true"></i>
                         <p class="m-0">{{ __('user_page.Switch to Hosting') }}</p>
-                    </a>
+                    </a> --}}
                     <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="moreCategory()">
                         <i class="fa fa-th text-center" aria-hidden="true"></i>
                         <p class="m-0">{{ __('user_page.Category') }}</p>
                     </div>
                     @if ($condition_villa)
-                    <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="modalFiltersHomes()">
-                        <i class="fas fa-ellipsis text-center"></i>
-                        <p class="m-0">Filters</p>
-                    </div>
+                        <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="modalFiltersHomes()">
+                            <i class="fas fa-ellipsis text-center"></i>
+                            <p class="m-0">Filters</p>
+                        </div>
                     @elseif($condition_restaurant)
-                    <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="moreSubCategory()">
-                        <i class="fa-solid fa-ellipsis text-center"></i>
-                        <p class="m-0">{{ __('user_page.Filters') }}</p>
-                    </div>
+                        <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="moreSubCategory()">
+                            <i class="fa-solid fa-ellipsis text-center"></i>
+                            <p class="m-0">{{ __('user_page.Filters') }}</p>
+                        </div>
                     @elseif($condition_hotel)
-                    <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="modalFiltersHotel()">
-                        <i class="fa-solid fa-ellipsis text-center"></i>
-                        <p class="m-0">{{ __('user_page.Filters') }}</p>
-                    </div>
+                        <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="modalFiltersHotel()">
+                            <i class="fa-solid fa-ellipsis text-center"></i>
+                            <p class="m-0">{{ __('user_page.Filters') }}</p>
+                        </div>
                     @elseif($condition_things_to_do)
-                    <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="moreSubCategory()">
-                        <i class="fa-solid fa-ellipsis text-center"></i>
-                        <p class="m-0">{{ __('user_page.Filters') }}</p>
-                    </div>
+                        <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="moreSubCategory()">
+                            <i class="fa-solid fa-ellipsis text-center"></i>
+                            <p class="m-0">{{ __('user_page.Filters') }}</p>
+                        </div>
                     @endif
                     <a class="list-link-sidebar mb-2" href="#!"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit()">
@@ -256,7 +256,8 @@ if (isset($_COOKIE['tema'])) {
                                 <div class="checkmark-mode"></div>
                             </label>
                         </div>
-                        <p class="mb-0 ms-2" id="switcher" style="cursor: pointer; color: #585656;">Light / Dark Mode</p>
+                        <p class="mb-0 ms-2" id="switcher" style="cursor: pointer; color: #585656;">Light / Dark Mode
+                        </p>
                     </div>
                     <a type="button" onclick="currency()" class="list-link-sidebar navbar-gap mb-2">
                         <img class="lozad"
@@ -298,25 +299,25 @@ if (isset($_COOKIE['tema'])) {
                     <p class="m-0">{{ __('user_page.Category') }}</p>
                 </div>
                 @if ($condition_villa)
-                <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="modalFiltersHomes()">
-                    <i class="fas fa-ellipsis text-center"></i>
-                    <p class="m-0">Filters</p>
-                </div>
+                    <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="modalFiltersHomes()">
+                        <i class="fas fa-ellipsis text-center"></i>
+                        <p class="m-0">Filters</p>
+                    </div>
                 @elseif($condition_restaurant)
-                <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="moreSubCategory()">
-                    <i class="fa-solid fa-ellipsis text-center"></i>
-                    <p class="m-0">{{ __('user_page.Filters') }}</p>
-                </div>
+                    <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="moreSubCategory()">
+                        <i class="fa-solid fa-ellipsis text-center"></i>
+                        <p class="m-0">{{ __('user_page.Filters') }}</p>
+                    </div>
                 @elseif($condition_hotel)
-                <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="modalFiltersHotel()">
-                    <i class="fa-solid fa-ellipsis text-center"></i>
-                    <p class="m-0">{{ __('user_page.Filters') }}</p>
-                </div>
+                    <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="modalFiltersHotel()">
+                        <i class="fa-solid fa-ellipsis text-center"></i>
+                        <p class="m-0">{{ __('user_page.Filters') }}</p>
+                    </div>
                 @elseif($condition_things_to_do)
-                <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="moreSubCategory()">
-                    <i class="fa-solid fa-ellipsis text-center"></i>
-                    <p class="m-0">{{ __('user_page.Filters') }}</p>
-                </div>
+                    <div class="list-link-sidebar subcategory-in-sidebar mb-2" onclick="moreSubCategory()">
+                        <i class="fa-solid fa-ellipsis text-center"></i>
+                        <p class="m-0">{{ __('user_page.Filters') }}</p>
+                    </div>
                 @endif
                 <hr>
                 <a type="button" onclick="language()" class="navbar-gap list-link-sidebar mb-2" id="language">
@@ -339,21 +340,19 @@ if (isset($_COOKIE['tema'])) {
                     </div>
                     <p class="mb-0" id="switcher" style="cursor: pointer; color: #585656;">Light / Dark Mode</p>
                 </div>
-                <a type="button" onclick="currency()" class="navbar-gap list-link-sidebar mb-2"
-                        style="color: white;">
-                        <img class="lozad"
-                            style=" width: 27px; border: solid 1px #858585; padding: 2px; border-radius: 3px;"
-                            src="{{ LazyLoad::show() }}"
-                            data-src="{{ URL::asset('assets/icon/currency/dollar-sign.svg') }}">
-                        @if (session()->has('currency'))
-                            <p class="mb-0" style="color: #585656">Change Currency ({{ session('currency') }})</p>
-                            {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                <a type="button" onclick="currency()" class="navbar-gap list-link-sidebar mb-2" style="color: white;">
+                    <img class="lozad" style=" width: 27px; border: solid 1px #858585; padding: 2px; border-radius: 3px;"
+                        src="{{ LazyLoad::show() }}"
+                        data-src="{{ URL::asset('assets/icon/currency/dollar-sign.svg') }}">
+                    @if (session()->has('currency'))
+                        <p class="mb-0" style="color: #585656">Change Currency ({{ session('currency') }})</p>
+                        {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
                             data-src="{{ URL::asset('assets/flags/flag_' . session('locale') . '.svg') }}"> --}}
-                        @else
-                            <p class="mb-0" style="color: #585656">Choose Currency</p>
-                            {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
+                    @else
+                        <p class="mb-0" style="color: #585656">Choose Currency</p>
+                        {{-- <img class="lozad" style="width: 27px;" src="{{ LazyLoad::show() }}"
                             data-src="{{ URL::asset('assets/flags/flag_en.svg') }}"> --}}
-                        @endif
+                    @endif
 
                 </a>
             @endauth
@@ -415,11 +414,10 @@ if (isset($_COOKIE['tema'])) {
         @foreach ($subCategory->take(4) as $item)
             <div class="list-link-sidebar subcategory-in-sidebar mb-2"
                 onclick="wowFilter({{ $item->id_category }}, {{ $item->id_subcategory }}, null, false)">
-                <i class="{{ $item->icon }} text-center"
-                    @php
-                        $isChecked = '';
-                        $filterIds = explode(',', request()->get('fSubCategory'));
-                    @endphp @if (in_array($item->id_subcategory, $filterIds))
+                <i class="{{ $item->icon }} text-center" @php
+                    $isChecked = '';
+                    $filterIds = explode(',', request()->get('fSubCategory'));
+                @endphp @if (in_array($item->id_subcategory, $filterIds))
                     style="color: #ff7400 !important;"
         @endif>
         </i>
@@ -427,7 +425,7 @@ if (isset($_COOKIE['tema'])) {
     </div>
     @endforeach
     </div>
-@endif
+    @endif
     </div>
 
     </div>
@@ -1714,10 +1712,10 @@ if (isset($_COOKIE['tema'])) {
             $('#categoryModal').css("overflow-y", "hidden")
 
             // close sidebar di mobile size
-            $( ".btn-close-expand-navbar-mobile" ).trigger( "click" )
+            $(".btn-close-expand-navbar-mobile").trigger("click")
 
             // close searchbar di mobile size
-            $( "#bodyList #overlay" ).trigger( "click" )
+            $("#bodyList #overlay").trigger("click")
         }
 
         function moreSubCategory() {
@@ -1727,10 +1725,10 @@ if (isset($_COOKIE['tema'])) {
             $('#modalSubCategory').css("overflow-y", "hidden")
 
             // close sidebar di mobile size
-            $( ".btn-close-expand-navbar-mobile" ).trigger( "click" )
+            $(".btn-close-expand-navbar-mobile").trigger("click")
 
             // close searchbar di mobile size
-            $( "#bodyList #overlay" ).trigger( "click" )
+            $("#bodyList #overlay").trigger("click")
         }
 
         function modalFiltersHomes() {
@@ -1740,10 +1738,10 @@ if (isset($_COOKIE['tema'])) {
             $('#modalFiltersHome').css("overflow-y", "hidden")
 
             // close sidebar di mobile size
-            $( ".btn-close-expand-navbar-mobile" ).trigger( "click" )
+            $(".btn-close-expand-navbar-mobile").trigger("click")
 
             // close searchbar di mobile size
-            $( "#bodyList #overlay" ).trigger( "click" )
+            $("#bodyList #overlay").trigger("click")
         }
 
         function modalFiltersHotel() {
@@ -1751,11 +1749,11 @@ if (isset($_COOKIE['tema'])) {
             $('#modalFiltersHotel').modal('show');
             $('#modalFiltersHotel').css("overflow-y", "hidden")
 
-           // close sidebar di mobile size
-           $( ".btn-close-expand-navbar-mobile" ).trigger( "click" )
+            // close sidebar di mobile size
+            $(".btn-close-expand-navbar-mobile").trigger("click")
 
             // close searchbar di mobile size
-            $( "#bodyList #overlay" ).trigger( "click" )
+            $("#bodyList #overlay").trigger("click")
         }
 
         function filterCollab() {
@@ -1763,11 +1761,11 @@ if (isset($_COOKIE['tema'])) {
             $('#modalFiltersCollab').modal('show');
             $('#modalFiltersCollab').css("overflow-y", "hidden")
 
-           // close sidebar di mobile size
-           $( ".btn-close-expand-navbar-mobile" ).trigger( "click" )
+            // close sidebar di mobile size
+            $(".btn-close-expand-navbar-mobile").trigger("click")
 
             // close searchbar di mobile size
-            $( "#bodyList #overlay" ).trigger( "click" )
+            $("#bodyList #overlay").trigger("click")
         }
 
         // fix bug scroll ketika open sidebar dan open modal subcategory di mobile size
