@@ -36,6 +36,8 @@
     <link rel="stylesheet" href="{{ asset('assets/js/plugins/iziToast/iziToast.min.css') }}">
     <script src="{{ asset('assets/js/plugins/iziToast/iziToast.min.js') }}"></script>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
     <style>
         /* NAVBAR */
         .loading-splash-screen {
@@ -193,9 +195,7 @@
             }
         }
 
-        /* @media only screen and (max-width: 350px) {
-
-} */
+        /* @media only screen and (max-width: 350px) {} */
 
         .overflow-x-scroll {
             overflow-x: auto;
@@ -304,6 +304,7 @@
     @endcomponent --}}
     @component('components.loading.loading-type1')
     @endcomponent
+
     <div class="expand-navbar-mobile" aria-expanded="false">
         <div class="px-3 pt-2 h-100">
             @auth
@@ -580,10 +581,13 @@
         </div>
 
     </div>
+    {{--@if (Route::current()->uri() != 'dashboard')--}}
+
     <div id="overlay"></div>
     <nav id="navBar" class="fixed-top bg-white navbar-1-1 border-bottom navbar navbar-expand-lg navbar-light p-4"
         style="z-index:4;">
-        {{-- <nav class="navbar-1-1 navbar navbar-expand-lg navbar-light p-4 {{ Request::is('manage-your-space') ? 'shadow bg-white fixed-top' : '' }}" style="margin-bottom:-2%;"> --}} <div class="container">
+        {{-- <nav class="navbar-1-1 navbar navbar-expand-lg navbar-light p-4 {{ Request::is('manage-your-space') ? 'shadow bg-white fixed-top' : '' }}" style="margin-bottom:-2%;"> --}} 
+        <div class="container">
             <a href="{{ route('partner_dashboard') }}" class="navbar-brand mb-n1" target="_blank">
                 <img style="width: 90px;" src="{{ asset('assets/logo.png') }}" alt="oke">
             </a>
@@ -1124,6 +1128,10 @@
         </div>
     </nav>
 
+    {{--@else
+        @include('new-admin.layouts.admin_navbar')
+    @endif--}}
+
     <!-- <main style="overflow-y: auto; overflow-x: hidden;"> -->
     <main class="main">
         <!-- <hr style="background-color: transparent; border-color: transparent;"> -->
@@ -1171,17 +1179,22 @@
     @yield('scripts')
     <script>
         $(document).ready(function() {
-            let navBarHeight = $('#navBar').outerHeight()
-            $('.main').css('margin-top', navBarHeight)
-            $('#layoutSidenav_nav').css('top', navBarHeight)
+            setMarginTopMain()
         })
 
         $(window).resize(function(){
             if (window.innerWidth > 991) {
                 $(".btn-close-expand-navbar-mobile").trigger('click')
             }
+            setMarginTopMain()
         })
         
+        function setMarginTopMain(){
+            let navBarHeight = $('#subNav').length > 0 ? $('#navBar').outerHeight() + $('#subNav').outerHeight() : $('#navBar').outerHeight() 
+            $('.main').css('margin-top', navBarHeight)
+            $('#layoutSidenav_nav').css('top', navBarHeight)
+        }
+
         $(".btn-close-expand-navbar-mobile").on("click", function() {
             $("body").css({
                 "height": "auto",
@@ -1193,6 +1206,15 @@
             $("#overlay").css("display", "none");
         })
         $(".navbar-toggler").on("click", function() {
+            openSidebar()
+        })
+
+        $('#expand-mobile-btn').on("click", function() {
+            console.log('clisks')
+            openSidebar()
+        })
+
+        function openSidebar(){
             $("body").css({
                 "height": "100%",
                 "overflow": "hidden"
@@ -1209,7 +1231,8 @@
                     $("body").css("overflow-y", "auto")
                 }
             }
-        })
+        }
+
         $('#overlay').click(function() {
             $("body").css({
                 "height": "auto",
