@@ -209,10 +209,10 @@
                             <i class="fa-solid fa-key text-center"></i>
                             <p class="m-0">{{ __('user_page.Change Password') }}</p>
                         </a>
-                        <a href="{{ route('switch') }}" class="list-link-sidebar mb-2">
+                        {{-- <a href="{{ route('switch') }}" class="list-link-sidebar mb-2">
                             <i class="fa fa-refresh text-center" aria-hidden="true"></i>
                             <p class="m-0">{{ __('user_page.Switch to Hosting') }}</p>
-                        </a>
+                        </a> --}}
                         <a class="list-link-sidebar mb-2" href="#!"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit()">
                             <i class="fa fa-sign-out text-center" aria-hidden="true"></i>

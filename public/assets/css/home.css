@@ -2816,7 +2816,7 @@ span.flatpickr-weekday {
 
 .bottom-content-home {
     width: 100%;
-    height: 87vh;
+    height: 88vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -2888,4 +2888,59 @@ span.flatpickr-weekday {
 
 .text-orange{
     color: #ff7400;
+}
+
+@media (max-width: 575px) { 
+    .support-section{
+        padding: 3rem 1rem 0rem !important;
+    }
+    .help-section-home{
+        height: 82vh;
+    }
+    .recomendation-section{
+        padding: 3rem 1rem 0rem !important;
+    }
+    .location-section{
+        padding: 3rem 1rem 3rem !important;
+    }
+    .row-grid-img-home {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-rows: repeat(1, auto) !important;
+        gap: 10px;
+        display: grid;
+    }
+    .row-grid-img-location {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-rows: repeat(1, auto) !important;
+        gap: 10px;
+        display: grid;
+    }
+}
+
+@media (min-width: 576px) { 
+
+}
+
+@media (min-width: 768px) { 
+
+}
+
+@media (min-width: 992px) { 
+
+}
+
+@media (min-width: 1200px) { 
+    .support-section{
+        padding: 3rem 5.7rem 1rem !important;
+    }
+    .recomendation-section{
+        padding: 0rem 5.7rem 1rem !important;
+    }
+    .location-section{
+        padding: 0rem 5.7rem 1rem !important;
+    }
+}
+
+@media (min-width: 1400px) { 
+
 }
