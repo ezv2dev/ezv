@@ -267,7 +267,7 @@
                     @foreach ($hotelCategory as $item)
                         <div class="grid-img-container"
                             onclick="hotelFilter({{ $item->id_hotel_category }}, null, true)">
-                            <img @if ($fCategory == $item->id_hotel_category) style="border: 5px solid #ff7400;" @endif
+                            <img @if ($fCategory == $item->id_hotel_category) style="border: 2px solid #ff7400;" @endif
                                 class="grid-img lozad" style="width: 100%; heigth: 100%;" src="{{ LazyLoad::show() }}"
                                 data-src="https://source.unsplash.com/random/?{{ $item->name }}">
                             <span class="grid-text translate-text-group-items">
