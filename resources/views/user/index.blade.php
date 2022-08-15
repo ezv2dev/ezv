@@ -230,7 +230,7 @@
             <i class="fa-solid fa-xmark close"></i>
             <i class="fa-solid fa-angle-left back d-none"></i>
         </button>
-        <form action="{{ route('search_home_combine') }}" method="GET" id="basic-form" autocomplete="off">
+        <form action="{{ route('search_home_combine') }}" method="GET" id="basic-form-mobile" autocomplete="off">
             {{-- NEW SEARCH MOBILE
             location untuk mobile --}}
             <div class="location-container mx-2 mt-2">
@@ -553,7 +553,7 @@
             tombol action dipaling bawah untuk mobile --}}
             <div class="bottom-action-container">
                 <div class="d-flex align-items-center">
-                    <div id="clear_date_header" class="btn-transparent-action clear-date-mobile d-none">
+                    <div id="clear_date_mobile" class="btn-transparent-action clear-date-mobile d-none">
                         {{ __('user_page.Clear Dates') }}</div>
                     <div class="btn-transparent-action clear-all-mobile">Clear All</div>
                     <div class="btn-company next-mobile ms-auto">Next</div>
@@ -1007,6 +1007,10 @@
                                                                     </a>
                                                                 </div>
                                                             </div>
+                                                            <button type="submit" class="d-block m-auto"
+                                                                style="background: #ff7400; color: white; padding: 5px 15px; border-radius: 10px; font-size: 18px; border: none;">
+                                                                Search
+                                                            </button>
                                                         </div>
                                                     </li>
                                                 </ul>
@@ -1525,20 +1529,23 @@
         {{-- Increment Decrement --}}
         <script>
             function adult_increment_index() {
-                document.getElementById('adult_desktop').stepUp();
-                document.getElementById('adult_mobile').stepUp();
-                document.getElementById('total_guest_desktop').value = parseInt(document.getElementById('adult_desktop')
-                        .value) +
-                    parseInt(document.getElementById('child_desktop').value);
-                // NEW SEARCH MOBILE
-                // fungsi untuk mengisi guest di mobile
-                document.querySelector('.guests-mobile').innerHTML = parseInt(document.getElementById('adult_mobile').value) +
-                    parseInt(document.getElementById('child_mobile').value) + " Guests";
+                if (parseInt(document.getElementById('total_guest_desktop').value) < 10
+                    && parseInt(document.querySelector('.guests-mobile').innerHTML) < 10) {
+                    document.getElementById('adult_desktop').stepUp();
+                    document.getElementById('adult_mobile').stepUp();
+                    document.getElementById('total_guest_desktop').value = parseInt(document.getElementById('adult_desktop')
+                            .value) +
+                        parseInt(document.getElementById('child_desktop').value);
+                    // NEW SEARCH MOBILE
+                    // fungsi untuk mengisi guest di mobile
+                    document.querySelector('.guests-mobile').innerHTML = parseInt(document.getElementById('adult_mobile').value) +
+                        parseInt(document.getElementById('child_mobile').value) + " Guests";    
+                }
             }
 
             function adult_decrement_index() {
                 document.getElementById('adult_desktop').stepDown();
-                document.getElementById('adult_desktop').stepDown();
+                document.getElementById('adult_mobile').stepDown();
                 document.getElementById('total_guest_desktop').value = parseInt(document.getElementById('adult_desktop')
                         .value) +
                     parseInt(document.getElementById('child_desktop').value);
@@ -1549,15 +1556,18 @@
             }
 
             function child_increment_index() {
-                document.getElementById('child_desktop').stepUp();
-                document.getElementById('child_mobile').stepUp();
-                document.getElementById('total_guest_desktop').value = parseInt(document.getElementById('adult_desktop')
-                        .value) +
-                    parseInt(document.getElementById('child_desktop').value);
-                // NEW SEARCH MOBILE
-                // fungsi untuk mengisi guest di mobile
-                document.querySelector('.guests-mobile').innerHTML = parseInt(document.getElementById('adult_mobile').value) +
-                    parseInt(document.getElementById('child_mobile').value) + " Guests";
+                if (parseInt(document.getElementById('total_guest_desktop').value) < 10
+                    && parseInt(document.querySelector('.guests-mobile').innerHTML) < 10) {
+                    document.getElementById('child_desktop').stepUp();
+                    document.getElementById('child_mobile').stepUp();
+                    document.getElementById('total_guest_desktop').value = parseInt(document.getElementById('adult_desktop')
+                            .value) +
+                        parseInt(document.getElementById('child_desktop').value);
+                    // NEW SEARCH MOBILE
+                    // fungsi untuk mengisi guest di mobile
+                    document.querySelector('.guests-mobile').innerHTML = parseInt(document.getElementById('adult_mobile').value) +
+                        parseInt(document.getElementById('child_mobile').value) + " Guests";
+                }
             }
 
             function child_decrement_index() {
@@ -1595,8 +1605,10 @@
 
         <script>
             $(".search-container-mobile .close").on("click", function() {
+                backToMainMobile();
                 $(".search-container-mobile").removeClass("search-container-mobile-open")
                     .addClass("search-container-mobile-closed");
+                $("body").removeAttr("style");
             });
         </script>
 
@@ -1606,10 +1618,14 @@
             function backToMainMobile() {
                 $(".search-container-mobile form").removeClass("h-100");
                 $("#sugest").removeClass("display-block").addClass("display-none");
+                $(".search-container-mobile .select-location-mobile-container").removeClass("d-none");
+                $(".search-container-mobile .location-has-selected-container").removeClass("d-flex").addClass("d-none");
                 $(".search-container-mobile .first-sugest-location").removeClass("d-none");
                 $(".search-container-mobile .dates-container").removeClass("d-none h-100 px-0");
                 $(".search-container-mobile .sidebar-popup").removeAttr("style");
+                $(".search-container-mobile .sidebar-popup").removeClass("d-block").addClass("d-none");
                 $(".search-container-mobile .guests-container").removeClass("d-none p-0");
+                $(".search-container-mobile .guest-popup").removeClass("d-block").addClass("d-none");
                 $(".search-container-mobile .selected-guest-mobile").removeClass("d-none").addClass("d-flex");
                 $(".search-container-mobile .bottom-action-container").removeClass("d-none bottom-select-date");
                 $(".search-container-mobile .bottom-action-container").removeClass("d-none");
@@ -1700,10 +1716,11 @@
                 $(".search-container-mobile .guests-container").removeClass("d-none").addClass("p-0");
                 $(".search-container-mobile .dates-container").removeClass("d-none px-0");
                 $(".search-container-mobile .sidebar-popup").removeAttr("style");
+                $(".search-container-mobile .sidebar-popup").removeClass("d-block").addClass("d-none");
                 $(".search-container-mobile .location-container")
                     .addClass("mx-2").removeClass("h-100");
                 $(".search-container-mobile .selected-guest-mobile").removeClass("d-flex").addClass("d-none");
-                $(".search-container-mobile .guest-popup").addClass("d-block");
+                $(".search-container-mobile .guest-popup").removeClass("d-none").addClass("d-block");
                 $(".search-container-mobile .bottom-action-container").removeClass("d-none bottom-select-date");
                 $(".search-container-mobile .btn-top-search .close").removeClass("d-none");
                 $(".search-container-mobile .btn-top-search .back").addClass("d-none");
@@ -1867,6 +1884,7 @@
 
                     // NEW SEARCH MOBILE
                     // fungsi untuk isi nilai dari location di mobile ketika user udh milih
+                    $('#loc_sugest').val($(this).data("value"));
                     $('.loc_sugest_mobile').html($(this).data("value"));
 
                     $('#sugest_mobile').removeClass("display-block");
@@ -1908,8 +1926,13 @@
                     };
 
                     if (window.innerWidth <= 649) {
+                        backToMainMobile();
                         $(".search-container-mobile").removeClass("search-container-mobile-closed")
                             .addClass("search-container-mobile-open");
+                        $("body").css({
+                            "height": "100%",
+                            "overflow": "hidden"
+                        });
                     }else {
                         $('#sugest_desktop').removeClass("display-none");
                         $('#sugest_desktop').addClass("display-block"); //add the class to the clicked element
@@ -1959,7 +1982,7 @@
 
                 $(".location_op_desktop").on('click', function(e) {
                     $('#loc_sugest_desktop').val($(this).data("value"));
-                    $('#loc_sugest_mobile').val($(this).data("value"));
+                    $('#loc_sugest').val($(this).data("value"));
                     $('#sugest_desktop').removeClass("display-block");
                     $('#sugest_desktop').addClass("display-none");
 
@@ -2009,16 +2032,17 @@
             // NEW SEARCH MOBILE
             // fungsi untuk clear all di mobile
             $(".clear-all-mobile").on("click", function() {
+                $("#loc_sugest_desktop").val("");
                 $("#loc_sugest").val("");
                 $("#check_in2").val("");
                 $("#check_out2").val("");
                 $("#check_in_mobile").val("");
                 $("#check_out_mobile").val("");
-                $("#total_guest_desktop").val("");
+                $("#total_guest_desktop").val("1");
                 $(".search-container-mobile .loc_sugest_mobile").html("Location");
                 $(".search-container-mobile .dates-mobile").html("When");
                 $(".search-container-mobile .guests-mobile").html("1 Guests");
-                calendarSearch(2);
+                calendarSearch(window.countMonthsMobile);
             });
         </script>
 
@@ -2056,8 +2080,13 @@
                         content_flatpickr.style.display = "none";
                     } else {
                         if (window.innerWidth <= 649) {
+                            backToMainMobile();
                             $(".search-container-mobile").removeClass("search-container-mobile-closed")
                                 .addClass("search-container-mobile-open");
+                            $("body").css({
+                                "height": "100%",
+                                "overflow": "hidden"
+                            });
                         } else {
                             content_flatpickr.style.display = "block";
                             document.addEventListener('mouseup', function(e) {
@@ -2142,8 +2171,13 @@
                 }
                 e(".dropdown-toggle").click(function() {
                     if (window.innerWidth <= 649) {
+                        backToMainMobile();
                         $(".search-container-mobile").removeClass("search-container-mobile-closed")
                             .addClass("search-container-mobile-open");
+                        $("body").css({
+                            "height": "100%",
+                            "overflow": "hidden"
+                        });
                     }else {
                         var t = e(this).parents(".button-dropdown").children(".dropdown-menu").is(
                         ":hidden");
@@ -2500,8 +2534,9 @@
             $(document).ready(function() {
                 function handleResponsive(windowWidth) {
                     if (windowWidth <= 649) {
+                        $("#loc_sugest_desktop").attr("readonly", true);
                         calendarSearch(window.countMonthsMobile);
-                        $("#clear_date_header").click(function() {
+                        $("#clear_date_mobile").click(function() {
                             $("#check_in2").val("");
                             $("#check_out2").val("");
 
@@ -2518,6 +2553,11 @@
                             calendarSearch(window.countMonthsMobile);
                         });
                     } else {
+                        backToMainMobile();
+                        $(".search-container-mobile").removeClass("search-container-mobile-open")
+                            .addClass("search-container-mobile-closed");
+                        $("body").removeAttr("style");
+                        $("#loc_sugest_desktop").attr("readonly", false);
                         $("#clear_date_header").click(function() {
                             $("#check_in2").val("");
                             $("#check_out2").val("");
