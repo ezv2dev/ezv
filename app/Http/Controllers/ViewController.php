@@ -2371,9 +2371,9 @@ class ViewController extends Controller
         $amenities = Amenities::select('icon', 'name', 'order', 'id_amenities')->get();
 
         //pagination ajax
-        if ($request->ajax()) {
-            return view('user.data_list_villa', compact('villa', 'amenities'))->render();
-        }
+        // if ($request->ajax()) {
+        //     return view('user.data_list_villa', compact('villa', 'amenities'))->render();
+        // }
 
         return view('user.list_villa', compact('villa', 'amenities', 'host_language', 'propertyType', 'villaCategory', 'villaFilter', 'accessibility_features', 'accessibility_features_detail'));
     }
