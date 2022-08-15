@@ -1341,14 +1341,24 @@
                 <h3 class="host-body-text mb-0 text-center text-orange">A World of Possibilities</h3>
 
                 <div class="row-grid-img-home pt-5">
-                    @foreach ($villaCategory as $item)
+                    @foreach ($villaCategory->take(24) as $item)
                         <div class="grid-img-container">
-                            <img src="https://source.unsplash.com/random/?{{ $item->name }}">
+                            <img src="https://source.unsplash.com/random/?{{ $item->villaCategory->name }}">
                             <div class="grid-text">
-                                {{ $item->name }}
+                                {{ $item->villaCategory->name }}
                             </div>
                         </div>
                     @endforeach
+                    @if ($villaCategory->count() <= 24)
+                        @foreach ($categoryTemp as $item)
+                            <div class="grid-img-container">
+                                <img src="https://source.unsplash.com/random/?{{ $item['name'] }}">
+                                <div class="grid-text">
+                                    {{ $item['name'] }}
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
                 </div>
             </section>
             <!-- Recomendation section Comment this when back to old design -->
@@ -1359,44 +1369,14 @@
                 <h3 class="host-body-text mb-0 text-center">The Finest Locations</h3>
 
                 <div class="row-grid-img-location pt-5">
-                    <!-- Image row 1-->
-                    <div class="grid-img-container flex-column">
-                        <img src="https://source.unsplash.com/featured?people,student">
-                        <div class="">
-                            Seminyak
+                    @foreach ($villaLocation as $item)
+                        <div class="grid-img-container flex-column">
+                            <img src="https://source.unsplash.com/random/?{{ $item->location->name }}">
+                            <div class="">
+                                {{ $item->location->name }}
+                            </div>
                         </div>
-                    </div>
-                    <div class="grid-img-container flex-column">
-                        <img src="https://source.unsplash.com/featured?cyscling,boxing">
-                        <div class="">
-                            Canggu
-                        </div>
-                    </div>
-                    <div class="grid-img-container flex-column">
-                        <img src="https://source.unsplash.com/featured?sunrise,shores">
-                        <div class="">
-                            Uluwatu
-                        </div>
-                    </div>
-                    <div class="grid-img-container flex-column">
-                        <img src="https://source.unsplash.com/featured?accident,crash">
-                        <div class="">
-                            Kuta
-                        </div>
-                    </div>
-                    <div class="grid-img-container flex-column">
-                        <img src="https://source.unsplash.com/featured?eating,drink">
-                        <div class="">
-                            Nusa Dua
-                        </div>
-                    </div>
-                    <div class="grid-img-container flex-column">
-                        <img src="https://source.unsplash.com/featured?happy,sadness">
-                        <div class="">
-                            Ubud
-                        </div>
-                    </div>
-                </div>
+                    @endforeach
             </section>
             <!-- Location section Comment this when back to old design -->
 

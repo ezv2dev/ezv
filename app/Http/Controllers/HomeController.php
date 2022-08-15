@@ -12,6 +12,8 @@ use App\Models\Location;
 use App\Models\RestaurantSubCategory;
 use App\Models\Villa;
 use App\Models\VillaCategory;
+use App\Models\VillaHasCategory;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -128,9 +130,24 @@ class HomeController extends Controller
 
         $restaurantSubCategory = RestaurantSubCategory::select('id_subcategory', 'name', 'order')->get();
         $activitySubCategory = ActivitySubcategory::select('id_category', 'id_subcategory', 'name', 'order')->get();
-        $villaCategory = VillaCategory::select('id_villa_category', 'name')->get();
 
-        return view('user.index')->with(compact('restaurantSubCategory', 'activitySubCategory', 'villaCategory'));
+        // ! Villa Category
+        $villaCategory = VillaHasCategory::with('villaCategory')->select('id_villa_category', DB::raw('count(*) as total'))
+            ->groupBy('id_villa_category')->orderByDesc('total')->get();
+        $categoryIds = $villaCategory->pluck('id_villa_category');
+        $categoryElse = VillaCategory::whereNotIn('id_villa_category', $categoryIds)->select('id_villa_category', 'name')->get();
+        $categoryTemp = collect();
+        if ($villaCategory->count() <= 24) {
+            for ($i = $villaCategory->count() + 1; $i <= 24; $i++) {
+                $categoryTemp->push(['id_villa_category' => $categoryElse[$i]->id_villa_category, 'total' => 0, 'name' => $categoryElse[$i]->name]);
+            }
+        }
+        // ! End Villa Category
+
+        // ! Villa Location
+        $villaLocation = Villa::with('location')->select('id_location', DB::raw('count(*) as total'))->groupBy('id_location')->orderByDesc('total')->take(6)->get();
+        // ! End Villa Location
+        return view('user.index')->with(compact('restaurantSubCategory', 'activitySubCategory', 'villaCategory', 'categoryTemp', 'villaLocation'));
     }
 
     public function get_lat_long(Request $request)
