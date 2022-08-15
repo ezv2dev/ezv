@@ -1007,6 +1007,10 @@
                                                                     </a>
                                                                 </div>
                                                             </div>
+                                                            <button type="submit" class="d-block m-auto"
+                                                                style="background: #ff7400; color: white; padding: 5px 15px; border-radius: 10px; font-size: 18px; border: none;">
+                                                                Search
+                                                            </button>
                                                         </div>
                                                     </li>
                                                 </ul>
@@ -2028,6 +2032,7 @@
             // NEW SEARCH MOBILE
             // fungsi untuk clear all di mobile
             $(".clear-all-mobile").on("click", function() {
+                $("#loc_sugest_desktop").val("");
                 $("#loc_sugest").val("");
                 $("#check_in2").val("");
                 $("#check_out2").val("");
