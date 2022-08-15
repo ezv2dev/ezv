@@ -12,13 +12,10 @@
 
                                 <div class="col-12 col-md-6 video-text-section"> 
                                     <h1 style="color: #ff7400;">Video content is trending</h1>
-                                    <p class="text-white">EZV Worlds 1<sup>st</sup> booking platform with a video search engine</p>
-                                    <p class="text-white">68% of costumers prefer watching videos to learn about new</p>
+                                    <p class="text-white">68% of consumers prefer watching videos to learn about new product or services</p>
                                     <p class="text-white">Show case what makes your property unique with short videos</p>
-                                    <p class="text-white">EZV Collab Portal, allows host to meet & create high quality content with professional verified creators from Videographers, Photographers, Drone Pilots, Blogger and more</p> 
-                                    <div class="col-12 d-flex justify-content-center pt-5">
-                                        <button class="letsgo" onclick="window.location.href='#start';">Get Started</button>
-                                    </div>
+                                    <p class="text-white">Collaborate with our team of media and marketing professionals Videographers, Photographers, Drone Pilots and more</p>
+                                    <p class="text-white">Free photo / video shoot for all new property listing (limited time only)</p> 
                                 </div>
 
                                 <div class="col-12 col-md-6">
