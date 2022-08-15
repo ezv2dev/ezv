@@ -259,9 +259,9 @@
                         </div>
                         <div class="col-4">
                             <img class="d-block w-100 lozad" src="{{ LazyLoad::show() }}"
-                                data-src="https://cf.bstatic.com/xdata/images/xphoto/max500_ao/85179701.jpg?k=ce7f1e159c7c0a6ce44bab2342d2145165d0d5dd2235dce5df882ae89ee01f07&o=">
+                                data-src="https://pix4.agoda.net/hotelimages/412153/-1/d38ca3ce2e65312e961e0b80636510f9.jpg">
                             <div class="location-popup-text sugest-list-text">
-                                <a type="button" class="location_op" data-value="Berawa">Berawa</a>
+                                <a type="button" class="location_op" data-value="Ubud">Ubud</a>
                             </div>
                         </div>
                     </div>
@@ -2039,6 +2039,14 @@
                 $("#check_in_mobile").val("");
                 $("#check_out_mobile").val("");
                 $("#total_guest_desktop").val("1");
+                $("#adult_desktop").val("1");
+                $("#adult_mobile").val("1");
+                $("#child_desktop").val("0");
+                $("#child_mobile").val("0");
+                $("#infant_desktop").val("0");
+                $("#infant_mobile").val("0");
+                $("#pet_desktop").val("0");
+                $("#pet_mobile").val("0");
                 $(".search-container-mobile .loc_sugest_mobile").html("Location");
                 $(".search-container-mobile .dates-mobile").html("When");
                 $(".search-container-mobile .guests-mobile").html("1 Guests");
