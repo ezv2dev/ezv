@@ -1791,7 +1791,7 @@
 
                             <div class="col-12 p-5-price text-center"
                                 style="display: none; padding: 0px; margin-top: 20px;" id="details_button">
-                                @if ($villa[0]->instant_book == 'yes')
+                                @if ($villa[0]->instant_book == 'no')
                                     <input class="price-button" onclick="details_reserve()"
                                         style="box-shadow: 1px 1px 10px #a4a4a4; text-align:center; cursor: pointer !important;"
                                         value="{{ __('user_page.VIEW DETAILS') }}" readonly>
@@ -4263,7 +4263,7 @@
     {{-- SweetAlert JS --}}
     <script src="{{ asset('assets/js/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
 
-    @if ($villa[0]->instant_book == 'yes')
+    @if ($villa[0]->instant_book == 'no')
         @include('user.modal.villa.details_reserve')
     @else
         @auth
