@@ -321,7 +321,12 @@ function calendar_availability(months) {
                         success: function (data) {
                             var total = data;
                             if (sum_night < min_stay) {
-                                alert("minimum stay is " + min_stay + " days");
+                                //alert("minimum stay is " + min_stay + " days");
+                                iziToast.error({
+                                    title: "Error",
+                                    message: "minimum stay is " + min_stay + " days",
+                                    position: "topRight",
+                                });
                             } else {
                                 $("#adult2").attr({
                                     max: total["max_total_guest"],
@@ -717,7 +722,12 @@ function calendar_reserve(months) {
                         success: function (data) {
                             var total = data;
                             if (sum_night < min_stay) {
-                                alert("minimum stay is " + min_stay + " days");
+                                // alert("minimum stay is " + min_stay + " days");
+                                iziToast.error({
+                                    title: "Error",
+                                    message: "minimum stay is " + min_stay + " days",
+                                    position: "topRight",
+                                });
                             } else {
                                 $("#adult2").attr({
                                     max: total["max_total_guest"],
@@ -925,7 +935,12 @@ function calendar_reserve2(months) {
                         success: function (data) {
                             var total = data;
                             if (sum_night < min_stay) {
-                                alert("minimum stay is " + min_stay + " days");
+                                // alert("minimum stay is " + min_stay + " days");
+                                iziToast.error({
+                                    title: "Error",
+                                    message: "minimum stay is " + min_stay + " days",
+                                    position: "topRight",
+                                });
                             } else {
                                 $("#adult2").attr({
                                     max: total["max_total_guest"],
