@@ -48,12 +48,19 @@
         display:none;
     }
 
+    #navbarMenu{
+        width:100%;
+        display:flex;
+        justify-content:center;
+    }
+
     .nav-menu-container{
         display:flex;
         align-items:start;
         flex-wrap:nowrap;
         gap:1rem;
         width:100%;
+        max-width:360px;
     }
 
     .nav-link{
@@ -83,6 +90,9 @@
     .nav-icon-link{
         width:20px;
         height:auto;
+    }
+
+    .nav-icon-link:not(.no-filter){
         filter:invert(42%) sepia(93%) saturate(1352%) hue-rotate(87deg) brightness(1%) contrast(119%);
     }
 
@@ -118,6 +128,8 @@
 
     #btnSwitchProfile:hover{
         cursor:pointer;
+        background:black;
+        color:white;
     }
 
 
@@ -218,6 +230,7 @@
         top:150%;
         right:0;
         padding:.5rem;
+        z-index:5;
     }
 
     .dropdown-user-details-name{
@@ -270,6 +283,10 @@
         gap:1rem;
     }
     
+    .subnav-list{
+        position:relative;
+    }
+
     .subnav-list a{
        color:black;
        font-weight:500;
@@ -280,10 +297,6 @@
     }
 
     @media (min-width: 992px) {
-        #navBar{
-            gap:0;
-        }
-        
         #navBar, #subNav{
             padding:1rem 4rem;
         }
@@ -297,8 +310,16 @@
             width:auto;
         }
 
+        .nav-menu-container{
+            max-width:none;
+        }
+
         .navbar-logo-h4{
             display:block;
+        }
+
+        #navbarMenu{
+            width:auto;
         }
 
         .nav-link:nth-last-child(1) {
@@ -327,155 +348,143 @@
 @endphp
 
 <header id="header">
-    <nav id="navBar" class="navbar navbar-expand-lg">
-        <a href="{{ route('partner_dashboard') }}" class="navbar-brand navbar-logo-container" target="_blank">
-            <img class="nav-logo-img" src="{{ asset('assets/logo.png') }}" alt="oke">
-            <h4 class="navbar-logo-h4">Host Dashboard</h4>
-        </a>
-    
-    
-        <div id="navbarCollapseButton">
-    
-            <button type="button" class="btn btn-filter-header" onclick="moreSubCategory();">
-                <img src="http://127.0.0.1:8000/assets/icon/menu/filter.svg" style="width: 20px; height: auto;">
-            </button>
-    
-    
-            <div id="searchbox-mobile" class="searchbox searchbox-display-block searchbox-villa" onclick="popUp();" style="cursor: pointer; width: 50px; border: none; margin: 0px;">
-                <span class="top-search">
-                    <img src="http://127.0.0.1:8000/assets/icon/menu/search.svg" style="width: 20px; height: auto;">
-                </span>
-            </div>
-    
-            <button class="btn navbar-btn-toggler" type="button" id="expand-mobile-btn">
-                <i class="fa-solid fa-bars"></i>
-            </button>
-
-        </div>
-        
-        <ul class="nav-menu-container">
-            <li class="nav-link">
-                <a href="{{ route('list') }}" target="_blank"></a>
-                <div class="nav-icon-link-container">
-                    <img src="{{ asset('assets/icon/menu/homes.svg')}}" class="nav-icon-link" alt="">
-                </div>
-                <p>Rumah</p>
-            </li>
-            <li class="nav-link">
-                <a href="{{ route('restaurant_list') }}" target="_blank"></a>
-                <div class="nav-icon-link-container">
-                    <img src="{{ asset('assets/icon/menu/food.svg')}}" class="nav-icon-link" alt="">
-                </div>
-                <p>Kuliner</p>
-            </li>
-            <li class="nav-link">
-                <a href="{{ route('hotel_list') }}" target="_blank"></a>
-                <div class="nav-icon-link-container">
-                    <img src="{{ asset('assets/icon/menu/hotel.svg')}}" class="nav-icon-link" alt="">
-                </div>
-                <p>Hotel</p>
-            </li>
-            <li class="nav-link">
-                <a href="{{ route('activity_list') }}" target="_blank"></a>
-                <div class="nav-icon-link-container">
-                    <img src="{{ asset('assets/icon/menu/wow.svg')}}" class="nav-icon-link" alt="">
-                </div>
-                <p>Wow</p>
-            </li> 
-            <li class="nav-link">
-                <a href="{{ route('collaborator_list') }}" target="_blank"></a>
-                <div class="nav-icon-link-container">
-                    <img src="{{ asset('assets/icon/menu/list.svg')}}" class="nav-icon-link" alt="">
-                </div>
-                <p>Buat Daftar</p>
-            </li> 
-        </ul>
-    
-        
-        <div class="nav-end-container">
-            <a id="btnSwitchProfile">Switch Profile</a>
-            <a type="button" onclick="language()" class="button-change-language">
-                <img class="nav-icon-lang" src="{{ session()->has('locale')? URL::asset('assets/flags/flag_' . session('locale') . '.svg') : URL::asset('assets/flags/flag_en.svg') }}">
+    <div class="container-xxl">
+        <nav id="navBar" class="navbar navbar-expand-lg">
+            <a href="{{ route('partner_dashboard') }}" class="navbar-brand navbar-logo-container" target="_blank">
+                <img class="nav-logo-img" src="{{ asset('assets/logo.png') }}" alt="oke">
+                <h4 class="navbar-logo-h4">Host Dashboard</h4>
             </a>
+        
+            <div id="navbarCollapseButton">    
+                <button class="btn navbar-btn-toggler" type="button" id="expand-mobile-btn">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
             
-            <div class="logged-user-menu">
-                <div class="logged-item">
-                    <label class="container-mode">
-                        <input type="checkbox" id="background-color-switch" onclick="changeBackgroundTrigger(this)" {{ $tema != null && $tema == 'black' ? 'checked' : '' }} class="change-mode-dekstop">
-                        <span class="checkmark-mode"></span>
-                    </label>
-                </div>
-    
-                <div class="logged-item">
-                    <a id="dropdownMenuLink">
-                        <img src="{{ Auth::user()->avatar ? Auth::user()->avatar : asset('assets/icon/menu/user_default.svg') }}" class="logged-user-photo" id="dropdownMenuLinkImg" alt="">
-                    </a>
-                    <div class="dropdown-menu-user">
-                        <h6 class="dropdown-header d-flex align-items-center">
-                            @if (Auth::user()->foto_profile != null)
-                                <img class="dropdown-user-img" src="{{ asset('foto_profile/' . Auth::user()->foto_profile) }} ">
-                            @elseIf (Auth::user()->avatar != null)
-                                <img class="dropdown-user-img" src="{{ Auth::user()->avatar }}">
-                            @else
-                                <img class="dropdown-user-img" src="{{ asset('assets/icon/menu/user_default.svg') }}">
+            <div id="navbarMenu">
+                <ul class="nav-menu-container">
+                    <li class="nav-link">
+                        <a href="{{ route('list') }}" target="_blank"></a>
+                        <div class="nav-icon-link-container">
+                            <img src="{{ asset('assets/icon/menu/homes.svg')}}" class="nav-icon-link" alt="">
+                        </div>
+                        <p>Rumah</p>
+                    </li>
+                    <li class="nav-link">
+                        <a href="{{ route('restaurant_list') }}" target="_blank"></a>
+                        <div class="nav-icon-link-container">
+                            <img src="{{ asset('assets/icon/menu/food.svg')}}" class="nav-icon-link" alt="">
+                        </div>
+                        <p>Kuliner</p>
+                    </li>
+                    <li class="nav-link">
+                        <a href="{{ route('hotel_list') }}" target="_blank"></a>
+                        <div class="nav-icon-link-container">
+                            <img src="{{ asset('assets/icon/menu/hotel.svg')}}" class="nav-icon-link" alt="">
+                        </div>
+                        <p>Hotel</p>
+                    </li>
+                    <li class="nav-link">
+                        <a href="{{ route('activity_list') }}" target="_blank"></a>
+                        <div class="nav-icon-link-container">
+                            <img src="{{ asset('assets/icon/menu/wow.svg')}}" class="nav-icon-link no-filter" alt="">
+                        </div>
+                        <p>Wow</p>
+                    </li> 
+                    <li class="nav-link">
+                        <a href="{{ route('collaborator_list') }}" target="_blank"></a>
+                        <div class="nav-icon-link-container">
+                            <img src="{{ asset('assets/icon/menu/list.svg')}}" class="nav-icon-link" alt="">
+                        </div>
+                        <p>Buat Daftar</p>
+                    </li> 
+                </ul>
+            </div>
+        
+            <div class="nav-end-container">
+                <a id="btnSwitchProfile">Switch Profile</a>
+                <a type="button" onclick="language()" class="button-change-language">
+                    <img class="nav-icon-lang" src="{{ session()->has('locale')? URL::asset('assets/flags/flag_' . session('locale') . '.svg') : URL::asset('assets/flags/flag_en.svg') }}">
+                </a>
+                
+                <div class="logged-user-menu">
+                    <div class="logged-item">
+                        <label class="container-mode">
+                            <input type="checkbox" id="background-color-switch" onclick="changeBackgroundTrigger(this)" {{ $tema != null && $tema == 'black' ? 'checked' : '' }} class="change-mode-dekstop">
+                            <span class="checkmark-mode"></span>
+                        </label>
+                    </div>
+        
+                    <div class="logged-item">
+                        <a id="dropdownMenuLink">
+                            <img src="{{ Auth::user()->avatar ? Auth::user()->avatar : asset('assets/icon/menu/user_default.svg') }}" class="logged-user-photo" id="dropdownMenuLinkImg" alt="">
+                        </a>
+                        <div class="dropdown-menu-user">
+                            <h6 class="dropdown-header d-flex align-items-center">
+                                @if (Auth::user()->foto_profile != null)
+                                    <img class="dropdown-user-img" src="{{ asset('foto_profile/' . Auth::user()->foto_profile) }} ">
+                                @elseIf (Auth::user()->avatar != null)
+                                    <img class="dropdown-user-img" src="{{ Auth::user()->avatar }}">
+                                @else
+                                    <img class="dropdown-user-img" src="{{ asset('assets/icon/menu/user_default.svg') }}">
+                                @endif
+                                <div class="dropdown-user-details">
+                                    <div class="dropdown-user-details-name">{{ Auth::user()->first_name }}
+                                        {{ Auth::user()->last_name }}</div>
+                                    <div class="dropdown-user-details-email">{{ Auth::user()->email }}</div>
+                                </div>
+                            </h6>
+        
+                            @if (in_array($role, [1,2,3]))
+                                <a class="dropdown-item" href="{{ route('partner_dashboard') }}">
+                                    {{ __('user_page.Dashboard') }}
+                                </a>
                             @endif
-                            <div class="dropdown-user-details">
-                                <div class="dropdown-user-details-name">{{ Auth::user()->first_name }}
-                                    {{ Auth::user()->last_name }}</div>
-                                <div class="dropdown-user-details-email">{{ Auth::user()->email }}</div>
-                            </div>
-                        </h6>
-    
-                        @if (in_array($role, [1,2,3]))
-                            <a class="dropdown-item" href="{{ route('partner_dashboard') }}">
-                                {{ __('user_page.Dashboard') }}
+                            @if (in_array($role, [1,2,3,5]))
+                                <a class="dropdown-item" href="{{ route('collaborator_list') }}">
+                                    {{ __('user_page.Collab Portal') }}
+                                </a>
+                            @endif
+                            <a class="dropdown-item" href="{{ route('profile_index') }}">
+                                {{ __('user_page.My Profile') }}
                             </a>
-                        @endif
-                        @if (in_array($role, [1,2,3,5]))
-                            <a class="dropdown-item" href="{{ route('collaborator_list') }}">
-                                {{ __('user_page.Collab Portal') }}
+                            <a class="dropdown-item" href="{{ route('change_password') }}">
+                                {{ __('user_page.Change Password') }}
                             </a>
-                        @endif
-                        <a class="dropdown-item" href="{{ route('profile_index') }}">
-                            {{ __('user_page.My Profile') }}
-                        </a>
-                        <a class="dropdown-item" href="{{ route('change_password') }}">
-                            {{ __('user_page.Change Password') }}
-                        </a>
-                        <a class="dropdown-item sign-out-link" href="#!" onclick="event.preventDefault(); document.getElementById('logout-form').submit()">
-                            <i data-feather="log-out"></i>
-                            {{ __('user_page.Sign Out') }}
-                        </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="post" style="display: none">
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        </form>
+                            <a class="dropdown-item sign-out-link" href="#!" onclick="event.preventDefault(); document.getElementById('logout-form').submit()">
+                                <i data-feather="log-out"></i>
+                                {{ __('user_page.Sign Out') }}
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="post" style="display: none">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
+        </nav>
+        <div id="subNav">
+            <ul class="subnav-container">
+                <li class="subnav-list">
+                    <a href="">Listings</a>
+                </li>
+                <li class="subnav-list">
+                    <a href="">Calendar</a>
+                </li>
+                <li class="subnav-list">
+                    <a href="">Reservations</a>
+                </li>
+                <li class="subnav-list">
+                    <a href="">Analytics</a>
+                </li>
+                <li class="subnav-list">
+                    <a href="">Accounts</a>
+                </li>
+                <li class="subnav-list">
+                    <a href="">Inbox</a>
+                </li>
+            </ul>
         </div>
-    
-    </nav>
-    <div id="subNav">
-        <ul class="subnav-container">
-            <li class="subnav-list">
-                <a href="">Listings</a>
-            </li>
-            <li class="subnav-list">
-                <a href="">Calendar</a>
-            </li>
-            <li class="subnav-list">
-                <a href="">Reservations</a>
-            </li>
-            <li class="subnav-list">
-                <a href="">Analytics</a>
-            </li>
-            <li class="subnav-list">
-                <a href="">Accounts</a>
-            </li>
-            <li class="subnav-list">
-                <a href="">Inbox</a>
-            </li>
-        </ul>
     </div>
 </header>
 

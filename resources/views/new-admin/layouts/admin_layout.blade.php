@@ -581,9 +581,9 @@
         </div>
 
     </div>
+    <div id="overlay"></div>
     {{--@if (Route::current()->uri() != 'dashboard')--}}
 
-    <div id="overlay"></div>
     <nav id="navBar" class="fixed-top bg-white navbar-1-1 border-bottom navbar navbar-expand-lg navbar-light p-4"
         style="z-index:4;">
         {{-- <nav class="navbar-1-1 navbar navbar-expand-lg navbar-light p-4 {{ Request::is('manage-your-space') ? 'shadow bg-white fixed-top' : '' }}" style="margin-bottom:-2%;"> --}} 
@@ -1128,9 +1128,9 @@
         </div>
     </nav>
 
-    {{--@else
-        @include('new-admin.layouts.admin_navbar')
-    @endif--}}
+    {{--@else--}}
+    {{--@include('new-admin.layouts.admin_navbar')--}}
+    {{--@endif--}}
 
     <!-- <main style="overflow-y: auto; overflow-x: hidden;"> -->
     <main class="main">
