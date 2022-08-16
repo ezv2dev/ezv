@@ -404,7 +404,7 @@
                     @endauth
 
                     <div class="col-12 text-center" id ="button_enquiry" style="display:block;">
-                        <input class="price-button" style="cursor: pointer; text-align: center;"
+                        <input class="price-button" style="cursor: pointer; text-align: center; caret-color: transparent;"
                         onclick="enquirybooking()"
                         value="ENQUIRY NOW">
                     </div>
@@ -925,49 +925,49 @@
         $('#enq-phn').hide();
     });
     function enquirybooking() {
-        // let error = 0;
-        // var regex = /^([a-zA-Z0-9_\.\-\+])+\@((.*))+$/;
-        // if(!$('#first_name_enquiry').val()) {
-        //     $('#first_name_enquiry').addClass('is-invalid');
-        //     $('#enq-fname').show();
-        //     error = 1;
-        // } else {
-        //     $('#first_name_enquiry').removeClass('is-invalid');
-        //     $('#enq-fname').hide();
-        // }
-        // if(!$('#last_name_enquiry').val()) {
-        //     $('#last_name_enquiry').addClass('is-invalid');
-        //     $('#enq-lname').show();
-        //     error = 1;
-        // } else {
-        //     $('#last_name_enquiry').removeClass('is-invalid');
-        //     $('#enq-lname').hide();
-        // }
-        // if(!$('#email_enquiry').val()) {
-        //     $('#email_enquiry').addClass('is-invalid');
-        //     $('#enq-eml').show();
-        //     error = 1;
-        // } else {
-        //     if (!regex.test($('#email_enquiry').val())) {
-        //         $('#email_enquiry').addClass('is-invalid');
-        //         $('#enq-eml').show();
-        //         error = 1;
-        //     } else {
-        //         $('#email_enquiry').removeClass('is-invalid');
-        //         $('#enq-eml').hide();
-        //     }
-        // }
-        // if(!$('#phone_enquiry').val()) {
-        //     $('#phone_enquiry').addClass('is-invalid');
-        //     $('#enq-phn').show();
-        //     error = 1;
-        // } else {
-        //     $('#phone_enquiry').removeClass('is-invalid');
-        //     $('#enq-phn').hide();
-        // }
-        // if(error = 1) {
-        //     return false;
-        // } else {
+        let error = 0;
+        var regex = /^([a-zA-Z0-9_\.\-\+])+\@((.*))+$/;
+        if(!$('#first_name_enquiry').val()) {
+            $('#first_name_enquiry').addClass('is-invalid');
+            $('#enq-fname').show();
+            error = 1;
+        } else {
+            $('#first_name_enquiry').removeClass('is-invalid');
+            $('#enq-fname').hide();
+        }
+        if(!$('#last_name_enquiry').val()) {
+            $('#last_name_enquiry').addClass('is-invalid');
+            $('#enq-lname').show();
+            error = 1;
+        } else {
+            $('#last_name_enquiry').removeClass('is-invalid');
+            $('#enq-lname').hide();
+        }
+        if(!$('#email_enquiry').val()) {
+            $('#email_enquiry').addClass('is-invalid');
+            $('#enq-eml').show();
+            error = 1;
+        } else {
+            if (!regex.test($('#email_enquiry').val())) {
+                $('#email_enquiry').addClass('is-invalid');
+                $('#enq-eml').show();
+                error = 1;
+            } else {
+                $('#email_enquiry').removeClass('is-invalid');
+                $('#enq-eml').hide();
+            }
+        }
+        if(!$('#phone_enquiry').val()) {
+            $('#phone_enquiry').addClass('is-invalid');
+            $('#enq-phn').show();
+            error = 1;
+        } else {
+            $('#phone_enquiry').removeClass('is-invalid');
+            $('#enq-phn').hide();
+        }
+        if(error == 1) {
+            return false;
+        } else {
             $('#button_enquiry').hide();
             $('#loading-image').show();
             if(`{{ Auth::check() }}` == 'true')
@@ -1073,6 +1073,6 @@
                     },
                 });
             }
-        // }
+        }
     }
 </script>
