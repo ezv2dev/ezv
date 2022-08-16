@@ -987,7 +987,7 @@
                             <div class="col-12 row gallery">
                                 @if ($photo->count() > 0)
                                     @foreach ($photo->sortBy('order') as $item)
-                                        <div class="col-4 grid-photo" id="displayPhoto{{ $item->id_photo }}">
+                                        <div class="col-4 grid-photo" id="displayPhoto{{ $item->id_photo }}" onclick="photoViews()">
                                         <a onclick="openModalGalleryMobile(`{{ $item->id_photo }}`)">
                                             <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="{{ URL::asset('/foto/gallery/' . $villa[0]->uid . '/' . $item->name) }}" title="{{ $item->caption }}">
                                         </a>
@@ -4497,7 +4497,7 @@
                     for (let i = 0; i < response.data.photo.length; i++) {
                         content += '<div class="col-4 grid-photo" id="displayPhoto' +
                             response.data.photo[i].id_photo +
-                            '"> <a href="' +
+                            '" onclick="photoViews()"> <a href="' +
                             path + lowerCaseUid + slash + response.data.photo[i].name +
                             '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
                             path + lowerCaseUid + slash + response.data.photo[i].name +
@@ -4507,7 +4507,7 @@
 
                         contentMobile += '<div class="col-4 grid-photo" id="displayPhoto' +
                             response.data.photo[i].id_photo +
-                            '"> <a onclick="openModalGalleryMobile('+response.data.photo[i].id_photo+')"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
+                            '" onclick="photoViews()"> <a onclick="openModalGalleryMobile('+response.data.photo[i].id_photo+')"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
                             path + lowerCaseUid + slash + response.data.photo[i].name +
                             '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $villa[0]->id_villa }}" data-photo="' +
                             response.data.photo[i].id_photo +
@@ -4531,7 +4531,7 @@
                         for (let v = 0; v < response.data.video.length; v++) {
                             content += '<div class="col-4 grid-photo" id="displayVideo' + response.data.video[v]
                                 .id_video +
-                                '"> <a class="pointer-normal" onclick="view(' + response.data.video[v]
+                                '" onclick="videoViews()"> <a class="pointer-normal" onclick="view(' + response.data.video[v]
                                 .id_video +
                                 ')" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="' +
                                 path + lowerCaseUid + slash + response.data.video[v].name +
@@ -4541,7 +4541,7 @@
 
                             contentMobile += '<div class="col-4 grid-photo" id="displayVideo' + response.data.video[v]
                                 .id_video +
-                                '"> <a class="pointer-normal" onclick="view(' + response.data.video[v]
+                                '" onclick="videoViews()"> <a class="pointer-normal" onclick="view(' + response.data.video[v]
                                 .id_video +
                                 ')" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="' +
                                 path + lowerCaseUid + slash + response.data.video[v].name +
@@ -4616,6 +4616,8 @@
                     let lowerCaseUid = uid.toLowerCase();
                     let content = "";
                     let contentPositionModal = "";
+                    let contentMobile = "";
+                    let contentPhotoModalMobile = "";
 
                     for (let i = 0; i < response.data.photo.length; i++) {
                         content += '<div class="col-4 grid-photo" id="displayPhoto' +
@@ -4627,11 +4629,36 @@
                             '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $villa[0]->id_villa }}" data-photo="' +
                             response.data.photo[i].id_photo +
                             '" onclick="delete_photo_photo(this)"><i class="fa fa-trash"></i></button> </span> </div>';
+
+                        contentMobile += '<div class="col-4 grid-photo" id="displayPhoto' +
+                            response.data.photo[i].id_photo +
+                            '" onclick="photoViews()"> <a onclick="openModalGalleryMobile('+response.data.photo[i].id_photo+')"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
+                            path + lowerCaseUid + slash + response.data.photo[i].name +
+                            '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $villa[0]->id_villa }}" data-photo="' +
+                            response.data.photo[i].id_photo +
+                            '" onclick="delete_photo_photo(this)"><i class="fa fa-trash"></i></button> </span> </div>';
+
+                        contentPhotoModalMobile += '<div id="'+ response.data.photo[i].id_photo +'">';
+                        contentPhotoModalMobile += '<div class="modal-gallery">'
+                        contentPhotoModalMobile += '<img id="displayPhoto'+ response.data.photo[i].id_photo +'" class="lozad-gallery-load lozad-gallery mb-2"';
+                        contentPhotoModalMobile += 'src="' +
+                            path + lowerCaseUid + slash + response.data.photo[i].name +
+                            '" title="' + response.data.photo[i].name + '"> </div></div>';
                     }
 
                     if (response.data.video.length > 0) {
                         for (let v = 0; v < response.data.video.length; v++) {
                             content += '<div class="col-4 grid-photo" id="displayVideo' + response.data.video[v]
+                                .id_video +
+                                '"> <a class="pointer-normal" onclick="view(' + response.data.video[v]
+                                .id_video +
+                                ')" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="' +
+                                path + lowerCaseUid + slash + response.data.video[v].name +
+                                '#t=5.0"> </video> <span class="video-grid-button"><i class="fa fa-play"></i></span></a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $villa[0]->id_villa }}" data-video="' +
+                                response.data.video[v].id_video +
+                                '" onclick="delete_photo_video(this)" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Video') }}"><i class="fa fa-trash"></i></button> </span> </div>';
+
+                            contentMobile += '<div class="col-4 grid-photo" id="displayVideo' + response.data.video[v]
                                 .id_video +
                                 '"> <a class="pointer-normal" onclick="view(' + response.data.video[v]
                                 .id_video +
@@ -4653,9 +4680,18 @@
                     btn.textContent = "{{ __('user_page.Save') }}";
                     btn.classList.remove("disabled");
 
+                    const mobile = $(".mobile");
+                    const desktop = $(".desktop");
 
-                    $('.gallery').html("");
-                    $('.gallery').append(content);
+                    $("#content-modal-photo-mobile").html("");
+                    $("#content-modal-photo-mobile").append(contentPhotoModalMobile);
+
+                    desktop.find('.gallery').html("");
+                    desktop.find('.gallery').append(content);
+
+                    mobile.find('.gallery').html("");
+                    mobile.find('.gallery').append(contentMobile);
+
                     $('#sortable-video').html("");
                     $('#sortable-video').append(contentPositionModal);
 
@@ -4934,7 +4970,7 @@
                 if (message.data.photo.length > 0) {
                     content = '<div class="col-4 grid-photo" id="displayPhoto' +
                         message.data.photo[0].id_photo +
-                        '"> <a href="' +
+                        '" onclick="photoViews()"> <a href="' +
                         path + lowerCaseUid + slash + message.data.photo[0].name +
                         '"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
                         path + lowerCaseUid + slash + message.data.photo[0].name +
@@ -4944,7 +4980,7 @@
 
                     contentMobile += '<div class="col-4 grid-photo" id="displayPhoto' +
                         message.data.photo[0].id_photo +
-                        '"> <a onclick="openModalGalleryMobile('+message.data.photo[0].id_photo+')"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
+                        '" onclick="photoViews()"> <a onclick="openModalGalleryMobile('+message.data.photo[0].id_photo+')"> <img class="photo-grid img-lightbox lozad-gallery-load lozad-gallery" src="' +
                         path + lowerCaseUid + slash + message.data.photo[0].name +
                         '"> </a> <span class="edit-icon"> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Photo Position') }}" type="button" onclick="position_photo()"><i class="fa fa-arrows"></i></button> <button data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Delete Photo') }}" href="javascript:void(0);" data-id="{{ $villa[0]->id_villa }}" data-photo="' +
                         message.data.photo[0].id_photo +
@@ -4971,7 +5007,7 @@
 
                 if (message.data.video.length > 0) {
                     content = '<div class="col-4 grid-photo" id="displayVideo' + message.data.video[0].id_video +
-                        '"> <a class="pointer-normal" onclick="view(' + message.data.video[0].id_video +
+                        '" onclick="videoViews()"> <a class="pointer-normal" onclick="view(' + message.data.video[0].id_video +
                         ')" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="' +
                         path + lowerCaseUid + slash + message.data.video[0].name +
                         '#t=5.0"> </video> <span class="video-grid-button"><i class="fa fa-play"></i></span></a> <span class="edit-video-icon"> <button type="button" onclick="position_video()" data-bs-toggle="popover" data-bs-animation="true" data-bs-placement="bottom" title="{{ __('user_page.Swap Video Position') }}"><i class="fa fa-arrows"></i></button> <button href="javascript:void(0);" data-id="{{ $villa[0]->id_villa }}" data-video="' +
@@ -4980,7 +5016,7 @@
 
                     contentMobile += '<div class="col-4 grid-photo" id="displayVideo' + message.data.video[0]
                             .id_video +
-                            '"> <a class="pointer-normal" onclick="view(' + message.data.video[0]
+                            '" onclick="videoViews()"> <a class="pointer-normal" onclick="view(' + message.data.video[0]
                             .id_video +
                             ')" href="javascript:void(0);"> <video href="javascript:void(0)" class="photo-grid" loading="lazy" src="' +
                             path + lowerCaseUid + slash + message.data.video[0].name +
