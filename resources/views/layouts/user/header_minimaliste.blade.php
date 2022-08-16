@@ -53,7 +53,7 @@
                                 <p class="m-0">{{ __('user_page.Dashboard') }}</p>
                             </a>
                         @endif
-                        @if ($role == 4)
+                        {{-- @if ($role == 4)
                             <a class="list-link-sidebar mb-2" href="{{ route('collaborator_intro') }}">
                                 <i class="fa fa-handshake-o text-center" aria-hidden="true"></i>
                                 <p class="m-0">{{ __('user_page.Collabs') }}</p>
@@ -63,7 +63,7 @@
                                 <i class="fa fa-handshake-o text-center" aria-hidden="true"></i>
                                 <p class="m-0">{{ __('user_page.Collab Portal') }}</p>
                             </a>
-                        @endif
+                        @endif --}}
                         <a class="list-link-sidebar mb-2" href="{{ route('profile_index') }}">
                             <i class="fa-solid fa-user text-center"></i>
                             <p class="m-0">{{ __('user_page.My Profile') }}</p>
@@ -247,11 +247,11 @@
                                                     {{ __('user_page.Dashboard') }}
                                                 </a>
                                             @endif
-                                            @if ($role == 1 || $role == 2 || $role == 3 || $role == 5)
+                                            {{-- @if ($role == 1 || $role == 2 || $role == 3 || $role == 5)
                                                 <a class="dropdown-item" href="{{ route('collaborator_list') }}">
                                                     {{ __('user_page.Collabs') }}
                                                 </a>
-                                            @endif
+                                            @endif --}}
                                             <a class="dropdown-item" href="{{ route('profile_index') }}">
                                                 {{ __('user_page.My Profile') }}
                                             </a>
@@ -293,7 +293,7 @@
                                     <a href="#" onclick="view_LoginModal('register');">Register</a>
                                     <hr>
                                     <a href="{{ route('ahost') }}">Become a Host</a>
-                                    <a href="{{ route('collaborator_list') }}">Collaborator Portal</a>
+                                    {{-- <a href="{{ route('collaborator_list') }}">Collaborator Portal</a> --}}
                                     <a href="{{ route('faq') }}">FAQ</a>
                                 </div>
                             </div>
