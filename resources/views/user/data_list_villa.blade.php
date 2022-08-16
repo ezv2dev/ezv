@@ -360,10 +360,10 @@ if (isset($_COOKIE['tema'])) {
                                                     $get_total = App\Http\Controllers\VillabookingController::get_total_all(['start' => $get_check_in, 'end' => $get_check_out, 'id_villa' => $data->id_villa]);
                                                 @endphp
                                                 <span class="villa-list-price">
-                                                    {{ CurrencyConversion::exchangeWithUnit($data->price) }} /{{ __('user_page.night') }}
+                                                    {{ CurrencyConversion::exchangeWithUnit($data->price) }}/{{ __('user_page.night') }}
                                                 </span>
                                                 <span> • </span>
-                                                <span class="villa-list-price villa-list-price-trigger" data-villa="{{ $data->id_villa }}" onclick="modal_price_breakdown(this)">
+                                                <span class="villa-list-price villa-list-price-trigger" style="text-decoration: underline;" data-villa="{{ $data->id_villa }}" onclick="modal_price_breakdown(this)">
                                                     {{ $get_total }} Total
                                                 </span>
 
@@ -385,6 +385,7 @@ if (isset($_COOKIE['tema'])) {
                                                                 {{ CurrencyConversion::exchangeWithUnit($data->price * $dateDiff) }}
                                                             </div>
                                                         </div>
+                                                        @if ($disc != null)
                                                         <div class="col-12 d-flex justify-content-between mb-2">
                                                             <div>
                                                                 Discount
@@ -393,6 +394,7 @@ if (isset($_COOKIE['tema'])) {
                                                                 {{ $disc }}
                                                             </div>
                                                         </div>
+                                                        @endIf
                                                         <div class="col-12 d-flex justify-content-between">
                                                             <div>
                                                                 Service Fee
@@ -400,7 +402,6 @@ if (isset($_COOKIE['tema'])) {
                                                             <div>
                                                                 {{ $service }}
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                 </div>
@@ -416,17 +417,34 @@ if (isset($_COOKIE['tema'])) {
                                                             <button type="button" class="btn-close-modal" data-bs-dismiss="modal" aria-label="Close"><i
                                                                     class="fa-solid fa-xmark"></i></button>
                                                         </div>
-                                                        <div class="filter-modal-body modal-body">
-                                                            <span>{{ CurrencyConversion::exchangeWithUnit($data->price) }} x {{$dateDiff}} nights</span>
-                                                            <span>{{ CurrencyConversion::exchangeWithUnit($data->price * $dateDiff) }}</span></br>
-                                                            <span>Discount</span> <span>{{ $disc }}</span></br>
-                                                            <span>Service Fee</span> <span>{{ $service }}</span></br>
+                                                        <div class="filter-modal-body modal-body" style="font-weight: 400;">
+                                                            <div class="col-12 d-flex justify-content-between mt-3 mb-2">
+                                                                <div>
+                                                                    {{ CurrencyConversion::exchangeWithUnit($data->price) }} x {{$dateDiff}} nights
+                                                                </div>
+                                                                <div>
+                                                                    {{ CurrencyConversion::exchangeWithUnit($data->price * $dateDiff) }}
+                                                                </div>
+                                                            </div>
+                                                            @if ($disc != null)
+                                                            <div class="col-12 d-flex justify-content-between mb-2">
+                                                                <div>
+                                                                    Discount
+                                                                </div>
+                                                                <div>
+                                                                    {{ $disc }}
+                                                                </div>
+                                                            </div>
+                                                            @endIf
+                                                            <div class="col-12 d-flex justify-content-between">
+                                                                <div>
+                                                                    Service Fee
+                                                                </div>
+                                                                <div>
+                                                                    {{ $service }}
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <!-- Submit -->
-                                                        <div class="modal-filter-footer">
-
-                                                        </div>
-                                                        <!-- END Submit -->
                                                     </div>
                                                 </div>
                                                 </div>

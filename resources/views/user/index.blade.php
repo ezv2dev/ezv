@@ -2724,8 +2724,8 @@
                             instance.formatDate(selectedDates[1], "Y-m-d")
                         );
 
-                        let content = document.getElementById("popup_check_search_desktop");
-                        content.style.display = "none";
+                        // let content = document.getElementById("popup_check_search_desktop");
+                        // content.style.display = "none";
                     },
                 });
             }
