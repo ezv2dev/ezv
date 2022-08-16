@@ -615,7 +615,7 @@
                         <div id="ul" class="ul-display-block">
 
                             <!--Search Option Navbar Uncomment this section when back to old design-->
-                            <!-- <ul class="navbar-nav me-auto mt-2 mt-lg-0 ">
+                            <ul class="navbar-nav me-auto mt-2 mt-lg-0 ">
                                     <div class="nav-link-form" id="villa-form">
                                         <li class="nav-item">
                                             <a class="nav-link nav-link-style nav-link-margin" id="villa-button"
@@ -666,7 +666,7 @@
                                         </li>
                                         <p>{{ __('user_page.Collabs') }}</p>
                                     </div>
-                                </ul> -->
+                                </ul>
                             <!--End of search option Navbar Uncomment this section when back to old design-->
 
                             <!--End of serach option 1 -->
@@ -1217,7 +1217,7 @@
             <div class="mx-auto d-flex flex-lg-row flex-column hero">
 
                 <!-- Hero uncomment this when back to old design -->
-                <!-- <div class="col-12">
+                <div class="col-12">
                         <div class="card card-overlay bg-dark text-white border-0 overflow-hidden lozad-gallery lozad-gallery-load index-jumbotron"
                             data-src="{{ URL::asset('assets/media/photos/desktop/batur.webp') }}">
                             <div class="card-img-overlay card-overlay d-flex align-items-center justify-content-center">
@@ -1239,11 +1239,11 @@
                                 </div>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
                 <!-- End Hero uncomment this when back to old design -->
 
                 <!-- Hero comment this when back to old design -->
-                <div class="col-12">
+                <!-- <div class="col-12">
                     <div class="card card-overlay bg-dark text-white border-0 overflow-hidden lozad-gallery lozad-gallery-load index-jumbotron"
                         data-src="{{ URL::asset('assets/media/photos/desktop/batur.webp') }}">
                         <div class="card-img-overlay card-overlay d-flex align-items-center justify-content-center">
@@ -1268,7 +1268,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!-- End Hero comment this when back to old design -->
 
             </div>
@@ -1279,7 +1279,7 @@
         <div class="container-xxl mx-auto p-0">
 
             <!-- Advert Download App Uncomment this when back to old design -->
-            <!-- <div class="mx-auto d-flex flex-lg-row flex-column hero">
+            <div class="mx-auto d-flex flex-lg-row flex-column hero">
                 <div class="col-12">
                     <div class="card card-overlay bg-dark text-white border-0 overflow-hidden lozad-gallery lozad-gallery-load"
                         data-src="{{ URL::asset('assets/media/photos/desktop/app.webp') }}"
@@ -1309,11 +1309,11 @@
                         </div>
                     </div>
                 </div>
-            </div> -->
+            </div>
             <!-- End Advert Download App Uncomment this when back to old design -->
 
             <!-- Support section Comment this when back to old design -->
-            <section class="support-section pt-5">
+            <!-- <section class="support-section pt-5">
                 <div class="col-12">
                     <div class="help-section-home text-right text-white">
                         <h1>We are here to help 24/7</h1>
@@ -1327,7 +1327,7 @@
                             process</p>
                     </div>
                 </div>
-            </section>
+            </section> -->
             <!-- Support section Comment this when back to old design -->
 
             {{-- end hero --}}
@@ -1336,7 +1336,7 @@
             {{-- Restaurant --}}
 
             <!-- Recomendation section Comment this when back to old design-->
-            <section class="recomendation-section">
+            <!-- <section class="recomendation-section">
 
                 <h3 class="host-body-text mb-0 text-center text-orange">A World of Possibilities</h3>
 
@@ -1360,11 +1360,11 @@
                         @endforeach
                     @endif
                 </div>
-            </section>
+            </section> -->
             <!-- Recomendation section Comment this when back to old design -->
 
             <!-- Location section Comment this when back to old design-->
-            <section class="location-section">
+            <!-- <section class="location-section">
 
                 <h3 class="host-body-text mb-0 text-center">The Finest Locations</h3>
 
@@ -1377,11 +1377,11 @@
                             </div>
                         </div>
                     @endforeach
-            </section>
+            </section> -->
             <!-- Location section Comment this when back to old design -->
 
             <!-- Join advert section Comment this when back to old design -->
-            <section class="h-100 pt-3 pt-lg-5 w-100">
+            <!-- <section class="h-100 pt-3 pt-lg-5 w-100">
 
                 <div class="row flex-column flex-lg-row">
                     <div class="col-12 col-lg-6">
@@ -1416,14 +1416,14 @@
                     </div>
 
                 </div>
-            </section>
+            </section> -->
             <!-- Join advert section Comment this when back to old design -->
 
 
 
 
             <!-- Discover Restuarant section Uncomment this when back to old design -->
-            <!-- <section class="h-100 w-100 bg-white">
+            <section class="h-100 w-100 bg-white">
                 <div class="container-xxl mx-auto p-0">
                     <div style="padding: 0rem 6rem 2rem 6rem;" class="discover-experiences-container">
                         <h1 class="mb-5" style="margin-bottom: 1rem !important;">
@@ -1464,13 +1464,13 @@
                         </div>
                     </div>
                 </div>
-            </section> -->
+            </section>
             <!-- Discover Restuarant section Uncomment this when back to old design -->
 
             {{-- Things To Do --}}
 
             <!-- Discover activity section Uncomment this when back to old design -->
-            <!-- <section class="h-100 w-100 bg-white">
+            <section class="h-100 w-100 bg-white">
                 <div class="container-xxl mx-auto p-0">
                     <div style="padding: 0rem 6rem 0rem 6rem;" class="discover-experiences-container">
                         <h1 class="mb-5" style="margin-bottom: 1rem !important;">
@@ -1512,7 +1512,7 @@
                         </div>
                     </div>
                 </div>
-            </section> -->
+            </section>
             <!-- Discover activity section Uncomment this when back to old design -->
 
             {{-- end experience --}}
@@ -1520,7 +1520,7 @@
             {{-- QA desktop --}}
 
             <!-- Section Learn About Uncomment this when back to old design -->
-            <!-- <section class="h-100 w-100" style="box-sizing: border-box;">
+            <section class="h-100 w-100" style="box-sizing: border-box;">
                 <div class="not-header-4-4 container-xxl mx-auto p-0 position-relative"
                     style="font-family: 'Poppins', sans-serif">
                     <div class="mx-auto d-flex flex-lg-row flex-column hero" id="qa-container">
@@ -1548,7 +1548,7 @@
                         </div>
                     </div>
                 </div>
-            </section> -->
+            </section>
             <!-- Section Learn About Uncomment this when back to old design -->
         </div>
 
