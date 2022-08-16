@@ -382,11 +382,11 @@
                         <div class="row my-3">
                             <div class="col-6">
                                 <input type="text" id="first_name_enquiry" class="form-control" name="first_name_enquiry" placeholder="First Name">
-                                <small id="enq-fname" class="invalid-feedback">The last name field is required</small>
+                                <small id="enq-fname" class="invalid-feedback">The first name field is required</small>
                             </div>
                             <div class="col-6">
                                 <input type="text" id="last_name_enquiry" class="form-control" name="last_name_enquiry" placeholder="Last Name">
-                                <small id="enq-lname" class="invalid-feedback">The first name field is required</small>
+                                <small id="enq-lname" class="invalid-feedback">The last name field is required</small>
                             </div>
                         </div>
                         <div class="col-12 my-3">
