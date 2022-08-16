@@ -13,7 +13,7 @@
                         src="{{ URL::asset('assets/media/photos/desktop/app.webp') }}">
                     <div class="card-img-overlay d-flex justify-content-center align-items-center">
                         <div class="row text-center">
-                            <p class="text-white" style="font-size: 62px;">
+                            <p class="text-white" style="font-size: 55px;">
                                 {{ __('user_page.Download The App') }}
                             </p>
                             <p class="text-white">
