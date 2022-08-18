@@ -4127,7 +4127,7 @@
                                 }
                             });
                         }
-                        
+
                     }
                 });
             }
@@ -4214,6 +4214,7 @@
                     $("#overlay").css("display", "none");
                 })
                 $("#expand-mobile-btn").on("click", function() {
+                    whenScroll();
                     $("body").css({
                         "height": "100%",
                         "overflow": "hidden"
@@ -4842,7 +4843,7 @@
                     // NEW SEARCH MOBILE
                     // fungsi untuk mengisi guest di mobile
                     document.querySelector('.guests-mobile').innerHTML = parseInt(document.getElementById('adult_mobile').value) +
-                        parseInt(document.getElementById('child_mobile').value) + " Guests";    
+                        parseInt(document.getElementById('child_mobile').value) + " Guests";
                 }
             }
 

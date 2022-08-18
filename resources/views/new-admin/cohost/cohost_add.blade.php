@@ -213,6 +213,9 @@ $(".check-cat").change(function () {
         }
     });
 });
+$('.btn-close').click(function (e) {
+    $('#modal-cohost').modal('hide');
+});
 function store_cohost()
 {
     let error = 0;
